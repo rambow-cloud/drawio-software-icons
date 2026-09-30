@@ -44,7 +44,7 @@ jobs:
               return requested;
             }
             const {data} = await github.rest.actions.listWorkflowRuns({
-              owner: 'jinxiao', repo: 'drawio-software-icons', workflow_id: 'ci-pages.yml',
+              owner: 'rambow-cloud', repo: 'drawio-software-icons', workflow_id: 'ci-pages.yml',
               branch: 'main', event: 'push', status: 'success', per_page: 1
             });
             if (!data.workflow_runs.length) throw new Error('No successful source publication');
@@ -70,7 +70,7 @@ jobs:
       - uses: actions/checkout@v7.0.1
         if: steps.published.outputs.result != 'true'
         with:
-          repository: jinxiao/drawio-software-icons
+          repository: rambow-cloud/drawio-software-icons
           ref: ${{ steps.resolve.outputs.result }}
           path: source
           persist-credentials: false

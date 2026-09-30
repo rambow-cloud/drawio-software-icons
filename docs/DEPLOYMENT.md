@@ -1,93 +1,76 @@
-# One source, two Pages sites / 单一源码、双站点发布
+# Deployment
 
-Cloudflare migration and the MCP icon API are described in [CLOUDFLARE.md](CLOUDFLARE.md).
-The Pages topology below remains the default until migration switches are enabled.
-After cutover, Cloudflare serves the main domain; both Pages sites retain resource
-files and publish redirect homepages. / Cloudflare 迁移后，两个 Pages 入口保留原资源，
-首页跳转主站；具体开关和切换顺序见上述文档。
+The authoritative source is `rambow-cloud/drawio-software-icons`.
+Cloudflare Workers serves the production website and icon API. GitHub Pages
+provides compatibility entrypoints and downloadable resources.
 
-The authoritative source is `jinxiao/drawio-software-icons`. The former Alibaba
-source is maintained in `collections/alibaba-cloud`, with its original license,
-notices, source pins, artwork, builder and tests. `ORIGIN.json` records the import.
-Do not rename or delete either repository while its Pages URLs are in use.
+## Sites
 
-| Site | Build directory | Default collection | Legacy catalog |
-| --- | --- | --- | --- |
-| `icons.rambow.cloud/` | `dist` | General Software | Software schema |
-| `jinxiao.github.io/alibaba-cloud-icons/` | `dist-alibaba` | Alibaba Cloud | Alibaba schema |
+| Site | Publisher | Artifact |
+| --- | --- | --- |
+| `https://icons.rambow.cloud/` | Cloudflare Workers Builds | `dist` and the Worker API |
+| `https://rambow-cloud.github.io/drawio-software-icons/` | Main repository GitHub Actions | `dist-pages` |
+| `https://jinxiao.github.io/alibaba-cloud-icons/` | Alibaba compatibility repository GitHub Actions | `dist-alibaba-pages` |
 
-Both serve the same bilingual UI and a content-addressed unified catalog. Use
-`?collection=all`, `?collection=software` or `?collection=alibaba-cloud` to override
-the entrypoint default. Old category query IDs are accepted.
+Both Pages homepages redirect to the production domain while preserving query
+parameters and fragments. The Alibaba entrypoint defaults to the Alibaba Cloud
+collection. XML, SVG, PNG, JSON and ZIP resource paths remain actual files.
 
-The software site's `libraries/all.xml`, localized and legacy category XMLs,
-`icons/`, `catalog.json`, and `downloads/drawio-software-icons.zip` retain their
-software-only contracts. The Alibaba site's `drawio/`, `svg/`, `config/alibaba-cloud.json`,
-`plugins/alibaba-cloud.js`, `catalog.json`, `catalog.csv`, `summary.json`, original
-documentation and `alibaba-cloud-drawio.zip` retain their previous formats. Its
-homepage changes, and its checksums are regenerated for the new site. All original
-Alibaba outputs also remain under `compat/alibaba-cloud/` on both sites.
+## Production domain and builds
 
-New shared downloads: `downloads/drawio-icons.zip`, `libraries/combined.xml`,
-`config/drawio-icons.en.json`, and `config/drawio-icons.zh-CN.json`. Unified guides
-live under `guides/`, avoiding collisions with legacy Alibaba documentation.
+`icons.rambow.cloud` is a custom domain of the existing
+`drawio-software-icons` Worker. Keep that domain attached to the Worker; do not
+configure it as a GitHub Pages custom domain or point it at a github.io host.
+The repository transfer does not require replacing its DNS records.
 
-## Publishing
+In the Worker's **Settings > Builds**, connect
+`rambow-cloud/drawio-software-icons`, select `main` and root directory `/`,
+and use `npm run deploy:cloudflare:production` as the deploy command.
+Retain the build command and environment described in [CLOUDFLARE.md](CLOUDFLARE.md).
+Keep the GitHub Actions variable `CLOUDFLARE_ENABLED` unset so that only Workers
+Builds deploys the production Worker.
 
-The primary domain is `https://icons.rambow.cloud/`. Set it in the source
-repository's Settings → Pages → Custom domain and enable Enforce HTTPS.
-Cloudflare DNS uses a DNS-only `CNAME` record, `icons` → `jinxiao.github.io`.
-GitHub Actions publication does not use a repository `CNAME` file.
-Keep the original `jinxiao.github.io/drawio-software-icons/` entrypoint available
-through GitHub Pages and retain the separate Alibaba site's resource paths.
-Both copies of the unified homepage identify the primary domain with canonical
-and Open Graph URL tags. The sitemap lists only the primary homepage; search
-and category parameters remain browsing filters. Preview pages retain `noindex`.
+## GitHub Pages publishing
 
-1. Main pushes run `.github/workflows/ci-pages.yml`, test both collections and
-   build both targets, then publish `dist` to the software site's Pages.
+Both repositories use **GitHub Actions** as the Pages source and set
+`LEGACY_REDIRECTS=true`. Leave their Pages custom domain fields empty.
+
+1. Main pushes run `.github/workflows/ci-pages.yml`, validate both collections,
+   and publish the compatibility artifact to the organization Pages URL.
 2. `deployment/alibaba-pages.yml` is installed as `.github/workflows/pages.yml`
-   in the Alibaba repository. It resolves the latest successful main push of the
-   source workflow, checks out that exact commit and publishes `dist-alibaba`.
-3. The compatibility publisher checks hourly (GitHub may delay scheduled runs).
-   A successful-publication cache skips unchanged commits. It only records the
-   cache after Pages deployment succeeds, so failures remain retryable.
-4. For immediate synchronization, run the Alibaba workflow manually. An optional
-   full source commit SHA supports deliberate rollback. Both repos must use
-   **GitHub Actions** as their Pages source. No cross-repository write token is used.
+   in `jinxiao/alibaba-cloud-icons`. It resolves the latest successful main push
+   of the source workflow, checks out that exact commit and publishes the
+   Alibaba compatibility artifact.
+3. The compatibility publisher checks hourly. A successful-publication cache
+   skips unchanged source commits; failed deployments remain retryable.
+4. For immediate synchronization, dispatch the Alibaba workflow manually. Its
+   optional full source commit SHA supports deliberate rollback.
 
-Keep the template and installed compatibility workflow synchronized when changing
-publishing behavior. All artwork and UI changes belong in the main source repo.
-Historical source in the old repo is retained for reference, not built or updated.
+Keep the template and installed workflow synchronized. All artwork and UI
+changes belong in the main source repository. Preserve the original Alibaba
+source and license references under `collections/alibaba-cloud`.
 
-## Browser verification after publishing
+## Organization transfer
 
-Open both original URLs. Software should be selected on the software site; Alibaba
-Cloud should be selected on the Alibaba site. Use the Collection → Category sidebar buttons and switch languages. Confirm that the main homepage always loads all 17 categories regardless of browsing filters. On the Alibaba homepage, the separate checkbox switches between its 9 categories and all 17. Then
-search for Git and ECS, and open one category in draw.io. Select categories from
-both collections, paste a backed-up existing configuration into the homepage’s **Choose categories /
-desktop setup**, generate a merged result and inspect that unrelated settings
-remain. Apply it in Desktop via **Extras → Configuration**, restart, and enable
-the collections in **More Shapes** if persisted sidebar preferences hide them.
-No custom JavaScript plugin is required for this workflow.
+The source repository moved from `jinxiao` to `rambow-cloud` on 2026-09-30.
+GitHub redirects old repository links, but does not redirect the old Pages
+address `https://jinxiao.github.io/drawio-software-icons/`.
+Update external bookmarks and draw.io configurations using that address to
+`https://icons.rambow.cloud/`, preserving each resource path. The separate
+Alibaba repository and its Pages address have not moved.
 
-## 中文
+Do not recreate the old software repository name merely to host a redirect:
+doing so removes GitHub's repository redirect. Existing user configurations
+outside this repository cannot be updated automatically.
 
-主站域名为 `https://icons.rambow.cloud/`，在源仓库 Settings → Pages 中配置
-Custom domain 并启用 Enforce HTTPS。Cloudflare 使用 DNS-only 的 CNAME 记录：
-`icons` → `jinxiao.github.io`。GitHub Actions 发布不依赖仓库中的 CNAME 文件。
-保留原软件站入口及阿里云站资源路径。两份统一首页的 canonical 和 Open Graph URL
-均指向新主域名；站点地图仅列出主站首页，搜索与分类参数作为浏览筛选，预览页继续 noindex。
+## Browser verification
 
-当前仓库是唯一源码入口；阿里云原始数据、构建器、测试及许可迁入
-`collections/alibaba-cloud/`。两个仓库及 Pages 地址继续保留，不做仓库重命名。
-每次构建生成 `dist/` 和 `dist-alibaba/`，页面相同，默认图标集及旧目录数据契约不同。
-旧 XML、JSON、插件、SVG、ZIP 和许可文件继续发布，新站使用独立的带哈希目录文件。
+Open the production homepage and both Pages entrypoints listed above. Confirm
+that Pages homepages reach the production domain and the Alibaba entrypoint
+selects its collection. Check language switching, search, a library download,
+and loading a category in draw.io.
 
-阿里云旧仓库每小时检查主仓库最近一次发布成功的版本（GitHub 定时任务可能延迟），
-按提交号构建并发布，重复版本跳过。需要立即同步时手动运行工作流；指定完整提交号
-可回退到已知版本。不需要跨仓库写权限令牌。修改发布规则时同步更新模板和旧仓库工作流。
-
-上线后请打开两个旧网址，检查「图标集 → 分类」两层按钮、默认图标集、语言切换、Git / ECS 搜索和分类加载。主站首页应始终加载全部 17 类，阿里云首页复选框应在 9 类与 17 类之间切换；两者独立于浏览筛选。分类加载和桌面配置入口位于首页第一个按钮旁。
-已有桌面配置可在网站中合并，再复制回「其他 → 配置」，应用并重启；若侧栏未出现，
-在「更多图形」中启用图标集。此流程不需要安装 JS 插件。
+Open `https://icons.rambow.cloud/api/health` and
+`https://icons.rambow.cloud/api/icons/search?q=kubernetes&p=0&c=3` to confirm API
+responses. Verify domain bindings and build/deployment status in Cloudflare;
+local DNS probes are not required.

@@ -1,7 +1,7 @@
 ## Summary / 变更说明
 
 <!-- Explain the problem and resulting behavior. English or Chinese is welcome.
-说明解决的问题和修改后的效果，中英文均可。仅提需求可使用 https://github.com/jinxiao/drawio-software-icons/issues/new/choose 。 -->
+说明解决的问题和修改后的效果，中英文均可。仅提需求可使用 https://github.com/rambow-cloud/drawio-software-icons/issues/new/choose 。 -->
 
 Related issue / 关联需求：
 

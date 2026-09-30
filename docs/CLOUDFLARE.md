@@ -101,7 +101,7 @@ deployment commands require a fresh `build:cloudflare` output.
 
 ### Cloudflare Workers Builds (current deployment pipeline)
 
-The Cloudflare GitHub App connects `jinxiao/drawio-software-icons` directly to
+The Cloudflare GitHub App connects `rambow-cloud/drawio-software-icons` directly to
 Workers Builds. Pushes to `main` build and deploy the Worker from root directory
 `/`. The configured build command creates a temporary Python environment,
 installs `uv`, runs `npm test`, then runs `npm run build:cloudflare`. Cloudflare

@@ -173,7 +173,7 @@ Icon records expose `id/name/aliases/tags/category/softwareType/homepage/reposit
 
 ## Deployment
 
-The public repository is `jinxiao/drawio-software-icons`, with the primary site URL `https://icons.rambow.cloud/`. In Settings → Pages, select GitHub Actions. A push to `main` validates and publishes. Relative asset URLs support repository subpaths and other static hosts.
+The public repository is `rambow-cloud/drawio-software-icons`, with the primary site URL `https://icons.rambow.cloud/`. In Settings → Pages, select GitHub Actions. A push to `main` validates and publishes. Relative asset URLs support repository subpaths and other static hosts.
 
 Enable **Allow GitHub Actions to create and approve pull requests** under Settings → Actions → General so scheduled updates can open PRs. The update workflow tests and builds its own changes before creating a PR. Additional checks on bot-created PRs may require approval in GitHub's PR interface.
 

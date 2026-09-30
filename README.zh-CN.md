@@ -155,7 +155,7 @@ npm run sync -- --refresh
 
 ## GitHub Pages
 
-公开仓库 `jinxiao/drawio-software-icons`，主站网址 `https://icons.rambow.cloud/`。Settings → Pages → Source 选择 GitHub Actions，推送到 `main` 后校验并发布。站点使用相对资源地址，也支持其他仓库子路径。
+公开仓库 `rambow-cloud/drawio-software-icons`，主站网址 `https://icons.rambow.cloud/`。Settings → Pages → Source 选择 GitHub Actions，推送到 `main` 后校验并发布。站点使用相对资源地址，也支持其他仓库子路径。
 
 Settings → Actions → General 中允许 GitHub Actions 创建 Pull Request，供每月更新工作流使用。定时任务用仓库 `GITHUB_TOKEN` 创建更新 PR，并在自身工作流内完成测试及构建；如果 GitHub 对机器人 PR 的附加检查要求批准，在 PR 页面批准运行即可。
 

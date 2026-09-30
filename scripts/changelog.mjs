@@ -60,7 +60,7 @@ export function changelogMarkdown(entries,locale='en') {
       if(!change.icons.length)lines.push(zh?'整批导入；请在网站对应图标集中查看完整列表。':'Collection import; browse the collection on the website for the full list.');
       lines.push('');
     }
-    if(entry.commit)lines.push(`[${zh?'查看提交':'View commit'}](https://github.com/jinxiao/drawio-software-icons/commit/${entry.commit})`,'');
+    if(entry.commit)lines.push(`[${zh?'查看提交':'View commit'}](https://github.com/rambow-cloud/drawio-software-icons/commit/${entry.commit})`,'');
   }
   return lines.join('\n');
 }

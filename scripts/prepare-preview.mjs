@@ -6,7 +6,7 @@ import { addHomepagePreview } from './preview-site.mjs';
 
 // Only the explicitly dispatched, same-repository preview branch can publish.
 const repo = process.env.GITHUB_REPOSITORY;
-if (repo !== 'jinxiao/drawio-software-icons' || process.env.GITHUB_REF !== 'refs/heads/preview/homepage' || process.env.GITHUB_EVENT_NAME !== 'workflow_dispatch') {
+if (repo !== 'rambow-cloud/drawio-software-icons' || process.env.GITHUB_REF !== 'refs/heads/preview/homepage' || process.env.GITHUB_EVENT_NAME !== 'workflow_dispatch') {
   throw Error('Homepage preview publication requires the trusted preview branch and workflow_dispatch.');
 }
 const api = path => JSON.parse(execFileSync('gh', ['api', `repos/${repo}/${path}`], { encoding: 'utf8' }));

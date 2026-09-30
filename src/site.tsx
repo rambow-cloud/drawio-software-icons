@@ -6,7 +6,7 @@ import type { Catalog, Category, Collection, Icon } from './types';
 
 export const siteBase=new URL('./',globalThis.location?.href ?? 'https://icons.rambow.cloud/').href;
 export const file=(path:string)=>new URL(path,siteBase).href;
-export const starRepository='jinxiao/drawio-software-icons';
+export const starRepository='rambow-cloud/drawio-software-icons';
 export function readPreference(key:string) { try{return localStorage.getItem(key);}catch{return null;} }
 export function preference(key:string,value:string) { try{localStorage.setItem(key,value);}catch{/* Browsing works without storage. */} }
 export function initialLocale():Locale {
