@@ -1,1 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="#ec663c"/><g fill="#fff"><rect x="9" y="9" width="9" height="9" rx="2"/><rect x="22" y="9" width="9" height="9" rx="2"/><rect x="9" y="22" width="9" height="9" rx="2"/><rect x="22" y="22" width="9" height="9" rx="2" opacity=".55"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Rambow Icons</title>
+  <desc id="desc">A right-facing ram with a curled horn above a cloud, paired with four icon tiles.</desc>
+  <g id="brand-mark">
+    <!-- Cyan crown and cloud keep the original brand silhouette. -->
+    <path id="crown" fill="#00A9F4" d="M164 75C203 40 247 27 288 33C360 42 414 101 414 187L403 227L330 201L276 126Z"/>
+    <path id="cloud" fill="#00A9F4" d="M86 293C52 305 28 335 28 373C12 390 10 415 21 436C33 461 58 474 87 474H433C468 474 492 451 492 420C492 389 468 365 438 365C425 365 415 368 405 374C393 329 356 302 310 306C294 260 245 238 201 257C158 240 108 257 86 293Z"/>
+    <!-- The face remains a single clean silhouette rather than tiny traced fragments. -->
+    <path id="face" fill="#FFFFFF" d="M207 143C239 120 279 122 306 142C326 156 335 172 351 181C375 168 403 181 422 201L479 266C487 275 483 292 472 304L456 320C444 333 428 334 415 322L397 306C388 298 379 300 374 310C367 325 378 342 386 356C405 393 392 434 352 461C365 415 339 388 309 356C279 324 268 301 272 273L272 217C253 219 237 209 226 194C218 184 212 173 207 162Z"/>
+    <!-- Broad spiral horn, with a cyan inner sweep. -->
+    <path id="horn" fill="#082F6B" d="M115 285C72 231 70 166 104 119C132 79 175 56 222 55C287 53 338 88 349 141C355 165 349 183 333 187C319 191 308 182 299 168C283 145 262 130 238 131C194 132 160 162 153 199C145 239 173 267 207 269C237 271 263 251 272 217C287 229 294 251 286 274C274 310 243 327 205 327C171 327 140 312 115 285Z"/>
+    <path id="horn-highlight" fill="#00A9F4" d="M204 143C183 171 182 203 202 223C223 245 254 244 272 217C274 248 250 280 219 285C184 290 156 269 150 238C143 201 164 162 204 143Z"/>
+    <!-- Ear, eye, nose and flowing neck use just four purposeful paths. -->
+    <path id="ear" fill="#082F6B" d="M207 162C229 148 251 149 265 159C282 170 285 193 315 205C282 229 243 216 226 194C218 184 212 173 207 162Z"/>
+    <path id="eye" fill="#082F6B" d="M345 212C368 202 390 208 401 239C391 231 384 233 376 232C363 231 364 219 345 212Z"/>
+    <path id="eye-glint" fill="#FFFFFF" d="M374 217C380 214 385 217 386 220C381 223 376 222 374 217Z"/>
+    <path id="nose" fill="#082F6B" d="M455 268L482 277C482 295 470 310 456 310C445 310 436 304 432 293C443 301 452 303 458 297C466 289 454 286 450 278L446 265Z"/>
+    <path id="neck" fill="#082F6B" d="M327 245C319 273 336 295 369 296C396 296 408 312 416 326C401 329 388 312 381 310C365 307 366 325 376 342C404 389 387 429 352 461C376 415 359 383 337 355C309 320 303 281 327 245Z"/>
+    <!-- The Go-specific gopher is replaced with a coherent icon-library device. -->
+    <path id="foreground-cloud" fill="#082F6B" d="M22 384C31 356 56 339 83 339C104 339 123 348 138 364C164 348 191 350 214 364C241 365 280 393 307 429C317 442 323 457 328 474H87C52 474 26 457 17 432C12 417 13 400 22 384Z"/>
+    <rect id="icon-tray" x="47" y="284" width="151" height="151" rx="29" fill="#082F6B"/>
+    <rect id="tile-square" x="65" y="302" width="51" height="51" rx="11" fill="#FF665C"/>
+    <rect id="tile-circle" x="130" y="302" width="51" height="51" rx="25.5" fill="#FFD166"/>
+    <rect id="tile-round" x="65" y="367" width="51" height="51" rx="11" fill="#FFA34D"/>
+    <path id="tile-diamond" fill="#FFE59A" d="M149.8 368.3C152.9 365.2 157.9 365.2 161 368.3L181.2 388.5C184.3 391.6 184.3 396.6 181.2 399.7L161 419.9C157.9 423 152.9 423 149.8 419.9L129.6 399.7C126.5 396.6 126.5 391.6 129.6 388.5Z"/>
+  </g>
+</svg>

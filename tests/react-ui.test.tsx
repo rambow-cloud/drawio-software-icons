@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { SiteProvider, initialFilters } from '../src/site';
 import { Page } from '../src/App';
+import { Header } from '../src/components/Home';
 import { BundleDialog } from '../src/components/BundleDialog';
 import { DetailDialog, SpotlightDialog } from '../src/components/IconDialogs';
 import { McpDialog } from '../src/components/McpDialog';
@@ -36,6 +37,15 @@ test('React page preserves section structure, bilingual labels, 72-card paginati
     const libraries=new URL(primary.replaceAll('&amp;','&')).searchParams.get('clibs')!;
     assert.equal(libraries.split(';').length,2);
     assert(libraries.includes(locale==='en'?'libraries/en/alibaba.xml':'libraries/zh-CN/alibaba.xml'));
+  }
+});
+
+test('header reuses the favicon artwork without changing the accessible brand name',()=>{
+  for(const locale of ['en','zh-CN'] as const){
+    const html=render(<Header/>,locale);
+    assert.match(html, /<a\b(?=[^>]*class="brand")(?=[^>]*aria-label="Architecture Icons")[^>]*>/);
+    assert.match(html, /<img\b(?=[^>]*class="brand-mark")(?=[^>]*src="[^"]*\/src\/favicon\.svg")(?=[^>]*width="39")(?=[^>]*height="39")(?=[^>]*alt="")(?=[^>]*aria-hidden="true")[^>]*>/);
+    assert(!html.includes('<span class="brand-mark">'));
   }
 });
 

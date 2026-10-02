@@ -5,6 +5,10 @@ import { ExternalLink, LibraryLink, Symbol } from './Ui';
 import { LatestUpdate } from './Updates';
 import { McpNotice } from './McpDialog';
 
+// Share the exact approved artwork with the browser favicon. Vite resolves this
+// relative to the bundle so it also works on repository/subpath deployments.
+const brandMarkUrl=new URL('../favicon.svg',import.meta.url).href;
+
 function useStars() {
   const [count,setCount]=useState<number|null>(null);
   useEffect(()=>{
@@ -32,7 +36,7 @@ function useStars() {
 }
 export function Header() {
   const {t,locale,setLocale}=useIcons(),stars=useStars(),count=stars?.toLocaleString(locale)??'';
-  return <><a className="skip-link" href="#library">{t.browse}</a><header className="topbar"><a className="brand" href="#" aria-label="Architecture Icons"><span className="brand-mark"><Symbol name="grid"/></span><span>architecture<span className="brand-light">icons</span><small>for draw.io</small></span></a><nav aria-label={locale==='en'?'Main navigation':'主导航'}><a href="#library">{t.navLibrary}</a><a href="#changelog">{t.changelog}</a><a href="#guide">{t.navGuide}</a></nav><div className="topbar-actions"><ButtonLink variant="outline" size="default" className="github-star" id="github-star" href={`https://github.com/${starRepository}`} target="_blank" rel="noopener noreferrer" title={t.starHint} aria-label={stars===null?t.starHint:`${t.starHint} · ${t.starCount.replace('{count}',count)}`}><Symbol name="star"/><span>{t.starAction}</span><span className="github-star-count" hidden={stars===null}>{count}</span></ButtonLink><Button variant="ghost" size="sm" className="language" id="language" onClick={()=>setLocale(locale==='en'?'zh-CN':'en')}><Symbol name="globe"/>{locale==='en'?'中文':'English'}</Button></div></header></>;
+  return <><a className="skip-link" href="#library">{t.browse}</a><header className="topbar"><a className="brand" href="#" aria-label="Architecture Icons"><img className="brand-mark" src={brandMarkUrl} width="39" height="39" alt="" aria-hidden="true"/><span>architecture<span className="brand-light">icons</span><small>for draw.io</small></span></a><nav aria-label={locale==='en'?'Main navigation':'主导航'}><a href="#library">{t.navLibrary}</a><a href="#changelog">{t.changelog}</a><a href="#guide">{t.navGuide}</a></nav><div className="topbar-actions"><ButtonLink variant="outline" size="default" className="github-star" id="github-star" href={`https://github.com/${starRepository}`} target="_blank" rel="noopener noreferrer" title={t.starHint} aria-label={stars===null?t.starHint:`${t.starHint} · ${t.starCount.replace('{count}',count)}`}><Symbol name="star"/><span>{t.starAction}</span><span className="github-star-count" hidden={stars===null}>{count}</span></ButtonLink><Button variant="ghost" size="sm" className="language" id="language" onClick={()=>setLocale(locale==='en'?'zh-CN':'en')}><Symbol name="globe"/>{locale==='en'?'中文':'English'}</Button></div></header></>;
 }
 function HomeSearch() {
   const {t,locale,catalog,setModal}=useIcons(),anchorRef=useRef<HTMLDivElement>(null),buttonRef=useRef<HTMLButtonElement>(null);
