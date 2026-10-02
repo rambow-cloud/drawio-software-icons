@@ -66,7 +66,9 @@ test('configuration-only additions build, reuse bytes, invalidate source changes
   const directory = await temporary(t), previousCwd = process.cwd();
   process.chdir(directory);
   try {
-    const config = { schemaVersion: 1, cache: settings, download: { concurrency: 2, timeoutMs: 1000 }, defaults: { softwareType: 'unverified' },
+    // Keep mocked downloads inside the temporary fixture, including in Workers CI
+    // where the automatic cache directory is shared across builds.
+    const config = { schemaVersion: 1, cache: { ...settings, directory: '.sync-stage/cache' }, download: { concurrency: 2, timeoutMs: 1000 }, defaults: { softwareType: 'unverified' },
       sources: { test: { kind: 'github', repo: 'example/icons', branch: 'main', initialRevision: 'a'.repeat(40), pathTemplate: 'svg/{id}.svg', license: 'MIT' },
         official: { kind: 'publisher-artwork', licenseFile: 'licenses/official-LICENSE.txt', license: 'Publisher terms' } } };
     const entry = { id: 'sample', name: 'Sample', category: 'test', source: 'test', homepage: 'https://example.com', aliases: ['示例'], tags: ['test'] };
