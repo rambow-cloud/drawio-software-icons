@@ -2,20 +2,31 @@
 
 ## Requests and pull requests / 提交需求与 PR
 
-Use the homepage's **Request an icon / feature** link or the [request forms](https://github.com/rambow-cloud/drawio-software-icons/issues/new/choose) to suggest icons, correct artwork or report problems. No code changes are required. Include product names, the official homepage, the collection, your use case, and any known artwork sources or brand terms. English and Chinese are both welcome.
+Every change follows **Issue → feat branch → PR → required CI check → merge**.
+This includes icons, fixes, documentation, maintenance and automated updates.
 
-Already have changes? Use **Submit a PR** on the homepage or [compare your branch or fork](https://github.com/rambow-cloud/drawio-software-icons/compare). The PR template collects the change summary, related issue, icon provenance, validation results and compatibility impact. Both website entrypoints send contributions to this repository.
+1. Create or reuse an open [issue](https://github.com/rambow-cloud/drawio-software-icons/issues/new/choose) **before committing work**. Use English and describe the problem, desired result and acceptance criteria. Forms cover icons, bugs, features and maintenance.
+2. Create `feat/<issue-number>-<description>` from current `main`, for example `feat/123-add-karpenter`. Fork contributions use the same branch naming convention.
+3. Commit and push to that feature branch, then open an English PR targeting `main`. Add a standalone `Closes #123` line matching the branch issue; a plain mention or template comment is insufficient.
+4. Run `npm run check:pr` and wait for **PR checks** to pass. The check validates branch/issue linkage, issue creation before commits, changed-file whitespace, JS/JSON/YAML syntax, SVG/PNG safety, icon configuration and TypeScript. It does not download artwork, generate release artifacts or deploy.
+5. Merge the PR after the required check passes. `main` requires a PR and the GitHub Actions check, with no bypass actors; direct pushes, force pushes and deletion are blocked. Full publishing builds run only after merge (or explicit publishing dispatch).
 
-仅提需求可点击首页的**提交图标 / 功能需求**，填写图标申请或功能反馈表单，无需修改代码。请提供产品名称、官网、图标集、使用场景，以及已知的素材来源或品牌规范，中英文均可。
+For checks beyond CI, use focused tests appropriate to the change. For a local
+uncommitted change, `check:pr` checks both tracked changes and new files against
+`origin/main`; CI checks the current PR base. See [deployment details](docs/DEPLOYMENT.md).
 
-已有修改则点击首页的**提交 PR**，选择你的分支或 Fork，按自动填入的模板说明变更、关联需求、图标来源、验证结果和兼容性影响。主站与阿里云入口统一在本仓库处理。
+所有修改（含图标、修复、文档、维护和自动更新）均须先建立英文 Issue，再从
+当前 `main` 创建 `feat/<Issue编号>-<描述>` 分支，提交英文 PR，并用单独一行
+`Closes #编号` 关联对应 Issue。通过轻量 **PR checks** 后才能合并，禁止直推
+`main`。PR 阶段仅校验格式、语法、配置、素材安全和类型；完整构建与发布在
+合并后执行。图标别名、网站翻译和更新日志仍保留中英文。
 
 ## Add or correct an icon / 添加或修正图标
 
 1. Edit or add `data/icons/*.json`: choose a stable lowercase ID, a name, one category, a source and the project homepage. See [configuration examples](docs/ICON_CONFIGURATION.md). Devicon entries use their upstream ID; Dashboard Icons entries use the SVG filename without `.svg`.
 2. Add bilingual aliases and relevant tags. Mark ambiguous software classifications as `unverified`; never classify software from the artwork collection's license.
 3. Configure new source rules in `data/icon-sources.json` when needed. If artwork only exists in a newer upstream commit, set the source's `revision`, or run `npm run sync -- --update` and review generated source pins.
-4. Run `npm run build:cloudflare` and `npm test`; both synchronize configuration automatically. Open the local preview and inspect artwork, proportions and downloads. Follow the README browser checks for draw.io.
+4. Run `npm run check:pr`. If you collect new artwork locally, run `npm run sync` to review its generated assets and pins, then use focused tests or a local preview as appropriate. Follow the README browser checks for draw.io; a full build is not required by PR CI.
 5. A configuration-only PR is sufficient: publishing builds generate missing assets, catalogs and pins. You may include generated snapshots for review or offline builds. Explain source changes and provide references.
 
 编辑 JSON 配置时给每个软件选择一个主分类，跨用途使用搜索标签，不重复收录。填写真实项目地址，许可不清晰则标记待核实。可以只提交配置，流水线自动下载、校验和生成产物；本地构建后仍需检查预览效果。

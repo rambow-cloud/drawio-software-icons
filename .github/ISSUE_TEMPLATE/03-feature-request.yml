@@ -1,0 +1,34 @@
+name: Feature request
+description: Propose a website, search, draw.io, MCP or usability improvement.
+title: "[Feature] "
+body:
+  - type: markdown
+    attributes:
+      value: Please write this issue in English and search existing issues first. Use the icon form for new artwork. Create the issue before committing work.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: Who needs this change, and what are they trying to achieve?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed behavior
+      description: Describe the desired result and any compatibility requirements.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List observable results that would make this issue complete.
+      placeholder: "- [ ] ..."
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and references
+      description: Optional approaches, screenshots or related issues.

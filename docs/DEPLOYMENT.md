@@ -39,10 +39,29 @@ In the Worker's **Settings > Builds**, connect
 `rambow-cloud/drawio-software-icons`, select `main` and root directory `/`,
 and use `npm run deploy:cloudflare:production` as the deploy command.
 Retain the build command and environment described in [CLOUDFLARE.md](CLOUDFLARE.md).
+Disable non-production branch builds and allow only `main` in Cloudflare's
+branch filters. Workers Builds has an independent GitHub App trigger; this
+account setting is required in addition to removing publishing from PR Actions.
 Keep the GitHub Actions variable `CLOUDFLARE_ENABLED` unset so that only Workers
 Builds deploys the production Worker.
 
 ## GitHub Pages publishing
+
+Pull requests use `.github/workflows/pr-checks.yml`, with one required
+**PR checks** job. It enforces the issue-first `feat/<issue-number>-<description>`
+branch and a matching closing issue reference, then checks whitespace, syntax,
+changed artwork safety, icon configuration and TypeScript. It performs no
+artwork downloads, distribution builds, Python setup, artifact uploads or
+deployment. Editing the PR body reruns the check. Token-created automation PRs
+explicitly dispatch this workflow from their feature branch so the resulting
+check belongs to the PR head commit. Manual check dispatch must likewise select
+the current PR feature branch and provide its PR number.
+
+The active **Issue-driven main** ruleset requires PRs and successful **PR checks**
+from GitHub Actions, and prevents default-branch deletion and force pushes.
+There are no bypass actors or required deployments. Its reproducible definition
+is `.github/main-ruleset.json`. A second reviewer is not required; the issue,
+PR and passing check provide the contribution record. See [Contributing](../CONTRIBUTING.md).
 
 Both repositories use **GitHub Actions** as the Pages source. Leave their Pages
 custom domain fields empty. The main repository no longer uses
@@ -50,7 +69,7 @@ custom domain fields empty. The main repository no longer uses
 that obsolete variable from the main repository. The Alibaba compatibility
 repository retains `LEGACY_REDIRECTS=true` for its legacy homepage.
 
-1. Main pushes run `.github/workflows/ci-pages.yml`, validate both collections,
+1. Merges to `main` run `.github/workflows/ci-pages.yml`, validate both collections,
    and publish the full site to the organization Pages URL. Pages deployment
    depends only on the successful build, so an optional Cloudflare deployment
    failure does not block it. Workers Builds independently deploys the same

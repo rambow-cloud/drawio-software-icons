@@ -2,7 +2,6 @@ name: Validate and publish
 on:
   push:
     branches: [main]
-  pull_request:
   workflow_dispatch:
     inputs:
       publish_preview:
