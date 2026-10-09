@@ -39,6 +39,9 @@ In the Worker's **Settings > Builds**, connect
 `rambow-cloud/drawio-software-icons`, select `main` and root directory `/`,
 and use `npm run deploy:cloudflare:production` as the deploy command.
 Retain the build command and environment described in [CLOUDFLARE.md](CLOUDFLARE.md).
+Disable non-production branch builds and allow only `main` in Cloudflare's
+branch filters. Workers Builds has an independent GitHub App trigger; this
+account setting is required in addition to removing publishing from PR Actions.
 Keep the GitHub Actions variable `CLOUDFLARE_ENABLED` unset so that only Workers
 Builds deploys the production Worker.
 

@@ -113,7 +113,18 @@ installs npm dependencies before executing this command.
 
 Use `npm run deploy:cloudflare` as the deploy command before domain cutover.
 Set `NODE_VERSION=22` and `PYTHON_VERSION=3.13.3` under **Build variables**,
-not Worker runtime variables. Non-main preview builds are currently disabled.
+not Worker runtime variables. Under **Settings → Builds**, keep the production
+branch set to `main` and disable builds for non-production branches. If using
+branch filters, the trigger's `branch_includes` must be `["main"]` rather than
+`["*"]`. This is a Cloudflare account setting; removing PR events from GitHub
+Actions does not disable Cloudflare's separate GitHub App trigger.
+
+PRs use only the lightweight required **PR checks** workflow. Cloudflare build
+checks are not merge requirements. Full production builds and deployment run
+after a PR merges to `main`. To update branch filters through the
+[Builds API](https://developers.cloudflare.com/api/resources/workers_builds/subresources/triggers/methods/update/),
+use a token with **Workers Builds Configuration: Edit**. A Wrangler OAuth token
+may work for Worker deployment while being rejected by the Builds API.
 
 Workers Builds uses its Cloudflare-managed build token; no Cloudflare API token
 is required in GitHub Actions secrets for this pipeline. Keep the GitHub
