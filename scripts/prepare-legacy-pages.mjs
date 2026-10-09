@@ -5,7 +5,8 @@ import { save, hash } from './lib.mjs';
 import { redirectHtml } from './legacy-redirect.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-// Keep full build outputs available for Cloudflare, verification and rollback.
+// Publish the full software site on GitHub Pages. Only the separate, legacy
+// Alibaba entrypoint redirects; keep its resource URLs available for old clients.
 for (const [source, folder, collection] of [['dist', 'dist-pages', 'software'], ['dist-alibaba', 'dist-alibaba-pages', 'alibaba-cloud']]) {
   const target = resolve(root, folder);
   if (resolve(process.cwd()) !== resolve(root) || relative(root, target) !== folder) throw Error('Invalid output directory');
@@ -13,8 +14,8 @@ for (const [source, folder, collection] of [['dist', 'dist-pages', 'software'], 
   if (stat?.isSymbolicLink()) throw Error('Output must not be a symlink');
   if (stat) await rm(target, { recursive: true });
   await cp(source, target, { recursive: true });
-  await save(`${target}/index.html`, redirectHtml(collection));
   if (collection === 'alibaba-cloud') {
+    await save(`${target}/index.html`, redirectHtml(collection));
     const checksums = {};
     async function visit(dir, prefix = '') {
       for (const entry of await readdir(dir, { withFileTypes: true })) {
@@ -27,4 +28,4 @@ for (const [source, folder, collection] of [['dist', 'dist-pages', 'software'], 
     await save(`${target}/SHA256SUMS.json`, JSON.stringify(checksums, null, 2) + '\n');
   }
 }
-console.log('Prepared redirect homepages and preserved legacy resource paths.');
+console.log('Prepared the full GitHub Pages site and the legacy Alibaba redirect with preserved resources.');

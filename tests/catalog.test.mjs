@@ -185,19 +185,20 @@ test('open all includes exactly eight distinct category libraries in either lang
   }
 });
 test('draw.io links preserve multiple Unicode paths and repository base paths',()=>{
-  const base='https://example.github.io/drawio-software-icons/';
   const paths=['libraries/zh-CN/数据库.xml','libraries/en/Storage & Backup.xml'];
-  const url=drawioUrl(base,[...paths,paths[0]]);
-  // Match draw.io's documented raw clibs convention: split first, then decode.
-  const loaded=url.split('clibs=')[1].split(';').map(id=>decodeURIComponent(id.slice(1)));
-  assert.deepEqual(loaded,paths.map(p=>new URL(p,base).href));
-  assert.ok(!url.includes('libs=0'));
-  assert.throws(()=>drawioUrl(base,[]));
-  assert.throws(()=>drawioUrl(base,['https://unrelated.test/icon.xml']));
-  assert.throws(()=>drawioUrl(base,['javascript:alert(1)']));
+  for(const base of ['https://icons.rambow.cloud/','https://rambow-cloud.github.io/drawio-software-icons/']) {
+    const url=drawioUrl(base,[...paths,paths[0]]);
+    // Match draw.io's documented raw clibs convention: split first, then decode.
+    const loaded=url.split('clibs=')[1].split(';').map(id=>decodeURIComponent(id.slice(1)));
+    assert.deepEqual(loaded,paths.map(p=>new URL(p,base).href));
+    assert.ok(!url.includes('libs=0'));
+    assert.throws(()=>drawioUrl(base,[]));
+    assert.throws(()=>drawioUrl(base,['https://unrelated.test/icon.xml']));
+    assert.throws(()=>drawioUrl(base,['javascript:alert(1)']));
+    assert.equal(isLocalSite(base),false);
+  }
   assert.ok(isLocalSite('http://127.0.0.1:5173/'));
   assert.ok(isLocalSite('http://[::1]:5173/'));
-  assert.equal(isLocalSite(base),false);
 });
 test('library XML survives Unicode, quotes, ampersands and embedded SVG unchanged',()=>{
   const icon={id:'special',name:'A & B "中文" <tools>',aliases:['别名'],tags:['tag & name']};

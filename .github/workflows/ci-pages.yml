@@ -65,7 +65,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v5.0.0
         if: (github.ref == 'refs/heads/main' && github.event_name != 'pull_request') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/preview/homepage' && inputs.publish_preview)
         with:
-          path: ${{ steps.preview.outputs.path || (vars.LEGACY_REDIRECTS == 'true' && 'dist-pages' || 'dist') }}
+          path: ${{ steps.preview.outputs.path || 'dist-pages' }}
           include-hidden-files: true
   cloudflare:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.CLOUDFLARE_ENABLED == 'true'
@@ -98,8 +98,8 @@ jobs:
             npm run deploy:cloudflare
           fi
   deploy:
-    if: always() && needs.build.result == 'success' && (needs.cloudflare.result == 'success' || needs.cloudflare.result == 'skipped') && ((github.ref == 'refs/heads/main' && github.event_name != 'pull_request') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/preview/homepage' && inputs.publish_preview))
-    needs: [build, cloudflare]
+    if: needs.build.result == 'success' && ((github.ref == 'refs/heads/main' && github.event_name != 'pull_request') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/preview/homepage' && inputs.publish_preview))
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: read

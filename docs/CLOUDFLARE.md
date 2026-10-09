@@ -1,10 +1,12 @@
 # Cloudflare website and draw.io MCP icon service
 
-Production cutover is configured as of 2026-09-26: `icons.rambow.cloud` is attached
-to the Cloudflare Worker, and Workers Builds deploys `main` with
-`npm run deploy:cloudflare:production`. Both GitHub Pages repositories have
-`LEGACY_REDIRECTS=true`; their homepages redirect while resource paths remain
-available. The software repository no longer has a GitHub Pages custom domain.
+The dual-site strategy serves the full collection at `https://icons.rambow.cloud/`
+and `https://rambow-cloud.github.io/drawio-software-icons/`. Neither homepage
+redirects to the other. `icons.rambow.cloud` is attached to the Cloudflare Worker,
+and Workers Builds deploys `main` with `npm run deploy:cloudflare:production`.
+GitHub Actions independently publishes the full `dist-pages` artifact. The
+software repository's Pages custom domain remains empty. Only the separate
+Alibaba compatibility repository retains its legacy homepage redirect.
 
 The website is deployed with **Workers Static Assets**. Existing HTML, JS, SVG,
 PNG, JSON, XML and ZIP paths are served directly by static asset hosting. Only
@@ -82,9 +84,11 @@ npm run dev:cloudflare
 ```
 
 `build:cloudflare` retains `dist` and `dist-alibaba`, creates the bundled index
-under `.worker-build`, and produces `dist-pages` / `dist-alibaba-pages` with redirect
-homepages. It verifies search parity, static-asset size/count limits, and unchanged
-legacy resource bytes. `check:cloudflare` bundles the Worker without deploying it.
+under `.worker-build`, and produces a full `dist-pages` copy plus
+`dist-alibaba-pages` with a legacy redirect homepage. It verifies search parity,
+static-asset size/count limits, relative homepage assets, identical full-site
+bytes and unchanged legacy resource bytes. `check:cloudflare` bundles the Worker
+without deploying it.
 
 `build` and `test` now synchronize icon JSON configuration before consuming the
 catalog. Configuration-only commits therefore work with the existing build
@@ -115,7 +119,7 @@ Workers Builds uses its Cloudflare-managed build token; no Cloudflare API token
 is required in GitHub Actions secrets for this pipeline. Keep the GitHub
 repository variable `CLOUDFLARE_ENABLED` unset to avoid deploying the same Worker
 from two pipelines. GitHub Actions continues testing and publishing the GitHub
-Pages compatibility sites.
+Pages website and legacy compatibility resources.
 
 ### Alternative: deployment from GitHub Actions
 
@@ -124,62 +128,48 @@ For GitHub Actions configure repository secrets `CLOUDFLARE_API_TOKEN` (account
 Workers Scripts edit; Zone edit for custom-domain setup as required by Cloudflare)
 and `CLOUDFLARE_ACCOUNT_ID`. Keep tokens in secrets, never in source. Set repository
 variable `CLOUDFLARE_ENABLED=true` to enable the Cloudflare job. Initially leave
-`CLOUDFLARE_PRODUCTION` and `LEGACY_REDIRECTS` unset. Pages publication waits for
-Cloudflare success whenever the Cloudflare job is enabled.
+`CLOUDFLARE_PRODUCTION` unset. Pages publication depends only on its build and
+continues independently of the optional Cloudflare deployment job.
 
-## Safe cutover and old GitHub Pages URLs
+## Independent websites and legacy URLs
 
-1. Deploy to workers.dev; open `/`, `/api/health`,
-   `/api/icons/search?q=kubernetes&p=0&c=3`, and
-   `/api/icons/search?q=云服务器&p=0&c=3` in a browser. Confirm JSON results and
-   open one returned image. Check a library download and configure MCP with the
-   workers.dev API URL to try `search_shapes`.
-2. After preview acceptance, attach `icons.rambow.cloud` using the production
-   environment (`npm run deploy:cloudflare:production`). An existing CNAME to
-   GitHub Pages must be replaced during this step; do not delete it ahead of time.
-   Cloudflare may require removing a conflicting DNS record before attaching the
-   custom domain. Check Cloudflare's deployment/domain status and then open the
-   main site in a browser. No local DNS probes are needed.
-3. Change the Workers Builds deploy command to
-   `npm run deploy:cloudflare:production` so subsequent deployments retain that
-   domain. If using the alternative GitHub Actions deployment instead, set
-   `CLOUDFLARE_PRODUCTION=true`.
-   Remove the **Custom domain** setting from the software repository's GitHub
-   Pages settings, so its github.io URL serves the compatibility artifact itself.
-4. Set `LEGACY_REDIRECTS=true` in the software repository and publish the main
-   workflow. Install the updated `deployment/alibaba-pages.yml` as
-   `.github/workflows/pages.yml` in `jinxiao/alibaba-cloud-icons`, set its
-   `LEGACY_REDIRECTS=true`, and dispatch it. Its cache key includes the switch, so
-   changing the switch cannot incorrectly skip publication.
+Leave the main repository's Pages custom domain empty and remove its obsolete
+`LEGACY_REDIRECTS` variable. Its workflow always publishes the full application,
+even if an old copy of that variable is still present. Cloudflare continues
+using its existing Worker custom domain and build trigger; enabling the Pages
+site requires no DNS changes.
 
-The old homepages redirect to the main site, retaining query parameters and
-fragments. Alibaba's homepage adds `collection=alibaba-cloud` only when no
-collection was specified. JavaScript performs the parameter-preserving redirect;
-without JavaScript a meta refresh and a manual link open the default destination.
-These are HTML redirects, not server-side HTTP 301 responses.
+Relative URLs keep catalogs, images, XML libraries, ZIP downloads and draw.io
+links on the current website, including the GitHub repository subpath. Browser
+search uses the downloaded catalog on either site. GitHub Pages is a static
+website; MCP setup continues to use the Cloudflare icon API. A Cloudflare outage
+does not prevent browsing and downloads on Pages, but affects MCP icon search.
 
-All old XML/SVG/PNG/JSON/ZIP paths remain real files on GitHub Pages. Do not add a
-blanket 404 redirect or replace resource files with HTML. Existing desktop
-configurations must keep loading their library URLs. The sitemap/canonical keep
-the same primary domain, and no API URLs are added to the sitemap.
+The independent `jinxiao/alibaba-cloud-icons` repository uses
+`deployment/alibaba-pages.yml` as `.github/workflows/pages.yml`. Its
+`LEGACY_REDIRECTS=true` switch still publishes an Alibaba redirect homepage,
+retaining query parameters and fragments and adding `collection=alibaba-cloud`
+only when absent. XML/SVG/PNG/JSON/ZIP URLs remain real files. The main repository
+change does not alter this separate legacy policy.
 
-After cutover open both old github.io homepages and an old XML/image URL from each
-repository. Homepages should navigate; resource URLs should still return their
-original formats. Browser checks are intentional; this project does not use local
-DNS probes or command-line HTTP smoke tests for deployment acceptance.
+The sitemap retains Cloudflare as the primary indexed domain; no API URLs are
+added to it. For browser acceptance steps and the two publication pipelines,
+see [Deployment](DEPLOYMENT.md). This project does not use local DNS probes or
+command-line HTTP smoke tests for deployment acceptance.
 
-For rollback, unset `LEGACY_REDIRECTS` in both repos and rebuild/publish full Pages
-sites before moving the custom domain back. Retain previous Cloudflare versions
-and use Wrangler/dashboard rollback for Worker-only regressions.
+For a Worker-only regression, retain previous Cloudflare versions and use
+Wrangler/dashboard rollback. The GitHub Pages site can stay on its successful
+deployment independently.
 
 ## 中文摘要
 
 静态网页、图标和下载由 Cloudflare Static Assets 直接响应，仅 `/api/*` 执行
 Worker。Cloudflare Workers Builds 通过 GitHub App 自动构建和部署，搜索索引与网站
-同版发布；GitHub Actions 继续测试和发布兼容站。先验证 workers.dev，
-再切主域名，最后开启两仓库 `LEGACY_REDIRECTS`，旧首页跳转、旧资源继续保留。
-仅提交这些代码不会自动切换线上域名；Workers Builds 的仓库连接、构建变量和迁移
-开关需要配置。当前自动部署方案无需向 GitHub 添加 Cloudflare API Token。
+同版发布；GitHub Actions 独立发布完整的 github.io 站点，两站首页不互相跳转。
+主仓库移除 `LEGACY_REDIRECTS` 开关，Pages 的自定义域名留空；独立的阿里云兼容
+仓库保留旧首页跳转和旧资源。两站的图片、下载及 draw.io 图标库使用当前站点的
+相对路径，网页搜索不依赖 Cloudflare API。当前自动部署方案无需向 GitHub 添加
+Cloudflare API Token，也不需要修改 DNS。
 MCP 设置 `DRAWIO_ICON_SERVICE_URL` 后需要重启对应 MCP 进程。
 
 References: [Static Assets](https://developers.cloudflare.com/workers/static-assets/),

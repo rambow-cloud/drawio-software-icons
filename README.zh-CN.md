@@ -1,9 +1,9 @@
 # Architecture Icons for draw.io
 
-[English](README.md) · [在线图标库](https://icons.rambow.cloud/)
+[English](README.md) · [在线图标库](https://icons.rambow.cloud/) · [GitHub Pages](https://rambow-cloud.github.io/drawio-software-icons/)
 
 **Cloudflare 与 MCP：** [部署与图标搜索接口](docs/CLOUDFLARE.md)，包含
-`DRAWIO_ICON_SERVICE_URL` 配置及旧 GitHub Pages 首页跳转方案。
+`DRAWIO_ICON_SERVICE_URL` 配置及 Cloudflare / GitHub Pages 双站发布方案。
 
 **AI 绘图接入：** 在[网站首页](https://icons.rambow.cloud/)点击「接入 MCP」，
 选择 Codex、Claude Desktop、Cursor 或 VS Code，以及 Windows / macOS / Linux，
@@ -155,7 +155,7 @@ npm run sync -- --refresh
 
 ## GitHub Pages
 
-公开仓库 `rambow-cloud/drawio-software-icons`，主站网址 `https://icons.rambow.cloud/`。Settings → Pages → Source 选择 GitHub Actions，推送到 `main` 后校验并发布。站点使用相对资源地址，也支持其他仓库子路径。
+公开仓库 `rambow-cloud/drawio-software-icons`。`https://icons.rambow.cloud/` 和 `https://rambow-cloud.github.io/drawio-software-icons/` 都提供完整图标库，首页不互相跳转。推送到 `main` 后，Cloudflare Workers Builds 与 GitHub Actions 分别发布两站。Settings → Pages → Source 选择 GitHub Actions，Custom domain 留空。主仓库固定发布完整站点，`LEGACY_REDIRECTS` 仅用于独立的阿里云兼容仓库。相对资源地址让图片、下载和 draw.io 图标库使用当前站点的域名及子路径；两站的 MCP 配置都使用 Cloudflare API。详见[部署说明](docs/DEPLOYMENT.md)。
 
 Settings → Actions → General 中允许 GitHub Actions 创建 Pull Request，供每月更新工作流使用。定时任务用仓库 `GITHUB_TOKEN` 创建更新 PR，并在自身工作流内完成测试及构建；如果 GitHub 对机器人 PR 的附加检查要求批准，在 PR 页面批准运行即可。
 

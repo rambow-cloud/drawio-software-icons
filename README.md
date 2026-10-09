@@ -1,9 +1,9 @@
 # Architecture Icons for draw.io
 
-[简体中文](README.zh-CN.md) · [Browse the collection](https://icons.rambow.cloud/)
+[简体中文](README.zh-CN.md) · [Browse the collection](https://icons.rambow.cloud/) · [GitHub Pages](https://rambow-cloud.github.io/drawio-software-icons/)
 
 **Cloudflare and MCP:** [deployment and icon search API](docs/CLOUDFLARE.md), including
-`DRAWIO_ICON_SERVICE_URL` setup and legacy GitHub Pages redirects.
+`DRAWIO_ICON_SERVICE_URL` setup and independent Cloudflare / GitHub Pages sites.
 
 **Use these icons with AI:** Select **Connect MCP** on the
 [homepage](https://icons.rambow.cloud/), choose Codex, Claude Desktop, Cursor or
@@ -173,7 +173,7 @@ Icon records expose `id/name/aliases/tags/category/softwareType/homepage/reposit
 
 ## Deployment
 
-The public repository is `rambow-cloud/drawio-software-icons`, with the primary site URL `https://icons.rambow.cloud/`. In Settings → Pages, select GitHub Actions. A push to `main` validates and publishes. Relative asset URLs support repository subpaths and other static hosts.
+The public repository is `rambow-cloud/drawio-software-icons`. Both `https://icons.rambow.cloud/` and `https://rambow-cloud.github.io/drawio-software-icons/` serve the full collection without homepage redirects. A push to `main` independently publishes Cloudflare through Workers Builds and GitHub Pages through GitHub Actions. In Settings → Pages, select GitHub Actions and leave the custom domain empty. The main workflow always publishes the full site; `LEGACY_REDIRECTS` applies only to the separate Alibaba compatibility repository. Relative resource URLs keep images, downloads and draw.io libraries on the site being visited. MCP uses the Cloudflare API on either site. See [Deployment](docs/DEPLOYMENT.md).
 
 Enable **Allow GitHub Actions to create and approve pull requests** under Settings → Actions → General so scheduled updates can open PRs. The update workflow tests and builds its own changes before creating a PR. Additional checks on bot-created PRs may require approval in GitHub's PR interface.
 

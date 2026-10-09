@@ -1,8 +1,8 @@
 # Deployment
 
 The authoritative source is `rambow-cloud/drawio-software-icons`.
-Cloudflare Workers serves the production website and icon API. GitHub Pages
-provides compatibility entrypoints and downloadable resources.
+Cloudflare Workers and GitHub Pages independently serve the full website.
+Cloudflare also serves the icon API used by MCP on either site.
 
 ## Sites
 
@@ -12,9 +12,21 @@ provides compatibility entrypoints and downloadable resources.
 | `https://rambow-cloud.github.io/drawio-software-icons/` | Main repository GitHub Actions | `dist-pages` |
 | `https://jinxiao.github.io/alibaba-cloud-icons/` | Alibaba compatibility repository GitHub Actions | `dist-alibaba-pages` |
 
-Both Pages homepages redirect to the production domain while preserving query
-parameters and fragments. The Alibaba entrypoint defaults to the Alibaba Cloud
-collection. XML, SVG, PNG, JSON and ZIP resource paths remain actual files.
+The Cloudflare and organization Pages homepages both render the application;
+neither redirects to the other. The Pages artifact is an identical copy of
+`dist`, including its homepage. Relative asset URLs support Cloudflare's `/`
+and Pages' `/drawio-software-icons/` path. Images, catalogs, downloads and draw.io
+library links resolve against the site being visited. Search runs in the browser
+and does not depend on the Cloudflare API.
+
+GitHub Pages hosts static files, so it has no `/api/*` endpoints. The MCP setup
+on both sites uses `https://icons.rambow.cloud/api/icons`. If Cloudflare is
+unavailable, browsing and downloads on Pages remain usable; MCP icon search
+still requires Cloudflare.
+
+Only the separate legacy Alibaba homepage redirects to Cloudflare, defaulting
+to the Alibaba Cloud collection and preserving query parameters and fragments.
+Its XML, SVG, PNG, JSON and ZIP paths remain actual files.
 
 ## Production domain and builds
 
@@ -32,11 +44,17 @@ Builds deploys the production Worker.
 
 ## GitHub Pages publishing
 
-Both repositories use **GitHub Actions** as the Pages source and set
-`LEGACY_REDIRECTS=true`. Leave their Pages custom domain fields empty.
+Both repositories use **GitHub Actions** as the Pages source. Leave their Pages
+custom domain fields empty. The main repository no longer uses
+`LEGACY_REDIRECTS`: it always publishes the full `dist-pages` website. Remove
+that obsolete variable from the main repository. The Alibaba compatibility
+repository retains `LEGACY_REDIRECTS=true` for its legacy homepage.
 
 1. Main pushes run `.github/workflows/ci-pages.yml`, validate both collections,
-   and publish the compatibility artifact to the organization Pages URL.
+   and publish the full site to the organization Pages URL. Pages deployment
+   depends only on the successful build, so an optional Cloudflare deployment
+   failure does not block it. Workers Builds independently deploys the same
+   source commit to Cloudflare.
 2. `deployment/alibaba-pages.yml` is installed as `.github/workflows/pages.yml`
    in `jinxiao/alibaba-cloud-icons`. It resolves the latest successful main push
    of the source workflow, checks out that exact commit and publishes the
@@ -65,12 +83,20 @@ outside this repository cannot be updated automatically.
 
 ## Browser verification
 
-Open the production homepage and both Pages entrypoints listed above. Confirm
-that Pages homepages reach the production domain and the Alibaba entrypoint
-selects its collection. Check language switching, search, a library download,
-and loading a category in draw.io.
+Open `https://icons.rambow.cloud/` and
+`https://rambow-cloud.github.io/drawio-software-icons/`. Confirm each stays on its
+own domain and displays the full collection. On each site, check language
+switching, search, a library download, and loading a category in draw.io. Pages
+resource and draw.io library URLs must retain `/drawio-software-icons/`.
+
+Open `https://rambow-cloud.github.io/drawio-software-icons/?collection=all&q=kubernetes#library`
+and confirm the filter and fragment survive a refresh. Open the separate
+Alibaba entrypoint and confirm it still reaches Cloudflare with its collection.
 
 Open `https://icons.rambow.cloud/api/health` and
 `https://icons.rambow.cloud/api/icons/search?q=kubernetes&p=0&c=3` to confirm API
 responses. Verify domain bindings and build/deployment status in Cloudflare;
 local DNS probes are not required.
+
+References: [GitHub Pages site types](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages),
+[Actions job dependencies](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idneeds).

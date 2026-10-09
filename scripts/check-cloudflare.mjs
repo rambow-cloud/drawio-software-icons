@@ -28,14 +28,23 @@ async function files(dir, prefix = '') {
 }
 const assets = await files('dist');
 assert.ok(assets.length <= 20000);
+assert.ok(!assets.includes('CNAME'), 'The GitHub Pages site must keep its github.io domain');
+const homepage = await readFile('dist/index.html', 'utf8');
+assert.doesNotMatch(homepage, /location\.replace/, 'Both primary homepages must render the application');
+for (const [, path] of homepage.matchAll(/(?:src|href)="([^"\s]+)"/g)) {
+  if (path.startsWith('#') || /^https?:/.test(path)) continue;
+  assert.ok(path.startsWith('./'), `Homepage asset must work under the GitHub Pages repository path: ${path}`);
+}
 for (const path of assets) assert.ok((await readFile(`dist/${path}`)).length <= 25 * 1024 * 1024, `Asset too large: ${path}`);
 for (const [source, target] of [['dist', 'dist-pages'], ['dist-alibaba', 'dist-alibaba-pages']]) {
-  assert.match(await readFile(`${target}/index.html`, 'utf8'), /location.replace/);
+  const legacy = target === 'dist-alibaba-pages';
+  if (legacy) assert.match(await readFile(`${target}/index.html`, 'utf8'), /location.replace/);
+  assert.deepEqual((await files(target)).sort(), (await files(source)).sort(), `Publishing file set: ${target}`);
   for (const path of await files(source)) {
-    if (['index.html', 'SHA256SUMS.json'].includes(path)) continue;
-    assert.equal(hash(await readFile(`${target}/${path}`)), hash(await readFile(`${source}/${path}`)), `Legacy resource: ${path}`);
+    if (legacy && ['index.html', 'SHA256SUMS.json'].includes(path)) continue;
+    assert.equal(hash(await readFile(`${target}/${path}`)), hash(await readFile(`${source}/${path}`)), `Published resource: ${target}/${path}`);
   }
 }
 const checksums = await json('dist-alibaba-pages/SHA256SUMS.json');
 for (const [path, sha] of Object.entries(checksums)) assert.equal(hash(await readFile(`dist-alibaba-pages/${path}`)), sha);
-console.log(`Verified ${index.icons.length} searchable icons, ${assets.length} Cloudflare assets and both legacy resource trees.`);
+console.log(`Verified ${index.icons.length} searchable icons, ${assets.length} Cloudflare assets, the identical full GitHub Pages site and legacy Alibaba resources.`);
