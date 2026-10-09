@@ -1,5 +1,5 @@
 * text=auto eol=lf
 *.svg text eol=lf
-assets/icons/*.svg -whitespace
+assets/icons/*.svg -text -whitespace
 *.zip binary
 *.png binary
