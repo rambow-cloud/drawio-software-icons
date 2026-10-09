@@ -59,6 +59,22 @@
       "manifest": "data/official-icons.json",
       "license": "Proprietary brand artwork; permission not verified",
       "licenseFile": "licenses/official-apps-LICENSE.txt"
+    },
+    "cncf-artwork": {
+      "kind": "github",
+      "repo": "cncf/artwork",
+      "branch": "main",
+      "initialRevision": "002662490acb2303c7301acc0256c00790e03e9f",
+      "license": "Linux Foundation trademark usage guidelines (brand artwork)",
+      "licenseFile": "LICENSE.md"
+    },
+    "cncf-landscape": {
+      "kind": "github",
+      "repo": "cncf/landscape",
+      "branch": "master",
+      "initialRevision": "5ebec81fd2747bacf46db156e64351bd28f43fb5",
+      "license": "Apache-2.0 (collection); logos retain upstream brand rights",
+      "licenseFile": "LICENSE"
     }
   }
 }

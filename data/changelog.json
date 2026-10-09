@@ -1,5 +1,407 @@
 [
   {
+    "id": "sync-2026-10-09-429583add59b-13",
+    "date": "2026-10-09",
+    "title": {
+      "en": "Karpenter and the Kubernetes ecosystem",
+      "zh-CN": "新增 Karpenter 与 Kubernetes 生态图标"
+    },
+    "summary": {
+      "en": "Added 74 Kubernetes ecosystem icons across autoscaling, networking, service meshes, GitOps, storage, security and developer tooling. Added Kubernetes search tags to 20 existing projects. Recorded pinned CNCF sources and official publisher artwork, preserving original colors and PNG bytes.",
+      "zh-CN": "新增 74 个 Kubernetes 生态图标，覆盖节点扩缩容、容器网络、服务网格、GitOps、存储备份、安全策略与开发运维工具；为 20 个已有项目补充 Kubernetes 搜索标签。固定 CNCF 来源及官方素材版本，保留原色与 PNG 原始字节。"
+    },
+    "changes": [
+      {
+        "kind": "added",
+        "collection": "software",
+        "icons": [
+          {
+            "id": "antrea",
+            "name": "Antrea"
+          },
+          {
+            "id": "argo-events",
+            "name": "Argo Events"
+          },
+          {
+            "id": "argo-rollouts",
+            "name": "Argo Rollouts"
+          },
+          {
+            "id": "argo-workflows",
+            "name": "Argo Workflows"
+          },
+          {
+            "id": "artifact-hub",
+            "name": "Artifact Hub"
+          },
+          {
+            "id": "backstage",
+            "name": "Backstage"
+          },
+          {
+            "id": "buildpacks",
+            "name": "Cloud Native Buildpacks"
+          },
+          {
+            "id": "calico",
+            "name": "Calico"
+          },
+          {
+            "id": "cdk8s",
+            "name": "cdk8s"
+          },
+          {
+            "id": "cert-manager",
+            "name": "cert-manager"
+          },
+          {
+            "id": "chaos-mesh",
+            "name": "Chaos Mesh"
+          },
+          {
+            "id": "cilium",
+            "name": "Cilium"
+          },
+          {
+            "id": "cloudnativepg",
+            "name": "CloudNativePG"
+          },
+          {
+            "id": "containerd",
+            "name": "containerd"
+          },
+          {
+            "id": "contour",
+            "name": "Contour"
+          },
+          {
+            "id": "coredns",
+            "name": "CoreDNS"
+          },
+          {
+            "id": "cri-o",
+            "name": "CRI-O"
+          },
+          {
+            "id": "crossplane",
+            "name": "Crossplane"
+          },
+          {
+            "id": "dapr",
+            "name": "Dapr"
+          },
+          {
+            "id": "devspace",
+            "name": "DevSpace"
+          },
+          {
+            "id": "dex",
+            "name": "Dex"
+          },
+          {
+            "id": "envoy-gateway",
+            "name": "Envoy Gateway"
+          },
+          {
+            "id": "etcd",
+            "name": "etcd"
+          },
+          {
+            "id": "external-secrets",
+            "name": "External Secrets Operator"
+          },
+          {
+            "id": "falco",
+            "name": "Falco"
+          },
+          {
+            "id": "flagger",
+            "name": "Flagger"
+          },
+          {
+            "id": "flannel",
+            "name": "Flannel"
+          },
+          {
+            "id": "fluent-bit",
+            "name": "Fluent Bit"
+          },
+          {
+            "id": "fluentd",
+            "name": "Fluentd"
+          },
+          {
+            "id": "flux",
+            "name": "Flux"
+          },
+          {
+            "id": "headlamp",
+            "name": "Headlamp"
+          },
+          {
+            "id": "istio",
+            "name": "Istio"
+          },
+          {
+            "id": "k0s",
+            "name": "k0s"
+          },
+          {
+            "id": "k9s",
+            "name": "K9s"
+          },
+          {
+            "id": "karmada",
+            "name": "Karmada"
+          },
+          {
+            "id": "karpenter",
+            "name": "Karpenter"
+          },
+          {
+            "id": "keda",
+            "name": "KEDA"
+          },
+          {
+            "id": "kgateway",
+            "name": "kgateway"
+          },
+          {
+            "id": "kind",
+            "name": "kind"
+          },
+          {
+            "id": "knative",
+            "name": "Knative"
+          },
+          {
+            "id": "ko",
+            "name": "ko"
+          },
+          {
+            "id": "kong",
+            "name": "Kong Gateway"
+          },
+          {
+            "id": "kpt",
+            "name": "kpt"
+          },
+          {
+            "id": "kubecost",
+            "name": "Kubecost"
+          },
+          {
+            "id": "kubeedge",
+            "name": "KubeEdge"
+          },
+          {
+            "id": "kubescape",
+            "name": "Kubescape"
+          },
+          {
+            "id": "kubevela",
+            "name": "KubeVela"
+          },
+          {
+            "id": "kubevirt",
+            "name": "KubeVirt"
+          },
+          {
+            "id": "kueue",
+            "name": "Kueue"
+          },
+          {
+            "id": "kuma",
+            "name": "Kuma"
+          },
+          {
+            "id": "kyverno",
+            "name": "Kyverno"
+          },
+          {
+            "id": "linkerd",
+            "name": "Linkerd"
+          },
+          {
+            "id": "litmus",
+            "name": "LitmusChaos"
+          },
+          {
+            "id": "longhorn",
+            "name": "Longhorn"
+          },
+          {
+            "id": "metallb",
+            "name": "MetalLB"
+          },
+          {
+            "id": "minikube",
+            "name": "minikube"
+          },
+          {
+            "id": "oauth2-proxy",
+            "name": "OAuth2 Proxy"
+          },
+          {
+            "id": "opa",
+            "name": "Open Policy Agent"
+          },
+          {
+            "id": "opencost",
+            "name": "OpenCost"
+          },
+          {
+            "id": "openebs",
+            "name": "OpenEBS"
+          },
+          {
+            "id": "operator-framework",
+            "name": "Operator Framework"
+          },
+          {
+            "id": "rook",
+            "name": "Rook"
+          },
+          {
+            "id": "sealed-secrets",
+            "name": "Sealed Secrets"
+          },
+          {
+            "id": "skaffold",
+            "name": "Skaffold"
+          },
+          {
+            "id": "sops",
+            "name": "SOPS"
+          },
+          {
+            "id": "spiffe",
+            "name": "SPIFFE"
+          },
+          {
+            "id": "spire",
+            "name": "SPIRE"
+          },
+          {
+            "id": "strimzi",
+            "name": "Strimzi"
+          },
+          {
+            "id": "tekton",
+            "name": "Tekton"
+          },
+          {
+            "id": "telepresence",
+            "name": "Telepresence"
+          },
+          {
+            "id": "tetragon",
+            "name": "Tetragon"
+          },
+          {
+            "id": "trivy",
+            "name": "Trivy"
+          },
+          {
+            "id": "velero",
+            "name": "Velero"
+          },
+          {
+            "id": "volcano",
+            "name": "Volcano"
+          }
+        ]
+      },
+      {
+        "kind": "updated",
+        "collection": "software",
+        "icons": [
+          {
+            "id": "argocd",
+            "name": "Argo CD"
+          },
+          {
+            "id": "ceph",
+            "name": "Ceph"
+          },
+          {
+            "id": "consul",
+            "name": "Consul"
+          },
+          {
+            "id": "docker",
+            "name": "Docker Engine"
+          },
+          {
+            "id": "envoy",
+            "name": "Envoy"
+          },
+          {
+            "id": "grafana",
+            "name": "Grafana"
+          },
+          {
+            "id": "harbor",
+            "name": "Harbor"
+          },
+          {
+            "id": "helm",
+            "name": "Helm"
+          },
+          {
+            "id": "jaegertracing",
+            "name": "Jaeger"
+          },
+          {
+            "id": "k3s",
+            "name": "K3s"
+          },
+          {
+            "id": "kubernetes",
+            "name": "Kubernetes"
+          },
+          {
+            "id": "loki",
+            "name": "Grafana Loki"
+          },
+          {
+            "id": "nats",
+            "name": "NATS"
+          },
+          {
+            "id": "opentelemetry",
+            "name": "OpenTelemetry"
+          },
+          {
+            "id": "prometheus",
+            "name": "Prometheus"
+          },
+          {
+            "id": "rancher",
+            "name": "Rancher"
+          },
+          {
+            "id": "talos",
+            "name": "Talos Linux"
+          },
+          {
+            "id": "thanos",
+            "name": "Thanos"
+          },
+          {
+            "id": "traefikproxy",
+            "name": "Traefik Proxy"
+          },
+          {
+            "id": "vault",
+            "name": "Vault"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "sync-2026-09-25-55bdeffdd41f-12",
     "date": "2026-09-25",
     "title": {

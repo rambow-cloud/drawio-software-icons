@@ -17,15 +17,15 @@ MCP Server URL. The official `search_shapes` tool uses built-in shapes first and
 supplements sparse results with icons from this service. Try: “Use Draw.io MCP
 to search for the ScyllaDB icon and draw a database node.”
 
-456 software and service icons across 8 categories. Bilingual browsing, search and library downloads, focused on open-source projects with selected commercial tools. Original-color upstream SVGs are preferred.
+530 software and service icons across 8 categories. Bilingual browsing, search and library downloads, focused on open-source projects with selected commercial tools. Original-color upstream SVGs are preferred.
 
 **Commercial icon usage:** commercial software and service icons are provided solely for drawing draw.io / diagrams.net architecture diagrams, not for other distribution purposes. The project does not grant additional brand rights or override upstream licenses. Original code and documentation remain MIT licensed. Read the bilingual [icon usage policy](ICON_USAGE.md) before using commercial brand assets.
 
 
 ## Unified collections, unchanged URLs
 
-The site now combines **456 software and service icons** in 8 categories with
-**888 Alibaba Cloud icon entries** in 9 source categories: **1,344 entries across
+The site now combines **530 software and service icons** in 8 categories with
+**888 Alibaba Cloud icon entries** in 9 source categories: **1,418 entries across
 two collections**. Alibaba counts include color variants and supplemental UI
 symbols, not 888 distinct cloud services. Original names remain where no upstream
 English product name exists; categories, browsing and setup are bilingual.
@@ -66,6 +66,23 @@ the original Alibaba ZIP and `drawio/all-icons.xml` stay Alibaba-only.
 Code, data and tests are maintained in this repository. The old Alibaba repository
 publishes a compatibility site from the latest successful source build, checking
 hourly or on manual dispatch. See [deployment details](docs/DEPLOYMENT.md).
+
+## Kubernetes ecosystem
+
+74 additions include **Karpenter**, KEDA, Cilium, Calico, Flannel, Istio, Linkerd,
+Flux, Flagger, Argo Workflows / Rollouts / Events, cert-manager, External Secrets
+Operator, Sealed Secrets, Kyverno, Falco, Trivy, Rook, Longhorn, OpenEBS, Velero,
+CoreDNS, containerd, CRI-O, Crossplane, Knative, K9s, kind, minikube and more.
+Existing Kubernetes, Helm, Argo CD, K3s and Talos entries remain available.
+Projects stay in their purpose-based categories, with shared `k8s`, `Kubernetes`,
+`Kubernetes 生态` and `云原生` tags plus Chinese aliases and specific use cases.
+Select **General Software** and search `k8s` to browse the ecosystem across
+categories, or search a project name in Spotlight.
+
+Most SVGs come from pinned CNCF artwork and Landscape sources. Karpenter and
+Sealed Secrets retain official publisher SVGs; Trivy, the three Argo subprojects
+and K9s retain official PNGs. The website, MCP search, draw.io libraries and
+offline ZIPs all use these same validated assets. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ## Monitoring and observability
 

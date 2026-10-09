@@ -320,7 +320,11 @@
         "security",
         "identity",
         "auth",
-        "安全"
+        "安全",
+        "k8s",
+        "Kubernetes 生态",
+        "cloud native",
+        "云原生"
       ],
       "artwork": {
         "path": "icons/grafana/grafana-original.svg",
@@ -358,7 +362,11 @@
         "security",
         "identity",
         "auth",
-        "安全"
+        "安全",
+        "k8s",
+        "Kubernetes 生态",
+        "cloud native",
+        "云原生"
       ],
       "artwork": {
         "path": "icons/jaegertracing/jaegertracing-original.svg",
@@ -496,7 +504,11 @@
         "security",
         "identity",
         "auth",
-        "安全"
+        "安全",
+        "k8s",
+        "Kubernetes 生态",
+        "cloud native",
+        "云原生"
       ],
       "artwork": {
         "format": "svg",
@@ -655,7 +667,11 @@
         "security",
         "identity",
         "auth",
-        "安全"
+        "安全",
+        "k8s",
+        "Kubernetes 生态",
+        "cloud native",
+        "云原生"
       ],
       "artwork": {
         "path": "icons/opentelemetry/opentelemetry-original.svg",
@@ -762,7 +778,11 @@
         "security",
         "identity",
         "auth",
-        "安全"
+        "安全",
+        "k8s",
+        "Kubernetes 生态",
+        "cloud native",
+        "云原生"
       ],
       "artwork": {
         "path": "icons/prometheus/prometheus-original.svg",
@@ -1036,7 +1056,11 @@
         "security",
         "identity",
         "auth",
-        "安全"
+        "安全",
+        "k8s",
+        "Kubernetes 生态",
+        "cloud native",
+        "云原生"
       ],
       "artwork": {
         "path": "svg/thanos.svg",
@@ -1104,7 +1128,11 @@
         "Security & Identity",
         "identity",
         "auth",
-        "安全"
+        "安全",
+        "k8s",
+        "Kubernetes 生态",
+        "cloud native",
+        "云原生"
       ],
       "artwork": {
         "path": "icons/vault/vault-original.svg",

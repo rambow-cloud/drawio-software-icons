@@ -38,6 +38,16 @@ Messaging and enterprise additions are maintained in `data/icons/applications.js
 
 ## Stable interfaces / 稳定接口
 
+Kubernetes ecosystem additions live in `data/icons/kubernetes.json`; their
+`category` still follows each project's purpose. Use pinned original color
+artwork from CNCF or official project repositories, record the applicable
+artwork terms, and add bilingual aliases plus `k8s` / `Kubernetes` tags. Existing
+project IDs must not be duplicated. Publisher PNGs remain PNGs in libraries.
+
+Kubernetes 生态新增条目维护于 `data/icons/kubernetes.json`，按用途沿用现有分类，
+补充中英文别名及 `k8s` / `Kubernetes` 标签。固定 CNCF 或项目官方原图的版本及
+来源条款，不重复已有 ID，也不将 PNG 伪装为矢量图标。
+
 Keep icon IDs stable. Set each entry's `category` by project purpose, independently of its upstream collection. When merging categories, add retired IDs to `categoryAliases` in `data/taxonomy.mjs` and preserve published localized library paths in `data/legacy-categories.json`. The generator serves those paths with the successor category while the ZIP and website list only current categories. Renames without compatibility mappings are breaking changes. Additive metadata may keep `schemaVersion: 1`; incompatible schema changes require a version increase.
 
 图标归类直接修改 JSON 配置的 `category`。分类合并时使用 `data/taxonomy.mjs` 保留旧 ID 映射和 XML 地址，避免已保存的链接失效；中英文分类与使用说明需同步更新。

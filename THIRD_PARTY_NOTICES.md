@@ -8,6 +8,8 @@ The collection contains brand artwork from these upstream repositories:
 | Dashboard Icons | https://github.com/homarr-labs/dashboard-icons | Apache-2.0 | [dashboard-LICENSE.txt](licenses/dashboard-LICENSE.txt) |
 | Lobe Icons | https://github.com/lobehub/lobe-icons | MIT | [lobe-LICENSE.txt](licenses/lobe-LICENSE.txt) |
 | Vendor Icons SVG (ServiceNow) | https://github.com/bwks/vendor-icons-svg | GPL-3.0-only | [vendor-LICENSE.txt](licenses/vendor-LICENSE.txt) |
+| CNCF project artwork | https://github.com/cncf/artwork | Linux Foundation trademark usage guidelines; no open-source artwork license claimed | [cncf-artwork-LICENSE.txt](licenses/cncf-artwork-LICENSE.txt) |
+| CNCF Landscape | https://github.com/cncf/landscape | Apache-2.0 for the collection; depicted logos retain upstream brand rights | [cncf-landscape-LICENSE.txt](licenses/cncf-landscape-LICENSE.txt) |
 | Official publisher artwork / 官方发布者图标 | Publisher listings in `data/official-icons.json` | Proprietary brand artwork; no open-source license claimed | [official-apps-LICENSE.txt](licenses/official-apps-LICENSE.txt) |
 
 Each entry in `catalog.json` (source: `data/catalog.json`) records its original SVG URL, pinned upstream commit, source checksum, packaged checksum and collection license URL. `data/sources.lock.json` pins the exact collection revisions.
@@ -27,6 +29,27 @@ Grafana Loki, Tempo, Mimir, Alloy and Pyroscope use unmodified SVG artwork linke
 Grafana Loki、Tempo、Mimir、Alloy、Pyroscope 使用官网开源项目页和产品页提供的原始 SVG，记录原链接并固定 SHA-256；Loki、Tempo、Mimir 选用各自产品页的渐变原图，Alloy 保持官方橙色标志。软件许可证不代表 Logo 授权。VictoriaMetrics、VictoriaLogs、Thanos、Alertmanager、Vector、SigNoz 来自固定版本的 Dashboard Icons，不声称为逐项授权的官方素材下载；VictoriaMetrics 保留上游单色标志。
 
 ## Modifications / 处理方式
+
+Kubernetes ecosystem additions are configured in `data/icons/kubernetes.json`.
+Most use original color marks from a pinned revision of CNCF's official artwork
+repository, subject to its Linux Foundation trademark usage guidelines. Calico,
+Flannel, kind, minikube, Skaffold, Tetragon and Kubecost use logos collected in the
+pinned CNCF Landscape repository; its Apache-2.0 collection license does not
+relicense those brands. Kong retains the pinned Dashboard Icons source.
+
+Karpenter and Sealed Secrets use unmodified SVGs from their official project
+repositories. Trivy, Argo Workflows, Argo Rollouts, Argo Events and K9s use their
+official repositories' unmodified PNGs. Each publisher asset has a commit-pinned
+URL, dimensions and SHA-256 in the manifest and generated provenance; PNGs
+remain raster artwork and are embedded as PNG in draw.io libraries.
+
+Kubernetes 生态新增条目维护于 `data/icons/kubernetes.json`。多数采用固定版本的
+CNCF 官方原色素材，并保留其 Linux Foundation 商标使用条款；Calico、Flannel、
+kind、minikube、Skaffold、Tetragon、Kubecost 来自 CNCF Landscape 收录素材，
+图标集的 Apache-2.0 许可不重新授权品牌图形。Kong 沿用 Dashboard Icons。
+Karpenter、Sealed Secrets 保留官方 SVG 原图；Trivy、Argo 三个子项目及 K9s
+保留官方 PNG 原图，固定提交、网址、尺寸与 SHA-256，PNG 直接嵌入 draw.io
+图标库。软件许可与图标版权、商标权分别记录。
 
 DingTalk uses an SVG wrapper with a 112 px rounded-rectangle clip on the 512 px canvas. The PNG bytes inside are unchanged; transparent corners replace the square display boundary. This project presentation is recorded in `data/official-icons.json`, with separate source and packaged checksums. The library embeds the SVG wrapper; the ZIP also retains the original PNG. The wrapper does not make the raster artwork a vector logo.
 

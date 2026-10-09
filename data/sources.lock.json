@@ -1,4 +1,22 @@
 {
+  "cncf-artwork": {
+    "kind": "github",
+    "repo": "cncf/artwork",
+    "branch": "main",
+    "initialRevision": "002662490acb2303c7301acc0256c00790e03e9f",
+    "license": "Linux Foundation trademark usage guidelines (brand artwork)",
+    "licenseFile": "LICENSE.md",
+    "revision": "002662490acb2303c7301acc0256c00790e03e9f"
+  },
+  "cncf-landscape": {
+    "kind": "github",
+    "repo": "cncf/landscape",
+    "branch": "master",
+    "initialRevision": "5ebec81fd2747bacf46db156e64351bd28f43fb5",
+    "license": "Apache-2.0 (collection); logos retain upstream brand rights",
+    "licenseFile": "LICENSE",
+    "revision": "5ebec81fd2747bacf46db156e64351bd28f43fb5"
+  },
   "dashboard": {
     "kind": "github",
     "repo": "homarr-labs/dashboard-icons",
@@ -36,7 +54,7 @@
     "manifest": "data/official-icons.json",
     "license": "Proprietary brand artwork; permission not verified",
     "licenseFile": "licenses/official-apps-LICENSE.txt",
-    "revision": "b1417ff87801459ee62ce0f6d1e43a519026df7bad1ad75f2a10ba59ba58056e"
+    "revision": "347c24542be745a6e66df7b48890c45848e994f3a0568164aaeb93b8c178163d"
   },
   "vendor": {
     "kind": "github",

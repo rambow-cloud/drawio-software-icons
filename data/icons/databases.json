@@ -166,7 +166,11 @@
         "storage",
         "backup",
         "s3",
-        "文件"
+        "文件",
+        "k8s",
+        "Kubernetes 生态",
+        "cloud native",
+        "云原生"
       ],
       "artwork": {
         "path": "svg/ceph.svg",
@@ -733,7 +737,11 @@
         "storage",
         "backup",
         "s3",
-        "文件"
+        "文件",
+        "k8s",
+        "Kubernetes 生态",
+        "cloud native",
+        "云原生"
       ],
       "artwork": {
         "path": "icons/nats/nats-original.svg",

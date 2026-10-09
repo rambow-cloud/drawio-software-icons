@@ -1,0 +1,2030 @@
+{
+  "$schema": "../schemas/icons.schema.json",
+  "icons": [
+    {
+      "id": "antrea",
+      "name": "Antrea",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://antrea.io/",
+      "repository": "https://github.com/antrea-io/antrea",
+      "softwareType": "open-source",
+      "aliases": [
+        "Antrea 容器网络"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "CNI",
+        "Open vSwitch",
+        "network policy",
+        "容器网络"
+      ],
+      "artwork": {
+        "path": "projects/antrea/icon/color/antrea-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "argo-events",
+      "name": "Argo Events",
+      "category": "development",
+      "source": "official-apps",
+      "homepage": "https://argoproj.github.io/argo-events/",
+      "repository": "https://github.com/argoproj/argo-events",
+      "softwareType": "open-source",
+      "aliases": [
+        "Argo 事件管理"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "event driven",
+        "eventing",
+        "automation",
+        "事件驱动"
+      ],
+      "artwork": {
+        "url": "https://raw.githubusercontent.com/argoproj/argo-events/109b9ff0e462fa8209324be3133b404f8d1803aa/docs/assets/logo.png",
+        "format": "png",
+        "publisher": "Argo Events project contributors",
+        "listing": "https://github.com/argoproj/argo-events",
+        "retrievedOn": "2026-10-09",
+        "sha256": "8f33a045c67fd5b0ee80f207a63fc625f3c1cd2b70e0281815ec5afcf32abf6d",
+        "width": 378,
+        "height": 379
+      }
+    },
+    {
+      "id": "argo-rollouts",
+      "name": "Argo Rollouts",
+      "category": "development",
+      "source": "official-apps",
+      "homepage": "https://argoproj.github.io/argo-rollouts/",
+      "repository": "https://github.com/argoproj/argo-rollouts",
+      "softwareType": "open-source",
+      "aliases": [
+        "Argo 渐进式交付"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "canary",
+        "blue green",
+        "progressive delivery",
+        "金丝雀发布",
+        "蓝绿发布"
+      ],
+      "artwork": {
+        "url": "https://raw.githubusercontent.com/argoproj/argo-rollouts/37125d874b395c2dd18092f7a23c26626a704bc4/ui/src/assets/images/argo-icon-color-square.png",
+        "format": "png",
+        "publisher": "Argo Rollouts project contributors",
+        "listing": "https://github.com/argoproj/argo-rollouts",
+        "retrievedOn": "2026-10-09",
+        "sha256": "dab0f558fa9d1cc2307f5c45e5077ceb39324ac40d96042de8dc5e5e279b25ee",
+        "width": 1138,
+        "height": 1096
+      }
+    },
+    {
+      "id": "argo-workflows",
+      "name": "Argo Workflows",
+      "category": "development",
+      "source": "official-apps",
+      "homepage": "https://argo-workflows.readthedocs.io/",
+      "repository": "https://github.com/argoproj/argo-workflows",
+      "softwareType": "open-source",
+      "aliases": [
+        "Argo 工作流"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "workflow",
+        "DAG",
+        "batch jobs",
+        "工作流"
+      ],
+      "artwork": {
+        "url": "https://raw.githubusercontent.com/argoproj/argo-workflows/adba7c3fbb9608c242c250e898b641e772563fb6/docs/assets/logo.png",
+        "format": "png",
+        "publisher": "Argo Workflows project contributors",
+        "listing": "https://github.com/argoproj/argo-workflows",
+        "retrievedOn": "2026-10-09",
+        "sha256": "1fc1ad5fb2d385d5ded352f381ef8dc94ab6bf8b466ad87d4225ecdfce6e0c9c",
+        "width": 268,
+        "height": 268
+      }
+    },
+    {
+      "id": "artifact-hub",
+      "name": "Artifact Hub",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://artifacthub.io",
+      "repository": "https://github.com/artifacthub/hub",
+      "softwareType": "open-source",
+      "aliases": [
+        "Artifact Hub 制品目录"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "Helm charts",
+        "artifact registry",
+        "制品目录"
+      ],
+      "artwork": {
+        "path": "projects/artifacthub/icon/color/artifacthub-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "backstage",
+      "name": "Backstage",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://backstage.io/",
+      "repository": "https://github.com/backstage/backstage",
+      "softwareType": "open-source",
+      "aliases": [
+        "Backstage 开发者门户"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "developer portal",
+        "platform engineering",
+        "开发者门户"
+      ],
+      "artwork": {
+        "path": "projects/backstage/icon/color/backstage-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "buildpacks",
+      "name": "Cloud Native Buildpacks",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://buildpacks.io/",
+      "repository": "https://github.com/buildpacks/pack",
+      "softwareType": "open-source",
+      "aliases": [
+        "云原生构建包"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "CNB",
+        "OCI",
+        "container image",
+        "镜像构建"
+      ],
+      "artwork": {
+        "path": "projects/buildpacks/icon/color/buildpacks-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "calico",
+      "name": "Calico",
+      "category": "infrastructure",
+      "source": "cncf-landscape",
+      "homepage": "https://www.tigera.io/project-calico",
+      "repository": "https://github.com/projectcalico/calico",
+      "softwareType": "open-source",
+      "aliases": [
+        "Calico 容器网络"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "Calico",
+        "CNI",
+        "network policy",
+        "容器网络"
+      ],
+      "artwork": {
+        "path": "hosted_logos/project-calico.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "cdk8s",
+      "name": "cdk8s",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://cdk8s.io/",
+      "repository": "https://github.com/cdk8s-team/cdk8s",
+      "softwareType": "open-source",
+      "aliases": [
+        "CDK for Kubernetes"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "IaC",
+        "manifest",
+        "基础设施即代码"
+      ],
+      "artwork": {
+        "path": "projects/cdk8s/icon/color/cdk8s-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "cert-manager",
+      "name": "cert-manager",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://cert-manager.io/",
+      "repository": "https://github.com/cert-manager/cert-manager",
+      "softwareType": "open-source",
+      "aliases": [
+        "cert-manager 证书管理"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "TLS",
+        "ACME",
+        "certificate",
+        "证书管理"
+      ],
+      "artwork": {
+        "path": "projects/cert-manager/icon/color/cert-manager-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "chaos-mesh",
+      "name": "Chaos Mesh",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://chaos-mesh.org/",
+      "repository": "https://github.com/chaos-mesh/chaos-mesh",
+      "softwareType": "open-source",
+      "aliases": [
+        "Chaos Mesh 混沌工程"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "chaos engineering",
+        "fault injection",
+        "混沌工程",
+        "故障注入"
+      ],
+      "artwork": {
+        "path": "projects/chaosmesh/icon/color/chaosmesh-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "cilium",
+      "name": "Cilium",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://cilium.io/",
+      "repository": "https://github.com/cilium/cilium",
+      "softwareType": "open-source",
+      "aliases": [
+        "Cilium 容器网络"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "CNI",
+        "eBPF",
+        "network policy",
+        "容器网络"
+      ],
+      "artwork": {
+        "path": "projects/cilium/icon/color/cilium_icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "cloudnativepg",
+      "name": "CloudNativePG",
+      "category": "databases",
+      "source": "cncf-artwork",
+      "homepage": "https://www.cloudnative-pg.io/",
+      "repository": "https://github.com/cloudnative-pg/cloudnative-pg",
+      "softwareType": "open-source",
+      "aliases": [
+        "CloudNativePG PostgreSQL 运维"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "PostgreSQL",
+        "database operator",
+        "CNPG",
+        "数据库运维"
+      ],
+      "artwork": {
+        "path": "projects/cloudnativepg/icon/color/cloudnativepg-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "containerd",
+      "name": "containerd",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://containerd.io/",
+      "repository": "https://github.com/containerd/containerd",
+      "softwareType": "open-source",
+      "aliases": [
+        "containerd 容器运行时"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "container runtime",
+        "CRI",
+        "容器运行时"
+      ],
+      "artwork": {
+        "path": "projects/containerd/icon/color/containerd-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "contour",
+      "name": "Contour",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://projectcontour.io",
+      "repository": "https://github.com/projectcontour/contour",
+      "softwareType": "open-source",
+      "aliases": [
+        "Contour 入口网关"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "ingress",
+        "Envoy",
+        "gateway",
+        "入口网关"
+      ],
+      "artwork": {
+        "path": "projects/contour/icon/color/contour-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "coredns",
+      "name": "CoreDNS",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://coredns.io/",
+      "repository": "https://github.com/coredns/coredns",
+      "softwareType": "open-source",
+      "aliases": [
+        "CoreDNS 集群 DNS"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "DNS",
+        "service discovery",
+        "服务发现"
+      ],
+      "artwork": {
+        "path": "projects/coredns/icon/color/coredns-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "cri-o",
+      "name": "CRI-O",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://cri-o.io/",
+      "repository": "https://github.com/cri-o/cri-o",
+      "softwareType": "open-source",
+      "aliases": [
+        "CRI-O 容器运行时"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "container runtime",
+        "CRI",
+        "OCI",
+        "容器运行时"
+      ],
+      "artwork": {
+        "path": "projects/crio/icon/color/crio-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "crossplane",
+      "name": "Crossplane",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://crossplane.io/",
+      "repository": "https://github.com/crossplane/crossplane",
+      "softwareType": "open-source",
+      "aliases": [
+        "Crossplane 基础设施编排"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "IaC",
+        "control plane",
+        "infrastructure as code",
+        "基础设施即代码"
+      ],
+      "artwork": {
+        "path": "projects/crossplane/icon/color/crossplane-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "dapr",
+      "name": "Dapr",
+      "category": "frameworks",
+      "source": "cncf-artwork",
+      "homepage": "https://dapr.io",
+      "repository": "https://github.com/dapr/dapr",
+      "softwareType": "open-source",
+      "aliases": [
+        "Dapr 分布式应用运行时"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "distributed applications",
+        "microservices",
+        "sidecar",
+        "微服务"
+      ],
+      "artwork": {
+        "path": "projects/dapr/icon/color/dapr-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "devspace",
+      "name": "DevSpace",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://devspace.sh",
+      "repository": "https://github.com/devspace-sh/devspace",
+      "softwareType": "open-source",
+      "aliases": [
+        "DevSpace 开发环境"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "local development",
+        "developer tools",
+        "开发环境"
+      ],
+      "artwork": {
+        "path": "projects/devspace/icon/color/devspace-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "dex",
+      "name": "Dex",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://dexidp.io/",
+      "repository": "https://github.com/dexidp/dex",
+      "softwareType": "open-source",
+      "aliases": [
+        "Dex 身份认证"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "OIDC",
+        "identity",
+        "SSO",
+        "单点登录"
+      ],
+      "artwork": {
+        "path": "projects/dex/icon/color/dex-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "envoy-gateway",
+      "name": "Envoy Gateway",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://gateway.envoyproxy.io",
+      "repository": "https://github.com/envoyproxy/gateway",
+      "softwareType": "open-source",
+      "aliases": [
+        "Envoy Gateway 网关"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "Gateway API",
+        "gateway",
+        "入口网关"
+      ],
+      "artwork": {
+        "path": "projects/envoy/envoy-gateway/icon/color/envoy-gateway-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "etcd",
+      "name": "etcd",
+      "category": "databases",
+      "source": "cncf-artwork",
+      "homepage": "https://etcd.io/",
+      "repository": "https://github.com/etcd-io/etcd",
+      "softwareType": "open-source",
+      "aliases": [
+        "etcd 分布式键值存储"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "key value",
+        "consensus",
+        "Raft",
+        "分布式键值存储"
+      ],
+      "artwork": {
+        "path": "projects/etcd/icon/color/etcd-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "external-secrets",
+      "name": "External Secrets Operator",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://external-secrets.io/",
+      "repository": "https://github.com/external-secrets/external-secrets",
+      "softwareType": "open-source",
+      "aliases": [
+        "外部密钥管理"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "ESO",
+        "secrets",
+        "secret management",
+        "密钥管理"
+      ],
+      "artwork": {
+        "path": "projects/external-secrets-operator/icon/color/eso-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "falco",
+      "name": "Falco",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://falco.org/",
+      "repository": "https://github.com/falcosecurity/falco",
+      "softwareType": "open-source",
+      "aliases": [
+        "Falco 运行时安全"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "runtime security",
+        "eBPF",
+        "threat detection",
+        "运行时安全"
+      ],
+      "artwork": {
+        "path": "projects/falco/icon/color/falco-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "flagger",
+      "name": "Flagger",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://docs.flagger.app",
+      "repository": "https://github.com/fluxcd/flagger",
+      "softwareType": "open-source",
+      "aliases": [
+        "Flagger 渐进式交付"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "GitOps",
+        "canary",
+        "progressive delivery",
+        "金丝雀发布"
+      ],
+      "artwork": {
+        "path": "projects/flux/flagger/icon/color/flagger-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "flannel",
+      "name": "Flannel",
+      "category": "infrastructure",
+      "source": "cncf-landscape",
+      "homepage": "https://github.com/flannel-io/flannel",
+      "repository": "https://github.com/flannel-io/flannel",
+      "softwareType": "open-source",
+      "aliases": [
+        "Flannel 容器网络"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "CNI",
+        "overlay network",
+        "容器网络"
+      ],
+      "artwork": {
+        "path": "hosted_logos/flannel.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "fluent-bit",
+      "name": "Fluent Bit",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://fluentbit.io/",
+      "repository": "https://github.com/fluent/fluent-bit",
+      "softwareType": "open-source",
+      "aliases": [
+        "Fluent Bit 日志采集"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "logging",
+        "log collector",
+        "日志采集"
+      ],
+      "artwork": {
+        "path": "projects/fluentd/fluentbit/icon/fluentbit-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "fluentd",
+      "name": "Fluentd",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://www.fluentd.org/",
+      "repository": "https://github.com/fluent/fluentd",
+      "softwareType": "open-source",
+      "aliases": [
+        "Fluentd 日志采集"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "logging",
+        "log collector",
+        "日志采集"
+      ],
+      "artwork": {
+        "path": "projects/fluentd/icon/color/fluentd-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "flux",
+      "name": "Flux",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://fluxcd.io/",
+      "repository": "https://github.com/fluxcd/flux2",
+      "softwareType": "open-source",
+      "aliases": [
+        "Flux CD"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "GitOps",
+        "continuous delivery",
+        "持续交付",
+        "fluxcd"
+      ],
+      "artwork": {
+        "path": "projects/flux/icon/color/flux-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "headlamp",
+      "name": "Headlamp",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://headlamp.dev",
+      "repository": "https://github.com/kubernetes-sigs/headlamp",
+      "softwareType": "open-source",
+      "aliases": [
+        "Headlamp 集群管理界面"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "dashboard",
+        "UI",
+        "cluster management",
+        "集群管理"
+      ],
+      "artwork": {
+        "path": "projects/headlamp/icon/color/headlamp-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "istio",
+      "name": "Istio",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://istio.io/",
+      "repository": "https://github.com/istio/istio",
+      "softwareType": "open-source",
+      "aliases": [
+        "Istio 服务网格"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "service mesh",
+        "服务网格",
+        "traffic management"
+      ],
+      "artwork": {
+        "path": "projects/istio/icon/color/istio-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "k0s",
+      "name": "k0s",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://k0sproject.io/",
+      "repository": "https://github.com/k0sproject/k0s",
+      "softwareType": "open-source",
+      "aliases": [
+        "k0s 轻量级 Kubernetes"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "distribution",
+        "lightweight",
+        "轻量级"
+      ],
+      "artwork": {
+        "path": "projects/k0s/icon/color/k0s-logo-2025-icon.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "k9s",
+      "name": "K9s",
+      "category": "development",
+      "source": "official-apps",
+      "homepage": "https://k9scli.io/",
+      "repository": "https://github.com/derailed/k9s",
+      "softwareType": "open-source",
+      "aliases": [
+        "K9s 终端集群管理"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "CLI",
+        "TUI",
+        "cluster management",
+        "集群管理",
+        "终端"
+      ],
+      "artwork": {
+        "url": "https://raw.githubusercontent.com/derailed/k9s/7e97f9adf007b02341962feb7084c039595787dc/assets/k9s_small.png",
+        "format": "png",
+        "publisher": "K9s project contributors",
+        "listing": "https://github.com/derailed/k9s",
+        "retrievedOn": "2026-10-09",
+        "sha256": "cdfa8b99ec487af566a6278b399f74cddf659db1d2238e3a9fa1aa856ad47734",
+        "width": 200,
+        "height": 100
+      }
+    },
+    {
+      "id": "karmada",
+      "name": "Karmada",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://karmada.io/",
+      "repository": "https://github.com/karmada-io/karmada",
+      "softwareType": "open-source",
+      "aliases": [
+        "Karmada 多集群管理"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "multi cluster",
+        "federation",
+        "多集群"
+      ],
+      "artwork": {
+        "path": "projects/karmada/icon/color/karmada-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "karpenter",
+      "name": "Karpenter",
+      "category": "infrastructure",
+      "source": "official-apps",
+      "homepage": "https://karpenter.sh/",
+      "repository": "https://github.com/kubernetes-sigs/karpenter",
+      "softwareType": "open-source",
+      "aliases": [
+        "Karpenter 节点自动扩缩容",
+        "Karpenter 节点自动配置"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "autoscaling",
+        "node provisioning",
+        "NodePool",
+        "EC2",
+        "EKS",
+        "节点",
+        "弹性伸缩"
+      ],
+      "artwork": {
+        "url": "https://raw.githubusercontent.com/aws/karpenter-provider-aws/09fc0d404f28792076ea2db4e9a1de5df1bcfde8/website/static/favicon.svg",
+        "format": "svg",
+        "publisher": "Karpenter project contributors",
+        "listing": "https://karpenter.sh/",
+        "retrievedOn": "2026-10-09",
+        "sha256": "2bea3dcfaae15c658a6728176e88fdd5ec15d01d8805737bf3221224d77b03e8",
+        "width": 500,
+        "height": 500
+      }
+    },
+    {
+      "id": "keda",
+      "name": "KEDA",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://keda.sh/",
+      "repository": "https://github.com/kedacore/keda",
+      "softwareType": "open-source",
+      "aliases": [
+        "KEDA 事件驱动扩缩容"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "autoscaling",
+        "event driven",
+        "HPA",
+        "弹性伸缩"
+      ],
+      "artwork": {
+        "path": "projects/keda/icon/color/keda-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "kgateway",
+      "name": "kgateway",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://kgateway.dev/",
+      "repository": "https://github.com/kgateway-dev/kgateway",
+      "softwareType": "open-source",
+      "aliases": [
+        "kgateway 网关"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "Gateway API",
+        "Envoy",
+        "gateway",
+        "入口网关"
+      ],
+      "artwork": {
+        "path": "projects/kgateway/icon/color/kgateway-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "kind",
+      "name": "kind",
+      "category": "infrastructure",
+      "source": "cncf-landscape",
+      "homepage": "https://github.com/kubernetes-sigs/kind",
+      "repository": "https://github.com/kubernetes-sigs/kind",
+      "softwareType": "open-source",
+      "aliases": [
+        "kind 本地集群"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "Kubernetes in Docker",
+        "local cluster",
+        "testing",
+        "本地集群"
+      ],
+      "artwork": {
+        "path": "hosted_logos/kind.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "knative",
+      "name": "Knative",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://knative.dev",
+      "repository": "https://github.com/knative/serving",
+      "softwareType": "open-source",
+      "aliases": [
+        "Knative 无服务器"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "serverless",
+        "eventing",
+        "scale to zero",
+        "无服务器"
+      ],
+      "artwork": {
+        "path": "projects/knative/icon/color/knative-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "ko",
+      "name": "ko",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://ko.build/",
+      "repository": "https://github.com/ko-build/ko",
+      "softwareType": "open-source",
+      "aliases": [
+        "ko Go 镜像构建"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "Go",
+        "container image",
+        "OCI",
+        "镜像构建"
+      ],
+      "artwork": {
+        "path": "projects/ko/icon/color/ko-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "kong",
+      "name": "Kong Gateway",
+      "category": "infrastructure",
+      "source": "dashboard",
+      "homepage": "https://github.com/Kong/kong",
+      "repository": "https://github.com/Kong/kong",
+      "softwareType": "open-source",
+      "aliases": [
+        "Kong API 网关"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "API gateway",
+        "ingress",
+        "网关"
+      ],
+      "artwork": {
+        "path": "svg/kong.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "kpt",
+      "name": "kpt",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://kpt.dev",
+      "repository": "https://github.com/kptdev/kpt",
+      "softwareType": "open-source",
+      "aliases": [
+        "kpt 配置管理"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "configuration",
+        "GitOps",
+        "KRM",
+        "配置管理"
+      ],
+      "artwork": {
+        "path": "projects/kpt/icon/color/kpt_icon_color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "kubecost",
+      "name": "Kubecost",
+      "category": "observability",
+      "source": "cncf-landscape",
+      "homepage": "https://www.kubecost.com/",
+      "repository": "https://github.com/kubecost/cost-model",
+      "softwareType": "commercial",
+      "aliases": [
+        "Kubecost 成本管理"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "FinOps",
+        "cost allocation",
+        "成本管理"
+      ],
+      "artwork": {
+        "path": "hosted_logos/kubecost.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "kubeedge",
+      "name": "KubeEdge",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://kubeedge.io/en/",
+      "repository": "https://github.com/kubeedge/kubeedge",
+      "softwareType": "open-source",
+      "aliases": [
+        "KubeEdge 边缘计算"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "edge computing",
+        "IoT",
+        "边缘计算"
+      ],
+      "artwork": {
+        "path": "projects/kubeedge/icon/color/kubeedge-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "kubescape",
+      "name": "Kubescape",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://kubescape.io/",
+      "repository": "https://github.com/kubescape/kubescape",
+      "softwareType": "open-source",
+      "aliases": [
+        "Kubescape 安全扫描"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "security",
+        "compliance",
+        "vulnerability",
+        "安全扫描"
+      ],
+      "artwork": {
+        "path": "projects/kubescape/icon/color/kubescape-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "kubevela",
+      "name": "KubeVela",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://kubevela.io",
+      "repository": "https://github.com/kubevela/kubevela",
+      "softwareType": "open-source",
+      "aliases": [
+        "KubeVela 应用交付"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "OAM",
+        "platform engineering",
+        "application delivery",
+        "应用交付"
+      ],
+      "artwork": {
+        "path": "projects/kubevela/icon/color/kubevela-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "kubevirt",
+      "name": "KubeVirt",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://kubevirt.io/",
+      "repository": "https://github.com/kubevirt/kubevirt",
+      "softwareType": "open-source",
+      "aliases": [
+        "KubeVirt 虚拟机"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "virtualization",
+        "virtual machine",
+        "虚拟化",
+        "虚拟机"
+      ],
+      "artwork": {
+        "path": "projects/kubevirt/icon/color/kubevirt-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "kueue",
+      "name": "Kueue",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://kueue.sigs.k8s.io/",
+      "repository": "https://github.com/kubernetes-sigs/kueue",
+      "softwareType": "open-source",
+      "aliases": [
+        "Kueue 作业队列"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "batch jobs",
+        "job queue",
+        "GPU",
+        "作业队列"
+      ],
+      "artwork": {
+        "path": "projects/kubernetes/sub-projects/kueue/icon/color/kueue-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "kuma",
+      "name": "Kuma",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://kuma.io",
+      "repository": "https://github.com/kumahq/kuma",
+      "softwareType": "open-source",
+      "aliases": [
+        "Kuma 服务网格"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "service mesh",
+        "服务网格",
+        "Envoy"
+      ],
+      "artwork": {
+        "path": "projects/kuma/icon/color/kuma-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "kyverno",
+      "name": "Kyverno",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://kyverno.io/",
+      "repository": "https://github.com/kyverno/kyverno",
+      "softwareType": "open-source",
+      "aliases": [
+        "Kyverno 策略管理"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "policy",
+        "admission controller",
+        "策略",
+        "准入控制"
+      ],
+      "artwork": {
+        "path": "projects/kyverno/icon/color/kyverno-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "linkerd",
+      "name": "Linkerd",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://linkerd.io/",
+      "repository": "https://github.com/linkerd/linkerd2",
+      "softwareType": "open-source",
+      "aliases": [
+        "Linkerd 服务网格"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "service mesh",
+        "服务网格",
+        "mTLS"
+      ],
+      "artwork": {
+        "path": "projects/linkerd/icon/color/linkerd-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "litmus",
+      "name": "LitmusChaos",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://litmuschaos.io/",
+      "repository": "https://github.com/litmuschaos/litmus",
+      "softwareType": "open-source",
+      "aliases": [
+        "Litmus 混沌工程"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "chaos engineering",
+        "resilience",
+        "混沌工程"
+      ],
+      "artwork": {
+        "path": "projects/litmus/icon/color/litmus-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "longhorn",
+      "name": "Longhorn",
+      "category": "databases",
+      "source": "cncf-artwork",
+      "homepage": "https://longhorn.io/",
+      "repository": "https://github.com/longhorn/longhorn",
+      "softwareType": "open-source",
+      "aliases": [
+        "Longhorn 分布式存储"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "storage",
+        "CSI",
+        "block storage",
+        "分布式存储"
+      ],
+      "artwork": {
+        "path": "projects/longhorn/icon/color/longhorn-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "metallb",
+      "name": "MetalLB",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://metallb.universe.tf",
+      "repository": "https://github.com/metallb/metallb",
+      "softwareType": "open-source",
+      "aliases": [
+        "MetalLB 负载均衡"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "load balancer",
+        "BGP",
+        "bare metal",
+        "负载均衡"
+      ],
+      "artwork": {
+        "path": "projects/metallb/icon/color/metallb-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "minikube",
+      "name": "minikube",
+      "category": "infrastructure",
+      "source": "cncf-landscape",
+      "homepage": "https://minikube.sigs.k8s.io",
+      "repository": "https://github.com/kubernetes/minikube",
+      "softwareType": "open-source",
+      "aliases": [
+        "minikube 本地集群"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "local cluster",
+        "testing",
+        "本地集群"
+      ],
+      "artwork": {
+        "path": "hosted_logos/minikube.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "oauth2-proxy",
+      "name": "OAuth2 Proxy",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://oauth2-proxy.github.io/oauth2-proxy/",
+      "repository": "https://github.com/oauth2-proxy/oauth2-proxy",
+      "softwareType": "open-source",
+      "aliases": [
+        "OAuth2 认证代理"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "OAuth2",
+        "OIDC",
+        "authentication",
+        "认证代理"
+      ],
+      "artwork": {
+        "path": "projects/oauth2-proxy/icon/color/oauth2-proxy-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "opa",
+      "name": "Open Policy Agent",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://www.openpolicyagent.org/",
+      "repository": "https://github.com/open-policy-agent/opa",
+      "softwareType": "open-source",
+      "aliases": [
+        "OPA 策略引擎"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "OPA",
+        "Rego",
+        "policy",
+        "策略引擎"
+      ],
+      "artwork": {
+        "path": "projects/open-policy-agent/icon/color/opa-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "opencost",
+      "name": "OpenCost",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://www.opencost.io/",
+      "repository": "https://github.com/opencost/opencost",
+      "softwareType": "open-source",
+      "aliases": [
+        "OpenCost 成本监控"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "FinOps",
+        "cost allocation",
+        "成本监控"
+      ],
+      "artwork": {
+        "path": "projects/opencost/icon/color/Opencost_Icon_Color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "openebs",
+      "name": "OpenEBS",
+      "category": "databases",
+      "source": "cncf-artwork",
+      "homepage": "https://www.openebs.io/",
+      "repository": "https://github.com/openebs/openebs",
+      "softwareType": "open-source",
+      "aliases": [
+        "OpenEBS 容器存储"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "storage",
+        "CSI",
+        "persistent volume",
+        "容器存储"
+      ],
+      "artwork": {
+        "path": "projects/openebs/icon/color/openebs-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "operator-framework",
+      "name": "Operator Framework",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://operatorframework.io/",
+      "repository": "https://github.com/operator-framework/operator-sdk",
+      "softwareType": "open-source",
+      "aliases": [
+        "Operator SDK"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "operator",
+        "SDK",
+        "OLM",
+        "控制器"
+      ],
+      "artwork": {
+        "path": "projects/operatorframework/icon/color/operatorframework-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "rook",
+      "name": "Rook",
+      "category": "databases",
+      "source": "cncf-artwork",
+      "homepage": "https://rook.io/",
+      "repository": "https://github.com/rook/rook",
+      "softwareType": "open-source",
+      "aliases": [
+        "Rook 存储编排"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "storage",
+        "Ceph",
+        "operator",
+        "存储编排"
+      ],
+      "artwork": {
+        "path": "projects/rook/icon/color/rook-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "sealed-secrets",
+      "name": "Sealed Secrets",
+      "category": "observability",
+      "source": "official-apps",
+      "homepage": "https://sealed-secrets.netlify.app/",
+      "repository": "https://github.com/bitnami-labs/sealed-secrets",
+      "softwareType": "open-source",
+      "aliases": [
+        "Sealed Secrets 密钥加密"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "Bitnami Sealed Secrets",
+        "GitOps",
+        "secret management",
+        "密钥管理",
+        "加密"
+      ],
+      "artwork": {
+        "url": "https://raw.githubusercontent.com/bitnami-labs/sealed-secrets/a1655887a40dfaeaaf337248732beb144b464814/site/themes/template/static/img/sealedsecrets-logo.svg",
+        "format": "svg",
+        "publisher": "Sealed Secrets project contributors",
+        "listing": "https://github.com/bitnami-labs/sealed-secrets",
+        "retrievedOn": "2026-10-09",
+        "sha256": "6bdc65a7899bc543a6aa5977030e2dcd429e35530300f6298ec0fb04f95238f6",
+        "width": 203,
+        "height": 40
+      }
+    },
+    {
+      "id": "skaffold",
+      "name": "Skaffold",
+      "category": "development",
+      "source": "cncf-landscape",
+      "homepage": "https://skaffold.dev/",
+      "repository": "https://github.com/GoogleContainerTools/skaffold",
+      "softwareType": "open-source",
+      "aliases": [
+        "Skaffold 开发流水线"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "developer tools",
+        "local development",
+        "开发流水线"
+      ],
+      "artwork": {
+        "path": "hosted_logos/skaffold.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "sops",
+      "name": "SOPS",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://github.com/getsops",
+      "repository": "https://github.com/getsops/sops",
+      "softwareType": "open-source",
+      "aliases": [
+        "SOPS 配置加密"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "secrets",
+        "encryption",
+        "GitOps",
+        "配置加密"
+      ],
+      "artwork": {
+        "path": "projects/sops/icon/color/sops-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "spiffe",
+      "name": "SPIFFE",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://spiffe.io/",
+      "repository": "https://github.com/spiffe/spiffe",
+      "softwareType": "open-source",
+      "aliases": [
+        "SPIFFE 工作负载身份"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "workload identity",
+        "mTLS",
+        "身份认证"
+      ],
+      "artwork": {
+        "path": "projects/spiffe/icon/color/spiffe-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "spire",
+      "name": "SPIRE",
+      "category": "observability",
+      "source": "cncf-artwork",
+      "homepage": "https://spiffe.io/spire/",
+      "repository": "https://github.com/spiffe/spire",
+      "softwareType": "open-source",
+      "aliases": [
+        "SPIRE 身份认证"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "SPIFFE",
+        "workload identity",
+        "attestation",
+        "身份认证"
+      ],
+      "artwork": {
+        "path": "projects/spire/icon/color/spire-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "strimzi",
+      "name": "Strimzi",
+      "category": "databases",
+      "source": "cncf-artwork",
+      "homepage": "https://strimzi.io/",
+      "repository": "https://github.com/strimzi/strimzi-kafka-operator",
+      "softwareType": "open-source",
+      "aliases": [
+        "Strimzi Kafka 运维"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "Kafka",
+        "database operator",
+        "streaming",
+        "消息队列"
+      ],
+      "artwork": {
+        "path": "projects/strimzi/icon/color/strimzi-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "tekton",
+      "name": "Tekton",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://tekton.dev",
+      "repository": "https://github.com/tektoncd/pipeline",
+      "softwareType": "open-source",
+      "aliases": [
+        "Tekton 流水线"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "CI/CD",
+        "pipeline",
+        "continuous integration",
+        "流水线"
+      ],
+      "artwork": {
+        "path": "projects/tekton/icon/color/tekton-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "telepresence",
+      "name": "Telepresence",
+      "category": "development",
+      "source": "cncf-artwork",
+      "homepage": "https://www.telepresence.io/",
+      "repository": "https://github.com/telepresenceio/telepresence",
+      "softwareType": "open-source",
+      "aliases": [
+        "Telepresence 本地调试"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "local development",
+        "debugging",
+        "本地开发",
+        "调试"
+      ],
+      "artwork": {
+        "path": "projects/telepresence/icon/color/telepresence-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "tetragon",
+      "name": "Tetragon",
+      "category": "observability",
+      "source": "cncf-landscape",
+      "homepage": "https://github.com/cilium/tetragon",
+      "repository": "https://github.com/cilium/tetragon",
+      "softwareType": "open-source",
+      "aliases": [
+        "Tetragon 运行时安全"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "Cilium",
+        "eBPF",
+        "runtime security",
+        "运行时安全"
+      ],
+      "artwork": {
+        "path": "hosted_logos/tetragon-logo-wormark.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "trivy",
+      "name": "Trivy",
+      "category": "observability",
+      "source": "official-apps",
+      "homepage": "https://trivy.dev",
+      "repository": "https://github.com/aquasecurity/trivy",
+      "softwareType": "open-source",
+      "aliases": [
+        "Trivy 漏洞扫描"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "security",
+        "vulnerability",
+        "SBOM",
+        "漏洞扫描"
+      ],
+      "artwork": {
+        "url": "https://raw.githubusercontent.com/aquasecurity/trivy/7c1b1fa19f1628132a9e8377fed127682500d87d/docs/imgs/logo.png",
+        "format": "png",
+        "publisher": "Aqua Security / Trivy project",
+        "listing": "https://github.com/aquasecurity/trivy",
+        "retrievedOn": "2026-10-09",
+        "sha256": "5b3b03c4c426b5da2966ec86f4536a6c3e67719832a678a501f74c242586ce58",
+        "width": 365,
+        "height": 383
+      }
+    },
+    {
+      "id": "velero",
+      "name": "Velero",
+      "category": "databases",
+      "source": "cncf-artwork",
+      "homepage": "https://velero.io",
+      "repository": "https://github.com/velero-io/velero",
+      "softwareType": "open-source",
+      "aliases": [
+        "Velero 备份恢复"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "backup",
+        "disaster recovery",
+        "migration",
+        "备份",
+        "恢复"
+      ],
+      "artwork": {
+        "path": "projects/velero/icon/color/velero-icon-color.svg",
+        "variant": "original-color"
+      }
+    },
+    {
+      "id": "volcano",
+      "name": "Volcano",
+      "category": "infrastructure",
+      "source": "cncf-artwork",
+      "homepage": "https://volcano.sh/",
+      "repository": "https://github.com/volcano-sh/volcano",
+      "softwareType": "open-source",
+      "aliases": [
+        "Volcano 批量调度"
+      ],
+      "tags": [
+        "k8s",
+        "Kubernetes",
+        "cloud native",
+        "云原生",
+        "Kubernetes 生态",
+        "batch scheduling",
+        "GPU",
+        "HPC",
+        "批量调度"
+      ],
+      "artwork": {
+        "path": "projects/volcano/icon/color/volcano-icon-color.svg",
+        "variant": "original-color"
+      }
+    }
+  ]
+}

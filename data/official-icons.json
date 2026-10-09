@@ -10,6 +10,36 @@
     "height": 44,
     "retrievedOn": "2026-09-19"
   },
+  "argo-events": {
+    "url": "https://raw.githubusercontent.com/argoproj/argo-events/109b9ff0e462fa8209324be3133b404f8d1803aa/docs/assets/logo.png",
+    "format": "png",
+    "publisher": "Argo Events project contributors",
+    "listing": "https://github.com/argoproj/argo-events",
+    "retrievedOn": "2026-10-09",
+    "sha256": "8f33a045c67fd5b0ee80f207a63fc625f3c1cd2b70e0281815ec5afcf32abf6d",
+    "width": 378,
+    "height": 379
+  },
+  "argo-rollouts": {
+    "url": "https://raw.githubusercontent.com/argoproj/argo-rollouts/37125d874b395c2dd18092f7a23c26626a704bc4/ui/src/assets/images/argo-icon-color-square.png",
+    "format": "png",
+    "publisher": "Argo Rollouts project contributors",
+    "listing": "https://github.com/argoproj/argo-rollouts",
+    "retrievedOn": "2026-10-09",
+    "sha256": "dab0f558fa9d1cc2307f5c45e5077ceb39324ac40d96042de8dc5e5e279b25ee",
+    "width": 1138,
+    "height": 1096
+  },
+  "argo-workflows": {
+    "url": "https://raw.githubusercontent.com/argoproj/argo-workflows/adba7c3fbb9608c242c250e898b641e772563fb6/docs/assets/logo.png",
+    "format": "png",
+    "publisher": "Argo Workflows project contributors",
+    "listing": "https://github.com/argoproj/argo-workflows",
+    "retrievedOn": "2026-10-09",
+    "sha256": "1fc1ad5fb2d385d5ded352f381ef8dc94ab6bf8b466ad87d4225ecdfce6e0c9c",
+    "width": 268,
+    "height": 268
+  },
   "dingtalk": {
     "presentation": {
       "kind": "rounded-rect",
@@ -41,6 +71,26 @@
     "height": 512,
     "retrievedOn": "2026-09-16",
     "format": "png"
+  },
+  "k9s": {
+    "url": "https://raw.githubusercontent.com/derailed/k9s/7e97f9adf007b02341962feb7084c039595787dc/assets/k9s_small.png",
+    "format": "png",
+    "publisher": "K9s project contributors",
+    "listing": "https://github.com/derailed/k9s",
+    "retrievedOn": "2026-10-09",
+    "sha256": "cdfa8b99ec487af566a6278b399f74cddf659db1d2238e3a9fa1aa856ad47734",
+    "width": 200,
+    "height": 100
+  },
+  "karpenter": {
+    "url": "https://raw.githubusercontent.com/aws/karpenter-provider-aws/09fc0d404f28792076ea2db4e9a1de5df1bcfde8/website/static/favicon.svg",
+    "format": "svg",
+    "publisher": "Karpenter project contributors",
+    "listing": "https://karpenter.sh/",
+    "retrievedOn": "2026-10-09",
+    "sha256": "2bea3dcfaae15c658a6728176e88fdd5ec15d01d8805737bf3221224d77b03e8",
+    "width": 500,
+    "height": 500
   },
   "loki": {
     "format": "svg",
@@ -102,6 +152,16 @@
     "height": 922,
     "retrievedOn": "2026-09-25"
   },
+  "sealed-secrets": {
+    "url": "https://raw.githubusercontent.com/bitnami-labs/sealed-secrets/a1655887a40dfaeaaf337248732beb144b464814/site/themes/template/static/img/sealedsecrets-logo.svg",
+    "format": "svg",
+    "publisher": "Sealed Secrets project contributors",
+    "listing": "https://github.com/bitnami-labs/sealed-secrets",
+    "retrievedOn": "2026-10-09",
+    "sha256": "6bdc65a7899bc543a6aa5977030e2dcd429e35530300f6298ec0fb04f95238f6",
+    "width": 203,
+    "height": 40
+  },
   "tempo": {
     "format": "svg",
     "name": "Grafana Tempo",
@@ -112,6 +172,16 @@
     "width": 121.85,
     "height": 99.17,
     "retrievedOn": "2026-09-19"
+  },
+  "trivy": {
+    "url": "https://raw.githubusercontent.com/aquasecurity/trivy/7c1b1fa19f1628132a9e8377fed127682500d87d/docs/imgs/logo.png",
+    "format": "png",
+    "publisher": "Aqua Security / Trivy project",
+    "listing": "https://github.com/aquasecurity/trivy",
+    "retrievedOn": "2026-10-09",
+    "sha256": "5b3b03c4c426b5da2966ec86f4536a6c3e67719832a678a501f74c242586ce58",
+    "width": 365,
+    "height": 383
   },
   "ubuntu": {
     "format": "svg",

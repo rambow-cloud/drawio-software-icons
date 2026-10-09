@@ -15,15 +15,15 @@
 优先使用内置形状，结果不足时补充本站图标。可试着说：
 「请用 Draw.io MCP 搜索 ScyllaDB 图标，并绘制一个数据库节点。」
 
-456 个软件与服务图标，8 个用途分类，支持中英文浏览、搜索与分类库下载。以开源项目为主，兼收常用商业工具，优先使用上游原色 SVG。
+530 个软件与服务图标，8 个用途分类，支持中英文浏览、搜索与分类库下载。以开源项目为主，兼收常用商业工具，优先使用上游原色 SVG。
 
 **商业图标使用范围：** 本项目中的商业软件与服务图标仅适用于 draw.io / diagrams.net 架构图绘制，不适用于其他发行用途。本项目不额外授予品牌使用权，也不覆盖上游许可证。原创代码和文档继续采用 MIT 许可。使用商业品牌图标前请阅读中英双语 [图标使用声明](ICON_USAGE.md)。
 
 
 ## 图标集合并，两个旧网址保留
 
-现在包含 **456 个软件与服务图标**（8 类）和 **888 个阿里云图标条目**（9 个来源分类），
-共 **1,344 个条目、两个图标集**。阿里云条目包含颜色变体和 UI 补充图形，不代表 888 种独立云服务。
+现在包含 **530 个软件与服务图标**（8 类）和 **888 个阿里云图标条目**（9 个来源分类），
+共 **1,418 个条目、两个图标集**。阿里云条目包含颜色变体和 UI 补充图形，不代表 888 种独立云服务。
 分类、界面和使用流程支持中英文；上游没有英文产品名称的条目保留原名。
 
 - [软件入口](https://icons.rambow.cloud/)默认选中「通用软件」。
@@ -51,6 +51,22 @@
 
 源码、数据和测试统一维护于当前仓库。阿里云旧仓库从主仓库最近一次发布成功的提交构建兼容站点，
 每小时检查更新，也可手动立即同步。详见[发布说明](docs/DEPLOYMENT.md)。
+
+## Kubernetes 生态
+
+新增 **74 个图标**，包括 **Karpenter**、KEDA、Cilium、Calico、Flannel、Istio、
+Linkerd、Flux、Flagger、Argo Workflows / Rollouts / Events、cert-manager、
+External Secrets Operator、Sealed Secrets、Kyverno、Falco、Trivy、Rook、
+Longhorn、OpenEBS、Velero、CoreDNS、containerd、CRI-O、Crossplane、Knative、
+K9s、kind、minikube 等。已有 Kubernetes、Helm、Argo CD、K3s、Talos 继续保留。
+按项目用途分布在原有分类，统一补充 `k8s`、`Kubernetes`、`Kubernetes 生态`、
+`云原生` 标签、中文别名和用途关键词。选择「通用软件」，搜索 `k8s` 可跨分类
+浏览生态项目，也可在 Spotlight 中搜索具体项目。
+
+多数 SVG 来自固定版本的 CNCF 官方素材及 Landscape；Karpenter、Sealed Secrets
+保留官方 SVG 原图，Trivy、三个 Argo 子项目及 K9s 保留官方 PNG 原图。网站、
+MCP 搜索、draw.io 图标库和离线 ZIP 都使用同一份校验后的素材。
+来源及使用条款见[第三方资源说明](THIRD_PARTY_NOTICES.md)。
 
 ## 监控与可观测性
 

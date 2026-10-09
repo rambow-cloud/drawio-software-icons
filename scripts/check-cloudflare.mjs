@@ -8,7 +8,7 @@ const index = await json('.worker-build/search-index.json');
 const catalog = await json('dist/unified-catalog.json');
 assert.equal(index.icons.length, catalog.icons.length);
 assert.equal(new Set(index.icons.map(i => i.id)).size, catalog.icons.length);
-for (const q of ['git', 'k8s', 'ecs', '阿里云', 'cloud', '容器', 'database', '云服务器']) {
+for (const q of ['git', 'k8s', 'karpenter', '节点自动扩缩容', 'cert-manager', 'argo rollouts', 'ecs', '阿里云', 'cloud', '容器', 'database', '云服务器']) {
   assert.deepEqual(search(index, q, 0, 100).images.map(i => i.url),
     searchSpotlight(catalog.icons, catalog.categories, q).slice(0, 100).map(i => `/${i.asset}`));
 }

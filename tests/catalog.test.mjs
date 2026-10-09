@@ -17,6 +17,23 @@ const english=await json('data/categories.en.json');
 const categories=(await json('data/categories.json')).map(c=>({...c,nameEn:english[c.id][0]}));
 const square='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="#123456" d="M0 0h100v100H0z"/></svg>';
 
+test('Kubernetes ecosystem searches include bilingual aliases and publisher originals survive draw.io export',async()=>{
+  for(const [query,id] of [['节点自动扩缩容','karpenter'],['CNI','cilium'],['GitOps','flux'],['密钥加密','sealed-secrets'],['K9s','k9s']]) {
+    assert.ok(filterIcons(catalog.icons,categories,query).some(icon=>icon.id===id),`${query}: ${id}`);
+  }
+  const ecosystem=new Set(filterIcons(catalog.icons,categories,'k8s').map(icon=>icon.id));
+  for(const id of ['karpenter','keda','kubernetes','helm','argocd','argo-workflows','argo-rollouts','argo-events','k3s','talos','velero','trivy'])assert.ok(ecosystem.has(id),id);
+  for(const id of ['karpenter','trivy','argo-workflows','argo-rollouts','argo-events','k9s','sealed-secrets']) {
+    const icon=catalog.icons.find(icon=>icon.id===id),configured=configuredIcons.find(icon=>icon.id===id);
+    assert.ok(icon&&configured,id);
+    const bytes=await readFile(`assets/${icon.asset}`),entry=libraryEntry(icon,icon.asset.endsWith('.png')?bytes:bytes.toString('utf8'));
+    assert.equal(hash(bytes),configured.artwork.sha256,`${id}: publisher checksum`);
+    assert.deepEqual(Buffer.from(entry.data.split(',')[1],'base64'),bytes,`${id}: library bytes`);
+    assert.match(entry.data,new RegExp(`^data:image/${configured.artwork.format==='svg'?'svg\\+xml':'png'};base64,`));
+    assert.ok(Math.abs(entry.w/entry.h-icon.width/icon.height)/(icon.width/icon.height)<0.00001,`${id}: original proportions`);
+  }
+});
+
 test('homepage and category links tolerate catalogs without the optional alias map',()=>{
   const olderCatalog={categories};
   assert.equal(resolveCategory(olderCatalog,'all'),'all');
@@ -27,12 +44,12 @@ test('homepage and category links tolerate catalogs without the optional alias m
   assert.equal(resolveCategory({...olderCatalog,categoryAliases},'all'),'all');
 });
 test('bilingual search, aliases, combined filters and no results',()=>{
-  assert.equal(filterIcons(catalog.icons,categories,'k8s')[0].id,'kubernetes');
+  assert.ok(filterIcons(catalog.icons,categories,'k8s').some(icon=>icon.id==='kubernetes'));
   const zh=filterIcons(catalog.icons,categories,'数据库').map(i=>i.id);
   const en=filterIcons(catalog.icons,categories,'databases').map(i=>i.id);
   assert.deepEqual(zh,en);
   assert.ok(zh.includes('postgresql'));
-  assert.deepEqual(filterIcons(catalog.icons,categories,'PostgreSQL','databases','open-source').map(i=>i.id),['postgresql']);
+  assert.deepEqual(filterIcons(catalog.icons,categories,'PostgreSQL','databases','open-source').map(i=>i.id),['cloudnativepg','postgresql']);
   assert.deepEqual(filterIcons(catalog.icons,categories,'PostgreSQL','cloud'),[]);
   assert.deepEqual(filterIcons(catalog.icons,categories,'zz-no-icon-zz'),[]);
   assert.equal(filterIcons(catalog.icons,categories,'  ＲＥＡＣＴ  ').some(i=>i.id==='react'),true);

@@ -104,7 +104,11 @@
         "cd",
         "iac",
         "build",
-        "自动化"
+        "自动化",
+        "k8s",
+        "Kubernetes 生态",
+        "cloud native",
+        "云原生"
       ],
       "artwork": {
         "path": "icons/argocd/argocd-original.svg",
@@ -395,7 +399,11 @@
         "cd",
         "iac",
         "build",
-        "自动化"
+        "自动化",
+        "k8s",
+        "Kubernetes 生态",
+        "cloud native",
+        "云原生"
       ],
       "artwork": {
         "path": "icons/consul/consul-original.svg",
