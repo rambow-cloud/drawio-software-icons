@@ -1,0 +1,28 @@
+name: Maintenance or documentation
+description: Track workflow, dependency, refactoring, documentation or upstream icon maintenance.
+title: "[Maintenance] "
+body:
+  - type: markdown
+    attributes:
+      value: Please write this issue in English. Maintenance and documentation changes also require an issue, a feat branch, a PR and passing PR checks.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Current problem
+      description: Explain why the work is needed.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and proposed change
+      description: Include affected files, dependencies or workflows when known.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria and validation
+      description: Describe the expected result and the focused checks needed to verify it.
+    validations:
+      required: true

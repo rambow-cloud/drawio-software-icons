@@ -169,7 +169,7 @@ Add or edit an entry in `data/icons/*.json` and commit the configuration; builds
 
 The default uses commits pinned in `data/sources.lock.json`. `--update` resolves current branches unless a source declares an explicit `revision`; `--refresh` bypasses local reuse and revalidates cached downloads without changing source revisions. Downloads are cached by URL and cache version. Expired entries use conditional HTTP when the server supplies validators. Download or artwork-validation failures leave existing assets, catalog and locks unchanged. Verified pinned local files need no network requests.
 
-A monthly Actions workflow checks the configured selection and creates or updates one `automation/icon-update` PR with generated artifacts. Configuration-only contributions do not need to commit those artifacts; the publishing build generates them. Upstream catalogs are not indiscriminately imported.
+A monthly Actions workflow checks the configured selection, creates or reuses an English maintenance issue, and opens a `feat/<issue-number>-refresh-icons` PR with generated artifacts. It uses lightweight checks and explicitly dispatches the same required PR check on that feature branch. Configuration-only contributions do not need to commit those artifacts; the publishing build generates them. Upstream catalogs are not indiscriminately imported.
 
 ## Data and artifacts
 
@@ -192,7 +192,9 @@ Icon records expose `id/name/aliases/tags/category/softwareType/homepage/reposit
 
 The public repository is `rambow-cloud/drawio-software-icons`. Both `https://icons.rambow.cloud/` and `https://rambow-cloud.github.io/drawio-software-icons/` serve the full collection without homepage redirects. A push to `main` independently publishes Cloudflare through Workers Builds and GitHub Pages through GitHub Actions. In Settings → Pages, select GitHub Actions and leave the custom domain empty. The main workflow always publishes the full site; `LEGACY_REDIRECTS` applies only to the separate Alibaba compatibility repository. Relative resource URLs keep images, downloads and draw.io libraries on the site being visited. MCP uses the Cloudflare API on either site. See [Deployment](docs/DEPLOYMENT.md).
 
-Enable **Allow GitHub Actions to create and approve pull requests** under Settings → Actions → General so scheduled updates can open PRs. The update workflow tests and builds its own changes before creating a PR. Additional checks on bot-created PRs may require approval in GitHub's PR interface.
+All changes follow **Issue → `feat/<issue-number>-<description>` → PR → PR checks → merge**. English [issue forms](https://github.com/rambow-cloud/drawio-software-icons/issues/new/choose) cover icons, bugs, features and maintenance. `main` requires a PR with a matching closing issue reference and passing lightweight checks; see [Contributing](CONTRIBUTING.md). PRs do not run publishing builds or deployments. Production publishing remains on merged `main` commits.
+
+Enable **Allow GitHub Actions to create and approve pull requests** under Settings → Actions → General so scheduled updates can open PRs. The update workflow creates its issue before committing, then dispatches `PR checks` on the generated feature branch because token-created PRs do not trigger normal PR workflows.
 
 ## Acceptance checks
 

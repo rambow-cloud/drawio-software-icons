@@ -1,0 +1,63 @@
+name: PR checks
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: PR number to check (also used for token-created automation PRs)
+        required: true
+        type: string
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+concurrency:
+  group: pr-checks-${{ github.event.pull_request.number || inputs.pr_number }}
+  cancel-in-progress: true
+jobs:
+  check:
+    name: PR checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Read the pull request
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
+          CHECK_SHA: ${{ github.sha }}
+          CHECK_EVENT: ${{ github.event_name }}
+        run: |
+          [[ "$PR_NUMBER" =~ ^[1-9][0-9]*$ ]] || exit 1
+          gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" > "$RUNNER_TEMP/pr.json"
+          node --input-type=module <<'NODE'
+          import { readFileSync, appendFileSync } from 'node:fs';
+          const pr = JSON.parse(readFileSync(`${process.env.RUNNER_TEMP}/pr.json`, 'utf8'));
+          for (const sha of [pr.head.sha, pr.base.sha]) {
+            if (!/^[a-f0-9]{40}$/.test(sha)) throw Error('Invalid commit SHA');
+          }
+          if (process.env.CHECK_EVENT === 'workflow_dispatch' && pr.head.sha !== process.env.CHECK_SHA) {
+            throw Error('Dispatch this workflow from the PR feature branch, not main');
+          }
+          appendFileSync(process.env.GITHUB_OUTPUT, `head_sha=${pr.head.sha}\nbase_sha=${pr.base.sha}\n`);
+          NODE
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ steps.pr.outputs.head_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Require an issue-first feature branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/check-pr-policy.mjs "$RUNNER_TEMP/pr.json"
+      - run: npm ci
+      - name: Check changed files, configuration and types
+        env:
+          PR_BASE_SHA: ${{ steps.pr.outputs.base_sha }}
+        run: npm run check:pr

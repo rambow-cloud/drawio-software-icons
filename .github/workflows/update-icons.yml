@@ -5,7 +5,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  issues: write
   pull-requests: write
+  actions: write
 concurrency:
   group: icon-update
   cancel-in-progress: false
@@ -20,10 +22,6 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
-        with:
-          python-version: '3.13'
-          enable-cache: false
       - run: npm ci
       - name: Restore icon download cache
         uses: actions/cache@v5
@@ -33,12 +31,21 @@ jobs:
           restore-keys: |
             icon-downloads-v1-${{ runner.os }}-
       - run: npm run sync -- --update
-      - run: npm run test:offline
-      - run: npm run build:offline
+      - name: Create or reuse the update issue
+        id: issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/prepare-icon-update.mjs
+      - name: Check the proposed files without a publishing build
+        if: steps.issue.outputs.issue_number != ''
+        run: npm run check:pr
       - name: Create or update review PR
+        if: steps.issue.outputs.issue_number != ''
+        id: pr
         uses: peter-evans/create-pull-request@v8.1.1
         with:
-          branch: automation/icon-update
+          branch: ${{ steps.issue.outputs.branch }}
+          delete-branch: true
           title: 'chore: refresh selected software icons'
           commit-message: 'chore: refresh selected software icons and provenance'
           body-path: .update-summary.md
@@ -50,3 +57,12 @@ jobs:
             data/changelog.json
             assets/icons
             licenses
+      - name: Run required checks on the automation feature branch
+        if: steps.pr.outputs.pull-request-number != '' && steps.pr.outputs.pull-request-operation != 'closed'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.pull-request-number }}
+          FEATURE_BRANCH: ${{ steps.issue.outputs.branch }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/pr-checks.yml/dispatches" \
+            --method POST -f "ref=$FEATURE_BRANCH" -f "inputs[pr_number]=$PR_NUMBER"

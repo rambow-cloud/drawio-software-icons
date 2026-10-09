@@ -186,7 +186,7 @@ export async function syncIcons({ update = false, refresh = false, fetchImpl = f
   await saveJson('data/official-icons.json', sortedOfficial);
   await saveJson('data/changelog.json', history);
   await save('.update-summary.md', changed.length || removed.length || licenseChanged
-    ? `## 图标更新\n\n更新或新增 ${changed.length} 项，移除 ${removed.length} 项。\n\n${changed.map(icon => `- ${icon.name} (${icon.id})`).join('\n')}\n${removed.map(id => `- 移除 ${id}`).join('\n')}\n\n上游许可变化：${licenseChanged ? '是' : '否'}。\n`
+    ? `## Icon update\n\nAdded or updated ${changed.length} icons; removed ${removed.length} icons.\n\n${changed.map(icon => `- ${icon.name} (${icon.id})`).join('\n')}\n${removed.map(id => `- Removed ${id}`).join('\n')}\n\nUpstream license changes: ${licenseChanged ? 'yes' : 'no'}.\n`
     : 'No selected icon or license changes.\n');
   console.log(`Synced ${icons.length} icons: ${reused} local, ${downloader.stats.cached} cached, ${downloader.stats.revalidated} not modified, ${downloader.stats.downloaded} downloaded; ${changed.length} changed, ${removed.length} removed.`);
   return { count: icons.length, changed: changed.length, removed: removed.length, reused, ...downloader.stats };

@@ -136,7 +136,7 @@ npm run preview
 
 终端和配置编辑器共用 `CodePanel`，由 shadcn/ui 的 Card、Textarea 组合，`CopyButton` 统一复制反馈和手动复制回退。`.terminal-theme` 只调整终端配色，提示符与实际复制内容分离。`npm run test:ui` 验证渲染、URL 筛选恢复、按钮语义和配置文本，也包含在 `npm test` 中。
 
-`npm run build` 先按 `data/icons/*.json` 同步图标，再校验、执行 TypeScript 检查、生成库与 ZIP，并构建两个静态站点到 `dist/` 和 `dist-alibaba/`。已校验的本地素材与有效缓存会直接复用，新增或来源变更时才需要联网。`npm test` 也会先同步，兼容现有两条 CI 流程。仅构建已同步产物可使用 `npm run build:offline`。
+`npm run build` 先按 `data/icons/*.json` 同步图标，再校验、执行 TypeScript 检查、生成库与 ZIP，并构建两个静态站点到 `dist/` 和 `dist-alibaba/`。已校验的本地素材与有效缓存会直接复用，新增或来源变更时才需要联网。`npm test` 也会先同步。仅构建已同步产物可使用 `npm run build:offline`。PR 仅运行 `npm run check:pr`，完整构建和发布在合并到 `main` 后执行。
 
 ## 收集与更新
 
@@ -150,7 +150,7 @@ npm run sync -- --refresh
 
 默认使用锁文件中的固定提交；`--update` 检查上游分支，但保留配置中显式指定的 `revision`。`--refresh` 跳过本地素材复用并重新验证下载缓存，不改变来源版本。缓存按 URL 与缓存版本区分，过期时在上游支持的情况下使用条件请求。下载或素材检查失败时，现有图标、清单及锁文件保持不变；已校验的固定版本本地素材无需联网。
 
-每月通过 Actions 检查上游一次，更新 `automation/icon-update` 分支和 PR，包含生成的素材与目录。日常新增图标可以只提交配置，发布构建自动生成产物，无需手工提交生成文件；不自动收录整个上游目录。
+每月通过 Actions 检查上游一次，有变更时先创建或复用英文维护 Issue，再更新 `feat/<Issue编号>-refresh-icons` 分支和 PR，并触发同一份轻量必需检查。PR 包含生成的素材与目录。日常新增图标可以只提交配置，发布构建自动生成产物，无需手工提交生成文件；不自动收录整个上游目录。
 
 ## 数据与产物
 
@@ -173,7 +173,9 @@ npm run sync -- --refresh
 
 公开仓库 `rambow-cloud/drawio-software-icons`。`https://icons.rambow.cloud/` 和 `https://rambow-cloud.github.io/drawio-software-icons/` 都提供完整图标库，首页不互相跳转。推送到 `main` 后，Cloudflare Workers Builds 与 GitHub Actions 分别发布两站。Settings → Pages → Source 选择 GitHub Actions，Custom domain 留空。主仓库固定发布完整站点，`LEGACY_REDIRECTS` 仅用于独立的阿里云兼容仓库。相对资源地址让图片、下载和 draw.io 图标库使用当前站点的域名及子路径；两站的 MCP 配置都使用 Cloudflare API。详见[部署说明](docs/DEPLOYMENT.md)。
 
-Settings → Actions → General 中允许 GitHub Actions 创建 Pull Request，供每月更新工作流使用。定时任务用仓库 `GITHUB_TOKEN` 创建更新 PR，并在自身工作流内完成测试及构建；如果 GitHub 对机器人 PR 的附加检查要求批准，在 PR 页面批准运行即可。
+所有修改按 **英文 Issue → `feat/<Issue编号>-<描述>` → PR → PR checks → 合并** 执行，详见[贡献指南](CONTRIBUTING.md)。`main` 必须通过 PR 和轻量检查才能更新，不允许直推、强制推送或删除。PR 阶段不生成发布包、不部署；合并后继续自动发布双站。
+
+Settings → Actions → General 中允许 GitHub Actions 创建 Pull Request，供每月更新工作流使用。机器人 PR 使用 `GITHUB_TOKEN`，不会自动触发普通 PR 工作流；自动更新会明确从对应功能分支触发 `PR checks`，让检查关联到 PR 的提交。
 
 ## 验收
 
