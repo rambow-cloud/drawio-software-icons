@@ -73,7 +73,7 @@ export function homepageMetadata() {
   return `${robotsMeta}\n${jsonLd({ '@context': 'https://schema.org', '@graph': [website, { '@type': 'CollectionPage', '@id': siteUrl, url: siteUrl, name: text.en.title, description: text.en.description, inLanguage: locales, isPartOf: { '@id': website['@id'] } }] })}`;
 }
 
-function page({ locale, suffix, title, description, body, items }) {
+function page({ locale, suffix, title, documentTitle = title, description, body, items }) {
   const path = `discover/${locale}/${suffix}`;
   const otherLocale = locale === 'en' ? 'zh-CN' : 'en';
   const translated = `discover/${otherLocale}/${suffix}`;
@@ -88,11 +88,11 @@ function page({ locale, suffix, title, description, body, items }) {
   ] }] };
   const html = `<!doctype html>
 <html lang="${locale}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>${escapeHtml(title)} | Architecture Icons</title><meta name="description" content="${escapeHtml(description)}" />${robotsMeta}
+<title>${escapeHtml(documentTitle)}</title><meta name="description" content="${escapeHtml(description)}" />${robotsMeta}
 <link rel="canonical" href="${absolute(path)}" />
 ${locales.map(lang => `<link rel="alternate" hreflang="${lang}" href="${absolute(`discover/${lang}/${suffix}`)}" />`).join('\n')}
 <link rel="alternate" hreflang="x-default" href="${absolute(`discover/en/${suffix}`)}" />
-<meta property="og:type" content="website" /><meta property="og:url" content="${absolute(path)}" /><meta property="og:title" content="${escapeHtml(title)}" /><meta property="og:description" content="${escapeHtml(description)}" />
+<meta property="og:type" content="website" /><meta property="og:url" content="${absolute(path)}" /><meta property="og:title" content="${escapeHtml(documentTitle)}" /><meta property="og:description" content="${escapeHtml(description)}" />
 <meta property="og:locale" content="${locale === 'en' ? 'en_US' : 'zh_CN'}" /><meta name="twitter:card" content="summary" />
 <link rel="icon" type="image/svg+xml" href="${relativeLink(path, 'discover/favicon.svg')}" /><link rel="stylesheet" href="${relativeLink(path, 'discover/style.css')}" />
 ${jsonLd(schema)}</head><body><header><a href="${relativeLink(path, '')}">Architecture Icons <small>for draw.io</small></a><nav>${link(path, `discover/${locale}/`, text[locale].contents)} · ${link(path, translated, text[locale].language)}</nav></header>
@@ -117,10 +117,16 @@ export function discoveryFiles(catalog) {
       const icons = catalog.icons.filter(i => i.category === category.id || i.categories?.includes(category.id));
       const collection = catalog.collections.find(c => c.id === category.collection);
       const title = `${localized(collection, locale)} · ${localized(category, locale)} ${locale === 'en' ? 'icons for draw.io' : 'draw.io 图标'}`;
+      // Keep the full collection heading in the page, but avoid repeating the
+      // site brand and generic software label in search-result titles.
+      const name = localized(category, locale);
+      const documentTitle = locale === 'en'
+        ? `${category.collection === 'alibaba-cloud' ? 'Alibaba Cloud ' : ''}${name}${/\bicons$/i.test(name) ? '' : ' Icons'} for draw.io`
+        : title;
       const description = `${localized(category, locale, 'description')} ${locale === 'en' ? `${icons.length} entries with XML downloads and artwork sources.` : `${icons.length} 个条目，提供 XML 下载及素材来源。`}`;
       const body = `<p>${link(path, category.libraries[locale], t.library)}</p>${category.collection === 'alibaba-cloud' ? `<p>${t.variants}</p>` : ''}
 <div class="icons">${icons.map(icon => `<article id="${escapeHtml(icon.id)}"><img src="${escapeHtml(relativeLink(path, icon.asset))}" alt="${escapeHtml(localized(icon, locale))}" loading="lazy" width="64" height="64" /><h2>${escapeHtml(localized(icon, locale))}</h2><p>${t.aliases}: ${escapeHtml([...new Set([icon.name, icon.nameEn, ...icon.aliases, ...icon.tags].filter(Boolean))].join(', '))}</p><p><a href="${escapeHtml(icon.homepage)}">${t.product}</a> · <a href="${escapeHtml(icon.source.url)}">${t.source}</a></p><p>${escapeHtml(icon.source.collectionLicense || '')} · ${link(path, icon.usagePolicyUrl || 'ICON_USAGE.md', t.provenance)}</p></article>`).join('')}</div>`;
-      pages.push(page({ locale, suffix: `${category.collection}/${category.id}/`, title, description, body,
+      pages.push(page({ locale, suffix: `${category.collection}/${category.id}/`, title, documentTitle, description, body,
         items: icons.map(icon => ({ name: localized(icon, locale), url: `${absolute(path)}#${encodeURIComponent(icon.id)}` })),
       }));
     }
