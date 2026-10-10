@@ -14,7 +14,7 @@
     "test:offline": "node --test tests/*.test.mjs && npm run test:ui && uv run --no-project python -m unittest discover -s collections/alibaba-cloud/tests",
     "test:ui": "tsx --test tests/react-ui.test.tsx",
     "typecheck": "tsc --noEmit",
-    "check:pr": "node scripts/check-pr.mjs && node --test tests/pr-policy.test.mjs && npm run typecheck",
+    "check:pr": "node scripts/check-pr.mjs && node --test tests/pr-policy.test.mjs tests/discovery.test.mjs && npm run typecheck",
     "build": "npm run sync && npm run build:offline",
     "build:offline": "npm run validate && npm run typecheck && node scripts/generate.mjs && vite build && node scripts/check-distribution.mjs && node scripts/publish-targets.mjs && node scripts/check-unified.mjs && node --test collections/alibaba-cloud/tests/test_plugin.cjs",
     "dev": "npm run sync && node scripts/generate.mjs && vite --host 127.0.0.1",

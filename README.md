@@ -2,6 +2,8 @@
 
 [简体中文](README.zh-CN.md) · [Browse the collection](https://icons.rambow.cloud/) · [GitHub Pages](https://rambow-cloud.github.io/drawio-software-icons/)
 
+**Search and AI discovery:** The [static English catalog](https://icons.rambow.cloud/discover/en/) works without JavaScript. Category pages, usage guides, the sitemap and AI reading index update with each build. See [discovery setup](docs/DISCOVERY.md) for webmaster submissions and crawler access settings.
+
 **Cloudflare and MCP:** [deployment and icon search API](docs/CLOUDFLARE.md), including
 `DRAWIO_ICON_SERVICE_URL` setup and independent Cloudflare / GitHub Pages sites.
 

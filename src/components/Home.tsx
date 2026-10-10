@@ -70,6 +70,6 @@ export function GuideAndSources() {
   return <><section className="guide" id="guide"><p className="eyebrow">FROM LIBRARY TO CANVAS</p><h2>{t.guideTitle}</h2><div className="steps">{[[t.step1,t.step1Text],[t.step2,t.step2Text],[t.step3,t.step3Text]].map(([name,detail],i)=><article key={i}><span className="step-number">0{i+1}</span><h3>{name}</h3><p>{detail}</p></article>)}</div><div className="offline-note"><Symbol name="download"/><div><p>{t.guideOffline}</p><p>{t.guideLanguage}</p></div></div><McpNotice/></section><section className="sources" id="sources"><div><p className="eyebrow">CLEAR ORIGINS, DEFINED USE</p><h2>{t.sourceTitle}</h2><p>{t.sourceText}</p><p>{t.commercialUse}</p><small>{t.brandNote}</small></div><div className="source-links">{sources.map(([href,label])=><ExternalLink key={href} href={file(href)}>{label} <Symbol name="external"/></ExternalLink>)}</div></section></>;
 }
 export function Footer() {
-  const {t,catalog}=useIcons();
-  return <footer><span>{t.footer}<small>{t.footerNote}</small></span><div><a href="#changelog">{t.changelog}</a><ExternalLink href={file('guides/README.md')}>{t.englishGuide}</ExternalLink><ExternalLink href={file('guides/README.zh-CN.md')}>{t.chineseGuide}</ExternalLink><span>v{catalog.version}</span></div></footer>;
+  const {t,catalog,locale}=useIcons();
+  return <footer><span>{t.footer}<small>{t.footerNote}</small></span><div><a href="#changelog">{t.changelog}</a><a href={file(`discover/${locale}/`)}>{locale==='en'?'Catalog and guides':'分类与使用指南'}</a><ExternalLink href={file('guides/README.md')}>{t.englishGuide}</ExternalLink><ExternalLink href={file('guides/README.zh-CN.md')}>{t.chineseGuide}</ExternalLink><span>v{catalog.version}</span></div></footer>;
 }
