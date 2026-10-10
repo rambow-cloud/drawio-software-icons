@@ -11,6 +11,8 @@ URL, so the crawlable English and Chinese content has its own stable URLs.
 | --- | --- | --- |
 | English catalog | https://icons.rambow.cloud/discover/en/ | Collection descriptions and category links |
 | 中文目录 | https://icons.rambow.cloud/discover/zh-CN/ | 图标集介绍、分类链接及使用说明 |
+| 阿里云icon 专题 | https://icons.rambow.cloud/discover/zh-CN/alibaba-cloud/ | 阿里云架构图标分类、SVG / XML 下载与导入说明 |
+| Alibaba Cloud collection | https://icons.rambow.cloud/discover/en/alibaba-cloud/ | English collection overview, previews, downloads and imports |
 | English guide | https://icons.rambow.cloud/discover/en/guide/ | Online, offline and Draw.io MCP setup |
 | 中文指南 | https://icons.rambow.cloud/discover/zh-CN/guide/ | 在线绘图、离线使用、桌面配置与 MCP 接入 |
 | Sitemap | https://icons.rambow.cloud/sitemap.xml | Canonical homepage and every published discovery page |
@@ -93,3 +95,27 @@ and no special AI text file is required. `llms.txt` is an auxiliary reading inde
 not evidence of indexing or a guarantee of inclusion. Baidu likewise states that
 submission does not guarantee indexing. Allow time for discovery and monitor
 the platform reports rather than claiming that deployment means indexing.
+
+## “阿里云icon”关键词与内容维护
+
+阿里云专题页集中承接“阿里云icon”“阿里云图标下载”“draw.io 阿里云图标”等搜索意图。
+标题和 H1 使用简短、明确的主题，正文提供分类预览、实际下载、导入步骤和来源说明。
+首页、静态目录及阿里云分类页使用描述性链接指向同一个专题入口，站点地图与
+`llms.txt` 随构建更新。页面明确这是社区架构图标库，避免混淆品牌 Logo 下载、
+网站开发用 Iconfont 字体库或官方阿里云站点。
+
+发布后，在已验证的 Google / Bing 站长平台对中文专题页请求索引，提交最新版
+站点地图。Google Search Console 的效果报告可按网页筛选该入口，再检查查询
+“阿里云icon”“阿里云图标”“阿里云图标下载”和“draw.io 阿里云图标”的展示、
+点击及平均排名。Bing 使用自己的关键词和页面表现报告。先观察平台是否展示该
+页面，再根据实际查询完善内容；精确关键词排名并不能通过提交链接保证。
+
+后续内容可以围绕真实使用任务扩展，例如用 ECS、SLB、OSS 绘制一个架构图，
+说明图标如何选取、导入与保存，并链接到相应分类及素材来源。在自己的 GitHub
+项目、技术博客或社区教程中，提供对读者有用的操作说明并自然链接专题页。
+对外发布仍需单独安排，本仓库不会自动在社区发帖。避免重复创建只替换关键词
+的入口、堆叠搜索词或购买 / 群发链接。
+
+这些做法对应 [Google 搜索要点](https://developers.google.com/search/docs/essentials?hl=zh-cn)
+中的描述性标题和可抓取链接，以及[链接最佳实践](https://developers.google.com/search/docs/crawling-indexing/links-crawlable?hl=zh-cn)。
+它们提高主题清晰度与内容可发现性，排名仍取决于搜索系统对相关性和内容质量的评估。

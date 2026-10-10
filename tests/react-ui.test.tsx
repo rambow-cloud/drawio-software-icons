@@ -29,6 +29,8 @@ test('React page preserves section structure, bilingual labels, 72-card paginati
     assert.equal((html.match(/<button\b[^>]*data-icon=/g)??[]).length,72);
     assert.equal((html.match(/class="mcp-notice"/g)??[]).length,2);
     assert(html.includes(locale==='en'?'Choose categories / desktop setup':'选择分类加载 / 桌面配置'));
+    assert(html.includes(`href="https://icons.rambow.cloud/discover/${locale}/alibaba-cloud/"`));
+    assert(html.includes(locale==='en'?'Alibaba Cloud icons':'阿里云icon 图标库'));
     assert(html.includes('&lt;script&gt;alert(1)&lt;/script&gt;'));
     assert(!html.includes('<script>alert(1)</script>'));
     // The homepage button includes both collections; sidebar links use the browsing scope.
