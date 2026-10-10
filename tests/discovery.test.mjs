@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { discoveryFiles, homepageDiscovery, homepageMetadata, siteUrl } from '../scripts/discovery.mjs';
 
 const categories = [
@@ -11,6 +12,37 @@ const catalog = { collections: [{ id: 'software', name: '通用软件', nameEn: 
 const files = discoveryFiles(catalog);
 const htmlPages = [...files].filter(([path]) => path.endsWith('.html'));
 const schemas = html => [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].map(match => JSON.parse(match[1]));
+
+test('current bilingual discovery titles are concise, unique and retain category context', async () => {
+  const [software, english, alibaba] = await Promise.all([
+    'data/categories.json', 'data/categories.en.json', 'collections/alibaba-cloud/data/catalog.json',
+  ].map(path => readFile(new URL(`../${path}`, import.meta.url), 'utf8').then(JSON.parse)));
+  const currentCategories = [
+    ...software.map(c => ({ ...c, collection: 'software', nameEn: english[c.id][0], descriptionEn: english[c.id][1] })),
+    ...alibaba.categories.map(c => ({ ...c, id: `alibaba-${c.id}`, collection: 'alibaba-cloud', nameEn: c.name_en })),
+  ].map(c => ({ ...c, libraries: { en: 'library.xml', 'zh-CN': 'library.xml' } }));
+  const currentFiles = discoveryFiles({ ...catalog, categories: currentCategories, icons: [] });
+  const titles = new Set();
+  for (const [path, html] of currentFiles) {
+    if (!path.endsWith('.html')) continue;
+    const title = html.match(/<title>(.*?)<\/title>/)[1].replaceAll('&amp;', '&');
+    assert(title.length <= 60, `${path}: ${title.length} characters: ${title}`);
+    assert(!titles.has(title), `${path}: duplicate title`);
+    titles.add(title);
+    assert(!/icons icons/i.test(title), `${path}: repeated icon keyword`);
+    const encodedTitle = html.match(/<title>(.*?)<\/title>/)[1];
+    assert(html.includes(`property="og:title" content="${encodedTitle}"`));
+    const category = currentCategories.find(c => path === `discover/en/${c.collection}/${c.id}/index.html`);
+    if (!category) continue;
+    assert(title.includes(category.nameEn), `${path}: retain full category name`);
+    assert(title.includes('draw.io'), `${path}: retain drawing-tool context`);
+    if (category.collection === 'alibaba-cloud') assert(title.includes('Alibaba Cloud'));
+    const heading = html.match(/<h1>(.*?)<\/h1>/)[1].replaceAll('&amp;', '&');
+    assert(heading.includes(catalog.collections.find(c => c.id === category.collection).nameEn));
+    assert.equal(schemas(html)[0]['@graph'][1].name, heading);
+  }
+  assert.equal(titles.size, 2 * (currentCategories.length + 2));
+});
 
 test('sitemap contains every generated HTML page and only canonical main-site URLs', () => {
   const urls = [...files.get('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
