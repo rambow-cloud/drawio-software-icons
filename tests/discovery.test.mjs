@@ -41,12 +41,12 @@ test('current bilingual discovery titles are concise, unique and retain category
     assert(heading.includes(catalog.collections.find(c => c.id === category.collection).nameEn));
     assert.equal(schemas(html)[0]['@graph'][1].name, heading);
   }
-  assert.equal(titles.size, 2 * (currentCategories.length + 2));
+  assert.equal(titles.size, 2 * (currentCategories.length + 3));
 });
 
 test('sitemap contains every generated HTML page and only canonical main-site URLs', () => {
   const urls = [...files.get('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-  assert.equal(htmlPages.length, 2 * (categories.length + 2));
+  assert.equal(htmlPages.length, 2 * (categories.length + 3));
   assert.deepEqual(urls, [siteUrl, ...htmlPages.map(([path]) => new URL(path.replace(/index\.html$/, ''), siteUrl).href)]);
   assert.equal(new Set(urls).size, urls.length);
   assert.deepEqual(files.get('urls.txt').trim().split('\n'), urls);
@@ -88,7 +88,7 @@ test('HTML works without JavaScript and escapes text and structured data from th
 
 test('relative links preserve GitHub Pages repository prefixes and stay within deployed files', () => {
   const origin = 'https://rambow-cloud.github.io/drawio-software-icons/';
-  const assets = new Set([...files.keys(), 'discover/favicon.svg', 'icons/test.svg', 'ICON_USAGE.md', 'THIRD_PARTY_NOTICES.md', 'compat/alibaba-cloud/NOTICE.md', 'downloads/drawio-icons.zip', ...categories.flatMap(c => Object.values(c.libraries))]);
+  const assets = new Set([...files.keys(), 'discover/favicon.svg', 'icons/test.svg', 'ICON_USAGE.md', 'THIRD_PARTY_NOTICES.md', 'compat/alibaba-cloud/NOTICE.md', 'downloads/drawio-icons.zip', 'alibaba-cloud-drawio.zip', 'drawio/all-icons.xml', ...categories.flatMap(c => Object.values(c.libraries))]);
   for (const [path, html] of htmlPages) {
     const base = new URL(path.replace(/index\.html$/, ''), origin);
     for (const [, href] of html.matchAll(/(?:href|src)="([^"<>]+)"/g)) {
@@ -112,4 +112,36 @@ test('AI reading guidance uses generated category URLs and keeps usage and MCP c
   assert(llms.includes('not a remote MCP server URL'));
   assert(llms.includes('grants no additional brand permissions'));
   assert.equal(schemas(homepageMetadata())[0]['@graph'][0]['@type'], 'WebSite');
+});
+
+test('Alibaba collection pages serve the keyword intent with accurate counts, previews and imports', () => {
+  const cloudIcon = { ...icon, id: 'cloud-icon', name: '云服务器 ECS', nameEn: 'Elastic Compute Service ECS', category: 'cloud-category', categories: ['cloud-category'], collection: 'alibaba-cloud' };
+  const collectionFiles = discoveryFiles({ ...catalog, icons: [icon, cloudIcon] });
+  const chinese = collectionFiles.get('discover/zh-CN/alibaba-cloud/index.html');
+  const english = collectionFiles.get('discover/en/alibaba-cloud/index.html');
+  assert(chinese.includes('<title>阿里云icon 图标库下载 | draw.io 架构图</title>'));
+  assert(chinese.includes('<h1>阿里云icon 图标库下载 | draw.io 架构图</h1>'));
+  assert(chinese.includes('1 个条目、1 个分类'), 'Count only Alibaba entries, not all collections or duplicated memberships');
+  assert(english.includes('1 Alibaba Cloud icon entries in 1 categories'));
+  for (const [locale, html] of [['zh-CN', chinese], ['en', english]]) {
+    assert(html.includes('href="../../../alibaba-cloud-drawio.zip"'));
+    assert(html.includes('href="../../../drawio/all-icons.xml"'));
+    assert(html.includes('href="../../../?collection=alibaba-cloud#library"'));
+    assert(html.includes('href="cloud-category/"'));
+    assert(html.includes('src="../../../icons/test.svg"'));
+    assert(!html.includes('Brand &lt;/script&gt;'), 'Previews must belong to Alibaba Cloud');
+    assert(html.includes('https://example.com/icon.svg'));
+    const drawioLink = html.match(/href="(https:\/\/app\.diagrams\.net[^"<>]+)"/)[1].replaceAll('&amp;', '&');
+    const libraries = new URL(drawioLink).searchParams.get('clibs').split(';');
+    assert.equal(libraries.length, 1);
+    assert.equal(new URL(decodeURIComponent(libraries[0].slice(1))).href, new URL(categories[1].libraries[locale], siteUrl).href);
+    assert.equal(schemas(html)[0]['@graph'][1].mainEntity.numberOfItems, 1);
+    assert(collectionFiles.get('sitemap.xml').includes(`${siteUrl}discover/${locale}/alibaba-cloud/`));
+    assert(collectionFiles.get('llms.txt').includes(`${siteUrl}discover/${locale}/alibaba-cloud/`));
+    assert(collectionFiles.get(`discover/${locale}/alibaba-cloud/cloud-category/index.html`).includes('href="../"'));
+    assert(collectionFiles.get(`discover/${locale}/index.html`).includes('href="alibaba-cloud/"'));
+  }
+  assert(chinese.includes('社区整理的架构图标库'));
+  assert(chinese.includes('不代表阿里云官方站点或品牌背书'));
+  assert(homepageDiscovery(catalog).includes('href="./discover/zh-CN/alibaba-cloud/"'));
 });

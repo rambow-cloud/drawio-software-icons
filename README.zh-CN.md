@@ -4,6 +4,8 @@
 
 **搜索与 AI 收录：** [中文静态目录](https://icons.rambow.cloud/discover/zh-CN/)无需 JavaScript；分类页、使用指南、站点地图与 AI 阅读入口随构建自动更新。站长平台提交和爬虫访问设置见[收录说明](docs/DISCOVERY.md)。
 
+**阿里云icon：** [阿里云图标库与下载](https://icons.rambow.cloud/discover/zh-CN/alibaba-cloud/)提供原色 SVG、draw.io XML 分类库、ZIP 下载及在线与离线导入说明，适用于阿里云架构图绘制。
+
 **Cloudflare 与 MCP：** [部署与图标搜索接口](docs/CLOUDFLARE.md)，包含
 `DRAWIO_ICON_SERVICE_URL` 配置及 Cloudflare / GitHub Pages 双站发布方案。
 
