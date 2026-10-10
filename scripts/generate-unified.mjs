@@ -75,6 +75,7 @@ export async function generateUnified(software, softwareEntries) {
   const finalCatalog = JSON.stringify(combined, null, 2) + '\n';
   await save('public/unified-catalog.json', finalCatalog);
   await save(`public/unified-catalog-${hash(finalCatalog)}.json`, finalCatalog);
+  await (await import('./discovery.mjs')).generateDiscovery(combined);
   const { configurationFor } = await import('../src/configuration.mjs');
   for (const locale of ['en', 'zh-CN']) {
     const config = configurationFor(combined, categories.map(c => c.id), payloads, locale);

@@ -59,7 +59,7 @@ await save('public/catalog.json',publicCatalog);addZip('catalog.json',publicCata
 // Content-addressed URL keeps new application code from fetching an old cached catalog.
 await save(`public/catalog-${hash(publicCatalog)}.json`,publicCatalog);
 for(const file of await readdir('licenses')) {const content=await readFile(`licenses/${file}`);await save(`public/licenses/${file}`,content);addZip(`licenses/${file}`,content);}
-for(const file of ['README.md','README.en.md','README.zh-CN.md','ICON_USAGE.md','THIRD_PARTY_NOTICES.md','CONTRIBUTING.md','LICENSE','data/official-icons.json','docs/DEPLOYMENT.md','docs/CLOUDFLARE.md','docs/ICON_CONFIGURATION.md']) {
+for(const file of ['README.md','README.en.md','README.zh-CN.md','ICON_USAGE.md','THIRD_PARTY_NOTICES.md','CONTRIBUTING.md','LICENSE','data/official-icons.json','docs/DEPLOYMENT.md','docs/CLOUDFLARE.md','docs/ICON_CONFIGURATION.md','docs/DISCOVERY.md']) {
   const content=await readFile(file);await save(`public/${file}`,content);addZip(file,content);
 }
 const history=await json('data/changelog.json');
@@ -72,7 +72,5 @@ await save('public/changelog.json',historyJson);addZip('changelog.json',historyJ
 const zip=zipSync(zipFiles,{level:6});
 await save('public/downloads/drawio-software-icons.zip',zip);
 await save('public/.nojekyll','');
-await save('public/robots.txt','User-agent: *\nAllow: /\n\nSitemap: https://icons.rambow.cloud/sitemap.xml\n');
-await save('public/sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>https://icons.rambow.cloud/</loc></url>\n</urlset>\n');
 console.log(`Generated ${catalog.icons.length} icons, ${categories.length*2} bilingual libraries, catalog and ${(zip.length/1024/1024).toFixed(2)} MB ZIP.`);
 await (await import('./generate-unified.mjs')).generateUnified({...catalog,categories,categoryAliases},entries);
