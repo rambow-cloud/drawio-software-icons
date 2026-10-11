@@ -10,7 +10,7 @@ const discoveryPlugin = {
   name: 'static-homepage-discovery',
   transformIndexHtml(html) {
     const catalog = JSON.parse(readFileSync(new URL('./public/unified-catalog.json', import.meta.url), 'utf8'));
-    return html.replace('<!-- discovery:metadata -->', homepageMetadata())
+    return html.replace('<!-- discovery:metadata -->', homepageMetadata(catalog))
       .replace('<!-- discovery:content -->', homepageDiscovery(catalog));
   },
 };

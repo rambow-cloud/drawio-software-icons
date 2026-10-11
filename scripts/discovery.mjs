@@ -1,8 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { save } from './lib.mjs';
 import { posix } from 'node:path';
-import { drawioUrl } from '../src/catalog.mjs';
-import { homepageTitle, homepageDescription, alibabaHeading, alibabaOverview, alibabaCopy } from '../src/homepage.mjs';
+import { homepageTitle, homepageDescription } from '../src/homepage.mjs';
 
 export const siteUrl = 'https://icons.rambow.cloud/';
 const repository = 'https://github.com/rambow-cloud/drawio-software-icons';
@@ -12,7 +11,7 @@ const absolute = path => new URL(path, siteUrl).href;
 const localized = (item, locale, field = 'name') => locale === 'en' ? item[`${field}En`] || item[field] : item[field];
 const categoryPath = (locale, category) => `discover/${locale}/${category.collection}/${category.id}/`;
 const alibabaPath = locale => `discover/${locale}/alibaba-cloud/`;
-const alibabaHomeLink = (path, label) => `<a href="${relativeLink(path, '')}#alibaba-cloud">${escapeHtml(label)}</a>`;
+const alibabaHomeLink = (path, label) => `<a href="${relativeLink(path, '')}?collection=alibaba-cloud#library">${escapeHtml(label)}</a>`;
 const relativeLink = (from, to) => {
   const path = posix.relative(from, to);
   return path ? (from ? '' : './') + path + (!to || to.endsWith('/') ? '/' : '') : './';
@@ -72,18 +71,7 @@ function usageLinks(path, locale) {
 }
 
 export function homepageDiscovery(catalog) {
-  return `<main class="boot"><h1>${escapeHtml(homepageTitle)}</h1><p lang="zh-CN">${text['zh-CN'].title}。${summary(catalog, 'zh-CN')}</p><p>${text.en.description}</p><p>${link('', 'discover/en/', 'English catalog and guide')} · ${link('', 'discover/zh-CN/', '中文分类与使用指南')} · ${alibabaHomeLink('', text['zh-CN'].alibabaLink)} · ${link('', 'downloads/drawio-icons.zip', text.en.download)}</p>${homepageAlibaba(catalog)}${categoryList(catalog, 'en', '')}<p role="status">正在加载交互图标库 · Loading interactive icons…</p></main>`;
-}
-
-function homepageAlibaba(catalog) {
-  const overview = alibabaOverview(catalog), path = '';
-  if (!overview.categories.length) return '';
-  const t = alibabaCopy['zh-CN'];
-  return `<section id="alibaba-cloud"><h2>${alibabaHeading}</h2><p lang="zh-CN">${escapeHtml(overview.chinese)}</p><p lang="en">${escapeHtml(overview.english)}</p>
-<p>${link(path, 'alibaba-cloud-drawio.zip', t.download)} · ${link(path, 'drawio/all-icons.xml', t.xml)} · <a href="${escapeHtml(drawioUrl(siteUrl, overview.categories.map(c => c.libraries['zh-CN'])))}">${t.online}</a></p>
-<div class="icons">${overview.examples.map(icon => `<article><img src="${escapeHtml(relativeLink(path, icon.asset))}" alt="${escapeHtml(icon.name)}" loading="lazy" width="64" height="64" /><h3>${escapeHtml(icon.name)}</h3><p>${link(path, icon.asset, 'SVG')} · <a href="${escapeHtml(icon.source.url)}">${t.source}</a></p></article>`).join('')}</div>
-<ul>${overview.categories.map(c => `<li>${link(path, categoryPath('zh-CN', c), `${c.name} (${c.count})`)} · ${link(path, c.libraries['zh-CN'], 'XML')} · ${link(path, categoryPath('en', c), c.nameEn)}</li>`).join('')}</ul>
-${t.steps.map(([heading, detail]) => `<h3>${heading}</h3><p>${detail}</p>`).join('')}<p>${t.rights}</p></section>`;
+  return `<main class="boot"><h1>${text.en.title}</h1><p lang="zh-CN">${text['zh-CN'].title}。${summary(catalog, 'zh-CN')}</p><p>${text.en.description}</p><p>${link('', 'discover/en/', 'English catalog and guide')} · ${link('', 'discover/zh-CN/', '中文分类与使用指南')} · ${alibabaHomeLink('', text['zh-CN'].alibabaLink)} · ${link('', 'downloads/drawio-icons.zip', text.en.download)}</p>${categoryList(catalog, 'en', '')}<p role="status">正在加载交互图标库 · Loading interactive icons…</p></main>`;
 }
 
 function alibabaRedirect(locale) {
@@ -93,8 +81,11 @@ function alibabaRedirect(locale) {
 <body><p><a href="${siteUrl}">${locale === 'en' ? 'Open the homepage icon library' : '打开首页图标库'}</a></p></body></html>\n`];
 }
 
-export function homepageMetadata() {
-  return `${robotsMeta}\n${jsonLd({ '@context': 'https://schema.org', '@graph': [website, { '@type': 'CollectionPage', '@id': siteUrl, url: siteUrl, name: homepageTitle, description: homepageDescription, inLanguage: locales, isPartOf: { '@id': website['@id'] } }] })}`;
+export function homepageMetadata(catalog) {
+  const collectionList = { '@type': 'ItemList', numberOfItems: catalog.collections.length,
+    itemListElement: catalog.collections.map((collection, index) => ({ '@type': 'ListItem', position: index + 1,
+      name: `${collection.name} / ${collection.nameEn}`, url: absolute(`?collection=${encodeURIComponent(collection.id)}#library`) })) };
+  return `${robotsMeta}\n${jsonLd({ '@context': 'https://schema.org', '@graph': [website, { '@type': 'CollectionPage', '@id': siteUrl, url: siteUrl, name: homepageTitle, description: homepageDescription, inLanguage: locales, isPartOf: { '@id': website['@id'] }, mainEntity: collectionList }] })}`;
 }
 
 function page({ locale, suffix, title, documentTitle = title, description, body, items }) {
@@ -169,7 +160,7 @@ export function discoveryFiles(catalog) {
     return [path, path.slice(0, -1), path + 'index.html'].map(source => `${source} / 301`);
   }).join('\n') + '\n');
   files.set('robots.txt', `# Public content is available to search and AI retrieval crawlers.\nUser-agent: *\nAllow: /\n\nSitemap: ${absolute('sitemap.xml')}\n`);
-  files.set('llms.txt', `# Architecture Icons for draw.io\n\n> ${text.en.description}\n> ${text['zh-CN'].description}\n\n${summary(catalog, 'en')}\n${text.en.variants}\n\n## Catalog and usage\n\n- [English catalog](${absolute('discover/en/')})\n- [中文目录](${absolute('discover/zh-CN/')})\n- [Alibaba Cloud icons and downloads](${siteUrl}#alibaba-cloud)\n- [阿里云icon 图标库与下载](${siteUrl}#alibaba-cloud)\n- [English usage guide](${absolute('discover/en/guide/')})\n- [中文使用指南](${absolute('discover/zh-CN/guide/')})\n- [Machine-readable catalog](${absolute('unified-catalog.json')})\n- [Icon use policy](${absolute('ICON_USAGE.md')})\n- [Artwork provenance and licenses](${absolute('THIRD_PARTY_NOTICES.md')})\n\n## Categories\n\n${catalog.categories.map(c => `- [${c.nameEn} / ${c.name}](${absolute(categoryPath('en', c))}): ${c.count} entries; [中文](${absolute(categoryPath('zh-CN', c))})`).join('\n')}\n\n## AI drawing integration\n\nUse Draw.io MCP with DRAWIO_ICON_SERVICE_URL=${absolute('api/icons')}. This is an icon search API, not a remote MCP server URL. No account or API key is required.\n\n## Rights\n\n${text.en.rights}\n${text['zh-CN'].rights}\n`);
+  files.set('llms.txt', `# Architecture Icons for draw.io\n\n> ${text.en.description}\n> ${text['zh-CN'].description}\n\n${summary(catalog, 'en')}\n${text.en.variants}\n\n## Catalog and usage\n\n- [English catalog](${absolute('discover/en/')})\n- [中文目录](${absolute('discover/zh-CN/')})\n- [Alibaba Cloud icons and downloads](${siteUrl}?collection=alibaba-cloud#library)\n- [阿里云icon 图标库与下载](${siteUrl}?collection=alibaba-cloud#library)\n- [English usage guide](${absolute('discover/en/guide/')})\n- [中文使用指南](${absolute('discover/zh-CN/guide/')})\n- [Machine-readable catalog](${absolute('unified-catalog.json')})\n- [Icon use policy](${absolute('ICON_USAGE.md')})\n- [Artwork provenance and licenses](${absolute('THIRD_PARTY_NOTICES.md')})\n\n## Categories\n\n${catalog.categories.map(c => `- [${c.nameEn} / ${c.name}](${absolute(categoryPath('en', c))}): ${c.count} entries; [中文](${absolute(categoryPath('zh-CN', c))})`).join('\n')}\n\n## AI drawing integration\n\nUse Draw.io MCP with DRAWIO_ICON_SERVICE_URL=${absolute('api/icons')}. This is an icon search API, not a remote MCP server URL. No account or API key is required.\n\n## Rights\n\n${text.en.rights}\n${text['zh-CN'].rights}\n`);
   files.set('discover/style.css', 'body{margin:0;background:#f8f7f4;color:#292720;font:16px/1.7 system-ui,sans-serif}header,main,footer{max-width:1080px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:1px solid #d8d5cc}h1{font-size:clamp(28px,4vw,44px);line-height:1.2}h2{font-size:21px}a{color:#81501e;text-underline-offset:3px;overflow-wrap:anywhere}li{margin:12px 0}section{margin:32px 0}footer{border-top:1px solid #d8d5cc}.icons{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px}.icons article{padding:20px;border:1px solid #d8d5cc;border-radius:12px;background:#fff;overflow-wrap:anywhere}.icons img{object-fit:contain}.icons p{font-size:14px}\n');
   return files;
 }
