@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { discoveryFiles, homepageDiscovery, homepageMetadata, siteUrl } from '../scripts/discovery.mjs';
+import { homepageTitle, homepageDescription } from '../src/homepage.mjs';
 
 const categories = [
   { id: 'software-category', collection: 'software', name: '软件分类', nameEn: 'Software category', description: '软件图标', descriptionEn: 'Software icons', count: 1, libraries: { en: 'libraries/en/Software Category.xml', 'zh-CN': 'libraries/zh-CN/软件分类.xml' } },
@@ -11,6 +12,7 @@ const icon = { id: 'test-icon', name: '品牌 </script><script>alert(1)</script>
 const catalog = { collections: [{ id: 'software', name: '通用软件', nameEn: 'General Software' }, { id: 'alibaba-cloud', name: '阿里云', nameEn: 'Alibaba Cloud' }], categories, icons: [icon] };
 const files = discoveryFiles(catalog);
 const htmlPages = [...files].filter(([path]) => path.endsWith('.html'));
+const contentPages = htmlPages.filter(([, html]) => !html.includes('http-equiv="refresh"'));
 const schemas = html => [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].map(match => JSON.parse(match[1]));
 
 test('current bilingual discovery titles are concise, unique and retain category context', async () => {
@@ -24,7 +26,7 @@ test('current bilingual discovery titles are concise, unique and retain category
   const currentFiles = discoveryFiles({ ...catalog, categories: currentCategories, icons: [] });
   const titles = new Set();
   for (const [path, html] of currentFiles) {
-    if (!path.endsWith('.html')) continue;
+    if (!path.endsWith('.html') || html.includes('http-equiv="refresh"')) continue;
     const title = html.match(/<title>(.*?)<\/title>/)[1].replaceAll('&amp;', '&');
     assert(title.length <= 60, `${path}: ${title.length} characters: ${title}`);
     assert(!titles.has(title), `${path}: duplicate title`);
@@ -41,20 +43,20 @@ test('current bilingual discovery titles are concise, unique and retain category
     assert(heading.includes(catalog.collections.find(c => c.id === category.collection).nameEn));
     assert.equal(schemas(html)[0]['@graph'][1].name, heading);
   }
-  assert.equal(titles.size, 2 * (currentCategories.length + 3));
+  assert.equal(titles.size, 2 * (currentCategories.length + 2));
 });
 
-test('sitemap contains every generated HTML page and only canonical main-site URLs', () => {
+test('sitemap contains indexable pages and excludes migrated collection URLs', () => {
   const urls = [...files.get('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-  assert.equal(htmlPages.length, 2 * (categories.length + 3));
-  assert.deepEqual(urls, [siteUrl, ...htmlPages.map(([path]) => new URL(path.replace(/index\.html$/, ''), siteUrl).href)]);
+  assert.equal(contentPages.length, 2 * (categories.length + 2));
+  assert.deepEqual(urls, [siteUrl, ...contentPages.map(([path]) => new URL(path.replace(/index\.html$/, ''), siteUrl).href)]);
   assert.equal(new Set(urls).size, urls.length);
   assert.deepEqual(files.get('urls.txt').trim().split('\n'), urls);
   assert(!files.get('sitemap.xml').includes('lastmod'), 'Do not invent content modification dates');
 });
 
 test('translations have reciprocal hreflang and distinct canonical URLs with valid JSON-LD', () => {
-  for (const [path, html] of htmlPages) {
+  for (const [path, html] of contentPages) {
     const locale = path.split('/')[1];
     const canonical = new URL(path.replace(/index\.html$/, ''), siteUrl).href;
     assert(html.includes(`<html lang="${locale}">`));
@@ -99,7 +101,7 @@ test('relative links preserve GitHub Pages repository prefixes and stay within d
       assert(!target || assets.has(target) || assets.has(target + 'index.html'), `${path}: ${href}`);
     }
   }
-  for (const [, href] of homepageDiscovery(catalog).matchAll(/href="([^"<>]+)"/g)) assert(href.startsWith('./'), href);
+  for (const [, href] of homepageDiscovery(catalog).matchAll(/href="([^"<>]+)"/g)) if (!/^https?:/.test(href)) assert(href.startsWith('./'), href);
 });
 
 test('AI reading guidance uses generated category URLs and keeps usage and MCP contracts explicit', () => {
@@ -114,34 +116,51 @@ test('AI reading guidance uses generated category URLs and keeps usage and MCP c
   assert.equal(schemas(homepageMetadata())[0]['@graph'][0]['@type'], 'WebSite');
 });
 
-test('Alibaba collection pages serve the keyword intent with accurate counts, previews and imports', () => {
+test('homepage serves Alibaba downloads, bilingual content and catalog-derived previews', async () => {
   const cloudIcon = { ...icon, id: 'cloud-icon', name: '云服务器 ECS', nameEn: 'Elastic Compute Service ECS', category: 'cloud-category', categories: ['cloud-category'], collection: 'alibaba-cloud' };
-  const collectionFiles = discoveryFiles({ ...catalog, icons: [icon, cloudIcon] });
-  const chinese = collectionFiles.get('discover/zh-CN/alibaba-cloud/index.html');
-  const english = collectionFiles.get('discover/en/alibaba-cloud/index.html');
-  assert(chinese.includes('<title>阿里云icon 图标库下载 | draw.io 架构图</title>'));
-  assert(chinese.includes('<h1>阿里云icon 图标库下载 | draw.io 架构图</h1>'));
-  assert(chinese.includes('1 个条目、1 个分类'), 'Count only Alibaba entries, not all collections or duplicated memberships');
-  assert(english.includes('1 Alibaba Cloud icon entries in 1 categories'));
-  for (const [locale, html] of [['zh-CN', chinese], ['en', english]]) {
-    assert(html.includes('href="../../../alibaba-cloud-drawio.zip"'));
-    assert(html.includes('href="../../../drawio/all-icons.xml"'));
-    assert(html.includes('href="../../../?collection=alibaba-cloud#library"'));
-    assert(html.includes('href="cloud-category/"'));
-    assert(html.includes('src="../../../icons/test.svg"'));
-    assert(!html.includes('Brand &lt;/script&gt;'), 'Previews must belong to Alibaba Cloud');
-    assert(html.includes('https://example.com/icon.svg'));
-    const drawioLink = html.match(/href="(https:\/\/app\.diagrams\.net[^"<>]+)"/)[1].replaceAll('&amp;', '&');
-    const libraries = new URL(drawioLink).searchParams.get('clibs').split(';');
-    assert.equal(libraries.length, 1);
-    assert.equal(new URL(decodeURIComponent(libraries[0].slice(1))).href, new URL(categories[1].libraries[locale], siteUrl).href);
-    assert.equal(schemas(html)[0]['@graph'][1].mainEntity.numberOfItems, 1);
-    assert(collectionFiles.get('sitemap.xml').includes(`${siteUrl}discover/${locale}/alibaba-cloud/`));
-    assert(collectionFiles.get('llms.txt').includes(`${siteUrl}discover/${locale}/alibaba-cloud/`));
-    assert(collectionFiles.get(`discover/${locale}/alibaba-cloud/cloud-category/index.html`).includes('href="../"'));
-    assert(collectionFiles.get(`discover/${locale}/index.html`).includes('href="alibaba-cloud/"'));
+  const html = homepageDiscovery({ ...catalog, icons: [icon, cloudIcon] });
+  assert(html.includes('<section id="alibaba-cloud">'));
+  assert(html.includes('阿里云icon 图标库 / Alibaba Cloud icons'));
+  assert(html.includes('1 个图标条目、1 个分类'), 'Count only Alibaba entries');
+  assert(html.includes('1 Alibaba Cloud icon entries in 1 categories'));
+  for (const target of ['alibaba-cloud-drawio.zip', 'drawio/all-icons.xml', 'discover/zh-CN/alibaba-cloud/cloud-category/']) assert(html.includes(`href="./${target}"`));
+  assert(html.includes('src="./icons/test.svg"'));
+  assert(html.includes('alt="云服务器 ECS"'));
+  assert(!html.includes('Brand &lt;/script&gt;'), 'Previews must belong to Alibaba Cloud');
+  assert(html.includes('https://example.com/icon.svg'));
+  assert(html.includes('drawio/'));
+  assert(html.includes('非阿里云官方站点'));
+  const drawioLink = html.match(/href="(https:\/\/app\.diagrams\.net[^"<>]+)"/)[1].replaceAll('&amp;', '&');
+  const libraries = new URL(drawioLink).searchParams.get('clibs').split(';');
+  assert.equal(libraries.length, 1);
+  assert.equal(new URL(decodeURIComponent(libraries[0].slice(1))).href, new URL(categories[1].libraries['zh-CN'], siteUrl).href);
+  // The homepage still escapes catalog text, even for previews containing markup.
+  const unsafe = homepageDiscovery({ ...catalog, icons: [{ ...cloudIcon, name: icon.name }] });
+  assert(unsafe.includes('&lt;/script&gt;&lt;script&gt;alert(1)&lt;/script&gt;'));
+  assert(!unsafe.includes('<script>alert(1)</script>'));
+  const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  assert(index.includes(`<title>${homepageTitle}</title>`));
+  assert(index.includes(`name="description" content="${homepageDescription}"`));
+  assert(index.includes('name="baidu-site-verification" content="codeva-gyFX1gxyRv"'));
+  assert.equal(schemas(homepageMetadata())[0]['@graph'][1].name, homepageTitle);
+});
+
+test('old Alibaba overview URLs permanently redirect to the homepage without catching categories', () => {
+  const rules = files.get('_redirects').trim().split('\n');
+  assert.equal(rules.length, 6);
+  for (const locale of ['en', 'zh-CN']) {
+    const path = `discover/${locale}/alibaba-cloud/`;
+    for (const source of [path, path.slice(0, -1), path + 'index.html']) assert(rules.includes(`/${source} / 301`));
+    const html = files.get(path + 'index.html');
+    assert(html.includes(`http-equiv="refresh" content="0; url=${siteUrl}"`));
+    assert(html.includes(`rel="canonical" href="${siteUrl}"`));
+    assert(!html.includes('noindex'), 'Let crawlers see the migration signal');
+    assert(!files.get('sitemap.xml').includes(`<loc>${siteUrl + path}</loc>`));
+    assert(!files.get('urls.txt').trim().split('\n').includes(siteUrl + path));
+    assert(!files.get('llms.txt').includes(siteUrl + path + ')'));
+    assert(files.get(`discover/${locale}/alibaba-cloud/cloud-category/index.html`).includes('href="../../../../#alibaba-cloud"'));
+    assert(files.get(`discover/${locale}/index.html`).includes('href="../../#alibaba-cloud"'));
   }
-  assert(chinese.includes('社区整理的架构图标库'));
-  assert(chinese.includes('不代表阿里云官方站点或品牌背书'));
-  assert(homepageDiscovery(catalog).includes('href="./discover/zh-CN/alibaba-cloud/"'));
+  assert(rules.every(rule => !rule.includes('*')));
+  assert(files.get('llms.txt').includes(siteUrl + '#alibaba-cloud'));
 });

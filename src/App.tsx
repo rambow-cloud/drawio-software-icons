@@ -9,12 +9,13 @@ import { IconLibrary } from './components/IconLibrary';
 import { DetailDialog, LocalNotice, SpotlightDialog } from './components/IconDialogs';
 import { BundleDialog } from './components/BundleDialog';
 import { McpDialog } from './components/McpDialog';
+import { AlibabaOverview } from './components/AlibabaOverview';
 
 declare const __CATALOG_FILE__: string;
 
 export function Page() {
   const {modal}=useIcons();
-  return <><Header/><main><Home/><IconLibrary/><Changelog/><GuideAndSources/></main><Footer/>
+  return <><Header/><main><Home/><AlibabaOverview/><IconLibrary/><Changelog/><GuideAndSources/></main><Footer/>
     {modal?.kind==='spotlight'&&<SpotlightDialog/>}
     {modal?.kind==='detail'&&<DetailDialog icon={modal.icon}/>}
     {modal?.kind==='bundle'&&<BundleDialog/>}

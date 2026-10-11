@@ -4,6 +4,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { SiteProvider, initialFilters } from '../src/site';
 import { Page } from '../src/App';
 import { Header } from '../src/components/Home';
+import { AlibabaOverview } from '../src/components/AlibabaOverview';
 import { BundleDialog } from '../src/components/BundleDialog';
 import { DetailDialog, SpotlightDialog } from '../src/components/IconDialogs';
 import { McpDialog } from '../src/components/McpDialog';
@@ -29,7 +30,8 @@ test('React page preserves section structure, bilingual labels, 72-card paginati
     assert.equal((html.match(/<button\b[^>]*data-icon=/g)??[]).length,72);
     assert.equal((html.match(/class="mcp-notice"/g)??[]).length,2);
     assert(html.includes(locale==='en'?'Choose categories / desktop setup':'选择分类加载 / 桌面配置'));
-    assert(html.includes(`href="https://icons.rambow.cloud/discover/${locale}/alibaba-cloud/"`));
+    assert(html.includes('href="#alibaba-cloud"'));
+    assert(!html.includes(`href="https://icons.rambow.cloud/discover/${locale}/alibaba-cloud/"`));
     assert(html.includes(locale==='en'?'Alibaba Cloud icons':'阿里云icon 图标库'));
     assert(html.includes('&lt;script&gt;alert(1)&lt;/script&gt;'));
     assert(!html.includes('<script>alert(1)</script>'));
@@ -102,4 +104,25 @@ test('terminal and editable configuration panels preserve exact text without inc
   assert(editable.includes('data-code-panel="config"'));
   assert(!editable.includes('readOnly=""'));
   assert(editable.includes('{&quot;keep&quot;:true}'));
+});
+
+
+test('homepage Alibaba section stays readable in both locales and imports only Alibaba libraries',()=>{
+  for(const locale of ['en','zh-CN'] as const){
+    const html=render(<AlibabaOverview/>,locale);
+    assert(html.includes('id="alibaba-cloud"'));
+    assert(html.includes('阿里云icon 图标库 / Alibaba Cloud icons'));
+    assert(html.includes('1 个图标条目、1 个分类'));
+    assert(html.includes('1 Alibaba Cloud icon entries in 1 categories'));
+    assert(html.includes('href="https://icons.rambow.cloud/alibaba-cloud-drawio.zip"'));
+    assert(html.includes('href="https://icons.rambow.cloud/drawio/all-icons.xml"'));
+    assert(html.includes('href="#library"'));
+    assert(html.includes('&lt;script&gt;alert(1)&lt;/script&gt;'));
+    assert(!html.includes('<script>alert(1)</script>'));
+    const online=html.match(/data-open-all="true" href="([^"]+)"/)?.[1];
+    assert(online);
+    const libraries=new URL(online.replaceAll('&amp;','&')).searchParams.get('clibs')!;
+    assert.equal(libraries.split(';').length,1);
+    assert(libraries.includes(`libraries/${locale}/alibaba.xml`));
+  }
 });

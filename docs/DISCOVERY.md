@@ -11,8 +11,7 @@ URL, so the crawlable English and Chinese content has its own stable URLs.
 | --- | --- | --- |
 | English catalog | https://icons.rambow.cloud/discover/en/ | Collection descriptions and category links |
 | 中文目录 | https://icons.rambow.cloud/discover/zh-CN/ | 图标集介绍、分类链接及使用说明 |
-| 阿里云icon 专题 | https://icons.rambow.cloud/discover/zh-CN/alibaba-cloud/ | 阿里云架构图标分类、SVG / XML 下载与导入说明 |
-| Alibaba Cloud collection | https://icons.rambow.cloud/discover/en/alibaba-cloud/ | English collection overview, previews, downloads and imports |
+| 阿里云icon / Alibaba Cloud icons | https://icons.rambow.cloud/#alibaba-cloud | Homepage previews, SVG / XML downloads and online / offline imports |
 | English guide | https://icons.rambow.cloud/discover/en/guide/ | Online, offline and Draw.io MCP setup |
 | 中文指南 | https://icons.rambow.cloud/discover/zh-CN/guide/ | 在线绘图、离线使用、桌面配置与 MCP 接入 |
 | Sitemap | https://icons.rambow.cloud/sitemap.xml | Canonical homepage and every published discovery page |
@@ -27,6 +26,9 @@ Each language version has its own canonical URL and reciprocal `hreflang` links.
 JSON-LD describes the website, collection contents and breadcrumbs; it makes no
 claims about reviews, endorsements or rich-result eligibility. The homepage
 contains a build-generated reading fallback; React replaces it when running.
+Both versions retain visible Chinese and English Alibaba collection descriptions,
+actual catalog previews and download links. The homepage uses the same descriptive
+bilingual title before and after React loads.
 The rendered website footer links to the catalog in the selected language.
 
 No modification date is fabricated for sitemaps. Counts describe icon entries;
@@ -96,26 +98,35 @@ not evidence of indexing or a guarantee of inclusion. Baidu likewise states that
 submission does not guarantee indexing. Allow time for discovery and monitor
 the platform reports rather than claiming that deployment means indexing.
 
-## “阿里云icon”关键词与内容维护
+## “阿里云icon”首页搜索入口与迁移
 
-阿里云专题页集中承接“阿里云icon”“阿里云图标下载”“draw.io 阿里云图标”等搜索意图。
-标题和 H1 使用简短、明确的主题，正文提供分类预览、实际下载、导入步骤和来源说明。
-首页、静态目录及阿里云分类页使用描述性链接指向同一个专题入口，站点地图与
-`llms.txt` 随构建更新。页面明确这是社区架构图标库，避免混淆品牌 Logo 下载、
-网站开发用 Iconfont 字体库或官方阿里云站点。
+首页 https://icons.rambow.cloud/ 承接“阿里云icon”“阿里云图标下载”及软件架构图标搜索。
+中英文图标说明、真实预览、SVG / XML / ZIP 下载与导入步骤在首页直接可读，
+浏览器切换语言后仍保留双语概要。初始 HTML、Open Graph、JSON-LD 和 React
+使用一致的首页主题；React 不再将标题改成缺少阿里云主题的泛化名称。
 
-发布后，在已验证的 Google / Bing 站长平台对中文专题页请求索引，提交最新版
-站点地图。Google Search Console 的效果报告可按网页筛选该入口，再检查查询
-“阿里云icon”“阿里云图标”“阿里云图标下载”和“draw.io 阿里云图标”的展示、
-点击及平均排名。Bing 使用自己的关键词和页面表现报告。先观察平台是否展示该
-页面，再根据实际查询完善内容；精确关键词排名并不能通过提交链接保证。
+旧的 `/discover/zh-CN/alibaba-cloud/` 与 `/discover/en/alibaba-cloud/` 概览地址
+通过构建生成的 `_redirects` 在 Cloudflare 上以 HTTP 301 跳转到首页。
+无尾斜杠及显式 `index.html` 地址同样迁移。GitHub Pages 不支持 `_redirects`，
+因此保留即时 meta refresh HTML 和指向主站首页的 canonical。阿里云分类页、
+中英文目录及指南仍提供独立内容；跳转规则只匹配概览地址。
+站内概览链接改为首页 `#alibaba-cloud`，迁移地址从 sitemap 和 `urls.txt` 移除。
 
-后续内容可以围绕真实使用任务扩展，例如用 ECS、SLB、OSS 绘制一个架构图，
-说明图标如何选取、导入与保存，并链接到相应分类及素材来源。在自己的 GitHub
-项目、技术博客或社区教程中，提供对读者有用的操作说明并自然链接专题页。
-对外发布仍需单独安排，本仓库不会自动在社区发帖。避免重复创建只替换关键词
-的入口、堆叠搜索词或购买 / 群发链接。
+发布后，在 Google Search Console 检查 https://icons.rambow.cloud/ 并请求重新索引，
+提交更新后的 sitemap。检查旧概览网址会看到重定向，这是预期行为。
+效果报告按首页 URL 筛选，再查看“阿里云icon”“阿里云图标下载”等查询的
+展示、点击和平均排名。已收录与关键词排名是不同阶段；验证通过或部署成功
+不等于排名提升。Google 需要重新抓取和处理更新，没有即时排名保证。
 
-这些做法对应 [Google 搜索要点](https://developers.google.com/search/docs/essentials?hl=zh-cn)
-中的描述性标题和可抓取链接，以及[链接最佳实践](https://developers.google.com/search/docs/crawling-indexing/links-crawlable?hl=zh-cn)。
-它们提高主题清晰度与内容可发现性，排名仍取决于搜索系统对相关性和内容质量的评估。
+浏览器验证：打开首页，确认阿里云预览、ZIP / XML 下载及导入说明；切换语言
+后双语概要仍可见。打开上述两个旧概览网址，应直接到首页；打开具体阿里云
+分类地址，仍能查看分类内容。在 GitHub Pages 镜像测试同一迁移路径，应进入
+主站首页，其余分类和下载继续保留仓库路径。
+
+后续应根据真实查询补充使用经验，例如说明自己如何选择 ECS、SLB、OSS 图标
+并在 draw.io 导入、连接和保存。在自己的项目 README 或技术博客提供有帮助
+的说明并自然链接首页；本仓库不会自动在社区发帖或批量购买、生成外链。
+
+这些做法对应 [Google 搜索要点](https://developers.google.com/search/docs/essentials?hl=zh-cn)、
+[标题最佳实践](https://developers.google.com/search/docs/appearance/title-link)及
+[永久重定向说明](https://developers.google.com/search/docs/crawling-indexing/301-redirects)。
