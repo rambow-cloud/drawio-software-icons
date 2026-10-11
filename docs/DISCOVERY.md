@@ -11,7 +11,7 @@ URL, so the crawlable English and Chinese content has its own stable URLs.
 | --- | --- | --- |
 | English catalog | https://icons.rambow.cloud/discover/en/ | Collection descriptions and category links |
 | 中文目录 | https://icons.rambow.cloud/discover/zh-CN/ | 图标集介绍、分类链接及使用说明 |
-| 阿里云icon / Alibaba Cloud icons | https://icons.rambow.cloud/#alibaba-cloud | Homepage previews, SVG / XML downloads and online / offline imports |
+| 阿里云icon / Alibaba Cloud icons | https://icons.rambow.cloud/?collection=alibaba-cloud#library | Existing homepage collection browser |
 | English guide | https://icons.rambow.cloud/discover/en/guide/ | Online, offline and Draw.io MCP setup |
 | 中文指南 | https://icons.rambow.cloud/discover/zh-CN/guide/ | 在线绘图、离线使用、桌面配置与 MCP 接入 |
 | Sitemap | https://icons.rambow.cloud/sitemap.xml | Canonical homepage and every published discovery page |
@@ -26,9 +26,10 @@ Each language version has its own canonical URL and reciprocal `hreflang` links.
 JSON-LD describes the website, collection contents and breadcrumbs; it makes no
 claims about reviews, endorsements or rich-result eligibility. The homepage
 contains a build-generated reading fallback; React replaces it when running.
-Both versions retain visible Chinese and English Alibaba collection descriptions,
-actual catalog previews and download links. The homepage uses the same descriptive
-bilingual title before and after React loads.
+The original homepage layout and bilingual hero copy are retained. Search metadata
+lives in the head: title, description, canonical, robots, Open Graph and JSON-LD.
+The metadata names the actual collections available through the existing browser.
+The descriptive bilingual document title remains consistent after React loads.
 The rendered website footer links to the catalog in the selected language.
 
 No modification date is fabricated for sitemaps. Counts describe icon entries;
@@ -98,35 +99,34 @@ not evidence of indexing or a guarantee of inclusion. Baidu likewise states that
 submission does not guarantee indexing. Allow time for discovery and monitor
 the platform reports rather than claiming that deployment means indexing.
 
-## “阿里云icon”首页搜索入口与迁移
+## “阿里云icon”首页元数据与迁移
 
-首页 https://icons.rambow.cloud/ 承接“阿里云icon”“阿里云图标下载”及软件架构图标搜索。
-中英文图标说明、真实预览、SVG / XML / ZIP 下载与导入步骤在首页直接可读，
-浏览器切换语言后仍保留双语概要。初始 HTML、Open Graph、JSON-LD 和 React
-使用一致的首页主题；React 不再将标题改成缺少阿里云主题的泛化名称。
+首页 https://icons.rambow.cloud/ 是主要搜索入口。保留原有页面布局、主标题文案、
+图标浏览器和操作按钮；不增加阿里云概览、预览卡片或 SEO 正文区块。
+`<head>` 中的 title、description、Open Graph 和 JSON-LD 准确描述软件、AI
+与阿里云图标用途。JSON-LD 的 ItemList 列出当前界面真实提供的图标集及浏览
+链接。初始 HTML 与 React 使用同一个 document title；保留百度验证标签。
+
+不使用隐藏关键词正文、白色文字、屏幕外 SEO 文本或按爬虫身份替换内容。
+Google 不使用 meta keywords 进行索引或排名。结构化数据描述可见功能，
+不虚构评分、官方背书或用户界面没有的内容。
 
 旧的 `/discover/zh-CN/alibaba-cloud/` 与 `/discover/en/alibaba-cloud/` 概览地址
-通过构建生成的 `_redirects` 在 Cloudflare 上以 HTTP 301 跳转到首页。
-无尾斜杠及显式 `index.html` 地址同样迁移。GitHub Pages 不支持 `_redirects`，
-因此保留即时 meta refresh HTML 和指向主站首页的 canonical。阿里云分类页、
-中英文目录及指南仍提供独立内容；跳转规则只匹配概览地址。
-站内概览链接改为首页 `#alibaba-cloud`，迁移地址从 sitemap 和 `urls.txt` 移除。
+继续通过 `_redirects` 在 Cloudflare 上以 HTTP 301 跳转到首页，包括无尾斜杠
+和显式 `index.html` 形式。GitHub Pages 使用即时 meta refresh 并将 canonical
+指向主站首页。阿里云分类页、目录及指南保留；迁移规则只匹配概览地址。
+已有集合链接指向首页 `?collection=alibaba-cloud#library`，不依赖新增区块。
+旧概览地址从 sitemap 和 `urls.txt` 移除，AI 阅读指引改为现有首页浏览入口。
 
-发布后，在 Google Search Console 检查 https://icons.rambow.cloud/ 并请求重新索引，
-提交更新后的 sitemap。检查旧概览网址会看到重定向，这是预期行为。
-效果报告按首页 URL 筛选，再查看“阿里云icon”“阿里云图标下载”等查询的
-展示、点击和平均排名。已收录与关键词排名是不同阶段；验证通过或部署成功
-不等于排名提升。Google 需要重新抓取和处理更新，没有即时排名保证。
+浏览器验证：打开首页确认恢复原布局和主标题，没有新增阿里云概览；切换语言，
+浏览器标签标题仍含阿里云主题。查看网页源代码的 `<head>`，确认验证标签、
+描述、canonical、robots 和 JSON-LD。点击已有的阿里云链接，应在现有浏览器中
+选择阿里云图标集；打开两个旧概览网址，应直接到首页。
 
-浏览器验证：打开首页，确认阿里云预览、ZIP / XML 下载及导入说明；切换语言
-后双语概要仍可见。打开上述两个旧概览网址，应直接到首页；打开具体阿里云
-分类地址，仍能查看分类内容。在 GitHub Pages 镜像测试同一迁移路径，应进入
-主站首页，其余分类和下载继续保留仓库路径。
+发布后，在 Google Search Console 检查首页并请求重新抓取；查看首页查询的
+展示、点击和平均排名。已收录与关键词排名是不同阶段；元数据有助于描述页面，
+不保证 Google 收录、富媒体展示或即时排名提升。
 
-后续应根据真实查询补充使用经验，例如说明自己如何选择 ECS、SLB、OSS 图标
-并在 draw.io 导入、连接和保存。在自己的项目 README 或技术博客提供有帮助
-的说明并自然链接首页；本仓库不会自动在社区发帖或批量购买、生成外链。
-
-这些做法对应 [Google 搜索要点](https://developers.google.com/search/docs/essentials?hl=zh-cn)、
-[标题最佳实践](https://developers.google.com/search/docs/appearance/title-link)及
-[永久重定向说明](https://developers.google.com/search/docs/crawling-indexing/301-redirects)。
+参考：[Google 支持的 meta 标签](https://developers.google.com/search/docs/crawling-indexing/special-tags)、
+[结构化数据要求](https://developers.google.com/search/docs/appearance/structured-data/sd-policies)、
+[隐藏文本政策](https://developers.google.com/search/docs/essentials/spam-policies#hidden-text-and-link-abuse)。

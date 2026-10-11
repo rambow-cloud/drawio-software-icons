@@ -113,36 +113,28 @@ test('AI reading guidance uses generated category URLs and keeps usage and MCP c
   for (const category of categories) for (const locale of ['en', 'zh-CN']) assert(llms.includes(`${siteUrl}discover/${locale}/${category.collection}/${category.id}/`));
   assert(llms.includes('not a remote MCP server URL'));
   assert(llms.includes('grants no additional brand permissions'));
-  assert.equal(schemas(homepageMetadata())[0]['@graph'][0]['@type'], 'WebSite');
+  assert.equal(schemas(homepageMetadata(catalog))[0]['@graph'][0]['@type'], 'WebSite');
 });
 
-test('homepage serves Alibaba downloads, bilingual content and catalog-derived previews', async () => {
-  const cloudIcon = { ...icon, id: 'cloud-icon', name: '云服务器 ECS', nameEn: 'Elastic Compute Service ECS', category: 'cloud-category', categories: ['cloud-category'], collection: 'alibaba-cloud' };
-  const html = homepageDiscovery({ ...catalog, icons: [icon, cloudIcon] });
-  assert(html.includes('<section id="alibaba-cloud">'));
-  assert(html.includes('阿里云icon 图标库 / Alibaba Cloud icons'));
-  assert(html.includes('1 个图标条目、1 个分类'), 'Count only Alibaba entries');
-  assert(html.includes('1 Alibaba Cloud icon entries in 1 categories'));
-  for (const target of ['alibaba-cloud-drawio.zip', 'drawio/all-icons.xml', 'discover/zh-CN/alibaba-cloud/cloud-category/']) assert(html.includes(`href="./${target}"`));
-  assert(html.includes('src="./icons/test.svg"'));
-  assert(html.includes('alt="云服务器 ECS"'));
-  assert(!html.includes('Brand &lt;/script&gt;'), 'Previews must belong to Alibaba Cloud');
-  assert(html.includes('https://example.com/icon.svg'));
-  assert(html.includes('drawio/'));
-  assert(html.includes('非阿里云官方站点'));
-  const drawioLink = html.match(/href="(https:\/\/app\.diagrams\.net[^"<>]+)"/)[1].replaceAll('&amp;', '&');
-  const libraries = new URL(drawioLink).searchParams.get('clibs').split(';');
-  assert.equal(libraries.length, 1);
-  assert.equal(new URL(decodeURIComponent(libraries[0].slice(1))).href, new URL(categories[1].libraries['zh-CN'], siteUrl).href);
-  // The homepage still escapes catalog text, even for previews containing markup.
-  const unsafe = homepageDiscovery({ ...catalog, icons: [{ ...cloudIcon, name: icon.name }] });
-  assert(unsafe.includes('&lt;/script&gt;&lt;script&gt;alert(1)&lt;/script&gt;'));
-  assert(!unsafe.includes('<script>alert(1)</script>'));
+test('head metadata describes visible homepage collections without adding an overview section', async () => {
+  const html = homepageDiscovery(catalog);
+  assert(html.includes('<h1>Software and Alibaba Cloud icons for draw.io</h1>'));
+  assert(html.includes('href="./?collection=alibaba-cloud#library"'));
+  assert(!html.includes('id="alibaba-cloud"'));
   const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
   assert(index.includes(`<title>${homepageTitle}</title>`));
+  assert(index.includes(`property="og:title" content="${homepageTitle}"`));
   assert(index.includes(`name="description" content="${homepageDescription}"`));
   assert(index.includes('name="baidu-site-verification" content="codeva-gyFX1gxyRv"'));
-  assert.equal(schemas(homepageMetadata())[0]['@graph'][1].name, homepageTitle);
+  const graph = schemas(homepageMetadata(catalog))[0]['@graph'];
+  assert.equal(graph[1].name, homepageTitle);
+  assert.equal(graph[1].description, homepageDescription);
+  const list = graph[1].mainEntity;
+  assert.equal(list.numberOfItems, catalog.collections.length);
+  assert.deepEqual(list.itemListElement.map(item => item.url), catalog.collections.map(collection => `${siteUrl}?collection=${collection.id}#library`));
+  const metadata = homepageMetadata({ ...catalog, collections: [{ ...catalog.collections[0], name: icon.name }] });
+  assert(!metadata.includes('</script><script>alert(1)</script>'));
+  assert.equal(schemas(metadata)[0]['@graph'][1].mainEntity.itemListElement[0].name, `${icon.name} / General Software`);
 });
 
 test('old Alibaba overview URLs permanently redirect to the homepage without catching categories', () => {
@@ -158,9 +150,9 @@ test('old Alibaba overview URLs permanently redirect to the homepage without cat
     assert(!files.get('sitemap.xml').includes(`<loc>${siteUrl + path}</loc>`));
     assert(!files.get('urls.txt').trim().split('\n').includes(siteUrl + path));
     assert(!files.get('llms.txt').includes(siteUrl + path + ')'));
-    assert(files.get(`discover/${locale}/alibaba-cloud/cloud-category/index.html`).includes('href="../../../../#alibaba-cloud"'));
-    assert(files.get(`discover/${locale}/index.html`).includes('href="../../#alibaba-cloud"'));
+    assert(files.get(`discover/${locale}/alibaba-cloud/cloud-category/index.html`).includes('href="../../../../?collection=alibaba-cloud#library"'));
+    assert(files.get(`discover/${locale}/index.html`).includes('href="../../?collection=alibaba-cloud#library"'));
   }
   assert(rules.every(rule => !rule.includes('*')));
-  assert(files.get('llms.txt').includes(siteUrl + '#alibaba-cloud'));
+  assert(files.get('llms.txt').includes(siteUrl + '?collection=alibaba-cloud#library'));
 });
