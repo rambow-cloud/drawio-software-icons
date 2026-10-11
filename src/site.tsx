@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useRef, useState, type P
 import { messages, type Locale } from './i18n';
 import { drawioUrl, filterIcons, isLocalSite, libraryPaths, resolveCategory } from './catalog.mjs';
 import { compareIconNames, spotlightLocation } from './spotlight.mjs';
+import { homepageTitle } from './homepage.mjs';
 import type { Catalog, Category, Collection, Icon } from './types';
 
 export const siteBase=new URL('./',globalThis.location?.href ?? 'https://icons.rambow.cloud/').href;
@@ -62,7 +63,7 @@ function useSite(catalog:Catalog,locale:Locale,setLocale:(locale:Locale)=>void) 
   };
   useEffect(()=>{
     document.documentElement.lang=locale;
-    document.title=locale==='en'?'Architecture Icons — for draw.io':'架构图标合集 — for draw.io';
+    document.title=homepageTitle;
     preference('icons-locale',locale);
   },[locale]);
   const previousFilters=useRef(filters);
