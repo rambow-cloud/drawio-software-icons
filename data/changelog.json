@@ -1,5 +1,155 @@
 [
   {
+    "id": "sync-2026-10-16-5f220916b2de-14",
+    "date": "2026-10-16",
+    "title": {
+      "en": "Identity providers and authentication",
+      "zh-CN": "身份提供商与认证图标"
+    },
+    "summary": {
+      "en": "Added 24 identity and authentication products, including Frontegg, Ping Identity, PingID, Okta, Entra ID and Cognito. Improved identity-provider search for seven existing entries. PingID and Cisco Duo are identified as MFA products; publisher PNGs remain raster artwork.",
+      "zh-CN": "新增 Frontegg、Ping Identity、PingID、Okta、Entra ID、Cognito 等 24 个身份认证产品图标，为 7 个已有条目补充身份提供商搜索词。PingID 与 Cisco Duo 按 MFA 产品区分；发布者 PNG 保留原始位图。"
+    },
+    "changes": [
+      {
+        "kind": "added",
+        "collection": "software",
+        "icons": [
+          {
+            "id": "amazon-cognito",
+            "name": "Amazon Cognito"
+          },
+          {
+            "id": "auth0",
+            "name": "Auth0"
+          },
+          {
+            "id": "authing",
+            "name": "Authing"
+          },
+          {
+            "id": "casdoor",
+            "name": "Casdoor"
+          },
+          {
+            "id": "clerk",
+            "name": "Clerk"
+          },
+          {
+            "id": "descope",
+            "name": "Descope"
+          },
+          {
+            "id": "duende-identityserver",
+            "name": "Duende IdentityServer"
+          },
+          {
+            "id": "duo",
+            "name": "Cisco Duo"
+          },
+          {
+            "id": "frontegg",
+            "name": "Frontegg"
+          },
+          {
+            "id": "fusionauth",
+            "name": "FusionAuth"
+          },
+          {
+            "id": "google-identity",
+            "name": "Google Identity"
+          },
+          {
+            "id": "jumpcloud",
+            "name": "JumpCloud"
+          },
+          {
+            "id": "kanidm",
+            "name": "Kanidm"
+          },
+          {
+            "id": "kinde",
+            "name": "Kinde"
+          },
+          {
+            "id": "logto",
+            "name": "Logto"
+          },
+          {
+            "id": "microsoft-entra-id",
+            "name": "Microsoft Entra ID"
+          },
+          {
+            "id": "okta",
+            "name": "Okta"
+          },
+          {
+            "id": "onelogin",
+            "name": "OneLogin"
+          },
+          {
+            "id": "ping-identity",
+            "name": "Ping Identity"
+          },
+          {
+            "id": "pingid",
+            "name": "PingID"
+          },
+          {
+            "id": "supertokens",
+            "name": "SuperTokens"
+          },
+          {
+            "id": "workos",
+            "name": "WorkOS"
+          },
+          {
+            "id": "wso2-identity-server",
+            "name": "WSO2 Identity Server"
+          },
+          {
+            "id": "zitadel",
+            "name": "ZITADEL"
+          }
+        ]
+      },
+      {
+        "kind": "updated",
+        "collection": "software",
+        "icons": [
+          {
+            "id": "authelia",
+            "name": "Authelia"
+          },
+          {
+            "id": "authentik",
+            "name": "Authentik"
+          },
+          {
+            "id": "dex",
+            "name": "Dex"
+          },
+          {
+            "id": "firebase",
+            "name": "Firebase"
+          },
+          {
+            "id": "keycloak",
+            "name": "Keycloak"
+          },
+          {
+            "id": "ory",
+            "name": "Ory"
+          },
+          {
+            "id": "supabase",
+            "name": "Supabase"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "sync-2026-10-09-429583add59b-13",
     "date": "2026-10-09",
     "title": {

@@ -1,0 +1,816 @@
+{
+  "$schema": "../schemas/icons.schema.json",
+  "icons": [
+    {
+      "id": "amazon-cognito",
+      "name": "Amazon Cognito",
+      "category": "observability",
+      "source": "authjs",
+      "homepage": "https://aws.amazon.com/cognito/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "AWS Cognito",
+        "Cognito",
+        "亚马逊 Cognito"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "AWS",
+        "CIAM",
+        "OIDC"
+      ],
+      "artwork": {
+        "path": "docs/public/img/providers/cognito.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "auth0",
+      "name": "Auth0",
+      "category": "observability",
+      "source": "official-apps",
+      "homepage": "https://auth0.com/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "Auth 0",
+        "Okta Customer Identity",
+        "Auth0 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "CIAM",
+        "OIDC"
+      ],
+      "artwork": {
+        "url": "https://cdn.auth0.com/website/website/favicons/auth0-favicon.svg",
+        "format": "svg",
+        "publisher": "Okta / Auth0",
+        "listing": "https://auth0.com/",
+        "width": 32,
+        "height": 32,
+        "sha256": "79a15cffa5267cf7acf8d036e7f406a8225fa84e19d4c68dbbcf90e697a1eed1",
+        "retrievedOn": "2026-10-16"
+      }
+    },
+    {
+      "id": "authing",
+      "name": "Authing",
+      "category": "observability",
+      "source": "cncf-landscape",
+      "homepage": "https://www.authing.cn/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "Authing 身份云",
+        "Authing 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "CIAM",
+        "身份云"
+      ],
+      "artwork": {
+        "path": "hosted_logos/authing.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "casdoor",
+      "name": "Casdoor",
+      "category": "observability",
+      "source": "cncf-landscape",
+      "homepage": "https://casdoor.org/",
+      "repository": "https://github.com/casdoor/casdoor",
+      "softwareType": "open-source",
+      "softwareLicense": "Apache-2.0",
+      "classificationNote": "Classification refers to the linked open-source community project. Hosted and enterprise editions have separate terms; artwork and brand rights are independent.",
+      "aliases": [
+        "Casdoor IAM",
+        "Casdoor 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "OIDC",
+        "SAML",
+        "self-hosted",
+        "自托管"
+      ],
+      "artwork": {
+        "path": "hosted_logos/casdoor.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "clerk",
+      "name": "Clerk",
+      "category": "observability",
+      "source": "official-apps",
+      "homepage": "https://clerk.com/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "Clerk Auth",
+        "Clerk 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "CIAM",
+        "user management",
+        "用户管理"
+      ],
+      "artwork": {
+        "url": "https://avatars.githubusercontent.com/u/49538330?v=4&s=512",
+        "format": "png",
+        "publisher": "Clerk",
+        "listing": "https://github.com/clerk",
+        "width": 460,
+        "height": 460,
+        "sha256": "fd3c0db3e028c51794206ad9dd22a809274d100a7d1738851562b76fcde99b87",
+        "retrievedOn": "2026-10-16"
+      }
+    },
+    {
+      "id": "descope",
+      "name": "Descope",
+      "category": "observability",
+      "source": "authjs",
+      "homepage": "https://www.descope.com/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "Descope CIAM",
+        "Descope 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "CIAM",
+        "passwordless",
+        "无密码登录"
+      ],
+      "artwork": {
+        "path": "docs/public/img/providers/descope.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "duende-identityserver",
+      "name": "Duende IdentityServer",
+      "category": "observability",
+      "source": "authjs",
+      "homepage": "https://duendesoftware.com/products/identityserver",
+      "repository": "https://github.com/DuendeSoftware/products",
+      "softwareType": "source-available",
+      "softwareLicense": null,
+      "classificationNote": "Duende publishes source code, but production use may require a commercial license. It is not classified as open-source; SDK and artwork licenses are separate.",
+      "aliases": [
+        "Duende Identity Server",
+        "IdentityServer",
+        "Duende 身份服务器"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "OIDC",
+        "OAuth2",
+        ".NET"
+      ],
+      "artwork": {
+        "path": "docs/public/img/providers/duende-identityserver-6.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "duo",
+      "name": "Cisco Duo",
+      "category": "observability",
+      "source": "dashboard",
+      "homepage": "https://duo.com/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Cisco Duo is a commercial access security and multi-factor authentication service; this entry identifies the product, not an SDK.",
+      "aliases": [
+        "Duo Security",
+        "Duo MFA",
+        "思科 Duo"
+      ],
+      "tags": [
+        "identity",
+        "authentication",
+        "MFA",
+        "2FA",
+        "身份认证",
+        "多因素认证",
+        "双因素认证"
+      ],
+      "artwork": {
+        "path": "svg/duo.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "frontegg",
+      "name": "Frontegg",
+      "category": "observability",
+      "source": "authjs",
+      "homepage": "https://frontegg.com/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "Frontegg CIAM",
+        "Frontegg 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "CIAM",
+        "B2B SaaS"
+      ],
+      "artwork": {
+        "path": "docs/public/img/providers/frontegg.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "fusionauth",
+      "name": "FusionAuth",
+      "category": "observability",
+      "source": "dashboard",
+      "homepage": "https://fusionauth.io/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "Fusion Auth",
+        "FusionAuth 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "CIAM",
+        "self-hosted",
+        "自托管"
+      ],
+      "artwork": {
+        "path": "svg/fusionauth.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "google-identity",
+      "name": "Google Identity",
+      "category": "observability",
+      "source": "authjs",
+      "homepage": "https://developers.google.com/identity",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "Google Sign-In",
+        "Sign in with Google",
+        "Google OAuth",
+        "Google Workspace SSO",
+        "谷歌登录",
+        "谷歌身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "OAuth2",
+        "OIDC"
+      ],
+      "artwork": {
+        "path": "docs/public/img/providers/google.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "jumpcloud",
+      "name": "JumpCloud",
+      "category": "observability",
+      "source": "official-apps",
+      "homepage": "https://jumpcloud.com/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "Jump Cloud",
+        "JumpCloud 云目录"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "cloud directory",
+        "云目录",
+        "LDAP"
+      ],
+      "artwork": {
+        "url": "https://jumpcloud.com/wp-content/themes/jumpcloud/assets/images/logos/jumpcloud-logo-tm-oceanblue.svg",
+        "format": "svg",
+        "publisher": "JumpCloud",
+        "listing": "https://jumpcloud.com/press",
+        "width": 600,
+        "height": 96,
+        "sha256": "728ff724f08d16a5f8c8346df6d326e085f7e075292f61b6e41831f205aba945",
+        "retrievedOn": "2026-10-16"
+      }
+    },
+    {
+      "id": "kanidm",
+      "name": "Kanidm",
+      "category": "observability",
+      "source": "dashboard",
+      "homepage": "https://kanidm.com/",
+      "repository": "https://github.com/kanidm/kanidm",
+      "softwareType": "open-source",
+      "softwareLicense": "MPL-2.0",
+      "classificationNote": "Classification refers to the linked open-source community project. Hosted and enterprise editions have separate terms; artwork and brand rights are independent.",
+      "aliases": [
+        "Kanidm IAM",
+        "Kanidm 身份管理"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "LDAP",
+        "OIDC",
+        "self-hosted",
+        "自托管"
+      ],
+      "artwork": {
+        "path": "svg/kanidm.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "kinde",
+      "name": "Kinde",
+      "category": "observability",
+      "source": "authjs",
+      "homepage": "https://kinde.com/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "Kinde Auth",
+        "Kinde 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "CIAM",
+        "OIDC",
+        "B2B SaaS"
+      ],
+      "artwork": {
+        "path": "docs/public/img/providers/kinde.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "logto",
+      "name": "Logto",
+      "category": "observability",
+      "source": "dashboard",
+      "homepage": "https://logto.io/",
+      "repository": "https://github.com/logto-io/logto",
+      "softwareType": "open-source",
+      "softwareLicense": "MPL-2.0",
+      "classificationNote": "Classification refers to the linked open-source community project. Hosted and enterprise editions have separate terms; artwork and brand rights are independent.",
+      "aliases": [
+        "Logto Auth",
+        "Logto 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "CIAM",
+        "OIDC",
+        "self-hosted",
+        "自托管"
+      ],
+      "artwork": {
+        "path": "svg/logto.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "microsoft-entra-id",
+      "name": "Microsoft Entra ID",
+      "category": "observability",
+      "source": "dashboard",
+      "homepage": "https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-id",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "Entra ID",
+        "Azure AD",
+        "Azure Active Directory",
+        "Microsoft Azure AD",
+        "微软身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "workforce identity",
+        "SAML",
+        "OIDC"
+      ],
+      "artwork": {
+        "path": "svg/entra-id.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "okta",
+      "name": "Okta",
+      "category": "observability",
+      "source": "devicon",
+      "homepage": "https://www.okta.com/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "Okta Identity",
+        "Okta 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "workforce identity",
+        "CIAM"
+      ],
+      "artwork": {
+        "path": "icons/okta/okta-original.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "onelogin",
+      "name": "OneLogin",
+      "category": "observability",
+      "source": "authjs",
+      "homepage": "https://www.onelogin.com/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "One Login",
+        "OneLogin 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "workforce identity",
+        "SAML",
+        "OIDC"
+      ],
+      "artwork": {
+        "path": "docs/public/img/providers/onelogin.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "ping-identity",
+      "name": "Ping Identity",
+      "category": "observability",
+      "source": "official-apps",
+      "homepage": "https://www.pingidentity.com/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "PingIdentity",
+        "PingOne",
+        "Ping Identity 身份平台"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "federation",
+        "联合身份"
+      ],
+      "artwork": {
+        "url": "https://avatars.githubusercontent.com/u/580170?v=4&s=512",
+        "format": "png",
+        "publisher": "Ping Identity",
+        "listing": "https://github.com/pingidentity",
+        "width": 307,
+        "height": 307,
+        "sha256": "569ae9252b25fdd1ccc5359b26b9a43b1f70391a9422a1ad28a3597f1a620d9f",
+        "retrievedOn": "2026-10-16"
+      }
+    },
+    {
+      "id": "pingid",
+      "name": "PingID",
+      "category": "observability",
+      "source": "official-apps",
+      "homepage": "https://www.pingidentity.com/en/products/pingid.html",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "PingID is a commercial multi-factor authentication product from Ping Identity; it is not a separate full identity provider platform. App artwork licensing is independent.",
+      "aliases": [
+        "Ping ID",
+        "PingID MFA",
+        "PingID 多因素认证"
+      ],
+      "tags": [
+        "identity",
+        "authentication",
+        "MFA",
+        "2FA",
+        "身份认证",
+        "多因素认证",
+        "双因素认证"
+      ],
+      "artwork": {
+        "url": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bb/a4/b1/bba4b188-1a7f-3c51-5252-ebcca7d7b056/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.png",
+        "format": "png",
+        "publisher": "Ping Identity Corporation",
+        "listing": "https://apps.apple.com/us/app/pingid/id891247102",
+        "appId": 891247102,
+        "width": 512,
+        "height": 512,
+        "sha256": "d81445f116e5d89ee94a891d66d155266d209e9fc5112fb9dc70ab79176ac0b2",
+        "retrievedOn": "2026-10-16"
+      }
+    },
+    {
+      "id": "supertokens",
+      "name": "SuperTokens",
+      "category": "observability",
+      "source": "official-apps",
+      "homepage": "https://supertokens.com/",
+      "repository": "https://github.com/supertokens/supertokens-core",
+      "softwareType": "open-source",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the community core authentication project. Enterprise modules and hosted offerings have separate licenses; no artwork license is inferred.",
+      "aliases": [
+        "Super Tokens",
+        "SuperTokens 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "self-hosted",
+        "自托管"
+      ],
+      "artwork": {
+        "url": "https://avatars.githubusercontent.com/u/50478857?v=4&s=512",
+        "format": "png",
+        "publisher": "SuperTokens",
+        "listing": "https://github.com/supertokens",
+        "retrievedOn": "2026-10-16",
+        "width": 460,
+        "height": 460,
+        "sha256": "4a59f4af9569783980e33cb0d00fce8571fd443f6176c1e7fcaa88a489ab149a"
+      }
+    },
+    {
+      "id": "workos",
+      "name": "WorkOS",
+      "category": "observability",
+      "source": "authjs",
+      "homepage": "https://workos.com/",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification refers to the linked commercial identity service or product, not its SDKs or artwork collection license.",
+      "aliases": [
+        "Work OS",
+        "WorkOS AuthKit",
+        "WorkOS 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "AuthKit",
+        "SAML",
+        "SCIM",
+        "directory sync"
+      ],
+      "artwork": {
+        "path": "docs/public/img/providers/workos.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "wso2-identity-server",
+      "name": "WSO2 Identity Server",
+      "category": "observability",
+      "source": "cncf-landscape",
+      "homepage": "https://wso2.com/identity-server/",
+      "repository": "https://github.com/wso2/product-is",
+      "softwareType": "open-source",
+      "softwareLicense": "Apache-2.0",
+      "classificationNote": "Classification refers to the linked open-source community project. Hosted and enterprise editions have separate terms; artwork and brand rights are independent.",
+      "aliases": [
+        "WSO2 IS",
+        "WSO2 IdentityServer",
+        "WSO2 身份服务器"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "SAML",
+        "OIDC",
+        "self-hosted",
+        "自托管"
+      ],
+      "artwork": {
+        "path": "hosted_logos/wso2.svg",
+        "variant": "original"
+      }
+    },
+    {
+      "id": "zitadel",
+      "name": "ZITADEL",
+      "category": "observability",
+      "source": "dashboard",
+      "homepage": "https://zitadel.com/",
+      "repository": "https://github.com/zitadel/zitadel",
+      "softwareType": "open-source",
+      "softwareLicense": "AGPL-3.0-only",
+      "classificationNote": "Classification refers to the linked open-source community project. Hosted and enterprise editions have separate terms; artwork and brand rights are independent.",
+      "aliases": [
+        "Zitadel IdP",
+        "ZITADEL 身份认证"
+      ],
+      "tags": [
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "single sign-on",
+        "单点登录",
+        "CIAM",
+        "OIDC",
+        "self-hosted",
+        "自托管"
+      ],
+      "artwork": {
+        "path": "svg/zitadel.svg",
+        "variant": "original"
+      }
+    }
+  ]
+}

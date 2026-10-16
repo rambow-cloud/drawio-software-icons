@@ -10,17 +10,35 @@ The collection contains brand artwork from these upstream repositories:
 | Vendor Icons SVG (ServiceNow) | https://github.com/bwks/vendor-icons-svg | GPL-3.0-only | [vendor-LICENSE.txt](licenses/vendor-LICENSE.txt) |
 | CNCF project artwork | https://github.com/cncf/artwork | Linux Foundation trademark usage guidelines; no open-source artwork license claimed | [cncf-artwork-LICENSE.txt](licenses/cncf-artwork-LICENSE.txt) |
 | CNCF Landscape | https://github.com/cncf/landscape | Apache-2.0 for the collection; depicted logos retain upstream brand rights | [cncf-landscape-LICENSE.txt](licenses/cncf-landscape-LICENSE.txt) |
+| Auth.js provider artwork | https://github.com/nextauthjs/next-auth | ISC for the collection; depicted logos retain upstream brand rights | [authjs-LICENSE.txt](licenses/authjs-LICENSE.txt) |
 | Official publisher artwork / 官方发布者图标 | Publisher listings in `data/official-icons.json` | Proprietary brand artwork; no open-source license claimed | [official-apps-LICENSE.txt](licenses/official-apps-LICENSE.txt) |
 
-Each entry in `catalog.json` (source: `data/catalog.json`) records its original SVG URL, pinned upstream commit, source checksum, packaged checksum and collection license URL. `data/sources.lock.json` pins the exact collection revisions.
+Each entry in `catalog.json` (source: `data/catalog.json`) records its original artwork URL, pinned upstream commit, source checksum, packaged checksum and collection license URL. `data/sources.lock.json` pins the exact collection revisions.
 
-For official publisher PNGs, the catalog instead records the verified publisher, App Store listing, original artwork URL, retrieval date and SHA-256; the manifest is pinned by a SHA-256 content digest rather than a Git commit. Public availability and publisher authenticity do not confer copyright or trademark permission. The five official PNGs are embedded in draw.io libraries, directly as `data:image/png;base64` or within DingTalk’s documented SVG wrapper, without tracing or recoloring.
+For official publisher PNGs, the catalog instead records the verified publisher, App Store or official GitHub organization listing, original artwork URL, retrieval date and SHA-256; the manifest is pinned by a SHA-256 content digest rather than a Git commit. Public availability and publisher authenticity do not confer copyright or trademark permission. Publisher PNGs are embedded in draw.io libraries, directly as `data:image/png;base64` or within DingTalk’s documented SVG wrapper, without tracing or recoloring.
 
 Ubuntu uses Canonical's round Circle of Friends SVG from the [official Ubuntu community asset listing](https://discourse.ubuntu.com/t/ubuntu-merchandise-assets/67314), preserved byte for byte and pinned by SHA-256 in the same manifest. Its provenance is the publisher's listing, not an App Store entry or the Devicon MIT collection. Copyright and trademark rights remain with Canonical Ltd.
 
 Ubuntu 使用 [Ubuntu 官方社区素材页](https://discourse.ubuntu.com/t/ubuntu-merchandise-assets/67314)提供的圆形 Circle of Friends SVG，原文件字节不变，以同一清单中的 SHA-256 固定版本。来源为官方素材页，并非 App Store 或 Devicon 的 MIT 图标集；版权和商标权归 Canonical Ltd. 所有。
 
-官方 PNG 的来源记录包含发布者、App Store 条目、原图网址、采集日期和 SHA-256；清单以内容摘要锁定，不伪造 Git 提交号。来源真实和公开可下载不代表获得版权或商标授权。五张官方 PNG 原样内嵌到图标库中，直接使用 `data:image/png;base64` 或采用已说明的钉钉 SVG 包装，不描摹、不改色。
+官方 PNG 的来源记录包含发布者、App Store 条目或官方 GitHub 组织资料、原图网址、采集日期和 SHA-256；清单以内容摘要锁定，不伪造 Git 提交号。来源真实和公开可下载不代表获得版权或商标授权。官方 PNG 原样内嵌到图标库中，直接使用 `data:image/png;base64` 或采用已说明的钉钉 SVG 包装，不描摹、不改色。
+
+Identity additions in `data/icons/identity.json` reuse pinned Devicon, Dashboard
+Icons and CNCF Landscape artwork. The Auth.js provider SVGs for Frontegg,
+Amazon Cognito, OneLogin, WorkOS, Duende IdentityServer, Google Identity, Kinde
+and Descope are preserved unchanged from a pinned collection revision. These
+are collected provider assets, not individually authorized publisher downloads.
+Auth0 and JumpCloud SVGs come from their official websites; PingID PNG comes
+from its official App Store listing. Ping Identity, Clerk and SuperTokens PNGs
+come from their official GitHub organization profiles. The platform mark and
+PingID MFA application icon are separate entries. Software classifications and
+licenses do not relicense any brand artwork.
+
+身份认证新增图标沿用固定版本的上游图标集；Auth.js 提供商 SVG 原样保留，
+不声称是逐项授权的官方发布者下载。Auth0、JumpCloud SVG 来自官网，PingID
+PNG 来自官方 App Store，Ping Identity、Clerk、SuperTokens PNG 来自官方
+GitHub 组织资料，均保留原图和来源。身份平台与 MFA 应用单独标识，软件许可
+与 Logo 素材许可分别记录。
 
 原始来源、固定提交、原文件 SHA-256、处理后 SHA-256 和图标集许可链接均记录在清单中。每项图标的详情页也提供来源和许可链接。
 

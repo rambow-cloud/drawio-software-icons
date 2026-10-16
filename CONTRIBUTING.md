@@ -33,6 +33,18 @@ uncommitted change, `check:pr` checks both tracked changes and new files against
 
 ## Localization / 中英文
 
+Identity and authentication additions belong in `data/icons/identity.json` under
+the existing Monitoring & Security category. Include bilingual provider aliases
+and `idp` / identity-provider tags where applicable. Keep MFA applications such
+as PingID distinct from the vendor's full identity platform. Reuse existing
+provider IDs; do not duplicate Keycloak, Authentik, Authelia, Dex or Ory. Auth.js
+provider SVGs are pinned original collection assets, not official publisher
+downloads; its ISC license does not grant third-party brand rights.
+
+身份认证类新增图标维护于 `data/icons/identity.json`，沿用「监控与安全」分类，
+补充中英文别名及 IdP 搜索词。区分身份平台与 MFA 应用；保留品牌原图及来源，
+不要从 SDK、采集库或社区版的软件许可推断托管服务和 Logo 的许可。
+
 Icon update history lives in `data/changelog.json`, newest batch first, with dates in Asia/Shanghai. `npm run sync` automatically appends added, updated and removed software icon groups (and license-only changes); review its generated English and Chinese title/summary before merging. Manual artwork changes and collection imports must add an entry too. Keep historical names and removed IDs, and record separate batches rather than overwriting past entries. Validation requires every current software icon to have an addition record. Builds generate both Markdown changelogs, the website timeline and offline ZIP copies from this single source.
 
 图标日志维护在 `data/changelog.json`，最新批次在前，日期采用 Asia/Shanghai。采集脚本自动记录新增、更新、移除及许可变更，合并前可补充具体的中英文说明；手动替换素材或合并图标集也须添加记录。保留历史名称及已移除 ID，不覆盖旧批次。构建会从同一份数据生成网站时间线、中英文 Markdown 和离线包中的日志。

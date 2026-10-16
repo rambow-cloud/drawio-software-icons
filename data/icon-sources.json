@@ -75,6 +75,15 @@
       "initialRevision": "5ebec81fd2747bacf46db156e64351bd28f43fb5",
       "license": "Apache-2.0 (collection); logos retain upstream brand rights",
       "licenseFile": "LICENSE"
+    },
+    "authjs": {
+      "kind": "github",
+      "repo": "nextauthjs/next-auth",
+      "branch": "main",
+      "initialRevision": "a1a16a5a7780488c7449feece410033f445d0b31",
+      "license": "ISC (collection); provider logos retain upstream brand rights",
+      "licenseFile": "LICENSE",
+      "preserveOriginal": true
     }
   }
 }
