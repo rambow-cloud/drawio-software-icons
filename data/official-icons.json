@@ -40,6 +40,26 @@
     "width": 268,
     "height": 268
   },
+  "auth0": {
+    "url": "https://cdn.auth0.com/website/website/favicons/auth0-favicon.svg",
+    "format": "svg",
+    "publisher": "Okta / Auth0",
+    "listing": "https://auth0.com/",
+    "width": 32,
+    "height": 32,
+    "sha256": "79a15cffa5267cf7acf8d036e7f406a8225fa84e19d4c68dbbcf90e697a1eed1",
+    "retrievedOn": "2026-10-16"
+  },
+  "clerk": {
+    "url": "https://avatars.githubusercontent.com/u/49538330?v=4&s=512",
+    "format": "png",
+    "publisher": "Clerk",
+    "listing": "https://github.com/clerk",
+    "width": 460,
+    "height": 460,
+    "sha256": "fd3c0db3e028c51794206ad9dd22a809274d100a7d1738851562b76fcde99b87",
+    "retrievedOn": "2026-10-16"
+  },
   "dingtalk": {
     "presentation": {
       "kind": "rounded-rect",
@@ -71,6 +91,16 @@
     "height": 512,
     "retrievedOn": "2026-09-16",
     "format": "png"
+  },
+  "jumpcloud": {
+    "url": "https://jumpcloud.com/wp-content/themes/jumpcloud/assets/images/logos/jumpcloud-logo-tm-oceanblue.svg",
+    "format": "svg",
+    "publisher": "JumpCloud",
+    "listing": "https://jumpcloud.com/press",
+    "width": 600,
+    "height": 96,
+    "sha256": "728ff724f08d16a5f8c8346df6d326e085f7e075292f61b6e41831f205aba945",
+    "retrievedOn": "2026-10-16"
   },
   "k9s": {
     "url": "https://raw.githubusercontent.com/derailed/k9s/7e97f9adf007b02341962feb7084c039595787dc/assets/k9s_small.png",
@@ -113,6 +143,27 @@
     "width": 65,
     "height": 46,
     "retrievedOn": "2026-09-19"
+  },
+  "ping-identity": {
+    "url": "https://avatars.githubusercontent.com/u/580170?v=4&s=512",
+    "format": "png",
+    "publisher": "Ping Identity",
+    "listing": "https://github.com/pingidentity",
+    "width": 307,
+    "height": 307,
+    "sha256": "569ae9252b25fdd1ccc5359b26b9a43b1f70391a9422a1ad28a3597f1a620d9f",
+    "retrievedOn": "2026-10-16"
+  },
+  "pingid": {
+    "url": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bb/a4/b1/bba4b188-1a7f-3c51-5252-ebcca7d7b056/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.png",
+    "format": "png",
+    "publisher": "Ping Identity Corporation",
+    "listing": "https://apps.apple.com/us/app/pingid/id891247102",
+    "appId": 891247102,
+    "width": 512,
+    "height": 512,
+    "sha256": "d81445f116e5d89ee94a891d66d155266d209e9fc5112fb9dc70ab79176ac0b2",
+    "retrievedOn": "2026-10-16"
   },
   "pyroscope": {
     "format": "svg",
@@ -161,6 +212,16 @@
     "sha256": "6bdc65a7899bc543a6aa5977030e2dcd429e35530300f6298ec0fb04f95238f6",
     "width": 203,
     "height": 40
+  },
+  "supertokens": {
+    "url": "https://avatars.githubusercontent.com/u/50478857?v=4&s=512",
+    "format": "png",
+    "publisher": "SuperTokens",
+    "listing": "https://github.com/supertokens",
+    "retrievedOn": "2026-10-16",
+    "width": 460,
+    "height": 460,
+    "sha256": "4a59f4af9569783980e33cb0d00fce8571fd443f6176c1e7fcaa88a489ab149a"
   },
   "tempo": {
     "format": "svg",

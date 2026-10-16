@@ -21,15 +21,15 @@ MCP Server URL. The official `search_shapes` tool uses built-in shapes first and
 supplements sparse results with icons from this service. Try: “Use Draw.io MCP
 to search for the ScyllaDB icon and draw a database node.”
 
-530 software and service icons across 8 categories. Bilingual browsing, search and library downloads, focused on open-source projects with selected commercial tools. Original-color upstream SVGs are preferred.
+554 software and service icons across 8 categories. Bilingual browsing, search and library downloads, focused on open-source projects with selected commercial tools. Original-color upstream SVGs are preferred.
 
 **Commercial icon usage:** commercial software and service icons are provided solely for drawing draw.io / diagrams.net architecture diagrams, not for other distribution purposes. The project does not grant additional brand rights or override upstream licenses. Original code and documentation remain MIT licensed. Read the bilingual [icon usage policy](ICON_USAGE.md) before using commercial brand assets.
 
 
 ## Unified collections, unchanged URLs
 
-The site now combines **530 software and service icons** in 8 categories with
-**888 Alibaba Cloud icon entries** in 9 source categories: **1,418 entries across
+The site now combines **554 software and service icons** in 8 categories with
+**888 Alibaba Cloud icon entries** in 9 source categories: **1,442 entries across
 two collections**. Alibaba counts include color variants and supplemental UI
 symbols, not 888 distinct cloud services. Original names remain where no upstream
 English product name exists; categories, browsing and setup are bilingual.
@@ -70,6 +70,17 @@ the original Alibaba ZIP and `drawio/all-icons.xml` stay Alibaba-only.
 Code, data and tests are maintained in this repository. The old Alibaba repository
 publishes a compatibility site from the latest successful source build, checking
 hourly or on manual dispatch. See [deployment details](docs/DEPLOYMENT.md).
+
+## Identity providers and authentication
+
+The Monitoring & Security category now includes Frontegg, Ping Identity, PingID,
+Okta, Auth0, Microsoft Entra ID (Azure AD), Amazon Cognito, OneLogin, JumpCloud,
+FusionAuth, ZITADEL, Logto, Casdoor, Authing, WorkOS, Clerk, SuperTokens, Kanidm,
+WSO2 Identity Server, Duende IdentityServer, Google Identity, Cisco Duo, Kinde
+and Descope. Existing Keycloak, Authentik, Authelia, Dex and Ory remain available.
+Search `idp`, `identity provider`, `身份提供商`, `SSO` or provider names. PingID
+and Cisco Duo use MFA-specific tags, distinct from full identity platforms.
+Publisher PNGs remain raster artwork in downloads and draw.io libraries.
 
 ## Kubernetes ecosystem
 

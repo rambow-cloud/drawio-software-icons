@@ -574,7 +574,12 @@
         "OIDC",
         "identity",
         "SSO",
-        "单点登录"
+        "单点登录",
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM"
       ],
       "artwork": {
         "path": "projects/dex/icon/color/dex-icon-color.svg",

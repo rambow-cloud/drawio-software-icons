@@ -1,4 +1,14 @@
 {
+  "authjs": {
+    "kind": "github",
+    "repo": "nextauthjs/next-auth",
+    "branch": "main",
+    "initialRevision": "a1a16a5a7780488c7449feece410033f445d0b31",
+    "license": "ISC (collection); provider logos retain upstream brand rights",
+    "licenseFile": "LICENSE",
+    "preserveOriginal": true,
+    "revision": "a1a16a5a7780488c7449feece410033f445d0b31"
+  },
   "cncf-artwork": {
     "kind": "github",
     "repo": "cncf/artwork",
@@ -54,7 +64,7 @@
     "manifest": "data/official-icons.json",
     "license": "Proprietary brand artwork; permission not verified",
     "licenseFile": "licenses/official-apps-LICENSE.txt",
-    "revision": "347c24542be745a6e66df7b48890c45848e994f3a0568164aaeb93b8c178163d"
+    "revision": "124c970535b43b29ac09a01c24c5f8a022982501ca924ec870e93bc4e56a1cda"
   },
   "vendor": {
     "kind": "github",

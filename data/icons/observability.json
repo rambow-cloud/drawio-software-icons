@@ -112,7 +112,14 @@
         "security",
         "identity",
         "auth",
-        "安全"
+        "安全",
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "单点登录"
       ],
       "artwork": {
         "path": "svg/authelia.svg",
@@ -144,7 +151,14 @@
         "security",
         "identity",
         "auth",
-        "安全"
+        "安全",
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "单点登录"
       ],
       "artwork": {
         "path": "svg/authentik.svg",
@@ -398,7 +412,14 @@
         "security",
         "identity",
         "auth",
-        "安全"
+        "安全",
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "单点登录"
       ],
       "artwork": {
         "path": "svg/keycloak.svg",
@@ -704,7 +725,14 @@
         "Security & Identity",
         "identity",
         "auth",
-        "安全"
+        "安全",
+        "idp",
+        "identity provider",
+        "身份提供商",
+        "身份认证",
+        "IAM",
+        "SSO",
+        "单点登录"
       ],
       "artwork": {
         "path": "icons/ory/ory-original.svg",

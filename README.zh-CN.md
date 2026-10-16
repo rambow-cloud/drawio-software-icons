@@ -19,15 +19,15 @@
 优先使用内置形状，结果不足时补充本站图标。可试着说：
 「请用 Draw.io MCP 搜索 ScyllaDB 图标，并绘制一个数据库节点。」
 
-530 个软件与服务图标，8 个用途分类，支持中英文浏览、搜索与分类库下载。以开源项目为主，兼收常用商业工具，优先使用上游原色 SVG。
+554 个软件与服务图标，8 个用途分类，支持中英文浏览、搜索与分类库下载。以开源项目为主，兼收常用商业工具，优先使用上游原色 SVG。
 
 **商业图标使用范围：** 本项目中的商业软件与服务图标仅适用于 draw.io / diagrams.net 架构图绘制，不适用于其他发行用途。本项目不额外授予品牌使用权，也不覆盖上游许可证。原创代码和文档继续采用 MIT 许可。使用商业品牌图标前请阅读中英双语 [图标使用声明](ICON_USAGE.md)。
 
 
 ## 图标集合并，两个旧网址保留
 
-现在包含 **530 个软件与服务图标**（8 类）和 **888 个阿里云图标条目**（9 个来源分类），
-共 **1,418 个条目、两个图标集**。阿里云条目包含颜色变体和 UI 补充图形，不代表 888 种独立云服务。
+现在包含 **554 个软件与服务图标**（8 类）和 **888 个阿里云图标条目**（9 个来源分类），
+共 **1,442 个条目、两个图标集**。阿里云条目包含颜色变体和 UI 补充图形，不代表 888 种独立云服务。
 分类、界面和使用流程支持中英文；上游没有英文产品名称的条目保留原名。
 
 - [软件入口](https://icons.rambow.cloud/)默认选中「通用软件」。
@@ -55,6 +55,17 @@
 
 源码、数据和测试统一维护于当前仓库。阿里云旧仓库从主仓库最近一次发布成功的提交构建兼容站点，
 每小时检查更新，也可手动立即同步。详见[发布说明](docs/DEPLOYMENT.md)。
+
+## 身份提供商与认证
+
+「监控与安全」新增 Frontegg、Ping Identity、PingID、Okta、Auth0、
+Microsoft Entra ID（Azure AD）、Amazon Cognito、OneLogin、JumpCloud、
+FusionAuth、ZITADEL、Logto、Casdoor、Authing、WorkOS、Clerk、SuperTokens、
+Kanidm、WSO2 Identity Server、Duende IdentityServer、Google Identity、
+Cisco Duo、Kinde 和 Descope。已有 Keycloak、Authentik、Authelia、Dex 和 Ory
+继续保留。可搜索 `idp`、`identity provider`、`身份提供商`、`SSO` 或品牌名称。
+PingID 和 Cisco Duo 使用 MFA 标签，与完整身份平台区分。发布者 PNG 在网站、
+下载和 draw.io 库中均保持原始位图，不作为矢量图宣传。
 
 ## Kubernetes 生态
 
