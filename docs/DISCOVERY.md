@@ -75,6 +75,48 @@ custom domain. Internal content links and assets remain relative for the mirror.
 
 ## Verification and measurement / 发布后确认
 
+### HTTP and canonical URLs
+
+Cloudflare uses a Single Redirect scoped to `icons.rambow.cloud` and HTTP only:
+301 to the same HTTPS path with the query string preserved. The reproducible
+zone ruleset payload is [deployment/icons-https-redirect.json](../deployment/icons-https-redirect.json).
+It belongs to the `rambow.cloud` zone's `http_request_dynamic_redirect` phase;
+it is separate from Worker deployment. When updating an existing phase ruleset,
+merge this rule by its `ref` and preserve any unrelated rules. Do not replace
+the entire ruleset or enable zone-wide redirects just for this subdomain.
+
+HTML canonical links and the sitemap already point to HTTPS. The generated
+Cloudflare `_headers` adds `Link: <https://icons.rambow.cloud/:splat.md>; rel="canonical"`
+for `/*.md`, including nested paths. Each Markdown document keeps its own path
+and language; it is not canonicalized to the homepage or a different guide.
+There is no `noindex` directive. GitHub Pages does not interpret `_headers`, so
+this non-HTML header applies to Cloudflare hosting only. Existing HTML canonical
+links still apply on the mirror. Google documents
+[canonical HTTP headers for non-HTML documents](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls#rel-canonical-http-header).
+
+After deployment, open browser Developer Tools > Network, enable Preserve log
+and Disable cache, then visit each explicit HTTP URL:
+
+- `http://icons.rambow.cloud/`
+- `http://icons.rambow.cloud/guides/README.md`
+- `http://icons.rambow.cloud/guides/README.zh-CN.md`
+- `http://icons.rambow.cloud/CHANGELOG.md`
+- `http://icons.rambow.cloud/guides/README.md?source=verification`
+
+Check for a server 301 with the same path/query on HTTPS, then a successful
+document response. Browser HTTPS-first or cached HSTS upgrades may happen before
+the request reaches Cloudflare; an internal browser redirect is not a server
+301. On each HTTPS Markdown response, inspect the `Link` response header for the
+same document's absolute HTTPS URL without the query string. Inspect homepage
+source for its single canonical `https://icons.rambow.cloud/`.
+
+In Search Console, inspect both old HTTP and final HTTPS URLs. After recrawling,
+HTTP URLs may correctly become "Page with redirect". Check the final HTTPS URL's
+user-declared and Google-selected canonical and crawl date. Historical September
+crawls do not describe the current deployment. Correct redirects and canonical
+signals do not guarantee indexing or keyword ranking; do not add `noindex` to
+make an indexing validation report disappear.
+
 PR checks run fixture-based discovery tests without downloading artwork or
 building distributions. The normal post-merge build generates the pages for
 both publishing targets and runs the existing distribution checks.

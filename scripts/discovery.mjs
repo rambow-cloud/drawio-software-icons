@@ -147,6 +147,9 @@ export function discoveryFiles(catalog) {
     }
   }
   const files = new Map(pages);
+  // Cloudflare static headers: keep draw.io CORS and give non-HTML documents
+  // their own HTTPS canonical. The splat includes nested directories.
+  files.set('_headers', `/*\n  Access-Control-Allow-Origin: *\n  X-Content-Type-Options: nosniff\n\n/*.md\n  Link: <${siteUrl}:splat.md>; rel="canonical"\n`);
   const urls = [siteUrl, ...pages.map(([path]) => absolute(path.replace(/index\.html$/, '')))];
   files.set('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(url => `  <url><loc>${escapeHtml(url)}</loc></url>`).join('\n')}\n</urlset>\n`);
   files.set('urls.txt', urls.join('\n') + '\n');
