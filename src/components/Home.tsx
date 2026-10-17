@@ -5,9 +5,8 @@ import { ExternalLink, LibraryLink, Symbol } from './Ui';
 import { LatestUpdate } from './Updates';
 import { McpNotice } from './McpDialog';
 
-// Share the exact approved artwork with the browser favicon. Vite resolves this
-// relative to the bundle so it also works on repository/subpath deployments.
-const brandMarkUrl=new URL('../favicon.svg',import.meta.url).href;
+// The discovery build copies the shared favicon to this portable public URL.
+const brandMarkUrl=file('discover/favicon.svg');
 
 function useStars() {
   const [count,setCount]=useState<number|null>(null);

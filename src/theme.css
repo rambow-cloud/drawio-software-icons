@@ -7,6 +7,19 @@
 @source "./";
 @custom-variant dark (&:is(.dark *));
 
+.startup-status:not([hidden]) {
+  position: fixed;
+  inset: auto 16px 16px;
+  z-index: 50;
+  padding: 16px;
+  border: 1px solid #b6c4a7;
+  border-radius: 12px;
+  background: #fff;
+  color: #292720;
+  box-shadow: 0 4px 24px #263b2926;
+}
+.startup-status button { cursor: pointer; text-decoration: underline; }
+
 @theme inline {
   --color-background: var(--ui-background);
   --color-foreground: var(--ui-foreground);

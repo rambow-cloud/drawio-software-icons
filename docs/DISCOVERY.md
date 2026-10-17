@@ -25,7 +25,14 @@ XML downloads, product links and artwork provenance. They work without JavaScrip
 Each language version has its own canonical URL and reciprocal `hreflang` links.
 JSON-LD describes the website, collection contents and breadcrumbs; it makes no
 claims about reviews, endorsements or rich-result eligibility. The homepage
-contains a build-generated reading fallback; React replaces it when running.
+contains the actual build-generated homepage, including the first 72 software
+icons, guides, changelog and download links. It remains readable without
+JavaScript. An inline bootstrap selects the saved or browser language from an
+inert Chinese template before first paint; the English page is the default
+without JavaScript. React hydrates the selected HTML after the content-addressed
+catalog loads, without replacing the homepage with a loading screen. URL filters,
+preview preferences and mirror-specific draw.io links are restored after hydration.
+If the catalog fails, the homepage stays visible with a separate retry notice.
 The original homepage layout and bilingual hero copy are retained. Search metadata
 lives in the head: title, description, canonical, robots, Open Graph and JSON-LD.
 The metadata names the actual collections available through the existing browser.

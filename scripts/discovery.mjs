@@ -70,10 +70,6 @@ function usageLinks(path, locale) {
   return `<section><h2>${text[locale].provenance}</h2><p>${text[locale].rights}</p><p>${link(path, 'ICON_USAGE.md', 'Icon usage / 图标使用声明')} · ${link(path, 'THIRD_PARTY_NOTICES.md', 'Third-party notices / 第三方资源说明')} · ${link(path, 'compat/alibaba-cloud/NOTICE.md', 'Alibaba Cloud artwork notice')}</p><a href="${repository}">GitHub</a></section>`;
 }
 
-export function homepageDiscovery(catalog) {
-  return `<main class="boot"><h1>${text.en.title}</h1><p lang="zh-CN">${text['zh-CN'].title}。${summary(catalog, 'zh-CN')}</p><p>${text.en.description}</p><p>${link('', 'discover/en/', 'English catalog and guide')} · ${link('', 'discover/zh-CN/', '中文分类与使用指南')} · ${alibabaHomeLink('', text['zh-CN'].alibabaLink)} · ${link('', 'downloads/drawio-icons.zip', text.en.download)}</p>${categoryList(catalog, 'en', '')}<p role="status">正在加载交互图标库 · Loading interactive icons…</p></main>`;
-}
-
 function alibabaRedirect(locale) {
   return [alibabaPath(locale) + 'index.html', `<!doctype html>
 <html lang="${locale}"><head><meta charset="UTF-8" /><meta http-equiv="refresh" content="0; url=${siteUrl}" />

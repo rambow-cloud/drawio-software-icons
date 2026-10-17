@@ -1,8 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { SiteProvider, initialFilters } from '../src/site';
-import { Page } from '../src/App';
+import { SiteProvider, initialFilters, file } from '../src/site';
+import App, { Page } from '../src/App';
+import { renderHomepage } from '../scripts/render-homepage';
+import { homepageLocale, prepareHomepage } from '../src/static-homepage.mjs';
+import { runInNewContext } from 'node:vm';
 import { Header } from '../src/components/Home';
 import { BundleDialog } from '../src/components/BundleDialog';
 import { DetailDialog, SpotlightDialog } from '../src/components/IconDialogs';
@@ -22,6 +25,55 @@ const catalog:Catalog={
 };
 const render=(node:ReactNode,locale:Locale='en')=>renderToStaticMarkup(<SiteProvider catalog={catalog} locale={locale} setLocale={()=>{}}>{node}</SiteProvider>);
 
+test('static homepage includes the real layout, initial icons and safe bilingual markup without a loading screen',()=>{
+  const html=renderHomepage(catalog);
+  const english=html.slice(0,html.indexOf('<template'));
+  const chinese=html.match(/<template id="homepage-zh-CN">([\s\S]*?)<\/template>/)![1];
+  for(const page of [english,chinese]) {
+    for(const id of ['home-title','library','changelog','guide','sources','grid'])assert(page.includes(`id="${id}"`),id);
+    assert.equal((page.match(/<button\b[^>]*data-icon=/g)??[]).length,72);
+    assert(page.includes('href="./downloads/drawio-icons.zip"'));
+    assert(page.includes('&lt;script&gt;alert(1)&lt;/script&gt;'));
+    assert(!page.includes('Loading icons'));
+    assert(!page.includes('class="boot"'));
+  }
+  assert(english.includes('Familiar icons.'));
+  assert(chinese.includes('让架构图，'));
+});
+
+test('first-paint language bootstrap respects saved locale, browser language and blocked storage',()=>{
+  for(const [saved,language,expected] of [['en','zh-CN','en'],['zh-CN','en-US','zh-CN'],[null,'zh-TW','zh-CN'],['invalid','en-US','en'],['blocked','zh-CN','zh-CN']]) {
+    let replaced=false,removed=false,pending=true;
+    const fragment={};
+    const root={dataset:{} as Record<string,string>,replaceChildren(content:unknown){assert.equal(content,fragment);replaced=true;},removeAttribute(name:string){assert.equal(name,'data-pending-locale');pending=false;}};
+    const translated={content:fragment,remove(){removed=true;}};
+    const document={documentElement:{lang:'en'},getElementById(id:string){return id==='app'?root:translated;}};
+    // Execute exactly the standalone function embedded in the generated document.
+    runInNewContext(`document.documentElement.lang=(${homepageLocale.toString()})();(${prepareHomepage.toString()})();`,{document,navigator:{language},localStorage:{getItem(){if(saved==='blocked')throw Error('blocked');return saved;}}});
+    assert.equal(root.dataset.locale,expected);
+    assert.equal(document.documentElement.lang,expected);
+    assert.equal(replaced,expected==='zh-CN');assert(removed);
+    assert(!pending,'later language switches must not hide the hydrated page');
+  }
+});
+
+test('hydration starts from the same static HTML regardless of URL and preview preferences',()=>{
+  const before=renderToStaticMarkup(<App catalog={catalog} initialLocale="zh-CN"/>);
+  const locationDescriptor=Object.getOwnPropertyDescriptor(globalThis,'location');
+  const storageDescriptor=Object.getOwnPropertyDescriptor(globalThis,'localStorage');
+  try {
+    Object.defineProperty(globalThis,'location',{configurable:true,value:{href:'https://example.com/mirror/?collection=alibaba-cloud&q=ecs&type=commercial'}});
+    Object.defineProperty(globalThis,'localStorage',{configurable:true,value:{getItem:()=> 'dark'}});
+    assert.equal(renderToStaticMarkup(<App catalog={catalog} initialLocale="zh-CN"/>),before);
+  } finally {
+    if(locationDescriptor)Object.defineProperty(globalThis,'location',locationDescriptor);else Reflect.deleteProperty(globalThis,'location');
+    if(storageDescriptor)Object.defineProperty(globalThis,'localStorage',storageDescriptor);else Reflect.deleteProperty(globalThis,'localStorage');
+  }
+  assert.equal(file('icons/a.svg'),'./icons/a.svg');
+  assert.equal(new URL(file('icons/a.svg'),'https://example.com/mirror/').href,'https://example.com/mirror/icons/a.svg');
+  assert.equal(file('https://upstream.example/logo.svg'),'https://upstream.example/logo.svg');
+});
+
 test('React page preserves section structure, bilingual labels, 72-card pagination and escaped catalog names',()=>{
   for(const locale of ['en','zh-CN'] as const){
     const html=render(<Page/>,locale);
@@ -31,7 +83,7 @@ test('React page preserves section structure, bilingual labels, 72-card paginati
     assert.equal((html.match(/<button\b[^>]*data-icon=/g)??[]).length,72);
     assert.equal((html.match(/class="mcp-notice"/g)??[]).length,2);
     assert(html.includes(locale==='en'?'Choose categories / desktop setup':'选择分类加载 / 桌面配置'));
-    assert(html.includes(`href="https://icons.rambow.cloud/?collection=alibaba-cloud#library"`));
+    assert(html.includes(`href="./?collection=alibaba-cloud#library"`));
     assert(html.includes(locale==='en'?'Alibaba Cloud icons':'阿里云icon 图标库'));
     assert(html.includes('&lt;script&gt;alert(1)&lt;/script&gt;'));
     assert(!html.includes('<script>alert(1)</script>'));
@@ -48,7 +100,7 @@ test('header reuses the favicon artwork without changing the accessible brand na
   for(const locale of ['en','zh-CN'] as const){
     const html=render(<Header/>,locale);
     assert.match(html, /<a\b(?=[^>]*class="brand")(?=[^>]*aria-label="Architecture Icons")[^>]*>/);
-    assert.match(html, /<img\b(?=[^>]*class="brand-mark")(?=[^>]*src="[^"]*\/src\/favicon\.svg")(?=[^>]*width="39")(?=[^>]*height="39")(?=[^>]*alt="")(?=[^>]*aria-hidden="true")[^>]*>/);
+    assert.match(html, /<img\b(?=[^>]*class="brand-mark")(?=[^>]*src="\.\/discover\/favicon\.svg")(?=[^>]*width="39")(?=[^>]*height="39")(?=[^>]*alt="")(?=[^>]*aria-hidden="true")[^>]*>/);
     assert(!html.includes('<span class="brand-mark">'));
   }
 });
