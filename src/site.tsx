@@ -2,12 +2,13 @@ import { createContext, useContext, useEffect, useMemo, useRef, useState, type P
 import { messages, type Locale } from './i18n';
 import { drawioUrl, filterIcons, isLocalSite, libraryPaths, resolveCategory } from './catalog.mjs';
 import { compareIconNames, spotlightLocation } from './spotlight.mjs';
-import { homepageTitle } from './homepage.mjs';
+import { homepages } from './homepage.mjs';
 import type { Catalog, Category, Collection, Icon } from './types';
 
-export const siteBase=new URL('./',globalThis.location?.href ?? 'https://icons.rambow.cloud/').href;
+const assetPrefix=()=>globalThis.document?.documentElement?.dataset.assetBase??'./';
+export const siteBase=new URL(assetPrefix(),globalThis.location?.href ?? 'https://icons.rambow.cloud/').href;
 // Relative links work identically in static HTML and on mirror subpaths.
-export const file=(path:string)=>/^[a-z][a-z\d+.-]*:/i.test(path)?path:`./${path}`;
+export const file=(path:string)=>/^[a-z][a-z\d+.-]*:/i.test(path)?path:`${assetPrefix()}${path}`;
 export const starRepository='rambow-cloud/drawio-software-icons';
 export function readPreference(key:string) { try{return localStorage.getItem(key);}catch{return null;} }
 export function preference(key:string,value:string) { try{localStorage.setItem(key,value);}catch{/* Browsing works without storage. */} }
@@ -70,8 +71,7 @@ function useSite(catalog:Catalog,locale:Locale,setLocale:(locale:Locale)=>void,p
   },[catalog,prerendered]);
   useEffect(()=>{
     document.documentElement.lang=locale;
-    document.title=homepageTitle;
-    preference('icons-locale',locale);
+    document.title=homepages[locale].title;
   },[locale]);
   const previousFilters=useRef(filters);
   useEffect(()=>{

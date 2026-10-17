@@ -3,6 +3,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { json, hash } from './lib.mjs';
 import { search } from '../worker/search.mjs';
 import { searchSpotlight } from '../src/spotlight.mjs';
+import { homepages } from '../src/homepage.mjs';
 
 const index = await json('.worker-build/search-index.json');
 const catalog = await json('dist/unified-catalog.json');
@@ -35,6 +36,25 @@ assert.doesNotMatch(homepage, /location\.replace/, 'Both primary homepages must 
 for (const [, path] of homepage.matchAll(/(?:src|href)="([^"\s]+)"/g)) {
   if (path.startsWith('#') || /^https?:/.test(path)) continue;
   assert.ok(path.startsWith('./'), `Homepage asset must work under the GitHub Pages repository path: ${path}`);
+}
+// Check the real Vite MPA outputs after merge, including mirror-relative paths.
+for (const [locale, config] of Object.entries(homepages)) {
+  const html = await readFile(`dist/${config.path}index.html`, 'utf8');
+  assert.ok(html.includes(`<html lang="${locale}"`));
+  assert.ok(html.includes(`data-locale="${locale}"`));
+  assert.ok(html.includes(`<title>${config.title.replaceAll('&', '&amp;')}</title>`));
+  assert.equal((html.match(/rel="canonical"/g) || []).length, 1);
+  assert.ok(html.includes(`rel="canonical" href="https://icons.rambow.cloud/${config.path}"`));
+  assert.ok(!html.includes('homepage-zh-CN') && !html.includes('icons-locale'));
+  for (const root of ['https://icons.rambow.cloud/', 'https://rambow-cloud.github.io/drawio-software-icons/']) {
+    for (const [, raw] of html.matchAll(/(?:src|href)="([^"<>]+)"/g)) {
+      if (raw.startsWith('#') || /^[a-z][a-z\d+.-]*:/i.test(raw)) continue;
+      const url = new URL(raw.replaceAll('&amp;', '&'), root + config.path);
+      assert.ok(url.href.startsWith(root), `${locale}: escaped site root: ${raw}`);
+      const target = decodeURIComponent(url.pathname.slice(new URL(root).pathname.length));
+      assert.ok(assets.includes(target) || assets.includes(target+'index.html'), `${locale}: missing ${target}`);
+    }
+  }
 }
 for (const path of assets) assert.ok((await readFile(`dist/${path}`)).length <= 25 * 1024 * 1024, `Asset too large: ${path}`);
 for (const [source, target] of [['dist', 'dist-pages'], ['dist-alibaba', 'dist-alibaba-pages']]) {
