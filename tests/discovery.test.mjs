@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { discoveryFiles, homepageMetadata, siteUrl } from '../scripts/discovery.mjs';
-import { homepageTitle, homepageDescription } from '../src/homepage.mjs';
+import { homepages, homepageTitle, homepageDescription } from '../src/homepage.mjs';
+import { iconGuides, iconGuidePath } from '../src/icon-guides.mjs';
 
 const categories = [
   { id: 'software-category', collection: 'software', name: '软件分类', nameEn: 'Software category', description: '软件图标', descriptionEn: 'Software icons', count: 1, libraries: { en: 'libraries/en/Software Category.xml', 'zh-CN': 'libraries/zh-CN/软件分类.xml' } },
@@ -14,6 +15,48 @@ const files = discoveryFiles(catalog);
 const htmlPages = [...files].filter(([path]) => path.endsWith('.html'));
 const contentPages = htmlPages.filter(([, html]) => !html.includes('http-equiv="refresh"'));
 const schemas = html => [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].map(match => JSON.parse(match[1]));
+
+test('localized homepage metadata has reciprocal URLs and one consistent locale', () => {
+  for (const locale of ['en', 'zh-CN']) {
+    const html = homepageMetadata(catalog, locale), expected = homepages[locale];
+    const url = siteUrl + expected.path;
+    assert.equal((html.match(/rel="canonical"/g) || []).length, 1);
+    assert(html.includes(`rel="canonical" href="${url}"`));
+    assert(html.includes(`property="og:url" content="${url}"`));
+    assert(html.includes(expected.title.replaceAll('&', '&amp;')));
+    for (const lang of ['en','zh-CN']) assert(html.includes(`hreflang="${lang}" href="${siteUrl + homepages[lang].path}"`));
+    const graph = schemas(html)[0]['@graph'][1];
+    assert.equal(graph.inLanguage, locale);
+    assert.equal(graph.name, expected.title);
+    assert.equal(graph.url, url);
+    assert(graph.mainEntity.itemListElement.every(item => item.url.startsWith(url + '?collection=')));
+  }
+});
+
+test('curated icon pages have content, downloads, provenance and inbound category links', () => {
+  const icons = Object.keys(iconGuides).map(id => ({ ...icon, id, name: id, nameEn: id, source: { ...icon.source, revision: 'pinned-source', licenseUrl: 'ICON_USAGE.md' }, sha256: 'pinned-artwork' }));
+  const generated = discoveryFiles({ ...catalog, icons });
+  assert.equal([...generated.keys()].filter(path => /\/icons\/[^/]+\/index.html$/.test(path)).length, 8);
+  for (const item of icons) for (const locale of ['en', 'zh-CN']) {
+    const path = iconGuidePath(locale, item.id), html = generated.get(path + 'index.html');
+    assert(html.includes(iconGuides[item.id][locale].diagram));
+    assert(html.includes(iconGuides[item.id][locale].tip));
+    assert(html.includes(iconGuides[item.id].reference));
+    assert(html.includes('pinned-source'));
+    assert(html.includes('pinned-artwork'));
+    assert(html.includes(' download>'));
+    assert(html.includes('clibs=U'));
+    assert(html.includes('rel="canonical" href="'+siteUrl+path+'"'));
+    assert(html.includes('SVG '+(locale==='en'?'icon':'图标')));
+    assert(generated.get('sitemap.xml').includes(siteUrl+path));
+    assert(generated.get(`discover/${locale}/software/software-category/index.html`).includes(`../../icons/${item.id}/`));
+    for (const [,href] of html.matchAll(/(?:href|src)="([^"<>]+)"/g)) {
+      if (/^https?:/.test(href)) continue;
+      const target = decodeURIComponent(new URL(href, siteUrl+path).pathname.slice(1));
+      assert(['', 'en/', 'discover/favicon.svg', 'icons/test.svg', 'library.xml', 'ICON_USAGE.md', 'THIRD_PARTY_NOTICES.md', 'compat/alibaba-cloud/NOTICE.md', 'downloads/drawio-icons.zip', ...categories.flatMap(c=>Object.values(c.libraries))].includes(target) || generated.has(target) || generated.has(target+'index.html'), target);
+    }
+  }
+});
 
 test('current bilingual discovery titles are concise, unique and retain category context', async () => {
   const [software, english, alibaba] = await Promise.all([
@@ -49,7 +92,7 @@ test('current bilingual discovery titles are concise, unique and retain category
 test('sitemap contains indexable pages and excludes migrated collection URLs', () => {
   const urls = [...files.get('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
   assert.equal(contentPages.length, 2 * (categories.length + 2));
-  assert.deepEqual(urls, [siteUrl, ...contentPages.map(([path]) => new URL(path.replace(/index\.html$/, ''), siteUrl).href)]);
+  assert.deepEqual(urls, [siteUrl, siteUrl+'en/', ...contentPages.map(([path]) => new URL(path.replace(/index\.html$/, ''), siteUrl).href)]);
   assert.equal(new Set(urls).size, urls.length);
   assert.deepEqual(files.get('urls.txt').trim().split('\n'), urls);
   assert(!files.get('sitemap.xml').includes('lastmod'), 'Do not invent content modification dates');
@@ -99,7 +142,7 @@ test('HTML works without JavaScript and escapes text and structured data from th
 
 test('relative links preserve GitHub Pages repository prefixes and stay within deployed files', () => {
   const origin = 'https://rambow-cloud.github.io/drawio-software-icons/';
-  const assets = new Set([...files.keys(), 'discover/favicon.svg', 'icons/test.svg', 'ICON_USAGE.md', 'THIRD_PARTY_NOTICES.md', 'compat/alibaba-cloud/NOTICE.md', 'downloads/drawio-icons.zip', 'alibaba-cloud-drawio.zip', 'drawio/all-icons.xml', ...categories.flatMap(c => Object.values(c.libraries))]);
+  const assets = new Set([...files.keys(), 'en/index.html', 'discover/favicon.svg', 'icons/test.svg', 'ICON_USAGE.md', 'THIRD_PARTY_NOTICES.md', 'compat/alibaba-cloud/NOTICE.md', 'downloads/drawio-icons.zip', 'alibaba-cloud-drawio.zip', 'drawio/all-icons.xml', ...categories.flatMap(c => Object.values(c.libraries))]);
   for (const [path, html] of htmlPages) {
     const base = new URL(path.replace(/index\.html$/, ''), origin);
     for (const [, href] of html.matchAll(/(?:href|src)="([^"<>]+)"/g)) {
@@ -126,9 +169,9 @@ test('AI reading guidance uses generated category URLs and keeps usage and MCP c
 
 test('head metadata describes visible homepage collections without adding an overview section', async () => {
   const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
-  assert(index.includes(`<title>${homepageTitle}</title>`));
-  assert(index.includes(`property="og:title" content="${homepageTitle}"`));
-  assert(index.includes(`name="description" content="${homepageDescription}"`));
+  assert(homepageMetadata(catalog).includes(`<title>${homepageTitle}</title>`));
+  assert(homepageMetadata(catalog).includes(`property="og:title" content="${homepageTitle}"`));
+  assert(homepageMetadata(catalog).includes(`name="description" content="${homepageDescription}"`));
   assert(index.includes('name="baidu-site-verification" content="codeva-gyFX1gxyRv"'));
   const graph = schemas(homepageMetadata(catalog))[0]['@graph'];
   assert.equal(graph[1].name, homepageTitle);
@@ -138,7 +181,7 @@ test('head metadata describes visible homepage collections without adding an ove
   assert.deepEqual(list.itemListElement.map(item => item.url), catalog.collections.map(collection => `${siteUrl}?collection=${collection.id}#library`));
   const metadata = homepageMetadata({ ...catalog, collections: [{ ...catalog.collections[0], name: icon.name }] });
   assert(!metadata.includes('</script><script>alert(1)</script>'));
-  assert.equal(schemas(metadata)[0]['@graph'][1].mainEntity.itemListElement[0].name, `${icon.name} / General Software`);
+  assert.equal(schemas(metadata)[0]['@graph'][1].mainEntity.itemListElement[0].name, icon.name);
 });
 
 test('old Alibaba overview URLs permanently redirect to the homepage without catching categories', () => {

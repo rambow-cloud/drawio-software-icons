@@ -2,13 +2,17 @@
 
 The canonical site is **https://icons.rambow.cloud/**. GitHub Pages continues to
 serve the full site as a mirror; canonical links and sitemaps consolidate signals
-on the primary domain. A localStorage language toggle is not a separate language
-URL, so the crawlable English and Chinese content has its own stable URLs.
+on the primary domain. The Chinese homepage is `/`; the English homepage is
+`/en/`. Both return complete, deterministic HTML with localized titles,
+descriptions, self-canonicals and reciprocal `hreflang` (`x-default` points to `/`).
+Browser language and saved preferences never replace the language at either URL.
 
 ## Published reading entrypoints
 
 | Resource | URL | Purpose |
 | --- | --- | --- |
+| 中文首页 | https://icons.rambow.cloud/ | 中文交互图标库与静态首屏 |
+| English homepage | https://icons.rambow.cloud/en/ | English interactive library and static initial content |
 | English catalog | https://icons.rambow.cloud/discover/en/ | Collection descriptions and category links |
 | 中文目录 | https://icons.rambow.cloud/discover/zh-CN/ | 图标集介绍、分类链接及使用说明 |
 | 阿里云icon / Alibaba Cloud icons | https://icons.rambow.cloud/?collection=alibaba-cloud#library | Existing homepage collection browser |
@@ -27,17 +31,37 @@ JSON-LD describes the website, collection contents and breadcrumbs; it makes no
 claims about reviews, endorsements or rich-result eligibility. The homepage
 contains the actual build-generated homepage, including the first 72 software
 icons, guides, changelog and download links. It remains readable without
-JavaScript. An inline bootstrap selects the saved or browser language from an
-inert Chinese template before first paint; the English page is the default
-without JavaScript. React hydrates the selected HTML after the content-addressed
+JavaScript. Vite builds both homepage entrypoints from the same React components;
+each contains only its own language, without an alternate-language template.
+React hydrates that HTML after the content-addressed
 catalog loads, without replacing the homepage with a loading screen. URL filters,
 preview preferences and mirror-specific draw.io links are restored after hydration.
 If the catalog fails, the homepage stays visible with a separate retry notice.
 The original homepage layout and bilingual hero copy are retained. Search metadata
 lives in the head: title, description, canonical, robots, Open Graph and JSON-LD.
 The metadata names the actual collections available through the existing browser.
-The descriptive bilingual document title remains consistent after React loads.
-The rendered website footer links to the catalog in the selected language.
+The localized document title remains consistent after React loads. The language
+switch is a real link to the alternate homepage and retains query filters and
+the fragment when clicked. Main navigation and the footer link to HTML reading
+pages. Category labels are real links to the corresponding static category;
+ordinary clicks retain client filtering, while opening in a new tab or using
+the explicit category-details link opens the HTML page.
+
+## Curated icon detail pages
+
+`src/icon-guides.mjs` contains bilingual editorial guidance for Kubernetes,
+Karpenter, Keycloak and Grafana. Only these four entries generate pages at
+`/discover/{locale}/icons/{id}/`; no empty pages are emitted for other icons.
+Each page contains diagram-specific guidance, links to product documentation,
+the actual catalog artwork/source/revision/license, SVG or PNG download,
+category XML, online import and offline instructions. Product facts link to
+primary documentation; diagram layout advice is this project's editorial guidance.
+Artwork rights are distinct from the software license.
+
+Category cards link to these pages and their interactive dialogs expose a guide
+link. Both languages enter `sitemap.xml` and `urls.txt`; each page has a canonical,
+reciprocal `hreflang`, descriptive preview alt text and ImageObject metadata.
+The original homepage hero and section layout remain intact.
 
 No modification date is fabricated for sitemaps. Counts describe icon entries;
 Alibaba color variants and supplemental graphics are not distinct cloud services.
@@ -188,10 +212,16 @@ Google 不使用 meta keywords 进行索引或排名。结构化数据描述可�
 已有集合链接指向首页 `?collection=alibaba-cloud#library`，不依赖新增区块。
 旧概览地址从 sitemap 和 `urls.txt` 移除，AI 阅读指引改为现有首页浏览入口。
 
-浏览器验证：打开首页确认恢复原布局和主标题，没有新增阿里云概览；切换语言，
-浏览器标签标题仍含阿里云主题。查看网页源代码的 `<head>`，确认验证标签、
+浏览器验证：打开 `/` 和 `/en/`，包括禁用 JavaScript 的情况，分别确认中文和
+英文正文。切换语言后 URL 与标签标题随之变化；查询和分类筛选仍保留。
+首页保留原布局和主标题，没有新增阿里云概览。查看源代码的 `<head>`，确认验证标签、
 描述、canonical、robots 和 JSON-LD。点击已有的阿里云链接，应在现有浏览器中
 选择阿里云图标集；打开两个旧概览网址，应直接到首页。
+
+再打开 `/discover/zh-CN/icons/keycloak/` 及对应英文版本，确认预览、下载和
+分类库导入链接；从分类页与 Keycloak 弹窗均可进入该页。在 GitHub Pages
+镜像的 `/drawio-software-icons/en/` 上确认图片、下载、语言切换与分类链接均
+保留仓库路径前缀。
 
 发布后，在 Google Search Console 检查首页并请求重新抓取；查看首页查询的
 展示、点击和平均排名。已收录与关键词排名是不同阶段；元数据有助于描述页面，

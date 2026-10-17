@@ -1,7 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { save } from './lib.mjs';
 import { posix } from 'node:path';
-import { homepageTitle, homepageDescription } from '../src/homepage.mjs';
+import { homepages } from '../src/homepage.mjs';
+import { iconGuides, iconGuidePath } from '../src/icon-guides.mjs';
 
 export const siteUrl = 'https://icons.rambow.cloud/';
 const repository = 'https://github.com/rambow-cloud/drawio-software-icons';
@@ -77,14 +78,23 @@ function alibabaRedirect(locale) {
 <body><p><a href="${siteUrl}">${locale === 'en' ? 'Open the homepage icon library' : '打开首页图标库'}</a></p></body></html>\n`];
 }
 
-export function homepageMetadata(catalog) {
+export function homepageMetadata(catalog, locale = 'zh-CN') {
+  const { title, description, path } = homepages[locale];
+  const url = absolute(path);
   const collectionList = { '@type': 'ItemList', numberOfItems: catalog.collections.length,
     itemListElement: catalog.collections.map((collection, index) => ({ '@type': 'ListItem', position: index + 1,
-      name: `${collection.name} / ${collection.nameEn}`, url: absolute(`?collection=${encodeURIComponent(collection.id)}#library`) })) };
-  return `${robotsMeta}\n${jsonLd({ '@context': 'https://schema.org', '@graph': [website, { '@type': 'CollectionPage', '@id': siteUrl, url: siteUrl, name: homepageTitle, description: homepageDescription, inLanguage: locales, isPartOf: { '@id': website['@id'] }, mainEntity: collectionList }] })}`;
+      name: localized(collection, locale), url: `${url}?collection=${encodeURIComponent(collection.id)}#library` })) };
+  return `<title>${escapeHtml(title)}</title>\n<meta name="description" content="${escapeHtml(description)}" />
+<link rel="canonical" href="${url}" />
+${locales.map(lang => `<link rel="alternate" hreflang="${lang}" href="${absolute(homepages[lang].path)}" />`).join('\n')}
+<link rel="alternate" hreflang="x-default" href="${siteUrl}" />
+<meta property="og:type" content="website" /><meta property="og:url" content="${url}" />
+<meta property="og:title" content="${escapeHtml(title)}" /><meta property="og:description" content="${escapeHtml(description)}" />
+<meta property="og:locale" content="${locale === 'en' ? 'en_US' : 'zh_CN'}" /><meta name="twitter:card" content="summary" />
+${robotsMeta}\n${jsonLd({ '@context': 'https://schema.org', '@graph': [website, { '@type': 'CollectionPage', '@id': url, url, name: title, description, inLanguage: locale, isPartOf: { '@id': website['@id'] }, mainEntity: collectionList }] })}`;
 }
 
-function page({ locale, suffix, title, documentTitle = title, description, body, items }) {
+function page({ locale, suffix, title, documentTitle = title, description, body, items, image }) {
   const path = `discover/${locale}/${suffix}`;
   const otherLocale = locale === 'en' ? 'zh-CN' : 'en';
   const translated = `discover/${otherLocale}/${suffix}`;
@@ -92,8 +102,9 @@ function page({ locale, suffix, title, documentTitle = title, description, body,
     '@type': items ? 'CollectionPage' : 'WebPage', '@id': absolute(path), url: absolute(path), name: title, description,
     inLanguage: locale, isPartOf: { '@id': website['@id'] },
     ...(items ? { mainEntity: { '@type': 'ItemList', numberOfItems: items.length, itemListElement: items.map((item, index) => ({ '@type': 'ListItem', position: index + 1, ...item })) } } : {}),
+    ...(image ? { primaryImageOfPage: { '@type': 'ImageObject', contentUrl: absolute(image.asset), caption: image.name } } : {}),
   }, { '@type': 'BreadcrumbList', itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Architecture Icons', item: siteUrl },
+    { '@type': 'ListItem', position: 1, name: 'Architecture Icons', item: absolute(homepages[locale].path) },
     ...(suffix ? [{ '@type': 'ListItem', position: 2, name: text[locale].contents, item: absolute(`discover/${locale}/`) }] : []),
     { '@type': 'ListItem', position: suffix ? 3 : 2, name: title, item: absolute(path) },
   ] }] };
@@ -106,10 +117,44 @@ ${locales.map(lang => `<link rel="alternate" hreflang="${lang}" href="${absolute
 <meta property="og:type" content="website" /><meta property="og:url" content="${absolute(path)}" /><meta property="og:title" content="${escapeHtml(documentTitle)}" /><meta property="og:description" content="${escapeHtml(description)}" />
 <meta property="og:locale" content="${locale === 'en' ? 'en_US' : 'zh_CN'}" /><meta name="twitter:card" content="summary" />
 <link rel="icon" type="image/svg+xml" href="${relativeLink(path, 'discover/favicon.svg')}" /><link rel="stylesheet" href="${relativeLink(path, 'discover/style.css')}" />
-${jsonLd(schema)}</head><body><header><a href="${relativeLink(path, '')}">Architecture Icons <small>for draw.io</small></a><nav>${link(path, `discover/${locale}/`, text[locale].contents)} · ${link(path, translated, text[locale].language)}</nav></header>
-<main><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p><p>${link(path, '', text[locale].browse)}</p>${body}${usageLinks(path, locale)}</main>
+${jsonLd(schema)}</head><body><header><a href="${relativeLink(path, homepages[locale].path)}">Architecture Icons <small>for draw.io</small></a><nav>${link(path, `discover/${locale}/`, text[locale].contents)} · ${link(path, translated, text[locale].language)}</nav></header>
+<main><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p><p>${link(path, homepages[locale].path, text[locale].browse)}</p>${body}${usageLinks(path, locale)}</main>
 <footer>${link(path, `discover/${locale}/guide/`, text[locale].guide)} · ${link(path, 'downloads/drawio-icons.zip', text[locale].download)}</footer></body></html>\n`;
   return [path + 'index.html', html];
+}
+
+function iconDetailPage(catalog, icon, locale) {
+  const en = locale === 'en';
+  const guide = iconGuides[icon.id], copy = guide[locale];
+  const name = localized(icon, locale), path = iconGuidePath(locale, icon.id);
+  const category = catalog.categories.find(c => c.id === icon.category);
+  if (!category) throw Error(`Missing guide category for ${icon.id}`);
+  const format = icon.asset.endsWith('.png') ? 'PNG' : 'SVG';
+  const title = en ? `${name} ${format} Icon for draw.io` : `${name} ${format} 图标与 draw.io 导入说明`;
+  const library = category.libraries[locale];
+  const related = guide.related.filter(id => catalog.icons.some(i => i.id === id));
+  const download = (asset, label) => `<a href="${escapeHtml(relativeLink(path, asset))}" download>${escapeHtml(label)}</a>`;
+  const external = (url, label) => `<a href="${escapeHtml(url)}">${escapeHtml(label)}</a>`;
+  const license = icon.source.licenseUrl || 'ICON_USAGE.md';
+  const licenseLink = /^https?:/.test(license) ? external(license, icon.source.collectionLicense) : link(path, license, icon.source.collectionLicense);
+  const drawio = `https://app.diagrams.net/?clibs=U${encodeURIComponent(absolute(library))}`;
+  const body = `<figure><img src="${escapeHtml(relativeLink(path, icon.asset))}" alt="${escapeHtml(`${name} ${format} ${en ? 'icon' : '图标'}`)}" width="128" height="128" /><figcaption>${escapeHtml(name)} · ${format}</figcaption></figure>
+<p>${download(icon.asset, en ? `Download ${format}` : `下载 ${format}`)} · ${download(library, en ? 'Download category XML' : '下载分类 XML')} · ${external(drawio, en ? 'Open category in draw.io' : '在 draw.io 加载本分类')}</p>
+<section><h2>${en ? 'Using this icon in a diagram' : '在架构图中如何使用'}</h2><p>${escapeHtml(copy.diagram)}</p><p>${escapeHtml(copy.tip)}</p><p>${external(guide.reference, en ? 'Product documentation' : '产品文档')} · ${link(path, categoryPath(locale, category), localized(category, locale))}</p></section>
+<section><h2>${en ? 'Artwork and provenance' : '素材与来源'}</h2><dl>
+<dt>${en ? 'Format' : '格式'}</dt><dd>${format}${icon.width && icon.height ? ` · ${icon.width} × ${icon.height}` : ''}</dd>
+<dt>${en ? 'Artwork source' : '素材来源'}</dt><dd>${external(icon.source.url, icon.source.publisher || icon.source.id)}</dd>
+<dt>${en ? 'Collection license / artwork terms' : '图标集许可／素材条款'}</dt><dd>${licenseLink}</dd>
+<dt>${en ? 'Pinned revision' : '固定来源版本'}</dt><dd><code>${escapeHtml(icon.source.revision)}</code></dd>
+<dt>SHA-256</dt><dd><code>${escapeHtml(icon.sha256)}</code></dd></dl>
+<p>${en ? 'Software licensing and artwork rights are separate. Collection licenses do not grant additional trademark rights. Check the linked terms before reuse; this community collection is not an endorsement by the product owner.' : '软件许可与图形素材权利分别适用，图标集许可不额外授予商标权。使用前请查阅所链接的条款；本社区合集不代表产品所有者的背书。'}</p></section>
+<section><h2>${en ? 'Import into draw.io / diagrams.net' : '导入 draw.io / diagrams.net'}</h2><ol>
+<li>${en ? 'For a single image, download the artwork above and drag it onto the canvas. Resize it while keeping its aspect ratio.' : '使用单个图标时，下载上方素材并拖到画布上，缩放时保持宽高比例。'}</li>
+<li>${en ? 'For the complete category, use the online category link, or download its XML and open it with File → Open Library in draw.io Desktop. The XML includes embedded artwork for offline use.' : '使用整套分类时，点击在线加载链接；或下载 XML，在 draw.io Desktop 中通过“文件 → 打开库”导入。XML 内嵌图形素材，可供离线使用。'}</li>
+<li>${escapeHtml(en ? `Search the imported library for ${name}, drag the icon onto the canvas, then add labels and connectors for your deployment.` : `在导入的图标库中查找 ${name}，拖入画布后，按实际部署添加标签和连线。`)}</li></ol>
+<p>${link(path, `discover/${locale}/guide/`, en ? 'Complete import and MCP guide' : '完整导入与 MCP 使用指南')}</p></section>
+${related.length ? `<section><h2>${en ? 'Related icon guides' : '相关图标说明'}</h2><ul>${related.map(id => `<li>${link(path, iconGuidePath(locale, id), catalog.icons.find(i => i.id === id).name)}</li>`).join('')}</ul></section>` : ''}`;
+  return page({ locale, suffix: `icons/${icon.id}/`, title, description: copy.summary, body, image: { asset: icon.asset, name } });
 }
 
 export function discoveryFiles(catalog) {
@@ -123,6 +168,9 @@ export function discoveryFiles(catalog) {
     pages.push(page({ locale, suffix: 'guide/', title: t.guide, description: t.description,
       body: t.steps.map(([title, detail]) => `<section><h2>${escapeHtml(title)}</h2><p>${escapeHtml(detail)}</p></section>`).join(''),
     }));
+    for (const icon of catalog.icons.filter(icon => Object.hasOwn(iconGuides, icon.id))) {
+      pages.push(iconDetailPage(catalog, icon, locale));
+    }
     for (const category of catalog.categories) {
       const path = categoryPath(locale, category);
       const icons = catalog.icons.filter(i => i.category === category.id || i.categories?.includes(category.id));
@@ -136,7 +184,7 @@ export function discoveryFiles(catalog) {
         : title;
       const description = `${localized(category, locale, 'description')} ${locale === 'en' ? `${icons.length} entries with XML downloads and artwork sources.` : `${icons.length} 个条目，提供 XML 下载及素材来源。`}`;
       const body = `<p>${link(path, category.libraries[locale], t.library)}</p>${category.collection === 'alibaba-cloud' ? `<p>${alibabaHomeLink(path, t.alibabaLink)}</p><p>${t.variants}</p>` : ''}
-<div class="icons">${icons.map(icon => `<article id="${escapeHtml(icon.id)}"><img src="${escapeHtml(relativeLink(path, icon.asset))}" alt="${escapeHtml(localized(icon, locale))}" loading="lazy" width="64" height="64" /><h2>${escapeHtml(localized(icon, locale))}</h2><p>${t.aliases}: ${escapeHtml([...new Set([icon.name, icon.nameEn, ...icon.aliases, ...icon.tags].filter(Boolean))].join(', '))}</p><p><a href="${escapeHtml(icon.homepage)}">${t.product}</a> · <a href="${escapeHtml(icon.source.url)}">${t.source}</a></p><p>${escapeHtml(icon.source.collectionLicense || '')} · ${link(path, icon.usagePolicyUrl || 'ICON_USAGE.md', t.provenance)}</p></article>`).join('')}</div>`;
+<div class="icons">${icons.map(icon => `<article id="${escapeHtml(icon.id)}"><img src="${escapeHtml(relativeLink(path, icon.asset))}" alt="${escapeHtml(localized(icon, locale))}" loading="lazy" width="64" height="64" /><h2>${Object.hasOwn(iconGuides, icon.id) ? link(path, iconGuidePath(locale, icon.id), localized(icon, locale)) : escapeHtml(localized(icon, locale))}</h2><p>${t.aliases}: ${escapeHtml([...new Set([icon.name, icon.nameEn, ...icon.aliases, ...icon.tags].filter(Boolean))].join(', '))}</p><p><a href="${escapeHtml(icon.homepage)}">${t.product}</a> · <a href="${escapeHtml(icon.source.url)}">${t.source}</a></p><p>${escapeHtml(icon.source.collectionLicense || '')} · ${link(path, icon.usagePolicyUrl || 'ICON_USAGE.md', t.provenance)}</p></article>`).join('')}</div>`;
       pages.push(page({ locale, suffix: `${category.collection}/${category.id}/`, title, documentTitle, description, body,
         items: icons.map(icon => ({ name: localized(icon, locale), url: `${absolute(path)}#${encodeURIComponent(icon.id)}` })),
       }));
@@ -146,7 +194,7 @@ export function discoveryFiles(catalog) {
   // Cloudflare static headers: keep draw.io CORS and give non-HTML documents
   // their own HTTPS canonical. The splat includes nested directories.
   files.set('_headers', `/*\n  Access-Control-Allow-Origin: *\n  X-Content-Type-Options: nosniff\n\n/*.md\n  Link: <${siteUrl}:splat.md>; rel="canonical"\n`);
-  const urls = [siteUrl, ...pages.map(([path]) => absolute(path.replace(/index\.html$/, '')))];
+  const urls = [siteUrl, absolute(homepages.en.path), ...pages.map(([path]) => absolute(path.replace(/index\.html$/, '')))];
   files.set('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(url => `  <url><loc>${escapeHtml(url)}</loc></url>`).join('\n')}\n</urlset>\n`);
   files.set('urls.txt', urls.join('\n') + '\n');
   // Wildcard access also covers domestic crawlers without guessing their identities.
@@ -167,6 +215,8 @@ export function discoveryFiles(catalog) {
   files.set('robots.txt', `# Public content is available to search and AI retrieval crawlers.\nUser-agent: *\nAllow: /\n\nSitemap: ${absolute('sitemap.xml')}\n`);
   files.set('llms.txt', `# Architecture Icons for draw.io\n\n> ${text.en.description}\n> ${text['zh-CN'].description}\n\n${summary(catalog, 'en')}\n${text.en.variants}\n\n## Catalog and usage\n\n- [English catalog](${absolute('discover/en/')})\n- [中文目录](${absolute('discover/zh-CN/')})\n- [Alibaba Cloud icons and downloads](${siteUrl}?collection=alibaba-cloud#library)\n- [阿里云icon 图标库与下载](${siteUrl}?collection=alibaba-cloud#library)\n- [English usage guide](${absolute('discover/en/guide/')})\n- [中文使用指南](${absolute('discover/zh-CN/guide/')})\n- [Machine-readable catalog](${absolute('unified-catalog.json')})\n- [Icon use policy](${absolute('ICON_USAGE.md')})\n- [Artwork provenance and licenses](${absolute('THIRD_PARTY_NOTICES.md')})\n\n## Categories\n\n${catalog.categories.map(c => `- [${c.nameEn} / ${c.name}](${absolute(categoryPath('en', c))}): ${c.count} entries; [中文](${absolute(categoryPath('zh-CN', c))})`).join('\n')}\n\n## AI drawing integration\n\nUse Draw.io MCP with DRAWIO_ICON_SERVICE_URL=${absolute('api/icons')}. This is an icon search API, not a remote MCP server URL. No account or API key is required.\n\n## Rights\n\n${text.en.rights}\n${text['zh-CN'].rights}\n`);
   files.set('discover/style.css', 'body{margin:0;background:#f8f7f4;color:#292720;font:16px/1.7 system-ui,sans-serif}header,main,footer{max-width:1080px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:1px solid #d8d5cc}h1{font-size:clamp(28px,4vw,44px);line-height:1.2}h2{font-size:21px}a{color:#81501e;text-underline-offset:3px;overflow-wrap:anywhere}li{margin:12px 0}section{margin:32px 0}footer{border-top:1px solid #d8d5cc}.icons{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px}.icons article{padding:20px;border:1px solid #d8d5cc;border-radius:12px;background:#fff;overflow-wrap:anywhere}.icons img{object-fit:contain}.icons p{font-size:14px}\n');
+  const curated = catalog.icons.filter(icon => Object.hasOwn(iconGuides, icon.id));
+  files.set('llms.txt', files.get('llms.txt') + `\n## Curated icon and import guides\n\n${curated.flatMap(icon => locales.map(locale => `- [${icon.name} (${locale})](${absolute(iconGuidePath(locale, icon.id))})`)).join('\n')}\n`);
   return files;
 }
 
