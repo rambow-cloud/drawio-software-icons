@@ -55,6 +55,15 @@ test('sitemap contains indexable pages and excludes migrated collection URLs', (
   assert(!files.get('sitemap.xml').includes('lastmod'), 'Do not invent content modification dates');
 });
 
+test('Markdown canonical headers preserve document paths and crawl eligibility', async () => {
+  const headers = files.get('_headers');
+  assert(headers.includes('/*\n  Access-Control-Allow-Origin: *\n  X-Content-Type-Options: nosniff\n'));
+  assert(headers.includes(`/*.md\n  Link: <${siteUrl}:splat.md>; rel="canonical"`));
+  assert(!/noindex|nofollow|X-Robots-Tag/i.test(headers));
+  const compiler = await readFile(new URL('../scripts/build-worker-index.mjs', import.meta.url), 'utf8');
+  assert(!compiler.includes("save('dist/_headers'"), 'API compilation must not overwrite discovery headers');
+});
+
 test('translations have reciprocal hreflang and distinct canonical URLs with valid JSON-LD', () => {
   for (const [path, html] of contentPages) {
     const locale = path.split('/')[1];

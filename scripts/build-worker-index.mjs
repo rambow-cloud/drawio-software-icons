@@ -18,7 +18,6 @@ const icons = await Promise.all([...catalog.icons].sort(compareIconNames).map(as
       width: Number((size.width * scale).toFixed(4)), height: Number((size.height * scale).toFixed(4)), set: collections.get(icon.collection) } };
 }));
 await save('.worker-build/search-index.json', JSON.stringify({ version: hash(JSON.stringify(icons)), icons }));
-// draw.io loads libraries and images cross-origin. GitHub Pages already supplies
-// CORS, but Cloudflare static hosting needs this explicit response header.
-await save('dist/_headers', '/*\n  Access-Control-Allow-Origin: *\n  X-Content-Type-Options: nosniff\n');
+// Static response headers are generated with discovery files before Vite copies
+// public/ to dist/. Do not overwrite canonical headers when compiling the API.
 console.log(`Compiled Worker search index: ${icons.length} icons.`);
