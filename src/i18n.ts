@@ -31,7 +31,7 @@ export const messages = {
     guideOffline:'桌面版 / 离线：推荐打开「选择分类加载 / 桌面配置」，生成或合并 JSON，复制到「其他 → 配置」后重启。也可解压完整 ZIP，将 libraries/zh-CN/（英文用 libraries/en/）中的 XML 一起拖到空白画布，放下前松开 Ctrl / Shift。17 个分类独立保留，图像全部内嵌。',
     guideLanguage:'分类库提供中文和英文两个目录。切换网站语言，即可下载或加载对应语言的分类库。',
     sourceTitle:'每个图标，都有出处。',sourceText:'素材来自上游图标集与官方应用发布者；新增 AI 品牌 SVG 来自 Lobe Icons。微信、企业微信、钉钉、QQ 和飞书使用官方发布的彩色应用图标。点击图标可查看原始链接、发布者、许可说明与校验值。',
-    notices:'第三方资源说明',chineseGuide:'中文使用说明',englishGuide:'English guide',footer:'为清晰表达而收集。',footerNote:'独立社区合集 · 与 draw.io 及各品牌无隶属关系',
+    notices:'第三方资源说明',footer:'为清晰表达而收集。',footerNote:'独立社区合集 · 与 draw.io 及各品牌无隶属关系',
     error:'图标库加载失败，请刷新页面重试。你仍然可以下载完整合集。',retry:'刷新重试',loadMore:'显示更多',showing:'已显示',of:' / ',
   },
   en: {
@@ -65,7 +65,7 @@ export const messages = {
     guideOffline:'Desktop / offline: use “Choose categories / desktop setup” to generate or merge JSON, paste it into Extras → Configuration, apply and restart. Alternatively, extract the complete ZIP and drag the XML files from libraries/en/ (or libraries/zh-CN/) together onto a blank canvas. Release Ctrl/Shift before dropping. All 17 categories stay separate, with images embedded.',
     guideLanguage:'Category libraries are available in Chinese and English folders. Switch the site language to download or open the corresponding libraries.',
     sourceTitle:'Every icon has a source.',sourceText:'Artwork comes from upstream icon collections and official app publishers; new AI brand SVGs come from Lobe Icons. WeChat, WeCom, DingTalk, QQ and Feishu use official color application icons. Select an icon for its original URL, publisher, rights notice and checksum.',
-    notices:'Third-party notices',chineseGuide:'中文使用说明',englishGuide:'English guide',footer:'Collected for clearer thinking.',footerNote:'Independent community collection · Not affiliated with draw.io or the featured brands',
+    notices:'Third-party notices',footer:'Collected for clearer thinking.',footerNote:'Independent community collection · Not affiliated with draw.io or the featured brands',
     error:'The icon catalog could not be loaded. Refresh to try again, or download the complete collection.',retry:'Try again',loadMore:'Show more',showing:'Showing',of:' of ',
   }
 } as const;

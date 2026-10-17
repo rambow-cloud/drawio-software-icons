@@ -147,7 +147,7 @@ test('head metadata describes visible homepage collections without adding an ove
 });
 
 test('old Alibaba overview URLs permanently redirect to the homepage without catching categories', () => {
-  const rules = files.get('_redirects').trim().split('\n');
+  const rules = files.get('_redirects').trim().split('\n').filter(rule => rule.startsWith('/discover/'));
   assert.equal(rules.length, 6);
   for (const locale of ['en', 'zh-CN']) {
     const path = `discover/${locale}/alibaba-cloud/`;
@@ -164,4 +164,18 @@ test('old Alibaba overview URLs permanently redirect to the homepage without cat
   }
   assert(rules.every(rule => !rule.includes('*')));
   assert(files.get('llms.txt').includes(siteUrl + '?collection=alibaba-cloud#library'));
+});
+
+test('retired raw guide URLs migrate to HTML usage guides or original documents', () => {
+  const rules = files.get('_redirects').trim().split('\n').filter(rule => rule.startsWith('/guides/'));
+  assert.equal(rules.length, 7);
+  for (const [name, locale] of [['README.md', 'en'], ['README.zh-CN.md', 'zh-CN']]) {
+    assert(rules.includes(`/guides/${name} /discover/${locale}/guide/ 301`));
+    assert(files.has(`discover/${locale}/guide/index.html`));
+  }
+  for (const path of ['ICON_USAGE.md', 'THIRD_PARTY_NOTICES.md', 'docs/DEPLOYMENT.md', 'docs/CLOUDFLARE.md', 'docs/ICON_CONFIGURATION.md']) {
+    assert(rules.includes(`/guides/${path} /${path} 301`));
+  }
+  assert(rules.every(rule => !rule.includes('*')), 'Do not redirect unknown paths');
+  assert(!files.get('sitemap.xml').includes('/guides/'));
 });

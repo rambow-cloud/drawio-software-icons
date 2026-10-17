@@ -98,10 +98,10 @@ After deployment, open browser Developer Tools > Network, enable Preserve log
 and Disable cache, then visit each explicit HTTP URL:
 
 - `http://icons.rambow.cloud/`
-- `http://icons.rambow.cloud/guides/README.md`
-- `http://icons.rambow.cloud/guides/README.zh-CN.md`
+- `http://icons.rambow.cloud/ICON_USAGE.md`
+- `http://icons.rambow.cloud/discover/zh-CN/guide/`
 - `http://icons.rambow.cloud/CHANGELOG.md`
-- `http://icons.rambow.cloud/guides/README.md?source=verification`
+- `http://icons.rambow.cloud/ICON_USAGE.md?source=verification`
 
 Check for a server 301 with the same path/query on HTTPS, then a successful
 document response. Browser HTTPS-first or cached HSTS upgrades may happen before
@@ -116,6 +116,27 @@ user-declared and Google-selected canonical and crawl date. Historical September
 crawls do not describe the current deployment. Correct redirects and canonical
 signals do not guarantee indexing or keyword ranking; do not add `noindex` to
 make an indexing validation report disappear.
+
+### Retired raw guide copies
+
+The homepage footer no longer links to raw English/Chinese Markdown READMEs.
+Its existing localized "Catalog and guides" link leads to HTML content.
+The build no longer creates `public/guides/`; repository documentation and
+offline ZIP instructions remain available.
+
+On Cloudflare, exact `_redirects` rules permanently redirect
+`/guides/README.md` to `/discover/en/guide/` and
+`/guides/README.zh-CN.md` to `/discover/zh-CN/guide/`. Five other known copies
+under `/guides/` redirect to their original document paths without that prefix.
+Unknown paths are not redirected to the homepage. GitHub Pages does not process
+`_redirects`; retired mirror URLs return 404, and the mirror footer uses the
+existing local HTML catalog link. No `noindex` directive is added.
+
+After publishing, refresh the homepage and check that the two raw Markdown
+links are absent from the footer. Open the two old HTTPS README URLs on
+`icons.rambow.cloud` and confirm they arrive at the corresponding HTML guides.
+In Search Console, these retired URLs may correctly become "Page with redirect";
+inspect the final HTML URLs for indexing status instead.
 
 PR checks run fixture-based discovery tests without downloading artwork or
 building distributions. The normal post-merge build generates the pages for
