@@ -71,5 +71,5 @@ export function GuideAndSources() {
 }
 export function Footer() {
   const {t,catalog,locale}=useIcons();
-  return <footer><span>{t.footer}<small>{t.footerNote}</small></span><div><a href="#changelog">{t.changelog}</a><a href={file(`discover/${locale}/`)}>{locale==='en'?'Catalog and guides':'分类与使用指南'}</a><ExternalLink href={file('guides/README.md')}>{t.englishGuide}</ExternalLink><ExternalLink href={file('guides/README.zh-CN.md')}>{t.chineseGuide}</ExternalLink><span>v{catalog.version}</span></div></footer>;
+  return <footer><span>{t.footer}<small>{t.footerNote}</small></span><div><a href="#changelog">{t.changelog}</a><a href={file(`discover/${locale}/`)}>{locale==='en'?'Catalog and guides':'分类与使用指南'}</a><span>v{catalog.version}</span></div></footer>;
 }

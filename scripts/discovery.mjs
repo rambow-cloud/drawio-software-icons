@@ -158,10 +158,16 @@ export function discoveryFiles(catalog) {
     const [path, html] = alibabaRedirect(locale);
     files.set(path, html);
   }
-  files.set('_redirects', locales.flatMap(locale => {
+  const redirects = locales.flatMap(locale => {
     const path = '/' + alibabaPath(locale);
     return [path, path.slice(0, -1), path + 'index.html'].map(source => `${source} / 301`);
-  }).join('\n') + '\n');
+  });
+  // Retire duplicate raw guides; usage links now lead to existing HTML guides.
+  redirects.push('/guides/README.md /discover/en/guide/ 301', '/guides/README.zh-CN.md /discover/zh-CN/guide/ 301');
+  for (const path of ['ICON_USAGE.md', 'THIRD_PARTY_NOTICES.md', 'docs/DEPLOYMENT.md', 'docs/CLOUDFLARE.md', 'docs/ICON_CONFIGURATION.md']) {
+    redirects.push(`/guides/${path} /${path} 301`);
+  }
+  files.set('_redirects', redirects.join('\n') + '\n');
   files.set('robots.txt', `# Public content is available to search and AI retrieval crawlers.\nUser-agent: *\nAllow: /\n\nSitemap: ${absolute('sitemap.xml')}\n`);
   files.set('llms.txt', `# Architecture Icons for draw.io\n\n> ${text.en.description}\n> ${text['zh-CN'].description}\n\n${summary(catalog, 'en')}\n${text.en.variants}\n\n## Catalog and usage\n\n- [English catalog](${absolute('discover/en/')})\n- [中文目录](${absolute('discover/zh-CN/')})\n- [Alibaba Cloud icons and downloads](${siteUrl}?collection=alibaba-cloud#library)\n- [阿里云icon 图标库与下载](${siteUrl}?collection=alibaba-cloud#library)\n- [English usage guide](${absolute('discover/en/guide/')})\n- [中文使用指南](${absolute('discover/zh-CN/guide/')})\n- [Machine-readable catalog](${absolute('unified-catalog.json')})\n- [Icon use policy](${absolute('ICON_USAGE.md')})\n- [Artwork provenance and licenses](${absolute('THIRD_PARTY_NOTICES.md')})\n\n## Categories\n\n${catalog.categories.map(c => `- [${c.nameEn} / ${c.name}](${absolute(categoryPath('en', c))}): ${c.count} entries; [中文](${absolute(categoryPath('zh-CN', c))})`).join('\n')}\n\n## AI drawing integration\n\nUse Draw.io MCP with DRAWIO_ICON_SERVICE_URL=${absolute('api/icons')}. This is an icon search API, not a remote MCP server URL. No account or API key is required.\n\n## Rights\n\n${text.en.rights}\n${text['zh-CN'].rights}\n`);
   files.set('discover/style.css', 'body{margin:0;background:#f8f7f4;color:#292720;font:16px/1.7 system-ui,sans-serif}header,main,footer{max-width:1080px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:1px solid #d8d5cc}h1{font-size:clamp(28px,4vw,44px);line-height:1.2}h2{font-size:21px}a{color:#81501e;text-underline-offset:3px;overflow-wrap:anywhere}li{margin:12px 0}section{margin:32px 0}footer{border-top:1px solid #d8d5cc}.icons{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px}.icons article{padding:20px;border:1px solid #d8d5cc;border-radius:12px;background:#fff;overflow-wrap:anywhere}.icons img{object-fit:contain}.icons p{font-size:14px}\n');
