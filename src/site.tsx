@@ -6,14 +6,11 @@ import { homepageTitle } from './homepage.mjs';
 import type { Catalog, Category, Collection, Icon } from './types';
 
 export const siteBase=new URL('./',globalThis.location?.href ?? 'https://icons.rambow.cloud/').href;
-export const file=(path:string)=>new URL(path,siteBase).href;
+// Relative links work identically in static HTML and on mirror subpaths.
+export const file=(path:string)=>/^[a-z][a-z\d+.-]*:/i.test(path)?path:`./${path}`;
 export const starRepository='rambow-cloud/drawio-software-icons';
 export function readPreference(key:string) { try{return localStorage.getItem(key);}catch{return null;} }
 export function preference(key:string,value:string) { try{localStorage.setItem(key,value);}catch{/* Browsing works without storage. */} }
-export function initialLocale():Locale {
-  const saved=readPreference('icons-locale');
-  return saved==='en'||saved==='zh-CN'?saved:globalThis.navigator?.language?.startsWith('zh')?'zh-CN':'en';
-}
 export function initialFilters(catalog:Catalog,href:string) {
   const url=new URL(href),params=url.searchParams;
   const defaultCollection=url.pathname.includes('/alibaba-cloud-icons/')?'alibaba-cloud':'software';
@@ -26,16 +23,18 @@ export function initialFilters(catalog:Catalog,href:string) {
 }
 type Modal = {kind:'spotlight'|'bundle'|'mcp'|'notice'} | {kind:'detail';icon:Icon} | null;
 
-function useSite(catalog:Catalog,locale:Locale,setLocale:(locale:Locale)=>void) {
-  const [filters,setFilters]=useState(()=>initialFilters(catalog,globalThis.location?.href??siteBase));
-  const [dark,setDark]=useState(()=>readPreference('icons-preview')==='dark');
+function useSite(catalog:Catalog,locale:Locale,setLocale:(locale:Locale)=>void,prerendered:boolean) {
+  // First hydrate the build-time state, then restore the URL and preferences.
+  const [base,setBase]=useState(prerendered?'https://icons.rambow.cloud/':siteBase);
+  const [filters,setFilters]=useState(()=>initialFilters(catalog,prerendered?'https://icons.rambow.cloud/':globalThis.location?.href??siteBase));
+  const [dark,setDark]=useState(()=>!prerendered&&readPreference('icons-preview')==='dark');
   const [homepageLoadAll,setHomepageLoadAll]=useState(false);
   const [modal,setModal]=useState<Modal>(null);
   const [selected,setSelected]=useState(()=>new Set(catalog.categories.filter(c=>filters.collection==='all'||c.collection===filters.collection).map(c=>c.id)));
   const [focusRequest,setFocusRequest]=useState<{kind:'icon'|'heading';id?:string;scroll?:boolean}|null>(null);
   const [located,setLocated]=useState<string|null>(null);
-  const t=messages[locale],local=isLocalSite(siteBase);
-  const alibabaEntrypoint=new URL(siteBase).pathname.includes('/alibaba-cloud-icons/');
+  const t=messages[locale],local=isLocalSite(base);
+  const alibabaEntrypoint=new URL(base).pathname.includes('/alibaba-cloud-icons/');
   const visibleCategories=useMemo(()=>catalog.categories.filter(c=>filters.collection==='all'||c.collection===filters.collection),[catalog,filters.collection]);
   const results=useMemo(()=>(filterIcons(catalog.icons,catalog.categories,filters.query,filters.category,filters.type,filters.collection) as Icon[]).sort(compareIconNames),[catalog,filters.query,filters.category,filters.type,filters.collection]);
   const title=(c:Category|Collection):string=>{
@@ -47,7 +46,7 @@ function useSite(catalog:Catalog,locale:Locale,setLocale:(locale:Locale)=>void) 
   const closeModal=()=>setModal(null);
   const openLibraries=(categories:Category[])=>{
     if(local){setModal({kind:'notice'});return;}
-    window.open(drawioUrl(siteBase,libraryPaths(categories,locale)),'_blank','noopener,noreferrer');
+    window.open(drawioUrl(base,libraryPaths(categories,locale)),'_blank','noopener,noreferrer');
   };
   const selectCollection=(collection:string,clear=false)=>{
     setFilters(current=>({...current,collection,category:'all',limit:72,...(clear?{query:'',type:'all'}:{})}));
@@ -61,6 +60,14 @@ function useSite(catalog:Catalog,locale:Locale,setLocale:(locale:Locale)=>void) 
     if(location.hash==='#changelog')history.replaceState(null,'',location.pathname+location.search+'#library');
     setFocusRequest({kind:'icon',id:icon.id});
   };
+  useEffect(()=>{
+    if(!prerendered)return;
+    const restored=initialFilters(catalog,location.href);
+    setBase(siteBase);
+    setFilters(current=>JSON.stringify(current)===JSON.stringify(restored)?current:restored);
+    setDark(readPreference('icons-preview')==='dark');
+    setSelected(new Set(catalog.categories.filter(c=>restored.collection==='all'||c.collection===restored.collection).map(c=>c.id)));
+  },[catalog,prerendered]);
   useEffect(()=>{
     document.documentElement.lang=locale;
     document.title=homepageTitle;
@@ -97,13 +104,13 @@ function useSite(catalog:Catalog,locale:Locale,setLocale:(locale:Locale)=>void) 
     return()=>cancelAnimationFrame(frame);
   },[focusRequest]);
   useEffect(()=>{if(!located)return;const timer=setTimeout(()=>setLocated(null),3000);return()=>clearTimeout(timer);},[located,focusRequest]);
-  return {catalog,locale,setLocale,t,filters,setFilters,dark,setDark:(value:boolean)=>{preference('icons-preview',value?'dark':'light');setDark(value);},homepageLoadAll,setHomepageLoadAll,modal,setModal,closeModal,selected,setSelected,visibleCategories,results,title,iconName,typeLabel,openLibraries,selectCollection,locateIcon,setFocusRequest,located,local,alibabaEntrypoint};
+  return {catalog,locale,setLocale,t,base,filters,setFilters,dark,setDark:(value:boolean)=>{preference('icons-preview',value?'dark':'light');setDark(value);},homepageLoadAll,setHomepageLoadAll,modal,setModal,closeModal,selected,setSelected,visibleCategories,results,title,iconName,typeLabel,openLibraries,selectCollection,locateIcon,setFocusRequest,located,local,alibabaEntrypoint};
 }
 
 type Site = ReturnType<typeof useSite>;
 const SiteContext=createContext<Site|null>(null);
-export function SiteProvider({catalog,locale,setLocale,children}:PropsWithChildren<{catalog:Catalog;locale:Locale;setLocale:(locale:Locale)=>void}>) {
-  const site=useSite(catalog,locale,setLocale);
+export function SiteProvider({catalog,locale,setLocale,children,prerendered=false}:PropsWithChildren<{catalog:Catalog;locale:Locale;setLocale:(locale:Locale)=>void;prerendered?:boolean}>) {
+  const site=useSite(catalog,locale,setLocale,prerendered);
   return <SiteContext.Provider value={site}>{children}</SiteContext.Provider>;
 }
 export function useIcons() {const site=useContext(SiteContext);if(!site)throw Error('SiteProvider is required');return site;}

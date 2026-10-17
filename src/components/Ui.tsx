@@ -2,7 +2,7 @@ import { Button, ButtonLink } from './ui/button';
 import { useLayoutEffect, useRef, type PropsWithChildren, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { drawioUrl, libraryPaths } from '../catalog.mjs';
-import { siteBase, useIcons } from '../site';
+import { useIcons } from '../site';
 import type { Category } from '../types';
 
 const symbols={
@@ -21,7 +21,7 @@ export function Symbol({name}:{name:keyof typeof symbols}) {
 }
 export function LibraryLink({className,size='default',categories,children}:{className?:string;size?:'default'|'sm';categories?:Category[];children?:ReactNode}) {
   const s=useIcons();
-  return <ButtonLink className={className} size={size} data-open-all href={drawioUrl(siteBase,libraryPaths(categories??s.visibleCategories,s.locale))} target="_blank" rel="noopener noreferrer" onClick={event=>{if(s.local){event.preventDefault();s.setModal({kind:'notice'});}}}>{children??s.t.openDrawio}<Symbol name="external"/></ButtonLink>;
+  return <ButtonLink className={className} size={size} data-open-all href={drawioUrl(s.base,libraryPaths(categories??s.visibleCategories,s.locale))} target="_blank" rel="noopener noreferrer" onClick={event=>{if(s.local){event.preventDefault();s.setModal({kind:'notice'});}}}>{children??s.t.openDrawio}<Symbol name="external"/></ButtonLink>;
 }
 export function Dialog({id,label,labelledBy,describedBy,onClose,children}:{id:string;label?:string;labelledBy?:string;describedBy?:string;onClose:()=>void;children:ReactNode}) {
   const ref=useRef<HTMLDialogElement>(null);

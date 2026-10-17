@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { discoveryFiles, homepageDiscovery, homepageMetadata, siteUrl } from '../scripts/discovery.mjs';
+import { discoveryFiles, homepageMetadata, siteUrl } from '../scripts/discovery.mjs';
 import { homepageTitle, homepageDescription } from '../src/homepage.mjs';
 
 const categories = [
@@ -110,7 +110,6 @@ test('relative links preserve GitHub Pages repository prefixes and stay within d
       assert(!target || assets.has(target) || assets.has(target + 'index.html'), `${path}: ${href}`);
     }
   }
-  for (const [, href] of homepageDiscovery(catalog).matchAll(/href="([^"<>]+)"/g)) if (!/^https?:/.test(href)) assert(href.startsWith('./'), href);
 });
 
 test('AI reading guidance uses generated category URLs and keeps usage and MCP contracts explicit', () => {
@@ -126,10 +125,6 @@ test('AI reading guidance uses generated category URLs and keeps usage and MCP c
 });
 
 test('head metadata describes visible homepage collections without adding an overview section', async () => {
-  const html = homepageDiscovery(catalog);
-  assert(html.includes('<h1>Software and Alibaba Cloud icons for draw.io</h1>'));
-  assert(html.includes('href="./?collection=alibaba-cloud#library"'));
-  assert(!html.includes('id="alibaba-cloud"'));
   const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
   assert(index.includes(`<title>${homepageTitle}</title>`));
   assert(index.includes(`property="og:title" content="${homepageTitle}"`));
