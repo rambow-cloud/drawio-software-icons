@@ -95,7 +95,7 @@ function useSite(catalog:Catalog,locale:Locale,setLocale:(locale:Locale)=>void,p
     if(!focusRequest)return;
     const frame=requestAnimationFrame(()=>{
       if(focusRequest.kind==='icon') {
-        const card=document.querySelector<HTMLButtonElement>(`[data-icon="${CSS.escape(focusRequest.id!)}"]`);
+        const card=document.querySelector<HTMLAnchorElement>(`[data-icon="${CSS.escape(focusRequest.id!)}"]`);
         card?.focus({preventScroll:true});
         card?.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
         setLocated(focusRequest.id!);

@@ -4,6 +4,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { SiteProvider, initialFilters, file } from '../src/site';
 import App, { Page } from '../src/App';
 import { renderHomepage } from '../scripts/render-homepage';
+import { iconDetailUrl } from '../src/icon-guides.mjs';
 import { Header } from '../src/components/Home';
 import { BundleDialog } from '../src/components/BundleDialog';
 import { DetailDialog, SpotlightDialog } from '../src/components/IconDialogs';
@@ -27,8 +28,9 @@ test('localized homepages include only their own static language and working lin
   for(const locale of ['en','zh-CN'] as const) {
     const html=renderHomepage(catalog,locale),prefix=locale==='en'?'../':'./';
     for(const id of ['home-title','library','changelog','guide','sources','grid'])assert(html.includes('id="'+id+'"'));
-    assert.equal((html.match(/<button\b[^>]*data-icon=/g)??[]).length,72);
+    assert.equal((html.match(/<a\b[^>]*data-icon=/g)??[]).length,72);
     assert(!html.includes('.zip'), 'Bulk archive downloads are retired');
+    assert(html.includes('href="'+iconDetailUrl(locale, 'icon-0')+'"'));
     assert(html.includes('href="'+prefix+'discover/'+locale+'/software/software-category/"'));
     assert(html.includes('&lt;script&gt;alert(1)&lt;/script&gt;'));
     assert(html.includes(locale==='en'?'Familiar icons.':'让架构图，'));
@@ -77,7 +79,7 @@ test('React page preserves section structure, bilingual labels, 72-card paginati
     assert(!html.includes('id="alibaba-cloud"'));
     assert(html.includes(locale==='en'?'Familiar icons.':'让架构图，'));
     for(const id of ['home-title','library','changelog','guide','sources','grid','load-more'])assert(html.includes(`id="${id}"`),id);
-    assert.equal((html.match(/<button\b[^>]*data-icon=/g)??[]).length,72);
+    assert.equal((html.match(/<a\b[^>]*data-icon=/g)??[]).length,72);
     assert.equal((html.match(/class="mcp-notice"/g)??[]).length,2);
     assert(html.includes(locale==='en'?'Choose categories / desktop setup':'选择分类加载 / 桌面配置'));
     assert(html.includes(`href="./${locale==='en'?'en/':''}?collection=alibaba-cloud#library"`));
