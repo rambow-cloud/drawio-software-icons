@@ -39,3 +39,15 @@ Copy: existing summaries, licenses, source URLs, software classifications and us
 No actionable P0/P1/P2 visual issues remain in the reviewed states. Downloads were inspected through their native link targets; external editor navigation and actual download completion are left for user inspection. No deployment or DNS validation was performed.
 
 final result: passed
+
+## Rambow Cloud palette alignment (issue #40)
+
+This revision supersedes the warm/orange palette described above; the approved detail layout, typography, content and original artwork remain in place.
+
+Source truth: live screenshots and computed CSS from https://rambow.cloud/zh/ and https://blog.rambow.cloud/zh/. Both expose the same paper `#edf5fc`, ink `#142f55`, muted text `#526d8c`, blue `#0078bb`, cyan `#00a6ed` and line `#5d89bd38`. Shared tokens in `src/brand.css` now feed the React site, generated detail stylesheet, and generated catalog/guide stylesheet. The code panel uses navy surfaces with light blue text. Semantic software types and change badges retain their existing colors.
+
+Evidence in the ignored `.sync-stage/brand-review/` directory: `reference-main.png`, `reference-blog.png`, `home.png`, `dialog.png`, `detail.png`, and `detail-mobile.png`. Desktop captures use the browser's normal viewport; mobile uses a 390 CSS-pixel viewport and the temporary override was reset afterward. The screenshots show the shared pale blue background, navy headings, blue actions, white surfaces and cool separators. Computed homepage and full-page colors match the reference paper/ink/blue exactly.
+
+The quick dialog and full detail page still select transparent by default, with the original neutral checkerboard. Light/dark artwork comparisons remain neutral. The mobile page has no horizontal overflow; the existing heading sizes, content wrapping, button hierarchy and preview controls remain readable. No actionable visual regressions were found in these reviewed states. CSS production bundling passes. Repository PR validation is recorded in the PR checks.
+
+final result: passed

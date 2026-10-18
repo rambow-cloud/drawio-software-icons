@@ -1,6 +1,7 @@
 /* Keep the existing page layout; utilities own the migrated components. */
 @layer theme, base, legacy, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
+@import "./brand.css" layer(legacy);
 @import "./style.css" layer(legacy);
 @import "./responsive.css" layer(legacy);
 @import "./icon-preview.css" layer(legacy);
@@ -14,11 +15,11 @@
   inset: auto 16px 16px;
   z-index: 50;
   padding: 16px;
-  border: 1px solid #b6c4a7;
+  border: 1px solid var(--brand-line-strong);
   border-radius: 12px;
   background: #fff;
-  color: #292720;
-  box-shadow: 0 4px 24px #263b2926;
+  color: var(--brand-ink);
+  box-shadow: 0 4px 24px var(--brand-shadow-raised);
 }
 .startup-status button { cursor: pointer; text-decoration: underline; }
 
@@ -46,28 +47,28 @@
 }
 
 :root {
-  --ui-background: #f8f7f4;
-  --ui-foreground: #344038;
-  --ui-card: #ffffff;
-  --ui-primary: #d9532c;
-  --ui-secondary: #edf0e6;
-  --ui-muted: #f5f6f1;
-  --ui-muted-foreground: #65705d;
-  --ui-accent: #e9ede2;
-  --ui-border: #dce2d4;
-  --ui-ring: #d9532c;
+  --ui-background: var(--brand-paper);
+  --ui-foreground: var(--brand-ink);
+  --ui-card: var(--brand-surface);
+  --ui-primary: var(--brand-blue);
+  --ui-secondary: var(--brand-wash);
+  --ui-muted: var(--brand-wash);
+  --ui-muted-foreground: var(--brand-muted);
+  --ui-accent: var(--brand-wash);
+  --ui-border: var(--brand-line);
+  --ui-ring: var(--brand-blue);
 }
 
 .terminal-theme {
-  --ui-background: #252e29;
-  --ui-foreground: #e3edda;
-  --ui-card: #252e29;
-  --ui-secondary: #303b34;
-  --ui-muted: #303b34;
-  --ui-muted-foreground: #b4c2b4;
-  --ui-accent: #38473c;
-  --ui-border: #53634f;
-  --ui-ring: #a9c68d;
+  --ui-background: var(--brand-ink);
+  --ui-foreground: var(--brand-paper);
+  --ui-card: var(--brand-ink);
+  --ui-secondary: #1d3d65;
+  --ui-muted: #1d3d65;
+  --ui-muted-foreground: var(--brand-line-strong);
+  --ui-accent: #294d77;
+  --ui-border: #5d89bd;
+  --ui-ring: var(--brand-cyan);
   color-scheme: dark;
 }
 
