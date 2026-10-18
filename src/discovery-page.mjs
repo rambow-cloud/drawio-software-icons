@@ -135,18 +135,10 @@ export function iconDetailPage(catalog, icon, locale) {
   if (!category) throw Error(`Missing guide category for ${icon.id}`);
   const format = icon.asset.endsWith('.png') ? 'PNG' : 'SVG';
   const collection = catalog.collections.find(c => c.id === icon.collection);
-  const copy = guide?.[locale] || {
-    summary: en
-      ? `${name} ${format} icon in the ${localized(collection, locale)} / ${localized(category, locale)} collection. Download the image, import category XML, or load it in draw.io.`
-      : `${name} ${format} 图标，收录于${localized(collection, locale)}的${localized(category, locale)}分类。支持单图下载、分类 XML 与 draw.io 在线加载。`,
-    diagram: en
-      ? `Use ${name} to identify the corresponding product or service. Add component names and connections that reflect your actual deployment.`
-      : `可以用 ${name} 标识对应产品或服务，再根据实际部署添加组件名称与连接关系。`,
-    tip: en
-      ? 'The artwork identifies the named product or service. Label instances, environments and deployment boundaries separately when they matter to your diagram.'
-      : '图形素材用于识别对应产品或服务。实例、环境和部署边界应按实际情况单独标注。',
-  };
-  const title = en ? `${name} ${format} Icon for draw.io` : `${name} ${format} 图标与 draw.io 导入说明`;
+  const summary = guide?.[locale]?.summary || (en
+    ? `${name} ${format} icon in the ${localized(collection, locale)} / ${localized(category, locale)} collection. Download the image, import category XML, or load it in draw.io.`
+    : `${name} ${format} 图标，收录于${localized(collection, locale)}的${localized(category, locale)}分类。支持单图下载、分类 XML 与 draw.io 在线加载。`);
+  const title = en ? `${name} ${format} Icon for draw.io` : `${name} ${format} 图标下载 | draw.io`;
   const library = category.libraries[locale];
   const candidates = [...(guide?.related || []), ...catalog.icons.filter(i => i.category === icon.category || i.categories?.includes(icon.category)).map(i => i.id)];
   const knownIds = new Set(catalog.icons.map(i => i.id));
@@ -157,12 +149,7 @@ export function iconDetailPage(catalog, icon, locale) {
   const licenseLink = /^https?:/.test(license) ? external(license, icon.source.collectionLicense) : link(path, license, icon.source.collectionLicense);
   const drawio = `https://app.diagrams.net/?clibs=U${encodeURIComponent(absolute(library))}`;
   const body = `<section class="icon-hero" aria-labelledby="icon-title"><figure class="preview"><div class="preview-top"><span>${en ? 'ARTWORK PREVIEW' : '图标预览'}</span><span class="format-tag">${format}</span></div><div class="preview-tile"><img src="${escapeHtml(relativeLink(path, icon.asset))}" alt="${escapeHtml(`${name} ${format} ${en ? 'icon' : '图标'}`)}" width="160" height="160" /></div><figcaption>${en ? 'Original colors · Ready for your canvas' : '保留原色 · 放入画布即可使用'}</figcaption></figure>
-<div class="icon-intro"><p class="eyebrow">${link(path, categoryPath(locale, category), localized(category, locale))}<span aria-hidden="true"> / </span>DRAW.IO</p><h1 id="icon-title">${escapeHtml(name)}<span>${en ? 'Architecture icon' : '架构图标'}</span></h1><p class="intro">${escapeHtml(copy.summary)}</p><div class="actions">${download(icon.asset, en ? `Download ${format}` : `下载 ${format}`, true)}<a class="action" href="${escapeHtml(drawio)}">${en ? 'Open in draw.io' : '在 draw.io 中使用'} <span aria-hidden="true">↗</span></a></div><div class="secondary-action">${download(library, en ? 'Category XML' : '下载分类 XML')}<span>${en ? 'Embedded artwork for offline use' : '内嵌素材，支持离线使用'}</span></div></div></section>
-<div class="detail-columns"><div class="reading-column"><section class="editorial"><p class="eyebrow">IN YOUR ARCHITECTURE</p><h2>${en ? 'A place in your diagram' : '在架构图中，放对位置'}</h2><p>${escapeHtml(copy.diagram)}</p><p class="tip">${escapeHtml(copy.tip)}</p><p class="text-link">${external(guide?.reference || icon.homepage, en ? 'Product documentation ↗' : '查看产品文档 ↗')}</p></section>
-<section class="import-guide"><p class="eyebrow">FROM LIBRARY TO CANVAS</p><h2>${en ? 'From icon to diagram' : '从图标到架构图'}</h2><ol class="import-steps">
-<li><div><h3>${en ? 'Choose your format' : '选择导入方式'}</h3><p>${en ? 'For one icon, download the artwork and drag it onto the canvas. Resize it while keeping its aspect ratio.' : '只需要一个图标时，下载素材并拖到画布上，缩放时保持宽高比例。'}</p></div></li>
-<li><div><h3>${en ? 'Load the category' : '加载所需分类'}</h3><p>${en ? 'Use “Open in draw.io” online, or download the category XML and import it with File → Open Library in draw.io Desktop. Artwork is embedded for offline use.' : '在线点击“在 draw.io 中使用”；或下载分类 XML，在桌面版通过“文件 → 打开库”导入，内嵌素材支持离线使用。'}</p></div></li>
-<li><div><h3>${en ? 'Make it your architecture' : '画出你的架构'}</h3><p>${escapeHtml(en ? `Find ${name} in the library, drag it onto the canvas, then add labels and connectors for your deployment.` : `在图标库中找到 ${name}，拖入画布，再按实际部署添加标签和连线。`)}</p></div></li></ol><p class="text-link">${link(path, `discover/${locale}/guide/`, en ? 'More on XML, desktop JSON and MCP →' : '更多 XML、桌面 JSON 与 MCP 用法 →')}</p></section></div>
+<div class="icon-intro"><p class="eyebrow">${link(path, categoryPath(locale, category), localized(category, locale))}<span aria-hidden="true"> / </span>DRAW.IO</p><h1 id="icon-title">${escapeHtml(name)}<span>${en ? 'Architecture icon' : '架构图标'}</span></h1><p class="intro">${escapeHtml(summary)}</p><div class="actions">${download(icon.asset, en ? `Download ${format}` : `下载 ${format}`, true)}<a class="action" href="${escapeHtml(drawio)}">${en ? 'Open in draw.io' : '在 draw.io 中使用'} <span aria-hidden="true">↗</span></a></div><div class="secondary-action">${download(library, en ? 'Category XML' : '下载分类 XML')}<span>${en ? 'Embedded artwork for offline use' : '内嵌素材，支持离线使用'}</span></div>
 <aside class="provenance" aria-labelledby="provenance-title"><p class="eyebrow">CLEAR ORIGINS</p><h2 id="provenance-title">${en ? 'About this artwork' : '素材信息'}</h2><dl>
 <dt>${en ? 'Format' : '格式'}</dt><dd>${format}${icon.width && icon.height ? ` · ${icon.width} × ${icon.height}` : ''}</dd>
 <dt>${en ? 'Collection' : '图标集'}</dt><dd>${escapeHtml(localized(collection, locale))}</dd>
@@ -170,9 +157,9 @@ export function iconDetailPage(catalog, icon, locale) {
 <dt>${en ? 'Artwork source' : '素材来源'}</dt><dd>${external(icon.source.url, icon.source.publisher || icon.source.id)}</dd>
 <dt>${en ? 'Collection license / artwork terms' : '图标集许可／素材条款'}</dt><dd>${licenseLink}</dd>
 </dl><p class="rights-note">${en ? 'Software licensing and artwork rights are separate. Collection licenses do not grant additional trademark rights. Check the linked terms before reuse; this community collection is not an endorsement by the product owner.' : '软件许可与图形素材权利分别适用，图标集许可不额外授予商标权。使用前请查阅所链接的条款；本社区合集不代表产品所有者的背书。'}</p>
-<details><summary>${en ? 'Version & file verification' : '版本与文件校验'}</summary><dl><dt>${en ? 'Pinned revision' : '固定来源版本'}</dt><dd><code>${escapeHtml(icon.source.revision)}</code></dd><dt>SHA-256</dt><dd><code>${escapeHtml(icon.sha256)}</code></dd></dl></details></aside></div>
-${related.length ? `<section class="related"><div class="section-heading"><div><p class="eyebrow">BUILD THE BIGGER PICTURE</p><h2>${en ? 'Keep building' : '继续完善你的架构图'}</h2></div>${link(path, `discover/${locale}/`, en ? 'All categories →' : '浏览全部分类 →')}</div><div class="related-grid">${related.map(id => { const item = catalog.icons.find(i => i.id === id); return `<a class="related-card" href="${relativeLink(path, iconGuidePath(locale, id))}"><span class="related-art"><img src="${escapeHtml(relativeLink(path, item.asset))}" width="44" height="44" alt="" loading="lazy" /></span><span><strong>${escapeHtml(localized(item, locale))}</strong><small>${en ? 'Icon & import guide' : '图标与导入说明'}</small></span><span class="related-arrow" aria-hidden="true">↗</span></a>`; }).join('')}</div></section>` : ''}`;
-  return page({ locale, suffix: `icons/${encodeURIComponent(icon.id)}/`, title, description: copy.summary, body, image: { asset: icon.asset, name }, detail: true });
+<details><summary>${en ? 'Version & file verification' : '版本与文件校验'}</summary><dl><dt>${en ? 'Pinned revision' : '固定来源版本'}</dt><dd><code>${escapeHtml(icon.source.revision)}</code></dd><dt>SHA-256</dt><dd><code>${escapeHtml(icon.sha256)}</code></dd></dl></details></aside></div></section>
+${related.length ? `<section class="related"><div class="section-heading"><div><p class="eyebrow">BUILD THE BIGGER PICTURE</p><h2>${en ? 'Keep building' : '继续完善你的架构图'}</h2></div>${link(path, `discover/${locale}/`, en ? 'All categories →' : '浏览全部分类 →')}</div><div class="related-grid">${related.map(id => { const item = catalog.icons.find(i => i.id === id); return `<a class="related-card" href="${relativeLink(path, iconGuidePath(locale, id))}"><span class="related-art"><img src="${escapeHtml(relativeLink(path, item.asset))}" width="44" height="44" alt="" loading="lazy" /></span><span><strong>${escapeHtml(localized(item, locale))}</strong><small>${en ? 'Icon details' : '图标详情'}</small></span><span class="related-arrow" aria-hidden="true">↗</span></a>`; }).join('')}</div></section>` : ''}`;
+  return page({ locale, suffix: `icons/${encodeURIComponent(icon.id)}/`, title, description: summary, body, image: { asset: icon.asset, name }, detail: true });
 }
 
 export function legacyIconRedirects() {

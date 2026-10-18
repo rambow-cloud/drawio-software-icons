@@ -1,4 +1,4 @@
-/* Static icon pages follow the homepage palette, brand and typography. */
+/* Icon details follow the homepage palette, brand and typography. */
 :root {
   font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   color: #252a29;
@@ -30,7 +30,7 @@ img { object-fit: contain; max-width: 100%; }
 .detail-main { max-width: 1280px; padding: 0 64px 72px; margin: auto; }
 .breadcrumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 28px 0; font-size: 12px; color: var(--muted); }
 .breadcrumbs [aria-current] { color: #344038; }
-.icon-hero { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 64px; align-items: center; padding: 12px 0 56px; }
+.icon-hero { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 64px; align-items: start; padding: 12px 0 40px; }
 .preview { min-height: 350px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 24px; border: 1px solid #dce2d4; border-radius: 16px; background: radial-gradient(#d5d9cf .8px, transparent .8px) 0 0 / 18px 18px, #f2f4ed; }
 .preview-top { width: 100%; display: flex; justify-content: space-between; align-items: center; font: 10px/1.5 ui-monospace, Consolas, monospace; letter-spacing: 1.5px; color: #65705d; }
 .format-tag { padding: 4px 8px; border: 1px solid #dce2d4; border-radius: 5px; background: #fff; }
@@ -50,19 +50,13 @@ img { object-fit: contain; max-width: 100%; }
 .secondary-action { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-top: 16px; font-size: 11px; color: #65705d; }
 .secondary-action .action { padding: 4px 0; border: 0; background: transparent; font-size: 12px; color: #344038; }
 .secondary-action .action:hover { color: var(--accent); }
-.detail-columns { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 64px; align-items: start; padding: 48px 0; border-top: 1px solid var(--border); }
 h2 { font-size: 23px; font-weight: 600; letter-spacing: -.6px; line-height: 1.5; margin-bottom: 20px; }
-.reading-column { min-width: 0; }
-.editorial > p:not(.eyebrow), .import-steps p { font-size: 14px; color: #65705d; }
-.editorial .tip { border-left: 2px solid #d8b188; padding: 4px 0 4px 18px; margin: 20px 0; }
-.text-link a { font-size: 13px; font-weight: 550; color: #9a3d20; }
-.import-guide { margin-top: 40px; padding-top: 36px; border-top: 1px solid var(--border); }
-.import-steps { list-style: none; padding: 0; margin: 0 0 20px; counter-reset: steps; }
-.import-steps li { display: flex; align-items: flex-start; gap: 16px; margin: 22px 0; counter-increment: steps; }
-.import-steps li::before { content: "0" counter(steps); flex-shrink: 0; padding-top: 3px; font: 12px/1.8 ui-monospace, Consolas, monospace; color: #987956; }
-h3 { font-size: 14px; font-weight: 600; line-height: 1.8; margin-bottom: 5px; }
-.provenance { border: 1px solid #dce2d4; border-radius: 12px; background: #f0f2eb; padding: 26px; min-width: 0; }
-.provenance h2 { font-size: 18px; margin-bottom: 24px; }
+.icon-intro { min-width: 0; }
+.provenance { margin-top: 24px; border: 1px solid #dce2d4; border-radius: 12px; background: #f0f2eb; padding: 24px; min-width: 0; }
+.provenance .eyebrow { margin-bottom: 8px; }
+.provenance h2 { font-size: 18px; margin-bottom: 20px; }
+.provenance > dl { display: grid; grid-template-columns: minmax(88px, .7fr) minmax(0, 1.3fr); gap: 12px 16px; }
+.provenance > dl > dt { margin: 0; line-height: 1.8; }
 dl { margin: 0; font-size: 12px; }
 dt { color: #65705d; margin: 18px 0 5px; }
 dd { margin: 0; line-height: 1.8; overflow-wrap: anywhere; }
@@ -90,7 +84,6 @@ code { font: 11px/1.8 ui-monospace, Consolas, monospace; }
   .detail-main { padding-left: 32px; padding-right: 32px; }
   .topbar nav { gap: 20px; }
   .icon-hero { gap: 32px; }
-  .detail-columns { grid-template-columns: minmax(0, 1fr) 270px; gap: 32px; }
 }
 @media (max-width: 760px) {
   .topbar { padding: 20px; gap: 12px; }
@@ -105,8 +98,7 @@ code { font: 11px/1.8 ui-monospace, Consolas, monospace; }
   .preview-tile { width: 160px; height: 160px; margin: 12px 0; }
   .preview-tile img { width: 112px; height: 112px; }
   .icon-intro h1 { font-size: 38px; }
-  .detail-columns { grid-template-columns: 1fr; gap: 32px; padding: 32px 0; }
-  .provenance { padding: 24px; }
+  .provenance { padding: 20px; }
   .section-heading { align-items: flex-start; flex-direction: column; gap: 16px; }
   h2 { font-size: 21px; }
   .detail-footer { padding: 24px 20px; }
