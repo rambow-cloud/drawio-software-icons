@@ -153,7 +153,7 @@ make an indexing validation report disappear.
 The homepage footer no longer links to raw English/Chinese Markdown READMEs.
 Its existing localized "Catalog and guides" link leads to HTML content.
 The build no longer creates `public/guides/`; repository documentation and
-offline ZIP instructions remain available.
+offline XML/JSON instructions remain available.
 
 On Cloudflare, exact `_redirects` rules permanently redirect
 `/guides/README.md` to `/discover/en/guide/` and

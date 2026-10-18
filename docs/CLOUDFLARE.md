@@ -9,7 +9,7 @@ software repository's Pages custom domain remains empty. Only the separate
 Alibaba compatibility repository retains its legacy homepage redirect.
 
 The website is deployed with **Workers Static Assets**. Existing HTML, JS, SVG,
-PNG, JSON, XML and ZIP paths are served directly by static asset hosting. Only
+PNG, JSON and XML paths are served directly by static asset hosting. Only
 `/api` and `/api/*` use Worker-first routing. Missing static files return 404;
 they must not return the homepage in place of an XML library or image.
 
@@ -95,8 +95,7 @@ catalog. Configuration-only commits therefore work with the existing build
 command. See [Icon configuration](ICON_CONFIGURATION.md) for source and cache
 settings. With `cache.directory: "auto"`, Workers Builds stores icon downloads in
 the `drawio-software-icons` subdirectory of npm's cache; enable **Settings → Build →
-Build cache** for cross-build reuse. GitHub Actions restores `.sync-stage/cache`
-through `actions/cache`. A cache miss only increases build time; missing or
+Build cache** for cross-build reuse. GitHub Actions does not persist dependency or artwork caches; verified committed artwork is reused locally. A cache miss only increases build time; missing or
 invalid artwork fails the build before deployment.
 
 Authenticate with `npx wrangler login`, then `npm run deploy:cloudflare` publishes
@@ -127,20 +126,15 @@ use a token with **Workers Builds Configuration: Edit**. A Wrangler OAuth token
 may work for Worker deployment while being rejected by the Builds API.
 
 Workers Builds uses its Cloudflare-managed build token; no Cloudflare API token
-is required in GitHub Actions secrets for this pipeline. Keep the GitHub
-repository variable `CLOUDFLARE_ENABLED` unset to avoid deploying the same Worker
-from two pipelines. GitHub Actions continues testing and publishing the GitHub
+is required in GitHub Actions secrets for this pipeline. Workers Builds is the
+only automated Worker publisher. GitHub Actions continues testing and publishing the GitHub
 Pages website and legacy compatibility resources.
 
-### Alternative: deployment from GitHub Actions
-
-If switching away from Workers Builds, disable its deployment trigger first.
-For GitHub Actions configure repository secrets `CLOUDFLARE_API_TOKEN` (account
-Workers Scripts edit; Zone edit for custom-domain setup as required by Cloudflare)
-and `CLOUDFLARE_ACCOUNT_ID`. Keep tokens in secrets, never in source. Set repository
-variable `CLOUDFLARE_ENABLED=true` to enable the Cloudflare job. Initially leave
-`CLOUDFLARE_PRODUCTION` unset. Pages publication depends only on its build and
-continues independently of the optional Cloudflare deployment job.
+The unused Actions deployment fallback has been removed along with its retained
+Worker index and static-site artifacts. The old `CLOUDFLARE_ENABLED` and
+`CLOUDFLARE_PRODUCTION` Actions variables no longer control publishing. For a
+manual deployment, build the intended commit and run `npm run deploy:cloudflare:production`
+with an authorized Wrangler session. Keep credentials outside source control.
 
 ## Independent websites and legacy URLs
 
@@ -150,7 +144,7 @@ even if an old copy of that variable is still present. Cloudflare continues
 using its existing Worker custom domain and build trigger; enabling the Pages
 site requires no DNS changes.
 
-Relative URLs keep catalogs, images, XML libraries, ZIP downloads and draw.io
+Relative URLs keep catalogs, images, XML libraries, individual downloads and draw.io
 links on the current website, including the GitHub repository subpath. Browser
 search uses the downloaded catalog on either site. GitHub Pages is a static
 website; MCP setup continues to use the Cloudflare icon API. A Cloudflare outage
@@ -160,7 +154,7 @@ The independent `jinxiao/alibaba-cloud-icons` repository uses
 `deployment/alibaba-pages.yml` as `.github/workflows/pages.yml`. Its
 `LEGACY_REDIRECTS=true` switch still publishes an Alibaba redirect homepage,
 retaining query parameters and fragments and adding `collection=alibaba-cloud`
-only when absent. XML/SVG/PNG/JSON/ZIP URLs remain real files. The main repository
+only when absent. XML/SVG/PNG/JSON URLs remain real files. The main repository
 change does not alter this separate legacy policy.
 
 The sitemap retains Cloudflare as the primary indexed domain; no API URLs are

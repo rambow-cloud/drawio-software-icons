@@ -1,6 +1,5 @@
 import { readFile, cp } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
-import { zipSync, unzipSync, strToU8 } from 'fflate';
 import { json, save, hash, libraryXml, readLibrary } from './lib.mjs';
 
 // Keep the imported builder intact so published Alibaba formats remain compatible.
@@ -13,8 +12,8 @@ export async function generateUnified(software, softwareEntries) {
   const originalConfig = await json(`${upstream}/config/alibaba-cloud.json`);
   const palettes = originalConfig.libraries[0].entries[0].libs;
   // A complete snapshot is also used to overlay the Alibaba publishing target.
-  await cp(upstream, 'public/compat/alibaba-cloud', { recursive: true });
-  for (const path of ['drawio', 'svg', 'plugins', 'previews', 'config', 'alibaba-cloud-drawio.zip']) {
+  await cp(upstream, 'public/compat/alibaba-cloud', { recursive: true, filter: source => !source.endsWith('.zip') });
+  for (const path of ['drawio', 'svg', 'plugins', 'previews', 'config']) {
     await cp(`${upstream}/${path}`, `public/${path}`, { recursive: true });
   }
   const collections = [
@@ -78,18 +77,5 @@ export async function generateUnified(software, softwareEntries) {
     const config = configurationFor(combined, categories.map(c => c.id), payloads, locale);
     await save(`public/config/drawio-icons.${locale}.json`, JSON.stringify(config));
   }
-  const zipFiles = unzipSync(await readFile('public/downloads/drawio-software-icons.zip'));
-  const add = async (path) => { zipFiles[path] = await readFile(`public/${path}`); };
-  for (const c of categories.filter(c => c.collection === 'alibaba-cloud')) {
-    for (const path of Object.values(c.libraries)) await add(path);
-  }
-  for (const i of icons.filter(i => i.collection === 'alibaba-cloud')) await add(i.asset);
-  for (const path of ['libraries/combined.xml', 'config/drawio-icons.en.json', 'config/drawio-icons.zh-CN.json',
-    'compat/alibaba-cloud/LICENSE', 'compat/alibaba-cloud/NOTICE.md', 'compat/alibaba-cloud/SOURCES.md',
-    'compat/alibaba-cloud/COLORS.md']) await add(path);
-  zipFiles['catalog.json'] = strToU8(finalCatalog);
-  const deterministic = Object.fromEntries(Object.entries(zipFiles).map(([path, data]) =>
-    [path, [data, { mtime: new Date('2020-01-01T00:00:00Z') }]]));
-  await save('public/downloads/drawio-icons.zip', zipSync(deterministic, { level: 6 }));
   console.log(`Unified collection: ${icons.length} icons in ${categories.length} categories across ${collections.length} collections.`);
 }

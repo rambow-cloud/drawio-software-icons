@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { inflateRawSync } from 'node:zlib';
-import { unzipSync, strFromU8 } from 'fflate';
 import { json, hash, readLibrary, parser } from './lib.mjs';
 
 const unified=await json('dist/unified-catalog.json');
@@ -10,12 +9,9 @@ const alibaba=await json('dist-alibaba/catalog.json');
 assert.equal(unified.icons.length,software.icons.length+alibaba.entries.length);
 assert.equal(unified.categories.length,software.categories.length+alibaba.categories.length);
 assert.equal(new Set(unified.icons.map(i=>i.id)).size,unified.icons.length);
-const archive=unzipSync(await readFile('dist/downloads/drawio-icons.zip'));
 assert.deepEqual(unified.changelog,await json('data/changelog.json'));
-assert.deepEqual(JSON.parse(strFromU8(archive['changelog.json'])),unified.changelog);
 for(const path of ['CHANGELOG.md','CHANGELOG.zh-CN.md','changelog.json'])assert.equal(await readFile(`dist-alibaba/${path}`,'utf8'),await readFile(`dist/${path}`,'utf8'));
-assert.equal(readLibrary(strFromU8(archive['libraries/combined.xml'])).length,unified.icons.length);
-assert.deepEqual(JSON.parse(strFromU8(archive['catalog.json'])),unified);
+assert.equal(readLibrary(await readFile('dist/libraries/combined.xml','utf8')).length,unified.icons.length);
 for(const c of unified.categories) {
   assert.equal(c.count,unified.icons.filter(i=>i.category===c.id||i.categories?.includes(c.id)).length);
   const data=await json(`dist/${c.configData}`);
@@ -28,7 +24,6 @@ for(const c of unified.categories) {
     const collection=unified.collections.find(p=>p.id===c.collection);
     const title=locale==='en'?`${collection.nameEn} · ${c.nameEn}`:`${collection.name} · ${c.name}`;
     assert.equal(parser.parse(xml).mxlibrary['@_title'],title);
-    assert.equal(strFromU8(archive[c.libraries[locale]]),xml);
     assert.equal(await readFile(`dist-alibaba/${c.libraries[locale]}`,'utf8'),xml);
   }
 }
@@ -64,7 +59,7 @@ for(const site of ['dist','dist-alibaba']) {
   const catalog=code.match(/unified-catalog-[a-f0-9]+\.json/)[0];
   assert.equal(await readFile(`${site}/${catalog}`,'utf8'),await readFile('dist/unified-catalog.json','utf8'));
   for(const path of ['compat/alibaba-cloud/LICENSE','compat/alibaba-cloud/NOTICE.md','compat/alibaba-cloud/SOURCES.md']) {
-    assert.equal(strFromU8(archive[path]),await readFile(`${site}/${path}`,'utf8'));
+    assert.equal(await readFile(`dist/${path}`,'utf8'),await readFile(`${site}/${path}`,'utf8'));
   }
 }
-console.log(`Verified ${unified.icons.length} icons, offline configurations, bilingual ZIP libraries and all ${Object.keys(original).length-1} legacy Alibaba resource endpoints.`);
+console.log(`Verified ${unified.icons.length} icons, offline configurations, bilingual XML libraries and all ${Object.keys(original).length-1} legacy Alibaba resource endpoints.`);

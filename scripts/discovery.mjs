@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import { save } from './lib.mjs';
 import { posix } from 'node:path';
 import { homepages } from '../src/homepage.mjs';
@@ -7,6 +8,7 @@ import { iconGuides, iconGuidePath } from '../src/icon-guides.mjs';
 export const siteUrl = 'https://icons.rambow.cloud/';
 const repository = 'https://github.com/rambow-cloud/drawio-software-icons';
 const locales = ['en', 'zh-CN'];
+const detailStyles = readFileSync(new URL('../src/icon-detail.css', import.meta.url), 'utf8');
 export const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 const absolute = path => new URL(path, siteUrl).href;
 const localized = (item, locale, field = 'name') => locale === 'en' ? item[`${field}En`] || item[field] : item[field];
@@ -30,11 +32,11 @@ const text = {
     alibabaLink: 'Alibaba Cloud icons and downloads',
     rights: 'Commercial icons are provided solely for draw.io architecture diagrams. Upstream licenses and brand rights apply; this project grants no additional brand permissions. Code and documentation use MIT, which does not relicense the artwork.',
     variants: 'Alibaba Cloud entries include color variants and supplemental UI graphics; the entry count is not a count of distinct cloud services.',
-    provenance: 'Artwork sources and usage', download: 'Download all icons (ZIP)', library: 'Download category XML', product: 'Product / project', source: 'Artwork source', aliases: 'Names and search terms',
+    provenance: 'Artwork sources and usage', library: 'Download category XML', product: 'Product / project', source: 'Artwork source', aliases: 'Names and search terms',
     language: '中文', contents: 'Contents',
     steps: [
       ['Online diagrams', 'Open the interactive library and choose “Open all collections in draw.io” or select categories. The website loads their XML libraries into diagrams.net. Drag an icon onto the canvas and connect it to other nodes.'],
-      ['Offline desktop', 'Download and unzip the complete icon archive. In draw.io Desktop, drag the desired XML files from libraries/en/ onto the blank canvas, or use File → Open Library. Images are embedded in the XML and work offline. Import one language only.'],
+      ['Offline desktop', 'Download the category XML from an icon’s details. In draw.io Desktop, use File → Open Library → Device to import it. Images are embedded in the XML and work offline. Import one language only.'],
       ['Merge existing configurations', 'On the interactive website, open “Select categories / Desktop config”. Back up your complete JSON from Extras → Configuration, paste it into the optional input, select categories, and generate the merged JSON. Apply it in the desktop app and restart. Other libraries and settings are preserved; processing stays in your browser.'],
       ['AI drawing with Draw.io MCP', 'The interactive website’s “Connect MCP” dialog supplies setup for Codex, Claude Desktop, Cursor and VS Code with Node.js LTS. Set DRAWIO_ICON_SERVICE_URL to https://icons.rambow.cloud/api/icons for an existing Draw.io MCP installation. This endpoint is an icon search API, not a remote MCP server URL. No website account or API key is required.'],
     ],
@@ -46,11 +48,11 @@ const text = {
     alibabaLink: '阿里云icon 图标库与下载',
     rights: '商业图标仅供 draw.io 架构图绘制。上游许可和品牌权利仍然适用，本项目不额外授予品牌使用权。代码和文档采用 MIT 许可，不代表图形素材统一采用 MIT 许可。',
     variants: '阿里云条目包含颜色变体和 UI 补充图形，条目数量不代表独立云服务数量。',
-    provenance: '素材来源与使用范围', download: '下载完整图标库（ZIP）', library: '下载本分类 XML', product: '产品 / 项目', source: '图标来源', aliases: '名称与搜索词',
+    provenance: '素材来源与使用范围', library: '下载本分类 XML', product: '产品 / 项目', source: '图标来源', aliases: '名称与搜索词',
     language: 'English', contents: '目录',
     steps: [
       ['在线绘图', '打开交互图标库，点击“在 draw.io 加载全部合集”或选择所需分类，分类 XML 图标库将加载到 diagrams.net 左侧。将图标拖入画布，再添加连线和自己的说明。'],
-      ['离线桌面使用', '下载并解压完整图标 ZIP。在 draw.io 桌面版，将 libraries/zh-CN/ 中所需 XML 文件拖到空白画布，或使用“文件 → 打开库”。图片已内嵌，可离线使用。只导入一种语言。'],
+      ['离线桌面使用', '在图标详情下载所需分类 XML。在 draw.io 桌面版，使用“文件 → 打开库 → 设备”导入。图片已内嵌，可离线使用。只导入一种语言。'],
       ['合并已有桌面配置', '在交互网站打开“选择分类加载 / 桌面配置”。先从桌面版“其他 → 配置”备份完整 JSON，再粘贴到可选输入框，勾选分类并生成合并配置。应用到桌面端并重启，其他图标库和设置会保留，配置仅在浏览器内处理。'],
       ['通过 Draw.io MCP 进行 AI 绘图', '交互网站“接入 MCP”提供 Codex、Claude Desktop、Cursor 和 VS Code 的配置，需要 Node.js LTS。已有 Draw.io MCP 时，将 DRAWIO_ICON_SERVICE_URL 设置为 https://icons.rambow.cloud/api/icons。此地址是图标搜索 API，不能当作远程 MCP Server URL；无需本站账号或 API Key。'],
     ],
@@ -94,7 +96,7 @@ ${locales.map(lang => `<link rel="alternate" hreflang="${lang}" href="${absolute
 ${robotsMeta}\n${jsonLd({ '@context': 'https://schema.org', '@graph': [website, { '@type': 'CollectionPage', '@id': url, url, name: title, description, inLanguage: locale, isPartOf: { '@id': website['@id'] }, mainEntity: collectionList }] })}`;
 }
 
-function page({ locale, suffix, title, documentTitle = title, description, body, items, image }) {
+function page({ locale, suffix, title, documentTitle = title, description, body, items, image, detail = false }) {
   const path = `discover/${locale}/${suffix}`;
   const otherLocale = locale === 'en' ? 'zh-CN' : 'en';
   const translated = `discover/${otherLocale}/${suffix}`;
@@ -116,10 +118,13 @@ ${locales.map(lang => `<link rel="alternate" hreflang="${lang}" href="${absolute
 <link rel="alternate" hreflang="x-default" href="${absolute(`discover/en/${suffix}`)}" />
 <meta property="og:type" content="website" /><meta property="og:url" content="${absolute(path)}" /><meta property="og:title" content="${escapeHtml(documentTitle)}" /><meta property="og:description" content="${escapeHtml(description)}" />
 <meta property="og:locale" content="${locale === 'en' ? 'en_US' : 'zh_CN'}" /><meta name="twitter:card" content="summary" />
-<link rel="icon" type="image/svg+xml" href="${relativeLink(path, 'discover/favicon.svg')}" /><link rel="stylesheet" href="${relativeLink(path, 'discover/style.css')}" />
-${jsonLd(schema)}</head><body><header><a href="${relativeLink(path, homepages[locale].path)}">Architecture Icons <small>for draw.io</small></a><nav>${link(path, `discover/${locale}/`, text[locale].contents)} · ${link(path, translated, text[locale].language)}</nav></header>
+<link rel="icon" type="image/svg+xml" href="${relativeLink(path, 'discover/favicon.svg')}" /><link rel="stylesheet" href="${relativeLink(path, detail ? 'discover/detail.css' : 'discover/style.css')}" />
+${jsonLd(schema)}</head>${detail ? `<body><a class="skip-link" href="#content">${locale === 'en' ? 'Skip to content' : '跳至内容'}</a>
+<header class="topbar"><a class="brand" href="${relativeLink(path, homepages[locale].path)}" aria-label="Architecture Icons"><img src="${relativeLink(path, 'discover/favicon.svg')}" width="39" height="39" alt="" /><span>architecture<span class="brand-light">icons</span><small>for draw.io</small></span></a><nav aria-label="${locale === 'en' ? 'Main navigation' : '主导航'}">${link(path, homepages[locale].path, locale === 'en' ? 'Icon library' : '图标库')}${link(path, `discover/${locale}/`, locale === 'en' ? 'Categories' : '图标分类')}${link(path, `discover/${locale}/guide/`, locale === 'en' ? 'Usage guide' : '使用指南')}</nav><a class="language" href="${relativeLink(path, translated)}" hreflang="${otherLocale}">${text[locale].language}</a></header>
+<main id="content" class="detail-main"><nav class="breadcrumbs" aria-label="${locale === 'en' ? 'Breadcrumb' : '面包屑导航'}">${link(path, homepages[locale].path, locale === 'en' ? 'Home' : '首页')}<span aria-hidden="true">/</span>${link(path, `discover/${locale}/`, text[locale].contents)}<span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(image.name)}</span></nav>${body}</main>
+<footer class="detail-footer"><span>architecture<span class="brand-light">icons</span> <small>for draw.io</small></span><div>${link(path, 'ICON_USAGE.md', locale === 'en' ? 'Icon usage' : '图标使用声明')}${link(path, 'THIRD_PARTY_NOTICES.md', locale === 'en' ? 'Third-party notices' : '第三方资源说明')}<a href="${repository}">GitHub ↗</a></div></footer></body>` : `<body><header><a href="${relativeLink(path, homepages[locale].path)}">Architecture Icons <small>for draw.io</small></a><nav>${link(path, `discover/${locale}/`, text[locale].contents)} · ${link(path, translated, text[locale].language)}</nav></header>
 <main><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p><p>${link(path, homepages[locale].path, text[locale].browse)}</p>${body}${usageLinks(path, locale)}</main>
-<footer>${link(path, `discover/${locale}/guide/`, text[locale].guide)} · ${link(path, 'downloads/drawio-icons.zip', text[locale].download)}</footer></body></html>\n`;
+<footer>${link(path, `discover/${locale}/guide/`, text[locale].guide)}</footer></body>`}</html>\n`;
   return [path + 'index.html', html];
 }
 
@@ -133,28 +138,26 @@ function iconDetailPage(catalog, icon, locale) {
   const title = en ? `${name} ${format} Icon for draw.io` : `${name} ${format} 图标与 draw.io 导入说明`;
   const library = category.libraries[locale];
   const related = guide.related.filter(id => catalog.icons.some(i => i.id === id));
-  const download = (asset, label) => `<a href="${escapeHtml(relativeLink(path, asset))}" download>${escapeHtml(label)}</a>`;
+  const download = (asset, label, primary = false) => `<a class="action${primary ? ' action-primary' : ''}" href="${escapeHtml(relativeLink(path, asset))}" download><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 15v5h16v-5"/></svg>${escapeHtml(label)}</a>`;
   const external = (url, label) => `<a href="${escapeHtml(url)}">${escapeHtml(label)}</a>`;
   const license = icon.source.licenseUrl || 'ICON_USAGE.md';
   const licenseLink = /^https?:/.test(license) ? external(license, icon.source.collectionLicense) : link(path, license, icon.source.collectionLicense);
   const drawio = `https://app.diagrams.net/?clibs=U${encodeURIComponent(absolute(library))}`;
-  const body = `<figure><img src="${escapeHtml(relativeLink(path, icon.asset))}" alt="${escapeHtml(`${name} ${format} ${en ? 'icon' : '图标'}`)}" width="128" height="128" /><figcaption>${escapeHtml(name)} · ${format}</figcaption></figure>
-<p>${download(icon.asset, en ? `Download ${format}` : `下载 ${format}`)} · ${download(library, en ? 'Download category XML' : '下载分类 XML')} · ${external(drawio, en ? 'Open category in draw.io' : '在 draw.io 加载本分类')}</p>
-<section><h2>${en ? 'Using this icon in a diagram' : '在架构图中如何使用'}</h2><p>${escapeHtml(copy.diagram)}</p><p>${escapeHtml(copy.tip)}</p><p>${external(guide.reference, en ? 'Product documentation' : '产品文档')} · ${link(path, categoryPath(locale, category), localized(category, locale))}</p></section>
-<section><h2>${en ? 'Artwork and provenance' : '素材与来源'}</h2><dl>
+  const body = `<section class="icon-hero" aria-labelledby="icon-title"><figure class="preview"><div class="preview-top"><span>${en ? 'ARTWORK PREVIEW' : '图标预览'}</span><span class="format-tag">${format}</span></div><div class="preview-tile"><img src="${escapeHtml(relativeLink(path, icon.asset))}" alt="${escapeHtml(`${name} ${format} ${en ? 'icon' : '图标'}`)}" width="160" height="160" /></div><figcaption>${en ? 'Original colors · Ready for your canvas' : '保留原色 · 放入画布即可使用'}</figcaption></figure>
+<div class="icon-intro"><p class="eyebrow">${link(path, categoryPath(locale, category), localized(category, locale))}<span aria-hidden="true"> / </span>DRAW.IO</p><h1 id="icon-title">${escapeHtml(name)}<span>${en ? 'Architecture icon' : '架构图标'}</span></h1><p class="intro">${escapeHtml(copy.summary)}</p><div class="actions">${download(icon.asset, en ? `Download ${format}` : `下载 ${format}`, true)}<a class="action" href="${escapeHtml(drawio)}">${en ? 'Open in draw.io' : '在 draw.io 中使用'} <span aria-hidden="true">↗</span></a></div><div class="secondary-action">${download(library, en ? 'Category XML' : '下载分类 XML')}<span>${en ? 'Embedded artwork for offline use' : '内嵌素材，支持离线使用'}</span></div></div></section>
+<div class="detail-columns"><div class="reading-column"><section class="editorial"><p class="eyebrow">IN YOUR ARCHITECTURE</p><h2>${en ? 'A place in your diagram' : '在架构图中，放对位置'}</h2><p>${escapeHtml(copy.diagram)}</p><p class="tip">${escapeHtml(copy.tip)}</p><p class="text-link">${external(guide.reference, en ? 'Product documentation ↗' : '查看产品文档 ↗')}</p></section>
+<section class="import-guide"><p class="eyebrow">FROM LIBRARY TO CANVAS</p><h2>${en ? 'From icon to diagram' : '从图标到架构图'}</h2><ol class="import-steps">
+<li><div><h3>${en ? 'Choose your format' : '选择导入方式'}</h3><p>${en ? 'For one icon, download the artwork and drag it onto the canvas. Resize it while keeping its aspect ratio.' : '只需要一个图标时，下载素材并拖到画布上，缩放时保持宽高比例。'}</p></div></li>
+<li><div><h3>${en ? 'Load the category' : '加载所需分类'}</h3><p>${en ? 'Use “Open in draw.io” online, or download the category XML and import it with File → Open Library in draw.io Desktop. Artwork is embedded for offline use.' : '在线点击“在 draw.io 中使用”；或下载分类 XML，在桌面版通过“文件 → 打开库”导入，内嵌素材支持离线使用。'}</p></div></li>
+<li><div><h3>${en ? 'Make it your architecture' : '画出你的架构'}</h3><p>${escapeHtml(en ? `Find ${name} in the library, drag it onto the canvas, then add labels and connectors for your deployment.` : `在图标库中找到 ${name}，拖入画布，再按实际部署添加标签和连线。`)}</p></div></li></ol><p class="text-link">${link(path, `discover/${locale}/guide/`, en ? 'More on XML, desktop JSON and MCP →' : '更多 XML、桌面 JSON 与 MCP 用法 →')}</p></section></div>
+<aside class="provenance" aria-labelledby="provenance-title"><p class="eyebrow">CLEAR ORIGINS</p><h2 id="provenance-title">${en ? 'About this artwork' : '素材信息'}</h2><dl>
 <dt>${en ? 'Format' : '格式'}</dt><dd>${format}${icon.width && icon.height ? ` · ${icon.width} × ${icon.height}` : ''}</dd>
 <dt>${en ? 'Artwork source' : '素材来源'}</dt><dd>${external(icon.source.url, icon.source.publisher || icon.source.id)}</dd>
 <dt>${en ? 'Collection license / artwork terms' : '图标集许可／素材条款'}</dt><dd>${licenseLink}</dd>
-<dt>${en ? 'Pinned revision' : '固定来源版本'}</dt><dd><code>${escapeHtml(icon.source.revision)}</code></dd>
-<dt>SHA-256</dt><dd><code>${escapeHtml(icon.sha256)}</code></dd></dl>
-<p>${en ? 'Software licensing and artwork rights are separate. Collection licenses do not grant additional trademark rights. Check the linked terms before reuse; this community collection is not an endorsement by the product owner.' : '软件许可与图形素材权利分别适用，图标集许可不额外授予商标权。使用前请查阅所链接的条款；本社区合集不代表产品所有者的背书。'}</p></section>
-<section><h2>${en ? 'Import into draw.io / diagrams.net' : '导入 draw.io / diagrams.net'}</h2><ol>
-<li>${en ? 'For a single image, download the artwork above and drag it onto the canvas. Resize it while keeping its aspect ratio.' : '使用单个图标时，下载上方素材并拖到画布上，缩放时保持宽高比例。'}</li>
-<li>${en ? 'For the complete category, use the online category link, or download its XML and open it with File → Open Library in draw.io Desktop. The XML includes embedded artwork for offline use.' : '使用整套分类时，点击在线加载链接；或下载 XML，在 draw.io Desktop 中通过“文件 → 打开库”导入。XML 内嵌图形素材，可供离线使用。'}</li>
-<li>${escapeHtml(en ? `Search the imported library for ${name}, drag the icon onto the canvas, then add labels and connectors for your deployment.` : `在导入的图标库中查找 ${name}，拖入画布后，按实际部署添加标签和连线。`)}</li></ol>
-<p>${link(path, `discover/${locale}/guide/`, en ? 'Complete import and MCP guide' : '完整导入与 MCP 使用指南')}</p></section>
-${related.length ? `<section><h2>${en ? 'Related icon guides' : '相关图标说明'}</h2><ul>${related.map(id => `<li>${link(path, iconGuidePath(locale, id), catalog.icons.find(i => i.id === id).name)}</li>`).join('')}</ul></section>` : ''}`;
-  return page({ locale, suffix: `icons/${icon.id}/`, title, description: copy.summary, body, image: { asset: icon.asset, name } });
+</dl><p class="rights-note">${en ? 'Software licensing and artwork rights are separate. Collection licenses do not grant additional trademark rights. Check the linked terms before reuse; this community collection is not an endorsement by the product owner.' : '软件许可与图形素材权利分别适用，图标集许可不额外授予商标权。使用前请查阅所链接的条款；本社区合集不代表产品所有者的背书。'}</p>
+<details><summary>${en ? 'Version & file verification' : '版本与文件校验'}</summary><dl><dt>${en ? 'Pinned revision' : '固定来源版本'}</dt><dd><code>${escapeHtml(icon.source.revision)}</code></dd><dt>SHA-256</dt><dd><code>${escapeHtml(icon.sha256)}</code></dd></dl></details></aside></div>
+${related.length ? `<section class="related"><div class="section-heading"><div><p class="eyebrow">BUILD THE BIGGER PICTURE</p><h2>${en ? 'Keep building' : '继续完善你的架构图'}</h2></div>${link(path, `discover/${locale}/`, en ? 'All categories →' : '浏览全部分类 →')}</div><div class="related-grid">${related.map(id => { const item = catalog.icons.find(i => i.id === id); return `<a class="related-card" href="${relativeLink(path, iconGuidePath(locale, id))}"><span class="related-art"><img src="${escapeHtml(relativeLink(path, item.asset))}" width="44" height="44" alt="" loading="lazy" /></span><span><strong>${escapeHtml(localized(item, locale))}</strong><small>${en ? 'Icon & import guide' : '图标与导入说明'}</small></span><span class="related-arrow" aria-hidden="true">↗</span></a>`; }).join('')}</div></section>` : ''}`;
+  return page({ locale, suffix: `icons/${icon.id}/`, title, description: copy.summary, body, image: { asset: icon.asset, name }, detail: true });
 }
 
 export function discoveryFiles(catalog) {
@@ -191,6 +194,7 @@ export function discoveryFiles(catalog) {
     }
   }
   const files = new Map(pages);
+  files.set('discover/detail.css', detailStyles);
   // Cloudflare static headers: keep draw.io CORS and give non-HTML documents
   // their own HTTPS canonical. The splat includes nested directories.
   files.set('_headers', `/*\n  Access-Control-Allow-Origin: *\n  X-Content-Type-Options: nosniff\n\n/*.md\n  Link: <${siteUrl}:splat.md>; rel="canonical"\n`);

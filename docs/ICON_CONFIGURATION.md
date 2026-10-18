@@ -1,6 +1,6 @@
 # 配置驱动的图标采集 / Configuration-driven icons
 
-日常新增或修改通用软件图标，只需编辑 `data/icons/*.json` 并提交。网站、搜索 API、draw.io 图标库和 ZIP 使用同一份生成目录，不需要逐处改代码。
+日常新增或修改通用软件图标，只需编辑 `data/icons/*.json` 并提交。网站、搜索 API、draw.io 图标库和 JSON 配置使用同一份生成目录，不需要逐处改代码。
 
 Add or edit an icon in `data/icons/*.json` and commit the configuration. Builds resolve the source, download missing artwork, validate it and generate all consumers. `data/catalog.json`, `data/official-icons.json`, `data/sources.lock.json` and `data/icon-inputs.lock.json` are generated outputs; do not edit them by hand.
 
@@ -111,6 +111,6 @@ npm run sync -- --update
 
 `--refresh` 强制检查缓存内容，不切换来源版本；`--update` 更新未显式指定 `revision` 的 GitHub 来源。校验或下载失败会终止构建，所有图标处理成功前不会覆盖已有素材、目录或锁文件，也不会继续部署。
 
-本地查看可运行 `npm run dev`，打开终端给出的地址，搜索新增名称和别名，并检查 SVG/PNG、XML、ZIP 下载。合并并发布后，在主站重复同样检查。
+本地查看可运行 `npm run dev`，打开终端给出的地址，搜索新增名称和别名，并检查 单图 SVG/PNG 下载与 XML/JSON 加载。合并并发布后，在主站重复同样检查。
 
 阿里云的导入快照仍由 `collections/alibaba-cloud` 的原有构建器生成，以保留 888 个图标的历史资源地址；本次通用软件采集配置不改变该兼容目录。

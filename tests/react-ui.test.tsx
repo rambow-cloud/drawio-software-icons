@@ -28,7 +28,7 @@ test('localized homepages include only their own static language and working lin
     const html=renderHomepage(catalog,locale),prefix=locale==='en'?'../':'./';
     for(const id of ['home-title','library','changelog','guide','sources','grid'])assert(html.includes('id="'+id+'"'));
     assert.equal((html.match(/<button\b[^>]*data-icon=/g)??[]).length,72);
-    assert(html.includes('href="'+prefix+'downloads/drawio-icons.zip"'));
+    assert(!html.includes('.zip'), 'Bulk archive downloads are retired');
     assert(html.includes('href="'+prefix+'discover/'+locale+'/software/software-category/"'));
     assert(html.includes('&lt;script&gt;alert(1)&lt;/script&gt;'));
     assert(html.includes(locale==='en'?'Familiar icons.':'让架构图，'));

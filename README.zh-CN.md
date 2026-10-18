@@ -4,7 +4,7 @@
 
 **搜索与 AI 收录：** [中文静态目录](https://icons.rambow.cloud/discover/zh-CN/)无需 JavaScript；分类页、使用指南、站点地图与 AI 阅读入口随构建自动更新。站长平台提交和爬虫访问设置见[收录说明](docs/DISCOVERY.md)。
 
-**阿里云icon：** [阿里云图标库与下载](https://icons.rambow.cloud/discover/zh-CN/alibaba-cloud/)提供原色 SVG、draw.io XML 分类库、ZIP 下载及在线与离线导入说明，适用于阿里云架构图绘制。
+**阿里云icon：** [阿里云图标库与下载](https://icons.rambow.cloud/discover/zh-CN/alibaba-cloud/)提供原色 SVG 单图下载、draw.io XML 分类库及在线与离线导入说明，适用于阿里云架构图绘制。
 
 **Cloudflare 与 MCP：** [部署与图标搜索接口](docs/CLOUDFLARE.md)，包含
 `DRAWIO_ICON_SERVICE_URL` 配置及 Cloudflare / GitHub Pages 双站发布方案。
@@ -32,7 +32,7 @@
 
 - [软件入口](https://icons.rambow.cloud/)默认选中「通用软件」。
 - [阿里云入口](https://jinxiao.github.io/alibaba-cloud-icons/)默认选中「阿里云」。
-- 侧栏采用「图标集 → 分类」两层按钮：先选择「阿里云」「通用软件」或「全部图标集」，再选择下方分类，两层按钮风格一致。切换图标集会重置分类，「全部分类」只清除分类筛选。主站首页第一个按钮固定加载全部合集；阿里云首页保留独立复选框，未选时加载阿里云，选中时加载全部合集。侧栏筛选不改变首页按钮的加载范围。原 XML、JSON、SVG、插件及 ZIP 地址保留，
+- 侧栏采用「图标集 → 分类」两层按钮：先选择「阿里云」「通用软件」或「全部图标集」，再选择下方分类，两层按钮风格一致。切换图标集会重置分类，「全部分类」只清除分类筛选。主站首页第一个按钮固定加载全部合集；阿里云首页保留独立复选框，未选时加载阿里云，选中时加载全部合集。侧栏筛选不改变首页按钮的加载范围。原 XML、JSON、SVG 及插件地址保留，
   两个旧站的 `catalog.json` 各自保持原结构。
 
 **Spotlight 快捷搜索：** 在非文本输入区域按 `/` 或 `Ctrl/Cmd + K`，也可点击顶部「快捷搜索」。
@@ -49,9 +49,7 @@
 更新时再次生成并合并。空配置也可直接使用 `config/drawio-icons.en.json` 或
 `config/drawio-icons.zh-CN.json`，已有配置请走合并流程，避免覆盖。
 
-网站的完整 ZIP（`downloads/drawio-icons.zip`）在每个语言目录中包含全部 17 类 XML；
-`libraries/combined.xml` 把两个图标集放进同一个库。原软件 ZIP 和 `libraries/all.xml`
-仍只含软件图标，原阿里云 ZIP 和 `drawio/all-icons.xml` 仍只含阿里云图标。
+网站不再提供 ZIP 整包下载。请在图标详情下载单个 SVG/PNG，或使用分类 XML、桌面 JSON 配置加载到 draw.io。`libraries/combined.xml` 合并两个图标集，`libraries/all.xml` 仅包含软件图标，`drawio/all-icons.xml` 仅包含阿里云图标。
 
 源码、数据和测试统一维护于当前仓库。阿里云旧仓库从主仓库最近一次发布成功的提交构建兼容站点，
 每小时检查更新，也可手动立即同步。详见[发布说明](docs/DEPLOYMENT.md)。
@@ -80,14 +78,14 @@ K9s、kind、minikube 等。已有 Kubernetes、Helm、Argo CD、K3s、Talos 继
 
 多数 SVG 来自固定版本的 CNCF 官方素材及 Landscape；Karpenter、Sealed Secrets
 保留官方 SVG 原图，Trivy、三个 Argo 子项目及 K9s 保留官方 PNG 原图。网站、
-MCP 搜索、draw.io 图标库和离线 ZIP 都使用同一份校验后的素材。
+MCP 搜索、draw.io 图标库和单图下载都使用同一份校验后的素材。
 来源及使用条款见[第三方资源说明](THIRD_PARTY_NOTICES.md)。
 
 ## 监控与可观测性
 
 可在首页[更新日志](https://icons.rambow.cloud/#changelog)查看每批新增、
 修正或移除的图标，点击名称可定位当前版本。日志跟随网站语言切换，通用软件及完整合集的
-离线 ZIP 均附带中英文 Markdown 日志。
+网站分别提供中英文 Markdown 日志。
 
 「监控与安全」分类新增 Grafana Loki、Tempo、Mimir、Alloy、Pyroscope，以及
 VictoriaMetrics、VictoriaLogs、Thanos、Prometheus Alertmanager、Vector、SigNoz。
@@ -112,7 +110,7 @@ Dashboard Icons。保留原色及比例，VictoriaMetrics 使用上游单色标�
 
 微信、企业微信、钉钉、QQ 和飞书使用各自官方发布者在 App Store 提供的 512 × 512 彩色 PNG 应用图标，原样保留像素。飞书与 Lark 分开收录。QQ 使用腾讯官方彩色企鹅应用图标；ServiceNow 使用上游字标。保留原素材颜色和比例，不自行重绘品牌 Logo。
 
-钉钉通过 SVG 圆角裁切显示，四角透明；内部原始 PNG 保持不变，ZIP 也单独附带原图。这是项目的显示调整，不是新的官方矢量 Logo。
+钉钉通过 SVG 圆角裁切显示，四角透明；内部原始 PNG 保持不变，也提供单独的 PNG 原图。这是项目的显示调整，不是新的官方矢量 Logo。
 
 ## 使用
 
@@ -124,7 +122,7 @@ Dashboard Icons。保留原色及比例，VictoriaMetrics 使用上游单色标�
 
 通用软件分类按用途合并为：数据与中间件、云与基础设施、开发工具与 DevOps、语言与运行时、框架与应用开发、数据分析与 AI、监控与安全、应用与内容管理。网站展示、XML 库标题和桌面 JSON 均添加 **通用软件 ·** 前缀，与 **阿里云 ·** 对应。Git、Gitea、Forgejo、GitHub、GitLab 统一归入「开发工具与 DevOps」。旧分类网页参数与 XML 地址继续映射到合并后的分类。
 
-**桌面版一次导入全部分类：** 下载并解压最新 ZIP，在 draw.io 桌面版新建空白图表，然后在文件管理器中全选 `libraries/zh-CN/`（英文用 `libraries/en/`）里的所需 XML，一起拖到画布空白处。放下前松开 Ctrl / Shift。每个文件会成为左侧一个独立图标库，保留独立分类。选择 XML 文件，不要拖整个目录或 ZIP，也不要同时导入两种语言。
+**桌面版导入分类：** 在「选择分类加载 / 桌面配置」中生成或合并 JSON，复制到「其他 → 配置」后重启；也可在图标详情下载分类 XML，通过「文件 → 打开库 → 设备」导入。分类独立保留，素材全部内嵌。
 
 单个库也可通过桌面版 **文件 → 打开库** 打开（网页版有“设备”子菜单）。`libraries/all.xml` 将全部软件图标合并到一个库，不保留独立分类栏。SVG / PNG 已内嵌，可离线使用。更新时先关闭旧分类库，再拖入新版。XML 以 `<mxlibrary` 开头，兼容 draw.io 的[拖拽识别逻辑](https://github.com/jgraph/drawio/blob/dev/src/main/webapp/js/diagramly/EditorUi.js)。
 
@@ -151,7 +149,7 @@ npm run preview
 
 终端和配置编辑器共用 `CodePanel`，由 shadcn/ui 的 Card、Textarea 组合，`CopyButton` 统一复制反馈和手动复制回退。`.terminal-theme` 只调整终端配色，提示符与实际复制内容分离。`npm run test:ui` 验证渲染、URL 筛选恢复、按钮语义和配置文本，也包含在 `npm test` 中。
 
-`npm run build` 先按 `data/icons/*.json` 同步图标，再校验、执行 TypeScript 检查、生成库与 ZIP，并构建两个静态站点到 `dist/` 和 `dist-alibaba/`。已校验的本地素材与有效缓存会直接复用，新增或来源变更时才需要联网。`npm test` 也会先同步。仅构建已同步产物可使用 `npm run build:offline`。PR 仅运行 `npm run check:pr`，完整构建和发布在合并到 `main` 后执行。
+`npm run build` 先按 `data/icons/*.json` 同步图标，再校验、执行 TypeScript 检查、生成 XML 图标库与 JSON 配置，并构建两个静态站点到 `dist/` 和 `dist-alibaba/`。已校验的本地素材与有效缓存会直接复用，新增或来源变更时才需要联网。`npm test` 也会先同步。仅构建已同步产物可使用 `npm run build:offline`。PR 仅运行 `npm run check:pr`，完整构建和发布在合并到 `main` 后执行。
 
 ## 收集与更新
 
@@ -161,7 +159,7 @@ npm run sync -- --update
 npm run sync -- --refresh
 ```
 
-在 `data/icons/*.json` 中新增或修改图标配置后提交即可，构建自动下载缺失素材并生成清单、搜索索引、图标库和 ZIP。来源规则、下载并发、超时及缓存策略维护在 `data/icon-sources.json`；示例见[图标配置说明](docs/ICON_CONFIGURATION.md)。不要手工修改生成的目录和锁文件。
+在 `data/icons/*.json` 中新增或修改图标配置后提交即可，构建自动下载缺失素材并生成清单、搜索索引、图标库和 JSON 配置。来源规则、下载并发、超时及缓存策略维护在 `data/icon-sources.json`；示例见[图标配置说明](docs/ICON_CONFIGURATION.md)。不要手工修改生成的目录和锁文件。
 
 默认使用锁文件中的固定提交；`--update` 检查上游分支，但保留配置中显式指定的 `revision`。`--refresh` 跳过本地素材复用并重新验证下载缓存，不改变来源版本。缓存按 URL 与缓存版本区分，过期时在上游支持的情况下使用条件请求。下载或素材检查失败时，现有图标、清单及锁文件保持不变；已校验的固定版本本地素材无需联网。
 
@@ -177,10 +175,9 @@ npm run sync -- --refresh
 - `assets/icons/`：收录的 SVG / PNG；`licenses/`：原始图标集许可。
 - `scripts/`：采集、校验、离线生成工具；`src/`：中英文静态网站。
 - `dist/catalog.json`：公共目录接口，`schemaVersion: 1`、版本、分类、图标与稳定相对路径。
-- `dist/libraries/zh-CN/` 与 `dist/libraries/en/`：每种语言 8 个分类库，以及兼容旧链接的文件；`dist/libraries/all.xml`：全集。ZIP 只包含当前分类库。
-- `dist/downloads/drawio-software-icons.zip`：全部 SVG / PNG、分类库、清单、使用说明与许可文件。
+- `dist/libraries/zh-CN/` 与 `dist/libraries/en/`：每种语言 8 个分类库，以及兼容旧链接的文件；`dist/libraries/all.xml`：全集。
 
-`README.md` 为默认英文说明，`README.zh-CN.md` 为中文说明，旧 `README.en.md` 保留跳转入口。ZIP 附带中英文说明、`ICON_USAGE.md`、上游许可文本和来源记录。商业图标额外记录 `usagePolicy`、`usagePolicyUrl` 和 `brandPermissionStatus`，这些字段说明项目用途，不表示已获得品牌授权。
+`README.md` 为默认英文说明，`README.zh-CN.md` 为中文说明，旧 `README.en.md` 保留跳转入口。网站单独提供中英文说明、`ICON_USAGE.md`、上游许可文本和来源记录。商业图标额外记录 `usagePolicy`、`usagePolicyUrl` 和 `brandPermissionStatus`，这些字段说明项目用途，不表示已获得品牌授权。
 
 清单字段包括 `id/name/aliases/tags/category/softwareType/homepage/repository/asset/width/height/sha256/source`。`source` 中包含原始 URL、提交、路径、变体、图标集许可和原始 SHA-256。`softwareLicense` 未核实时为 null，不将图标集许可套用到软件上。
 
@@ -194,6 +191,6 @@ Settings → Actions → General 中允许 GitHub Actions 创建 Pull Request，
 
 ## 验收
 
-打开站点检查：语言切换与刷新保持、中文/英文/别名搜索、软件类型筛选、无结果提示、明暗预览、详情来源链接、SVG/XML/ZIP 下载。在 draw.io 中分别打开一个分类、多个分类；拖入横向和方形图标，缩放后保存并重新打开。桌面版导入下载的分类 XML，确认离线图标可见。
+打开站点检查：语言切换与刷新保持、中文/英文/别名搜索、软件类型筛选、无结果提示、明暗预览、详情来源链接、单图 SVG/PNG 下载与 XML/JSON 加载。在 draw.io 中分别打开一个分类、多个分类；拖入横向和方形图标，缩放后保存并重新打开。桌面版导入下载的分类 XML，确认离线图标可见。
 
 原创代码与文档采用 MIT；图标保留上游许可与商标权，包括采用 GPL 的 ServiceNow SVG 源文件。详见 [图标使用声明](ICON_USAGE.md)、[第三方资源说明](THIRD_PARTY_NOTICES.md) 与 [贡献指南](CONTRIBUTING.md)。
