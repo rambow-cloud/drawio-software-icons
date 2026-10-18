@@ -26,7 +26,7 @@ still requires Cloudflare.
 
 Only the separate legacy Alibaba homepage redirects to Cloudflare, defaulting
 to the Alibaba Cloud collection and preserving query parameters and fragments.
-Its XML, SVG, PNG, JSON and ZIP paths remain actual files.
+Its XML, SVG, PNG and JSON paths remain actual files.
 
 ## Production domain and builds
 
@@ -42,8 +42,7 @@ Retain the build command and environment described in [CLOUDFLARE.md](CLOUDFLARE
 Disable non-production branch builds and allow only `main` in Cloudflare's
 branch filters. Workers Builds has an independent GitHub App trigger; this
 account setting is required in addition to removing publishing from PR Actions.
-Keep the GitHub Actions variable `CLOUDFLARE_ENABLED` unset so that only Workers
-Builds deploys the production Worker.
+Workers Builds is the sole automated Cloudflare publisher. GitHub Actions builds and publishes the Pages mirror only; it does not transfer Worker outputs between jobs.
 
 ## GitHub Pages publishing
 
@@ -71,8 +70,7 @@ repository retains `LEGACY_REDIRECTS=true` for its legacy homepage.
 
 1. Merges to `main` run `.github/workflows/ci-pages.yml`, validate both collections,
    and publish the full site to the organization Pages URL. Pages deployment
-   depends only on the successful build, so an optional Cloudflare deployment
-   failure does not block it. Workers Builds independently deploys the same
+   depends only on its own successful build. Workers Builds independently deploys the same
    source commit to Cloudflare.
 2. `deployment/alibaba-pages.yml` is installed as `.github/workflows/pages.yml`
    in `jinxiao/alibaba-cloud-icons`. It resolves the latest successful main push
@@ -86,6 +84,20 @@ repository retains `LEGACY_REDIRECTS=true` for its legacy homepage.
 Keep the template and installed workflow synchronized. All artwork and UI
 changes belong in the main source repository. Preserve the original Alibaba
 source and license references under `collections/alibaba-cloud`.
+
+## Storage policy
+
+GitHub Actions retains no diagnostic build artifacts or caches. The only upload
+is the temporary github-pages artifact required by Pages, with a one-day expiry
+as a fallback. An always() cleanup job deletes artifacts from the current run
+after build/deployment completes, including failures. A forced workflow cancellation
+can prevent cleanup; the expiry is the fallback. Workflow logs remain available.
+Cloudflare Workers Builds continues to deploy independently.
+
+Homepage preview publishing rebuilds the previously successful, pinned main
+commit in an isolated checkout rather than depending on a retained artifact.
+Bulk icon ZIPs are no longer generated or published; their old URLs are retired.
+Individual SVG/PNG files and XML/JSON imports remain supported.
 
 ## Organization transfer
 

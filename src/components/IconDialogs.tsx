@@ -31,6 +31,6 @@ export function DetailDialog({icon}:{icon:Icon}) {
   </Dialog>;
 }
 export function LocalNotice() {
-  const {t,closeModal}=useIcons();
-  return <Dialog id="notice" labelledBy="notice-title" onClose={closeModal}><CloseButton onClose={closeModal}/><h2 id="notice-title">{t.navGuide}</h2><p id="notice-body">{t.localNote}</p><ButtonLink variant="default" size="default"  href={file('downloads/drawio-icons.zip')} download>{t.downloadAll}</ButtonLink></Dialog>;
+  const {t,closeModal,setModal}=useIcons();
+  return <Dialog id="notice" labelledBy="notice-title" onClose={closeModal}><CloseButton onClose={closeModal}/><h2 id="notice-title">{t.navGuide}</h2><p id="notice-body">{t.localNote}</p><Button variant="default" size="default" onClick={()=>setModal({kind:'bundle'})}>{t.bundle}</Button></Dialog>;
 }

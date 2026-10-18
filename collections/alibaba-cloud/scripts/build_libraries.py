@@ -4,7 +4,6 @@ from __future__ import annotations
 import argparse
 import base64
 import csv
-from datetime import date
 import hashlib
 import io
 import json
@@ -15,7 +14,6 @@ import shutil
 import tempfile
 from urllib.parse import quote, unquote
 import xml.etree.ElementTree as ET
-import zipfile
 import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -222,14 +220,6 @@ def build(out):
     checksums = {p.relative_to(out).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                  for p in sorted(out.rglob("*")) if p.is_file()}
     write_text(out / "SHA256SUMS.json", json.dumps(checksums, indent=2) + "\n")
-    archive = out / "alibaba-cloud-drawio.zip"
-    timestamp = date.fromisoformat(catalog["snapshot_date"])
-    with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as zf:
-        for p in sorted(out.rglob("*")):
-            if p.is_file() and p != archive:
-                info = zipfile.ZipInfo(p.relative_to(out).as_posix(), (timestamp.year, timestamp.month, timestamp.day, 0, 0, 0))
-                info.compress_type = zipfile.ZIP_DEFLATED
-                zf.writestr(info, p.read_bytes())
     print(json.dumps({k: v for k, v in summary.items() if k != "categories"}, ensure_ascii=False))
 
 

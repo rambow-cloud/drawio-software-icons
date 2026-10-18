@@ -28,6 +28,7 @@ async function files(dir, prefix = '') {
   return result;
 }
 const assets = await files('dist');
+for (const dir of ['dist', 'dist-alibaba']) assert.ok(!(await files(dir)).some(path => path.endsWith('.zip')), `${dir}: bulk archives must not be published`);
 assert.ok(!assets.some(path => path.startsWith('guides/')), 'Retired raw guide copies must not be published');
 assert.ok(assets.length <= 20000);
 assert.ok(!assets.includes('CNAME'), 'The GitHub Pages site must keep its github.io domain');

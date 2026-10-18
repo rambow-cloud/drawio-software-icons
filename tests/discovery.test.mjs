@@ -45,6 +45,10 @@ test('curated icon pages have content, downloads, provenance and inbound categor
     assert(html.includes('pinned-source'));
     assert(html.includes('pinned-artwork'));
     assert(html.includes(' download>'));
+    assert.equal((html.match(/<h1\b/g) || []).length, 1);
+    assert(html.includes('id="content"'));
+    assert(html.includes('<details>'));
+    assert(!html.includes('.zip'));
     assert(html.includes('clibs=U'));
     assert(html.includes('rel="canonical" href="'+siteUrl+path+'"'));
     assert(html.includes('SVG '+(locale==='en'?'icon':'图标')));
@@ -53,7 +57,7 @@ test('curated icon pages have content, downloads, provenance and inbound categor
     for (const [,href] of html.matchAll(/(?:href|src)="([^"<>]+)"/g)) {
       if (/^https?:/.test(href)) continue;
       const target = decodeURIComponent(new URL(href, siteUrl+path).pathname.slice(1));
-      assert(['', 'en/', 'discover/favicon.svg', 'icons/test.svg', 'library.xml', 'ICON_USAGE.md', 'THIRD_PARTY_NOTICES.md', 'compat/alibaba-cloud/NOTICE.md', 'downloads/drawio-icons.zip', ...categories.flatMap(c=>Object.values(c.libraries))].includes(target) || generated.has(target) || generated.has(target+'index.html'), target);
+      assert(['', 'en/', 'discover/favicon.svg', 'icons/test.svg', 'library.xml', 'ICON_USAGE.md', 'THIRD_PARTY_NOTICES.md', 'compat/alibaba-cloud/NOTICE.md', ...categories.flatMap(c=>Object.values(c.libraries))].includes(target) || generated.has(target) || generated.has(target+'index.html'), target);
     }
   }
 });
@@ -142,7 +146,7 @@ test('HTML works without JavaScript and escapes text and structured data from th
 
 test('relative links preserve GitHub Pages repository prefixes and stay within deployed files', () => {
   const origin = 'https://rambow-cloud.github.io/drawio-software-icons/';
-  const assets = new Set([...files.keys(), 'en/index.html', 'discover/favicon.svg', 'icons/test.svg', 'ICON_USAGE.md', 'THIRD_PARTY_NOTICES.md', 'compat/alibaba-cloud/NOTICE.md', 'downloads/drawio-icons.zip', 'alibaba-cloud-drawio.zip', 'drawio/all-icons.xml', ...categories.flatMap(c => Object.values(c.libraries))]);
+  const assets = new Set([...files.keys(), 'en/index.html', 'discover/favicon.svg', 'icons/test.svg', 'ICON_USAGE.md', 'THIRD_PARTY_NOTICES.md', 'compat/alibaba-cloud/NOTICE.md', 'drawio/all-icons.xml', ...categories.flatMap(c => Object.values(c.libraries))]);
   for (const [path, html] of htmlPages) {
     const base = new URL(path.replace(/index\.html$/, ''), origin);
     for (const [, href] of html.matchAll(/(?:href|src)="([^"<>]+)"/g)) {

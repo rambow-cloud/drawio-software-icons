@@ -4,7 +4,7 @@
 
 **Search and AI discovery:** The [static English catalog](https://icons.rambow.cloud/discover/en/) works without JavaScript. Category pages, usage guides, the sitemap and AI reading index update with each build. See [discovery setup](docs/DISCOVERY.md) for webmaster submissions and crawler access settings.
 
-**Alibaba Cloud icons:** The [homepage icon library](https://icons.rambow.cloud/?collection=alibaba-cloud#library) provides source-color SVG artwork, draw.io XML category libraries, ZIP archives and online / offline import instructions for architecture diagrams.
+**Alibaba Cloud icons:** The [homepage icon library](https://icons.rambow.cloud/?collection=alibaba-cloud#library) provides source-color SVG artwork, draw.io XML category libraries, individual downloads and online / offline import instructions for architecture diagrams.
 
 **Cloudflare and MCP:** [deployment and icon search API](docs/CLOUDFLARE.md), including
 `DRAWIO_ICON_SERVICE_URL` setup and independent Cloudflare / GitHub Pages sites.
@@ -37,7 +37,7 @@ English product name exists; categories, browsing and setup are bilingual.
 - [Software entrypoint](https://icons.rambow.cloud/) defaults to General Software.
 - [Alibaba Cloud entrypoint](https://jinxiao.github.io/alibaba-cloud-icons/) defaults to Alibaba Cloud.
 - The sidebar follows **Collection → Category**: choose **Alibaba Cloud**, **General Software** or **All collections**, then a category below. All rows share the same button style. Switching collections resets the category filter; **All categories** only clears that filter. The main homepage’s first button always loads all collections. The Alibaba homepage has a separate checkbox: unchecked loads Alibaba Cloud, checked loads all collections. Sidebar choices do not change either homepage action. Existing XML,
-  JSON, SVG, plugin and ZIP URLs continue to work; the two old `catalog.json` schemas remain separate.
+  JSON, SVG and plugin URLs continue to work; the two old `catalog.json` schemas remain separate.
 
 **Spotlight search:** press `/` or `Ctrl/Cmd + K` outside a text field, or click
 **Quick search** in the header. Search across every collection by Chinese/English
@@ -62,10 +62,7 @@ empty configuration you may also download `config/drawio-icons.en.json` or
 `config/drawio-icons.zh-CN.json`. Do not overwrite an existing configuration with
 these unmerged downloads.
 
-The **complete ZIP** (`downloads/drawio-icons.zip`) contains all 17 category XMLs
-in each language directory. `libraries/combined.xml` combines both collections
-into one panel. The older software ZIP and `libraries/all.xml` stay software-only;
-the original Alibaba ZIP and `drawio/all-icons.xml` stay Alibaba-only.
+Bulk ZIP archives are no longer published. Download individual SVG/PNG artwork from icon details, or load categories with XML and desktop JSON. `libraries/combined.xml` combines both collections into one panel; `libraries/all.xml` is software-only and `drawio/all-icons.xml` is Alibaba-only.
 
 Code, data and tests are maintained in this repository. The old Alibaba repository
 publishes a compatibility site from the latest successful source build, checking
@@ -97,14 +94,14 @@ categories, or search a project name in Spotlight.
 Most SVGs come from pinned CNCF artwork and Landscape sources. Karpenter and
 Sealed Secrets retain official publisher SVGs; Trivy, the three Argo subprojects
 and K9s retain official PNGs. The website, MCP search, draw.io libraries and
-offline ZIPs all use these same validated assets. See [third-party notices](THIRD_PARTY_NOTICES.md).
+individual downloads all use these same validated assets. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ## Monitoring and observability
 
 See the bilingual [changelog](https://icons.rambow.cloud/#changelog)
 for each batch of added, corrected or removed icons. Select an icon in the timeline
 to locate its current version. Both English and Chinese Markdown logs are included
-in the software and unified offline ZIPs; the website follows the selected language.
+as individual files on the website; the website follows the selected language.
 
 The **Monitoring & Security** category now includes Grafana Loki, Tempo, Mimir,
 Alloy and Pyroscope, plus VictoriaMetrics, VictoriaLogs, Thanos, Prometheus
@@ -131,7 +128,7 @@ The **Apps & Content Management** category includes WeChat, WeCom, DingTalk, QQ,
 
 WeChat, WeCom, DingTalk, QQ and Feishu use unmodified 512 × 512 color PNG application icons from their official publishers’ App Store listings. Feishu and Lark are separate entries. ServiceNow uses an upstream wordmark, not a newly drawn logo. Original colors and proportions are preserved.
 
-DingTalk is displayed through an SVG rounded-corner clip with transparent corners. The original PNG is embedded unchanged and also included separately in the ZIP. This is a project presentation adjustment, not a new official vector logo.
+DingTalk is displayed through an SVG rounded-corner clip with transparent corners. The original PNG is embedded unchanged and also available as an individual PNG. This is a project presentation adjustment, not a new official vector logo.
 
 ## Use the icons
 
@@ -143,7 +140,7 @@ Switch between English and Chinese using the header button. Your choice is remem
 
 The eight software categories are Data & Middleware, Cloud & Infrastructure, Developer Tools & DevOps, Languages & Runtimes, Frameworks & App Development, Analytics & AI, Monitoring & Security, and Apps & Content Management. Category titles on the website, in XML libraries and in desktop configurations use a **General Software ·** prefix, matching the **Alibaba Cloud ·** prefix. Git, Gitea, Forgejo, GitHub and GitLab all belong to Developer Tools & DevOps. Legacy category query parameters and XML URLs resolve to the merged categories.
 
-**Desktop: import all categories at once:** download and extract the latest ZIP, open a blank diagram in draw.io Desktop, then select the desired XML files inside `libraries/en/` (or `libraries/zh-CN/`) in your file manager and drag them together onto the drawing canvas. Release Ctrl/Shift before dropping. Each file loads as its own sidebar library, preserving their categories. Select the XML files, not the folder or ZIP; choose only one language directory.
+**Desktop: import categories:** use “Choose categories / desktop setup” to generate or merge JSON, then paste it into Extras → Configuration and restart. Alternatively, download category XML from icon details and use File → Open Library → Device. Each XML file remains a separate library with embedded artwork.
 
 For a single library, use **File → Open Library** in Desktop (the web version offers a **Device** submenu). `libraries/all.xml` merges all software icons into one library and does not preserve separate category panels. SVGs and PNGs are embedded for offline use. When updating, close the old category libraries before dragging in the new ones. Libraries begin with `<mxlibrary` so draw.io's [drop handler](https://github.com/jgraph/drawio/blob/dev/src/main/webapp/js/diagramly/EditorUi.js) can recognize them.
 
@@ -170,7 +167,7 @@ The frontend uses React + TypeScript with Vite, Tailwind CSS and shadcn/ui. `src
 
 The terminal and configuration editor share `CodePanel`, composed from shadcn/ui Card and Textarea, with `CopyButton` for clipboard feedback and manual-copy fallback. Terminal colors are scoped through `.terminal-theme`; command prompts are separate from the copied text. Run `npm run test:ui` for rendering, URL restoration, button semantics and configuration-text checks; these also run as part of `npm test`.
 
-The build first synchronizes `data/icons/*.json`, reusing verified local artwork and download caches, then validates the catalog, checks TypeScript, generates libraries and the ZIP, and writes the two static sites to `dist/` and `dist-alibaba/`. New or changed sources may require network access. `npm test` also synchronizes first so configuration-only contributions work in both CI pipelines. Use `npm run build:offline` to build already synchronized artifacts without downloading.
+The build first synchronizes `data/icons/*.json`, reusing verified local artwork and download caches, then validates the catalog, checks TypeScript, generates libraries and JSON configurations, and writes the two static sites to `dist/` and `dist-alibaba/`. New or changed sources may require network access. `npm test` also synchronizes first so configuration-only contributions work in both CI pipelines. Use `npm run build:offline` to build already synchronized artifacts without downloading.
 
 ## Collect and update
 
@@ -180,7 +177,7 @@ npm run sync -- --update
 npm run sync -- --refresh
 ```
 
-Add or edit an entry in `data/icons/*.json` and commit the configuration; builds download missing artwork and generate the catalog, search index, libraries and ZIP automatically. Source rules, download concurrency/timeouts and cache policy live in `data/icon-sources.json`. See [Icon configuration](docs/ICON_CONFIGURATION.md) for examples and cache settings. Do not hand-edit generated catalogs or locks.
+Add or edit an entry in `data/icons/*.json` and commit the configuration; builds download missing artwork and generate the catalog, search index, libraries and JSON configurations automatically. Source rules, download concurrency/timeouts and cache policy live in `data/icon-sources.json`. See [Icon configuration](docs/ICON_CONFIGURATION.md) for examples and cache settings. Do not hand-edit generated catalogs or locks.
 
 The default uses commits pinned in `data/sources.lock.json`. `--update` resolves current branches unless a source declares an explicit `revision`; `--refresh` bypasses local reuse and revalidates cached downloads without changing source revisions. Downloads are cached by URL and cache version. Expired entries use conditional HTTP when the server supplies validators. Download or artwork-validation failures leave existing assets, catalog and locks unchanged. Verified pinned local files need no network requests.
 
@@ -196,10 +193,9 @@ A monthly Actions workflow checks the configured selection, creates or reuses an
 - `assets/icons/` and `licenses/`: packaged SVG / PNG files and original collection licenses or rights notices.
 - `scripts/` and `src/`: collection / validation / generation tools and the bilingual static site.
 - `dist/catalog.json`: public catalog, `schemaVersion: 1`, version, categories and stable relative asset paths.
-- `dist/libraries/en/`, `dist/libraries/zh-CN/`: 8 category libraries per language, plus compatibility files for legacy URLs; `dist/libraries/all.xml`: all icons. The ZIP includes only current category libraries.
-- `dist/downloads/drawio-software-icons.zip`: SVGs, PNGs, libraries, catalog, guides and licenses.
+- `dist/libraries/en/`, `dist/libraries/zh-CN/`: 8 category libraries per language, plus compatibility files for legacy URLs; `dist/libraries/all.xml`: all icons.
 
-`README.md` is the default English guide; `README.zh-CN.md` is the Chinese guide. `README.en.md` remains a compatibility link. Both guides, `ICON_USAGE.md`, all upstream license texts and provenance are included in the downloadable ZIP. Commercial catalog entries expose `usagePolicy`, `usagePolicyUrl` and `brandPermissionStatus`; these describe project scope, not a vendor authorization.
+`README.md` is the default English guide; `README.zh-CN.md` is the Chinese guide. `README.en.md` remains a compatibility link. Both guides, `ICON_USAGE.md`, all upstream license texts and provenance are served as individual files alongside the libraries. Commercial catalog entries expose `usagePolicy`, `usagePolicyUrl` and `brandPermissionStatus`; these describe project scope, not a vendor authorization.
 
 Icon records expose `id/name/aliases/tags/category/softwareType/homepage/repository/asset/width/height/sha256/source`. Source metadata includes original URL, commit, path, variant, collection license and original SHA-256. Unverified software SPDX licenses are null; a collection license is never substituted for a software license.
 
@@ -213,6 +209,6 @@ Enable **Allow GitHub Actions to create and approve pull requests** under Settin
 
 ## Acceptance checks
 
-Open the published site and check language persistence, bilingual / alias search, type filtering, empty results, light / dark previews, source links and SVG / XML / ZIP downloads. Open single and multiple categories in draw.io, drag square and wide icons onto a canvas, resize, save and reopen. Import a downloaded category XML into draw.io Desktop and check icons offline.
+Open the published site and check language persistence, bilingual / alias search, type filtering, empty results, light / dark previews, source links and individual SVG/PNG downloads and XML/JSON loading. Open single and multiple categories in draw.io, drag square and wide icons onto a canvas, resize, save and reopen. Import a downloaded category XML into draw.io Desktop and check icons offline.
 
 Original code and documentation are MIT licensed. Artwork retains upstream licenses and trademark rights, including the GPL-covered ServiceNow SVG source. See the [icon usage policy](ICON_USAGE.md), [third-party notices](THIRD_PARTY_NOTICES.md) and [contribution guide](CONTRIBUTING.md).
