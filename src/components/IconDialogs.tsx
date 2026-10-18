@@ -5,6 +5,8 @@ import { searchSpotlight } from '../spotlight.mjs';
 import { iconDetailUrl } from '../icon-guides.mjs';
 import type { Icon } from '../types';
 import { CloseButton, Dialog, ExternalLink, Symbol } from './Ui';
+import { ArtworkPreview } from './ArtworkPreview';
+import { artworkSource, projectLabel } from '../icon-presentation.mjs';
 
 export function SpotlightDialog() {
   const s=useIcons(),{t,catalog,dark}=s;
@@ -24,10 +26,39 @@ export function SpotlightDialog() {
 }
 export function DetailDialog({icon}:{icon:Icon}) {
   const s=useIcons(),{t,dark,catalog,locale}=s,category=catalog.categories.find(c=>c.id===icon.category)!;
-  const sourceName=({devicon:'Devicon',dashboard:'Dashboard Icons',lobe:'Lobe Icons',vendor:'Vendor Icons SVG','alibaba-iconfont':'Alibaba Cloud · Iconfont','official-apps':t.officialPublisher} as Record<string,string>)[icon.source.id]??icon.source.id;
-  return <Dialog id="detail" labelledBy="detail-title" onClose={s.closeModal}><CloseButton onClose={s.closeModal}/><p className="eyebrow">{t.details}</p><div className={`detail-art${dark?' dark-preview':''}`}><img src={file(icon.asset)} width="96" height="96" alt={s.iconName(icon)}/></div><h2 id="detail-title">{s.iconName(icon)}</h2><div className="detail-tags"><span>{s.title(category)}</span><span>{s.typeLabel(icon.softwareType)}</span></div><div className="detail-actions"><ButtonLink variant="default" size="default"  href={file(icon.asset)} download><Symbol name="download"/>{icon.asset.endsWith('.png')?t.downloadPng:t.downloadSvg}</ButtonLink><ButtonLink variant="outline" size="default"  href={file(category.libraries[locale])} download>{t.downloadLibrary}</ButtonLink><ButtonLink variant="ghost" size="default" href={iconDetailUrl(locale,icon.id)}>{locale==='en'?'View full details':'查看完整详情'}</ButtonLink></div>
-    <dl><dt>{t.project}</dt><dd><ExternalLink href={icon.homepage}>{t.project} ↗</ExternalLink></dd>{icon.repository&&<><dt>{t.repository}</dt><dd><ExternalLink href={icon.repository}>{t.repository} ↗</ExternalLink></dd></>}<dt>{t.source}</dt><dd><ExternalLink href={icon.source.listing??icon.source.url}>{sourceName} ↗</ExternalLink></dd>{icon.source.publisher&&<><dt>{t.publisher}</dt><dd>{icon.source.publisher}</dd><dt>{t.sourceLink}</dt><dd><ExternalLink href={icon.source.url}>{icon.source.variant==='official-svg'?t.downloadSvg:t.downloadPng} ↗</ExternalLink></dd></>}<dt>{icon.source.publisher?t.rightsNotice:t.license}</dt><dd><ExternalLink href={file(icon.source.licenseUrl)}>{icon.source.collectionLicense} ↗</ExternalLink></dd><dt>{icon.source.publisher?t.contentPin:t.revision}</dt><dd><code>{icon.source.revision.slice(0,12)}</code></dd></dl>
-    <div className="detail-notes">{icon.source.id==='official-apps'&&icon.source.variant!=='official-svg'&&<p>{t.officialRaster}</p>}{icon.softwareType==='commercial'&&<p>{t.commercialUse} <ExternalLink href={file('ICON_USAGE.md')}>{t.usagePolicy} ↗</ExternalLink></p>}<p>{t.typeNote}</p><p>{t.brandNote}</p></div>
+  return <Dialog id="detail" labelledBy="detail-title" onClose={s.closeModal}>
+    <div className="detail-close-bar"><Button variant="ghost" size="icon" className="detail-close max-[760px]:size-11" onClick={s.closeModal} aria-label={t.close}><Symbol name="close"/></Button></div>
+    <div className="detail-layout">
+      <ArtworkPreview key={icon.id} icon={icon} locale={locale} src={file(icon.asset)} name={s.iconName(icon)} dark={dark}/>
+      <div className="detail-content">
+        <p className="detail-category">{s.title(category)}</p>
+        <div className="detail-title-row"><h2 id="detail-title">{s.iconName(icon)}</h2><span className="detail-type">{s.typeLabel(icon.softwareType)}</span></div>
+        <div className="detail-actions">
+          <ButtonLink href={file(icon.asset)} download><Symbol name="download"/>{icon.asset.endsWith('.png')?t.downloadPng:t.downloadSvg}</ButtonLink>
+          <ButtonLink variant="outline" className="shadow-none" href={file(category.libraries[locale])} download><Symbol name="download"/>{t.downloadLibrary}</ButtonLink>
+        </div>
+        <dl>
+          <dt>{t.project}</dt><dd><ExternalLink href={icon.homepage}>{projectLabel(icon.homepage)} ↗</ExternalLink></dd>
+          {icon.repository&&icon.repository!==icon.homepage&&<><dt>{t.repository}</dt><dd><ExternalLink href={icon.repository}>{projectLabel(icon.repository)} ↗</ExternalLink></dd></>}
+          <dt>{t.source}</dt><dd><ExternalLink href={icon.source.listing??icon.source.url}>{artworkSource(icon,locale)} ↗</ExternalLink></dd>
+          <dt>{icon.source.publisher?t.rightsNotice:t.license}</dt><dd><ExternalLink href={file(icon.source.licenseUrl)}>{icon.source.collectionLicense} ↗</ExternalLink></dd>
+          <dt>{locale==='en'?'Names and aliases':'名称与别名'}</dt><dd>{[...new Set([icon.name,icon.nameEn,...icon.aliases].filter(Boolean))].join(', ')}</dd>
+        </dl>
+        <div className="detail-notes">
+          <p>{t.brandNote}</p>
+          {icon.softwareType==='commercial'&&<p>{t.commercialUse} <ExternalLink href={file('ICON_USAGE.md')}>{t.usagePolicy} ↗</ExternalLink></p>}
+          <details><summary>{locale==='en'?'Usage notes and file verification':'使用说明与文件校验'}</summary>
+            {icon.source.id==='official-apps'&&icon.source.variant!=='official-svg'&&<p>{t.officialRaster}</p>}
+            <p>{t.typeNote}</p>
+            <dl>{icon.source.publisher&&<><dt>{t.publisher}</dt><dd>{icon.source.publisher}</dd><dt>{t.sourceLink}</dt><dd><ExternalLink href={icon.source.url}>{icon.source.variant==='official-svg'?t.downloadSvg:t.downloadPng} ↗</ExternalLink></dd></>}
+              <dt>{icon.source.publisher?t.contentPin:t.revision}</dt><dd><code>{icon.source.revision}</code></dd>
+              {icon.sha256&&<><dt>SHA-256</dt><dd><code>{icon.sha256}</code></dd></>}
+            </dl>
+          </details>
+        </div>
+        <a className="detail-full-link" href={iconDetailUrl(locale,icon.id)}>{locale==='en'?'View full details':'查看完整详情'}<Symbol name="arrow"/></a>
+      </div>
+    </div>
   </Dialog>;
 }
 export function LocalNotice() {

@@ -42,6 +42,8 @@ test('every catalog entry gets bilingual server-rendered details without per-ico
     const graph = schemas(html);
     assert.equal(graph[1].primaryImageOfPage.contentUrl, 'https://icons.rambow.cloud/' + item.asset);
     assert.equal(graph[2]['@type'], 'BreadcrumbList');
+    assert.deepEqual(graph[2].itemListElement.map(item => item.position), [1, 2, 3, 4]);
+    assert(graph[2].itemListElement[1].item.includes(`collection=${item.collection}#library`));
     assert(generated.get('sitemap.xml').includes(iconDetailUrl(locale, item.id)));
     assert(generated.get('llms.txt').includes(iconDetailUrl(locale, item.id)));
     assert(generated.get(`discover/${locale}/${item.collection}/${item.category}/index.html`).includes(iconDetailUrl(locale, item.id)));
@@ -54,6 +56,26 @@ test('every catalog entry gets bilingual server-rendered details without per-ico
   assert(png.includes('PNG 图标'));
   assert(png.includes('A &amp; B'));
   assert(png.includes('&lt;/script&gt;'));
+});
+
+test('detail backgrounds work without scripts and recommendations stay in the current category', async () => {
+  for (const locale of ['en', 'zh-CN']) {
+    const html = await (await handle(request(iconGuidePath(locale, icon.id)), assetEnv)).text();
+    const radios = [...html.matchAll(/<input\b[^>]*type="radio"[^>]*>/g)].map(match => match[0]);
+    assert.equal(radios.length, 3);
+    assert(radios.every(input => input.includes('aria-label=') && input.includes('name="artwork-background"')));
+    assert.equal(radios.filter(input => input.includes(' checked')).length, 1);
+    for (const value of ['light', 'dark', 'transparent']) assert(radios.some(input => input.includes(`value="${value}"`)));
+    assert(html.includes('SVG · 128 × 128'));
+    assert(!html.includes('CLEAR ORIGINS'));
+    assert(!html.includes('BUILD THE BIGGER PICTURE'));
+    const related = html.slice(html.indexOf('class="related-grid"'));
+    assert(related.includes(iconGuidePath(locale, 'keycloak').split('/').slice(-2).join('/')));
+    assert(!related.includes('alibaba%3Aiconfont-123'));
+    assert(!related.includes('/okta/'));
+    assert(html.includes(icon.homepage));
+    assert(html.includes('ICON_USAGE.md'));
+  }
 });
 
 test('valid URL aliases redirect once; unknown, malformed and extra-segment URLs return 404', async () => {

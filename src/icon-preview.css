@@ -1,0 +1,23 @@
+/* Native radios keep both React and server-rendered previews usable without JS. */
+.artwork-preview { margin: 0; min-width: 0; overflow: hidden; border: 1px solid #e1e2de; border-radius: 6px; background: #fff; color: #5d655f; }
+.artwork-stage { display: grid; place-items: center; min-height: 326px; padding: 40px; background: #fff; }
+.artwork-stage img { display: block; width: 208px; height: 208px; max-width: 100%; object-fit: contain; }
+.preview-controls { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 12px; min-height: 54px; padding: 7px 14px; border-top: 1px solid #e6e6e1; background: #fafaf8; font-size: 12px; line-height: 1.5; }
+.preview-backgrounds { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+.preview-backgrounds > span { margin-right: 8px; }
+.preview-choice { position: relative; display: grid; place-items: center; width: 36px; height: 36px; cursor: pointer; }
+.preview-choice input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.preview-swatch { display: block; width: 24px; height: 24px; border: 1px solid #d5d7d2; border-radius: 4px; background: #fff; pointer-events: none; }
+.swatch-dark { background: #252a29; }
+.swatch-transparent { background: repeating-conic-gradient(#e4e5e1 0% 25%, #fff 0% 50%) 0 0 / 10px 10px; }
+.preview-choice input:checked + .preview-swatch { outline: 2px solid #d9532c; outline-offset: 2px; }
+.preview-choice input:focus-visible + .preview-swatch { outline: 3px solid #252a29; outline-offset: 4px; }
+.preview-format { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.artwork-preview:has(input[value="dark"]:checked) .artwork-stage { background: #252a29; }
+.artwork-preview:has(input[value="transparent"]:checked) .artwork-stage { background: repeating-conic-gradient(#eeefec 0% 25%, #fff 0% 50%) 0 0 / 16px 16px; }
+@media (max-width: 760px) {
+  .artwork-stage { min-height: 260px; padding: 28px; }
+  .artwork-stage img { width: 152px; height: 152px; }
+  .preview-choice { width: 44px; height: 44px; }
+  .preview-controls { padding: 4px 12px; }
+}

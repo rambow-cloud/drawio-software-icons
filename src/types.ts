@@ -3,6 +3,7 @@ import type { Locale } from './i18n';
 export type Icon = {
   id:string; name:string; nameEn?:string; collection:string; categories?:string[]; aliases:string[]; tags:string[]; category:string; softwareType:string;
   asset:string; homepage:string; repository:string|null;
+  width?:number; height?:number; sha256?:string;
   source:{id:string;variant?:string;url:string;revision:string;collectionLicense:string;licenseUrl:string;listing?:string;publisher?:string};
 };
 export type Category = {id:string;collection:string;configData:string;name:string;nameEn:string;description:string;descriptionEn:string;keywords:string[];count:number;libraries:Record<Locale,string>;libraryRevisions?:Record<Locale,string>};

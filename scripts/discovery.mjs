@@ -6,7 +6,7 @@ import { iconGuidePath, iconDetailUrl } from '../src/icon-guides.mjs';
 import { siteUrl, escapeHtml, page, summary, categoryList, alibabaRedirect, text, link, relativeLink, alibabaHomeLink } from '../src/discovery-page.mjs';
 export { siteUrl, escapeHtml, homepageMetadata } from '../src/discovery-page.mjs';
 const locales = ['en', 'zh-CN'];
-const detailStyles = readFileSync(new URL('../src/icon-detail.css', import.meta.url), 'utf8');
+const detailStyles = ['icon-detail.css', 'icon-preview.css'].map(file => readFileSync(new URL(`../src/${file}`, import.meta.url), 'utf8')).join('\n');
 const absolute = path => new URL(path, siteUrl).href;
 const localized = (item, locale, field = 'name') => locale === 'en' ? item[`${field}En`] || item[field] : item[field];
 const categoryPath = (locale, category) => `discover/${locale}/${category.collection}/${category.id}/`;
