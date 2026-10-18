@@ -1,6 +1,7 @@
 // Shared HTML rendering for build-time catalogs and request-time icon pages. No Node APIs.
 import { homepages } from './homepage.mjs';
 import { iconGuides, iconGuidePath, iconDetailUrl, iconSiteUrl, legacyStaticIconIds } from './icon-guides.mjs';
+import { artworkFormat, artworkDimensions, artworkSource, previewBackgrounds, projectLabel } from './icon-presentation.mjs';
 
 export const siteUrl = iconSiteUrl;
 const repository = 'https://github.com/rambow-cloud/drawio-software-icons';
@@ -95,7 +96,7 @@ ${locales.map(lang => `<link rel="alternate" hreflang="${lang}" href="${absolute
 ${robotsMeta}\n${jsonLd({ '@context': 'https://schema.org', '@graph': [website, { '@type': 'CollectionPage', '@id': url, url, name: title, description, inLanguage: locale, isPartOf: { '@id': website['@id'] }, mainEntity: collectionList }] })}`;
 }
 
-export function page({ locale, suffix, title, documentTitle = title, description, body, items, image, detail = false }) {
+export function page({ locale, suffix, title, documentTitle = title, description, body, items, image, detail = false, breadcrumbs }) {
   const path = `discover/${locale}/${suffix}`;
   const otherLocale = locale === 'en' ? 'zh-CN' : 'en';
   const translated = `discover/${otherLocale}/${suffix}`;
@@ -106,8 +107,8 @@ export function page({ locale, suffix, title, documentTitle = title, description
     ...(image ? { primaryImageOfPage: { '@type': 'ImageObject', contentUrl: absolute(image.asset), caption: image.name } } : {}),
   }, { '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Architecture Icons', item: absolute(homepages[locale].path) },
-    ...(suffix ? [{ '@type': 'ListItem', position: 2, name: text[locale].contents, item: absolute(`discover/${locale}/`) }] : []),
-    { '@type': 'ListItem', position: suffix ? 3 : 2, name: title, item: absolute(path) },
+    ...(suffix ? (breadcrumbs || [{ name: text[locale].contents, path: `discover/${locale}/` }]).map((item, index) => ({ '@type': 'ListItem', position: index + 2, name: item.name, item: absolute(item.path) })) : []),
+    { '@type': 'ListItem', position: suffix ? (breadcrumbs?.length ?? 1) + 2 : 2, name: title, item: absolute(path) },
   ] }] };
   const html = `<!doctype html>
 <html lang="${locale}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -119,8 +120,8 @@ ${locales.map(lang => `<link rel="alternate" hreflang="${lang}" href="${absolute
 <meta property="og:locale" content="${locale === 'en' ? 'en_US' : 'zh_CN'}" /><meta name="twitter:card" content="summary" />
 <link rel="icon" type="image/svg+xml" href="${relativeLink(path, 'discover/favicon.svg')}" /><link rel="stylesheet" href="${relativeLink(path, detail ? 'discover/detail.css' : 'discover/style.css')}" />
 ${jsonLd(schema)}</head>${detail ? `<body><a class="skip-link" href="#content">${locale === 'en' ? 'Skip to content' : '跳至内容'}</a>
-<header class="topbar"><a class="brand" href="${relativeLink(path, homepages[locale].path)}" aria-label="Architecture Icons"><img src="${relativeLink(path, 'discover/favicon.svg')}" width="39" height="39" alt="" /><span>architecture<span class="brand-light">icons</span><small>for draw.io</small></span></a><nav aria-label="${locale === 'en' ? 'Main navigation' : '主导航'}">${link(path, homepages[locale].path, locale === 'en' ? 'Icon library' : '图标库')}${link(path, `discover/${locale}/`, locale === 'en' ? 'Categories' : '图标分类')}${link(path, `discover/${locale}/guide/`, locale === 'en' ? 'Usage guide' : '使用指南')}</nav><a class="language" href="${relativeLink(path, translated)}" hreflang="${otherLocale}">${text[locale].language}</a></header>
-<main id="content" class="detail-main"><nav class="breadcrumbs" aria-label="${locale === 'en' ? 'Breadcrumb' : '面包屑导航'}">${link(path, homepages[locale].path, locale === 'en' ? 'Home' : '首页')}<span aria-hidden="true">/</span>${link(path, `discover/${locale}/`, text[locale].contents)}<span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(image.name)}</span></nav>${body}</main>
+<header class="topbar"><a class="brand" href="${relativeLink(path, homepages[locale].path)}" aria-label="Architecture Icons"><img src="${relativeLink(path, 'discover/favicon.svg')}" width="39" height="39" alt="" /><span>architecture<span class="brand-light">icons</span><small>for draw.io</small></span></a><nav aria-label="${locale === 'en' ? 'Main navigation' : '主导航'}">${link(path, homepages[locale].path, locale === 'en' ? 'Icon library' : '图标合集')}${link(path, `discover/${locale}/`, locale === 'en' ? 'Categories' : '图标分类')}<a href="${relativeLink(path, homepages[locale].path)}#changelog">${locale === 'en' ? 'Changelog' : '更新日志'}</a>${link(path, `discover/${locale}/guide/`, locale === 'en' ? 'Usage guide' : '使用指南')}</nav><a class="language" href="${relativeLink(path, translated)}" hreflang="${otherLocale}">${text[locale].language}</a></header>
+<main id="content" class="detail-main"><nav class="breadcrumbs" aria-label="${locale === 'en' ? 'Breadcrumb' : '面包屑导航'}">${link(path, homepages[locale].path, locale === 'en' ? 'Home' : '首页')}<span aria-hidden="true">/</span>${breadcrumbs ? breadcrumbs.map(item => link(path, item.path, item.name)).join('<span aria-hidden="true">/</span>') : link(path, `discover/${locale}/`, text[locale].contents)}<span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(image.name)}</span></nav>${body}</main>
 <footer class="detail-footer"><span>architecture<span class="brand-light">icons</span> <small>for draw.io</small></span><div>${link(path, 'ICON_USAGE.md', locale === 'en' ? 'Icon usage' : '图标使用声明')}${link(path, 'THIRD_PARTY_NOTICES.md', locale === 'en' ? 'Third-party notices' : '第三方资源说明')}<a href="${repository}">GitHub ↗</a></div></footer></body>` : `<body><header><a href="${relativeLink(path, homepages[locale].path)}">Architecture Icons <small>for draw.io</small></a><nav>${link(path, `discover/${locale}/`, text[locale].contents)} · ${link(path, translated, text[locale].language)}</nav></header>
 <main><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p><p>${link(path, homepages[locale].path, text[locale].browse)}</p>${body}${usageLinks(path, locale)}</main>
 <footer>${link(path, `discover/${locale}/guide/`, text[locale].guide)}</footer></body>`}</html>\n`;
@@ -133,33 +134,40 @@ export function iconDetailPage(catalog, icon, locale) {
   const name = localized(icon, locale), path = iconGuidePath(locale, icon.id);
   const category = catalog.categories.find(c => c.id === icon.category);
   if (!category) throw Error(`Missing guide category for ${icon.id}`);
-  const format = icon.asset.endsWith('.png') ? 'PNG' : 'SVG';
+  const format = artworkFormat(icon);
   const collection = catalog.collections.find(c => c.id === icon.collection);
   const summary = guide?.[locale]?.summary || (en
     ? `${name} ${format} icon in the ${localized(collection, locale)} / ${localized(category, locale)} collection. Download the image, import category XML, or load it in draw.io.`
     : `${name} ${format} 图标，收录于${localized(collection, locale)}的${localized(category, locale)}分类。支持单图下载、分类 XML 与 draw.io 在线加载。`);
   const title = en ? `${name} ${format} Icon for draw.io` : `${name} ${format} 图标下载 | draw.io`;
   const library = category.libraries[locale];
-  const candidates = [...(guide?.related || []), ...catalog.icons.filter(i => i.category === icon.category || i.categories?.includes(icon.category)).map(i => i.id)];
-  const knownIds = new Set(catalog.icons.map(i => i.id));
-  const related = [...new Set(candidates)].filter(id => id !== icon.id && knownIds.has(id)).slice(0, 4);
+  const peers = new Map(catalog.icons.filter(i => i.id !== icon.id && (i.category === icon.category || i.categories?.includes(icon.category))).map(i => [i.id, i]));
+  const related = [...new Set([...(guide?.related || []), ...peers.keys()])].map(id => peers.get(id)).filter(Boolean).slice(0, 6);
   const download = (asset, label, primary = false) => `<a class="action${primary ? ' action-primary' : ''}" href="${escapeHtml(relativeLink(path, asset))}" download><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 15v5h16v-5"/></svg>${escapeHtml(label)}</a>`;
   const external = (url, label) => `<a href="${escapeHtml(/^https?:\/\//i.test(url || '') ? url : '#')}">${escapeHtml(label)}</a>`;
   const license = icon.source.licenseUrl || 'ICON_USAGE.md';
   const licenseLink = /^https?:/.test(license) ? external(license, icon.source.collectionLicense) : link(path, license, icon.source.collectionLicense);
   const drawio = `https://app.diagrams.net/?clibs=U${encodeURIComponent(absolute(library))}`;
-  const body = `<section class="icon-hero" aria-labelledby="icon-title"><figure class="preview"><div class="preview-top"><span>${en ? 'ARTWORK PREVIEW' : '图标预览'}</span><span class="format-tag">${format}</span></div><div class="preview-tile"><img src="${escapeHtml(relativeLink(path, icon.asset))}" alt="${escapeHtml(`${name} ${format} ${en ? 'icon' : '图标'}`)}" width="160" height="160" /></div><figcaption>${en ? 'Original colors · Ready for your canvas' : '保留原色 · 放入画布即可使用'}</figcaption></figure>
-<div class="icon-intro"><p class="eyebrow">${link(path, categoryPath(locale, category), localized(category, locale))}<span aria-hidden="true"> / </span>DRAW.IO</p><h1 id="icon-title">${escapeHtml(name)}<span>${en ? 'Architecture icon' : '架构图标'}</span></h1><p class="intro">${escapeHtml(summary)}</p><div class="actions">${download(icon.asset, en ? `Download ${format}` : `下载 ${format}`, true)}<a class="action" href="${escapeHtml(drawio)}">${en ? 'Open in draw.io' : '在 draw.io 中使用'} <span aria-hidden="true">↗</span></a></div><div class="secondary-action">${download(library, en ? 'Category XML' : '下载分类 XML')}<span>${en ? 'Embedded artwork for offline use' : '内嵌素材，支持离线使用'}</span></div>
-<aside class="provenance" aria-labelledby="provenance-title"><p class="eyebrow">CLEAR ORIGINS</p><h2 id="provenance-title">${en ? 'About this artwork' : '素材信息'}</h2><dl>
-<dt>${en ? 'Format' : '格式'}</dt><dd>${format}${icon.width && icon.height ? ` · ${icon.width} × ${icon.height}` : ''}</dd>
-<dt>${en ? 'Collection' : '图标集'}</dt><dd>${escapeHtml(localized(collection, locale))}</dd>
+  const previewLabel = en ? 'Preview background' : '预览背景';
+  const preview = `<figure class="artwork-preview"><div class="artwork-stage"><img src="${escapeHtml(relativeLink(path, icon.asset))}" alt="${escapeHtml(`${name} ${format} ${en ? 'icon' : '图标'}`)}" width="180" height="180" /></div><figcaption class="preview-controls"><div class="preview-backgrounds" role="group" aria-label="${previewLabel}"><span aria-hidden="true">${previewLabel}</span>${previewBackgrounds(locale).map(choice => `<label class="preview-choice" title="${choice.label}"><input type="radio" name="artwork-background" value="${choice.value}" aria-label="${choice.label}"${choice.value === 'light' ? ' checked' : ''} /><span class="preview-swatch swatch-${choice.value}" aria-hidden="true"></span></label>`).join('')}</div><span class="preview-format">${format}${artworkDimensions(icon)}</span></figcaption></figure>`;
+  const softwareType = (en ? { 'open-source': 'Open source', 'source-available': 'Source available', commercial: 'Commercial tool / service', unverified: 'Unverified' } : { 'open-source': '开源项目', 'source-available': '源码可用', commercial: '商业工具 / 服务', unverified: '待核实' })[icon.softwareType];
+  const breadcrumbs = [
+    { name: localized(collection, locale), path: homepages[locale].path + '?collection=' + encodeURIComponent(icon.collection) + '#library' },
+    { name: localized(category, locale), path: categoryPath(locale, category) },
+  ];
+  const body = `<section class="icon-hero" aria-labelledby="icon-title">${preview}
+<div class="icon-intro"><p class="detail-category">${escapeHtml(localized(collection, locale))}<span aria-hidden="true"> / </span>${link(path, categoryPath(locale, category), localized(category, locale))}</p><div class="detail-title-row"><h1 id="icon-title">${escapeHtml(name)}</h1>${softwareType ? `<span class="detail-type">${softwareType}</span>` : ''}</div><p class="intro">${escapeHtml(summary)}</p><div class="actions">${download(icon.asset, en ? `Download ${format}` : `下载 ${format}`, true)}<a class="action" href="${escapeHtml(drawio)}">${en ? 'Open in draw.io' : '在 draw.io 中使用'} <span aria-hidden="true">↗</span></a></div><div class="secondary-action">${download(library, en ? 'Category XML' : '下载分类 XML')}<span>${en ? 'Embedded artwork for offline use' : '内嵌素材，支持离线使用'}</span></div>
+<aside class="provenance" aria-label="${en ? 'Artwork information' : '素材信息'}"><dl>
+${icon.homepage ? `<dt>${en ? 'Project homepage' : '项目主页'}</dt><dd>${external(icon.homepage, projectLabel(icon.homepage) + ' ↗')}</dd>` : ''}
+${icon.repository && icon.repository !== icon.homepage ? `<dt>${en ? 'Project repository' : '项目仓库'}</dt><dd>${external(icon.repository, projectLabel(icon.repository) + ' ↗')}</dd>` : ''}
+<dt>${en ? 'Artwork source' : '图标来源'}</dt><dd>${external(icon.source.listing || icon.source.url, artworkSource(icon, locale) + ' ↗')}</dd>
+<dt>${icon.source.publisher ? (en ? 'Artwork terms' : '素材条款') : (en ? 'Collection license' : '图标集许可')}</dt><dd>${licenseLink}</dd>
 <dt>${en ? 'Names and aliases' : '名称与别名'}</dt><dd>${escapeHtml([...new Set([icon.name, icon.nameEn, ...(icon.aliases || [])].filter(Boolean))].join(', '))}</dd>
-<dt>${en ? 'Artwork source' : '素材来源'}</dt><dd>${external(icon.source.url, icon.source.publisher || icon.source.id)}</dd>
-<dt>${en ? 'Collection license / artwork terms' : '图标集许可／素材条款'}</dt><dd>${licenseLink}</dd>
 </dl><p class="rights-note">${en ? 'Software licensing and artwork rights are separate. Collection licenses do not grant additional trademark rights. Check the linked terms before reuse; this community collection is not an endorsement by the product owner.' : '软件许可与图形素材权利分别适用，图标集许可不额外授予商标权。使用前请查阅所链接的条款；本社区合集不代表产品所有者的背书。'}</p>
-<details><summary>${en ? 'Version & file verification' : '版本与文件校验'}</summary><dl><dt>${en ? 'Pinned revision' : '固定来源版本'}</dt><dd><code>${escapeHtml(icon.source.revision)}</code></dd><dt>SHA-256</dt><dd><code>${escapeHtml(icon.sha256)}</code></dd></dl></details></aside></div></section>
-${related.length ? `<section class="related"><div class="section-heading"><div><p class="eyebrow">BUILD THE BIGGER PICTURE</p><h2>${en ? 'Keep building' : '继续完善你的架构图'}</h2></div>${link(path, `discover/${locale}/`, en ? 'All categories →' : '浏览全部分类 →')}</div><div class="related-grid">${related.map(id => { const item = catalog.icons.find(i => i.id === id); return `<a class="related-card" href="${relativeLink(path, iconGuidePath(locale, id))}"><span class="related-art"><img src="${escapeHtml(relativeLink(path, item.asset))}" width="44" height="44" alt="" loading="lazy" /></span><span><strong>${escapeHtml(localized(item, locale))}</strong><small>${en ? 'Icon details' : '图标详情'}</small></span><span class="related-arrow" aria-hidden="true">↗</span></a>`; }).join('')}</div></section>` : ''}`;
-  return page({ locale, suffix: `icons/${encodeURIComponent(icon.id)}/`, title, description: summary, body, image: { asset: icon.asset, name }, detail: true });
+${icon.softwareType === 'commercial' ? `<p class="rights-note commercial-note">${text[locale].rights} ${link(path, 'ICON_USAGE.md', en ? 'Icon usage policy' : '图标使用声明')}</p>` : ''}
+<details><summary>${en ? 'Version & file verification' : '版本与文件校验'}</summary><dl>${icon.source.publisher ? `<dt>${en ? 'Original artwork' : '原始素材'}</dt><dd>${external(icon.source.url, artworkSource(icon, locale) + ' ↗')}</dd>` : ''}<dt>${en ? 'Pinned revision' : '固定来源版本'}</dt><dd><code>${escapeHtml(icon.source.revision)}</code></dd><dt>SHA-256</dt><dd><code>${escapeHtml(icon.sha256)}</code></dd></dl></details></aside></div></section>
+${related.length ? `<section class="related"><div class="section-heading"><h2>${en ? 'More in this category' : '同分类图标'}</h2>${link(path, categoryPath(locale, category), en ? 'View all →' : '查看全部 →')}</div><div class="related-grid">${related.map(item => `<a class="related-card" href="${escapeHtml(relativeLink(path, iconGuidePath(locale, item.id)))}"><span class="related-art"><img src="${escapeHtml(relativeLink(path, item.asset))}" width="64" height="64" alt="" loading="lazy" /></span><strong>${escapeHtml(localized(item, locale))}</strong></a>`).join('')}</div></section>` : ''}`;
+  return page({ locale, suffix: `icons/${encodeURIComponent(icon.id)}/`, title, description: summary, body, image: { asset: icon.asset, name }, detail: true, breadcrumbs });
 }
 
 export function legacyIconRedirects() {

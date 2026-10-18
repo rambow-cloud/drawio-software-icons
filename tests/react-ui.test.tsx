@@ -8,6 +8,7 @@ import { iconDetailUrl } from '../src/icon-guides.mjs';
 import { Header } from '../src/components/Home';
 import { BundleDialog } from '../src/components/BundleDialog';
 import { DetailDialog, SpotlightDialog } from '../src/components/IconDialogs';
+import { ArtworkPreview } from '../src/components/ArtworkPreview';
 import { McpDialog } from '../src/components/McpDialog';
 import { Button, ButtonLink } from '../src/components/ui/button';
 import { CodePanel } from '../src/components/CodePanel';
@@ -141,6 +142,36 @@ test('shared buttons preserve action/link semantics and loading disables repeate
   assert(!link.includes('role="button"'));
   for(const html of [render(<Page/>),render(<BundleDialog/>),render(<McpDialog/>),render(<SpotlightDialog/>),render(<DetailDialog icon={icon}/>)]) {
     for(const button of html.match(/<button\b[^>]*>/g)??[])assert(/data-slot="(button|select-trigger)"/.test(button),button);
+  }
+});
+
+test('artwork previews offer independent native background groups and retain raster dimensions',()=>{
+  for(const locale of ['en','zh-CN'] as const){
+    const item={...icon,asset:'icons/original.png',width:512,height:512};
+    const html=renderToStaticMarkup(<><ArtworkPreview icon={item} locale={locale} src={item.asset} name={item.name}/><ArtworkPreview icon={item} locale={locale} src={item.asset} name={item.name} dark/></>);
+    const inputs=[...html.matchAll(/<input\b[^>]*>/g)].map(match=>match[0]);
+    assert.equal(inputs.length,6);
+    assert(inputs.every(input=>input.includes('type="radio"')&&input.includes('aria-label=')));
+    const groups=inputs.map(input=>input.match(/name="([^"]+)"/)![1]);
+    assert.equal(new Set(groups).size,2,'separate previews must not change each other');
+    const checked=inputs.filter(input=>input.includes('checked=""'));
+    assert.equal(checked.length,2);
+    assert(checked[0].includes('value="light"'));
+    assert(checked[1].includes('value="dark"'));
+    assert(html.includes('PNG · 512 × 512'));
+    assert(!html.includes('<script>alert(1)</script>'));
+  }
+});
+
+test('compact details preserve publisher sources, usage restrictions and file verification',()=>{
+  const item={...icon,softwareType:'commercial',asset:'icons/original.png',sha256:'pinned-sha',source:{...icon.source,id:'official-apps',listing:'https://example.com/listing',publisher:'Official publisher',revision:'full-pinned-revision'}};
+  for(const locale of ['en','zh-CN'] as const){
+    const html=render(<DetailDialog icon={item}/>,locale);
+    for(const value of ['https://example.com/listing','https://example.com/logo.svg','full-pinned-revision','pinned-sha','ICON_USAGE.md',iconDetailUrl(locale,icon.id)])assert(html.includes(value),value);
+    assert(html.includes(locale==='en'?'Download PNG':'下载 PNG'));
+    assert(html.includes(locale==='en'?'Commercial icons are provided solely':'商业软件图标仅供'));
+    assert(html.includes(locale==='en'?'Official 512':'官方发布的 512'));
+    assert(html.includes('<details>'));
   }
 });
 
