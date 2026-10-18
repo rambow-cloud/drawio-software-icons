@@ -145,10 +145,10 @@ test('shared buttons preserve action/link semantics and loading disables repeate
   }
 });
 
-test('artwork previews offer independent native background groups and retain raster dimensions',()=>{
+test('artwork previews start transparent with independent native groups and original raster dimensions',()=>{
   for(const locale of ['en','zh-CN'] as const){
     const item={...icon,asset:'icons/original.png',width:512,height:512};
-    const html=renderToStaticMarkup(<><ArtworkPreview icon={item} locale={locale} src={item.asset} name={item.name}/><ArtworkPreview icon={item} locale={locale} src={item.asset} name={item.name} dark/></>);
+    const html=renderToStaticMarkup(<><ArtworkPreview icon={item} locale={locale} src={item.asset} name={item.name}/><ArtworkPreview icon={item} locale={locale} src={item.asset} name={item.name}/></>);
     const inputs=[...html.matchAll(/<input\b[^>]*>/g)].map(match=>match[0]);
     assert.equal(inputs.length,6);
     assert(inputs.every(input=>input.includes('type="radio"')&&input.includes('aria-label=')));
@@ -156,8 +156,7 @@ test('artwork previews offer independent native background groups and retain ras
     assert.equal(new Set(groups).size,2,'separate previews must not change each other');
     const checked=inputs.filter(input=>input.includes('checked=""'));
     assert.equal(checked.length,2);
-    assert(checked[0].includes('value="light"'));
-    assert(checked[1].includes('value="dark"'));
+    assert(checked.every(input=>input.includes('value="transparent"')));
     assert(html.includes('PNG · 512 × 512'));
     assert(!html.includes('<script>alert(1)</script>'));
   }

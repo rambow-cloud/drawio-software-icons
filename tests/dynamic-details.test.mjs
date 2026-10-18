@@ -64,7 +64,9 @@ test('detail backgrounds work without scripts and recommendations stay in the cu
     const radios = [...html.matchAll(/<input\b[^>]*type="radio"[^>]*>/g)].map(match => match[0]);
     assert.equal(radios.length, 3);
     assert(radios.every(input => input.includes('aria-label=') && input.includes('name="artwork-background"')));
-    assert.equal(radios.filter(input => input.includes(' checked')).length, 1);
+    const checked = radios.filter(input => input.includes(' checked'));
+    assert.equal(checked.length, 1);
+    assert(checked[0].includes('value="transparent"'));
     for (const value of ['light', 'dark', 'transparent']) assert(radios.some(input => input.includes(`value="${value}"`)));
     assert(html.includes('SVG · 128 × 128'));
     assert(!html.includes('CLEAR ORIGINS'));
