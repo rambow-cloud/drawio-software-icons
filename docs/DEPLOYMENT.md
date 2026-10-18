@@ -13,8 +13,10 @@ Cloudflare also serves the icon API used by MCP on either site.
 | `https://jinxiao.github.io/alibaba-cloud-icons/` | Alibaba compatibility repository GitHub Actions | `dist-alibaba-pages` |
 
 The Cloudflare and organization Pages homepages both render the application;
-neither redirects to the other. The Pages artifact is an identical copy of
-`dist`, including its homepage. Relative asset URLs support Cloudflare's `/`
+neither redirects to the other. The Pages artifact copies `dist`, including its
+homepage, and adds eight small redirects for the former static detail URLs.
+All standalone icon-detail links on either site point to the primary Cloudflare
+website, which renders them dynamically. Relative asset URLs support Cloudflare's `/`
 and Pages' `/drawio-software-icons/` path. Images, catalogs, downloads and draw.io
 library links resolve against the site being visited. Search runs in the browser
 and does not depend on the Cloudflare API.
@@ -22,7 +24,7 @@ and does not depend on the Cloudflare API.
 GitHub Pages hosts static files, so it has no `/api/*` endpoints. The MCP setup
 on both sites uses `https://icons.rambow.cloud/api/icons`. If Cloudflare is
 unavailable, browsing and downloads on Pages remain usable; MCP icon search
-still requires Cloudflare.
+and standalone icon details still require Cloudflare.
 
 Only the separate legacy Alibaba homepage redirects to Cloudflare, defaulting
 to the Alibaba Cloud collection and preserving query parameters and fragments.

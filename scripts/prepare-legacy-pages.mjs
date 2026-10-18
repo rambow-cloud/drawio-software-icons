@@ -3,6 +3,7 @@ import { resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { save, hash } from './lib.mjs';
 import { redirectHtml } from './legacy-redirect.mjs';
+import { legacyIconRedirects } from '../src/discovery-page.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 // Publish the full software site on GitHub Pages. Only the separate, legacy
@@ -14,6 +15,7 @@ for (const [source, folder, collection] of [['dist', 'dist-pages', 'software'], 
   if (stat?.isSymbolicLink()) throw Error('Output must not be a symlink');
   if (stat) await rm(target, { recursive: true });
   await cp(source, target, { recursive: true });
+  for (const [path, html] of legacyIconRedirects()) await save(`${target}/${path}`, html);
   if (collection === 'alibaba-cloud') {
     await save(`${target}/index.html`, redirectHtml(collection));
     const checksums = {};

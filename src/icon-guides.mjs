@@ -1,5 +1,9 @@
-// Curated guidance only: entries without an editorial guide keep their dialog.
-export const iconGuidePath = (locale, id) => `discover/${locale}/icons/${id}/`;
+// Every catalog entry has a dynamic detail URL; editorial copy is optional.
+export const iconSiteUrl = 'https://icons.rambow.cloud/';
+export const iconGuidePath = (locale, id) => `discover/${locale}/icons/${encodeURIComponent(id)}/`;
+export const iconDetailUrl = (locale, id) => new URL(iconGuidePath(locale, id), iconSiteUrl).href;
+// Only these pages existed as static documents on the Pages mirrors.
+export const legacyStaticIconIds = ['kubernetes', 'karpenter', 'keycloak', 'grafana'];
 export const iconGuides = {
   kubernetes: {
     reference: 'https://kubernetes.io/docs/concepts/overview/',

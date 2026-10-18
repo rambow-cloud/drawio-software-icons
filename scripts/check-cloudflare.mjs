@@ -4,6 +4,8 @@ import { json, hash } from './lib.mjs';
 import { search } from '../worker/search.mjs';
 import { searchSpotlight } from '../src/spotlight.mjs';
 import { homepages } from '../src/homepage.mjs';
+import { iconDetailUrl } from '../src/icon-guides.mjs';
+import { iconDetailPage, legacyIconRedirects } from '../src/discovery-page.mjs';
 
 const index = await json('.worker-build/search-index.json');
 const catalog = await json('dist/unified-catalog.json');
@@ -30,6 +32,20 @@ async function files(dir, prefix = '') {
 const assets = await files('dist');
 for (const dir of ['dist', 'dist-alibaba']) assert.ok(!(await files(dir)).some(path => path.endsWith('.zip')), `${dir}: bulk archives must not be published`);
 assert.ok(!assets.some(path => path.startsWith('guides/')), 'Retired raw guide copies must not be published');
+assert.ok(!assets.some(path => /^discover\/[^/]+\/icons\//.test(path)), 'Icon details must be rendered on request, not emitted per icon');
+const sitemap = await readFile('dist/sitemap.xml', 'utf8');
+const detailUrls = new Set();
+for (const icon of catalog.icons) for (const locale of ['en', 'zh-CN']) {
+  const url = iconDetailUrl(locale, icon.id);
+  assert.ok(!detailUrls.has(url), `Duplicate detail URL: ${url}`);
+  detailUrls.add(url);
+  assert.ok(sitemap.includes(`<loc>${url}</loc>`), `Missing dynamic URL: ${url}`);
+  const [, html] = iconDetailPage(catalog, icon, locale);
+  assert.ok(html.includes(`rel="canonical" href="${url}"`), `Canonical: ${url}`);
+  assert.ok(html.includes(`href="${locale === 'en' ? '../../../../en/' : '../../../../'}"`), `Localized home link: ${url}`);
+  assert.ok(html.includes(' download>'), `Single icon download: ${url}`);
+}
+assert.equal(detailUrls.size, catalog.icons.length * 2);
 assert.ok(assets.length <= 20000);
 assert.ok(!assets.includes('CNAME'), 'The GitHub Pages site must keep its github.io domain');
 const homepage = await readFile('dist/index.html', 'utf8');
@@ -61,7 +77,9 @@ for (const path of assets) assert.ok((await readFile(`dist/${path}`)).length <= 
 for (const [source, target] of [['dist', 'dist-pages'], ['dist-alibaba', 'dist-alibaba-pages']]) {
   const legacy = target === 'dist-alibaba-pages';
   if (legacy) assert.match(await readFile(`${target}/index.html`, 'utf8'), /location.replace/);
-  assert.deepEqual((await files(target)).sort(), (await files(source)).sort(), `Publishing file set: ${target}`);
+  const redirects = legacyIconRedirects();
+  assert.deepEqual((await files(target)).sort(), [...await files(source), ...redirects.keys()].sort(), `Publishing file set: ${target}`);
+  for (const [path, html] of redirects) assert.equal(await readFile(`${target}/${path}`, 'utf8'), html, `Retired mirror detail: ${target}/${path}`);
   for (const path of await files(source)) {
     if (legacy && ['index.html', 'SHA256SUMS.json'].includes(path)) continue;
     assert.equal(hash(await readFile(`${target}/${path}`)), hash(await readFile(`${source}/${path}`)), `Published resource: ${target}/${path}`);
@@ -69,4 +87,4 @@ for (const [source, target] of [['dist', 'dist-pages'], ['dist-alibaba', 'dist-a
 }
 const checksums = await json('dist-alibaba-pages/SHA256SUMS.json');
 for (const [path, sha] of Object.entries(checksums)) assert.equal(hash(await readFile(`dist-alibaba-pages/${path}`)), sha);
-console.log(`Verified ${index.icons.length} searchable icons, ${assets.length} Cloudflare assets, the identical full GitHub Pages site and legacy Alibaba resources.`);
+console.log(`Verified ${index.icons.length} searchable icons, ${detailUrls.size} dynamic detail URLs, ${assets.length} Cloudflare assets and the Pages mirrors with eight legacy detail redirects.`);

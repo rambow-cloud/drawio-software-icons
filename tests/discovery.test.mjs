@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { discoveryFiles, homepageMetadata, siteUrl } from '../scripts/discovery.mjs';
 import { homepages, homepageTitle, homepageDescription } from '../src/homepage.mjs';
-import { iconGuides, iconGuidePath } from '../src/icon-guides.mjs';
+import { iconGuides, iconGuidePath, iconDetailUrl } from '../src/icon-guides.mjs';
+
+import { iconDetailPage } from '../src/discovery-page.mjs';
 
 const categories = [
   { id: 'software-category', collection: 'software', name: '软件分类', nameEn: 'Software category', description: '软件图标', descriptionEn: 'Software icons', count: 1, libraries: { en: 'libraries/en/Software Category.xml', 'zh-CN': 'libraries/zh-CN/软件分类.xml' } },
@@ -36,9 +38,10 @@ test('localized homepage metadata has reciprocal URLs and one consistent locale'
 test('curated icon pages have content, downloads, provenance and inbound category links', () => {
   const icons = Object.keys(iconGuides).map(id => ({ ...icon, id, name: id, nameEn: id, source: { ...icon.source, revision: 'pinned-source', licenseUrl: 'ICON_USAGE.md' }, sha256: 'pinned-artwork' }));
   const generated = discoveryFiles({ ...catalog, icons });
-  assert.equal([...generated.keys()].filter(path => /\/icons\/[^/]+\/index.html$/.test(path)).length, 8);
+  assert.equal([...generated.keys()].filter(path => /\/icons\/[^/]+\/index.html$/.test(path)).length, 0);
+  assert.equal(generated.size, files.size, 'HTML file count must not grow with icon count');
   for (const item of icons) for (const locale of ['en', 'zh-CN']) {
-    const path = iconGuidePath(locale, item.id), html = generated.get(path + 'index.html');
+    const path = iconGuidePath(locale, item.id), html = iconDetailPage({ ...catalog, icons }, item, locale)[1];
     assert(html.includes(iconGuides[item.id][locale].diagram));
     assert(html.includes(iconGuides[item.id][locale].tip));
     assert(html.includes(iconGuides[item.id].reference));
@@ -53,11 +56,11 @@ test('curated icon pages have content, downloads, provenance and inbound categor
     assert(html.includes('rel="canonical" href="'+siteUrl+path+'"'));
     assert(html.includes('SVG '+(locale==='en'?'icon':'图标')));
     assert(generated.get('sitemap.xml').includes(siteUrl+path));
-    assert(generated.get(`discover/${locale}/software/software-category/index.html`).includes(`../../icons/${item.id}/`));
+    assert(generated.get(`discover/${locale}/software/software-category/index.html`).includes(iconDetailUrl(locale, item.id)));
     for (const [,href] of html.matchAll(/(?:href|src)="([^"<>]+)"/g)) {
       if (/^https?:/.test(href)) continue;
       const target = decodeURIComponent(new URL(href, siteUrl+path).pathname.slice(1));
-      assert(['', 'en/', 'discover/favicon.svg', 'icons/test.svg', 'library.xml', 'ICON_USAGE.md', 'THIRD_PARTY_NOTICES.md', 'compat/alibaba-cloud/NOTICE.md', ...categories.flatMap(c=>Object.values(c.libraries))].includes(target) || generated.has(target) || generated.has(target+'index.html'), target);
+      assert(['', 'en/', 'discover/favicon.svg', 'icons/test.svg', 'library.xml', 'ICON_USAGE.md', 'THIRD_PARTY_NOTICES.md', 'compat/alibaba-cloud/NOTICE.md', ...categories.flatMap(c=>Object.values(c.libraries))].includes(target) || generated.has(target) || generated.has(target+'index.html') || icons.some(i => ['en','zh-CN'].some(lang => iconGuidePath(lang,i.id) === target)), target);
     }
   }
 });
@@ -96,7 +99,7 @@ test('current bilingual discovery titles are concise, unique and retain category
 test('sitemap contains indexable pages and excludes migrated collection URLs', () => {
   const urls = [...files.get('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
   assert.equal(contentPages.length, 2 * (categories.length + 2));
-  assert.deepEqual(urls, [siteUrl, siteUrl+'en/', ...contentPages.map(([path]) => new URL(path.replace(/index\.html$/, ''), siteUrl).href)]);
+  assert.deepEqual(urls, [siteUrl, siteUrl+'en/', ...contentPages.map(([path]) => new URL(path.replace(/index\.html$/, ''), siteUrl).href), ...catalog.icons.flatMap(i => ['en','zh-CN'].map(locale => iconDetailUrl(locale,i.id)))]);
   assert.equal(new Set(urls).size, urls.length);
   assert.deepEqual(files.get('urls.txt').trim().split('\n'), urls);
   assert(!files.get('sitemap.xml').includes('lastmod'), 'Do not invent content modification dates');

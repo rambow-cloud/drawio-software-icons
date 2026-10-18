@@ -10,7 +10,9 @@ Alibaba compatibility repository retains its legacy homepage redirect.
 
 The website is deployed with **Workers Static Assets**. Existing HTML, JS, SVG,
 PNG, JSON and XML paths are served directly by static asset hosting. Only
-`/api` and `/api/*` use Worker-first routing. Missing static files return 404;
+`/api`, `/api/*` and `/discover/{locale}/icons/*` use Worker-first routing. Icon
+details are rendered from the deployed catalog by one shared HTML template;
+there are no per-icon HTML or JSON files. Missing static files return 404;
 they must not return the homepage in place of an XML library or image.
 
 No database, R2 bucket, KV namespace, Node server or runtime upstream fetch is

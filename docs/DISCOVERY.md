@@ -47,16 +47,29 @@ pages. Category labels are real links to the corresponding static category;
 ordinary clicks retain client filtering, while opening in a new tab or using
 the explicit category-details link opens the HTML page.
 
-## Curated icon detail pages
+## Dynamic icon detail pages
 
-`src/icon-guides.mjs` contains bilingual editorial guidance for Kubernetes,
-Karpenter, Keycloak and Grafana. Only these four entries generate pages at
-`/discover/{locale}/icons/{id}/`; no empty pages are emitted for other icons.
-Each page contains diagram-specific guidance, links to product documentation,
-the actual catalog artwork/source/revision/license, SVG or PNG download,
-category XML, online import and offline instructions. Product facts link to
-primary documentation; diagram layout advice is this project's editorial guidance.
+Every catalog entry has Chinese and English details at
+`/discover/{locale}/icons/{encoded-id}/`. The Worker uses the unified catalog
+bundled with that deployment and a shared runtime-safe HTML renderer. It does
+not fetch a catalog from an upstream service or generate per-icon HTML/JSON files.
+Adding a catalog entry automatically adds its routes, sitemap entries and links.
+
+The existing editorial guidance for Kubernetes, Karpenter, Keycloak and Grafana
+is preserved. Other pages describe actual catalog names, aliases, collection,
+category, format, source, revision and license with general import instructions;
+they do not invent product capabilities. All pages provide single-image downloads,
+category XML, online draw.io loading and a link to the JSON/MCP usage guide.
 Artwork rights are distinct from the software license.
+
+Homepage cards are real links. Ordinary clicks keep the quick dialog; opening
+in a new tab follows the standalone detail URL. Every dialog and category entry
+links to the full details. GitHub Pages links use the primary domain, and only
+the eight previously published mirror detail URLs retain tiny redirect files.
+GET and HEAD are supported; unknown icons return 404, other methods return 405.
+Missing trailing slashes, encoded aliases and index.html variants of valid
+icons redirect to one canonical URL. HTML uses ETag revalidation, so new catalog
+data or template changes invalidate cached responses without a persistent cache.
 
 Category cards link to these pages and their interactive dialogs expose a guide
 link. Both languages enter `sitemap.xml` and `urls.txt`; each page has a canonical,
