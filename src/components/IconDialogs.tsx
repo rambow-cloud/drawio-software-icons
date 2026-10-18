@@ -25,11 +25,11 @@ export function SpotlightDialog() {
   </Dialog>;
 }
 export function DetailDialog({icon}:{icon:Icon}) {
-  const s=useIcons(),{t,dark,catalog,locale}=s,category=catalog.categories.find(c=>c.id===icon.category)!;
+  const s=useIcons(),{t,catalog,locale}=s,category=catalog.categories.find(c=>c.id===icon.category)!;
   return <Dialog id="detail" labelledBy="detail-title" onClose={s.closeModal}>
     <div className="detail-close-bar"><Button variant="ghost" size="icon" className="detail-close max-[760px]:size-11" onClick={s.closeModal} aria-label={t.close}><Symbol name="close"/></Button></div>
     <div className="detail-layout">
-      <ArtworkPreview key={icon.id} icon={icon} locale={locale} src={file(icon.asset)} name={s.iconName(icon)} dark={dark}/>
+      <ArtworkPreview key={icon.id} icon={icon} locale={locale} src={file(icon.asset)} name={s.iconName(icon)}/>
       <div className="detail-content">
         <p className="detail-category">{s.title(category)}</p>
         <div className="detail-title-row"><h2 id="detail-title">{s.iconName(icon)}</h2><span className="detail-type">{s.typeLabel(icon.softwareType)}</span></div>
