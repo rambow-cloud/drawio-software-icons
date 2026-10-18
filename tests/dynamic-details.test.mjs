@@ -29,6 +29,10 @@ test('every catalog entry gets bilingual server-rendered details without per-ico
     assert.equal((html.match(/<h1\b/g) || []).length, 1);
     assert(html.includes('original-revision'));
     assert(html.includes('original-sha'));
+    assert(!html.includes('IN YOUR ARCHITECTURE'));
+    assert(!html.includes('FROM LIBRARY TO CANVAS'));
+    assert(!html.includes('class="import-steps"'));
+    assert(html.indexOf('class="provenance"') < html.indexOf('</section>'));
     assert(html.includes(' download>'));
     assert(html.includes('clibs=U'));
     assert(!html.includes('noindex'));

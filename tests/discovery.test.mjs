@@ -42,9 +42,10 @@ test('curated icon pages have content, downloads, provenance and inbound categor
   assert.equal(generated.size, files.size, 'HTML file count must not grow with icon count');
   for (const item of icons) for (const locale of ['en', 'zh-CN']) {
     const path = iconGuidePath(locale, item.id), html = iconDetailPage({ ...catalog, icons }, item, locale)[1];
-    assert(html.includes(iconGuides[item.id][locale].diagram));
-    assert(html.includes(iconGuides[item.id][locale].tip));
-    assert(html.includes(iconGuides[item.id].reference));
+    assert(html.includes(iconGuides[item.id][locale].summary));
+    assert(!html.includes('IN YOUR ARCHITECTURE'));
+    assert(!html.includes('FROM LIBRARY TO CANVAS'));
+    assert(html.indexOf('class="provenance"') < html.indexOf('</section>'), 'Artwork information belongs in the top section');
     assert(html.includes('pinned-source'));
     assert(html.includes('pinned-artwork'));
     assert(html.includes(' download>'));

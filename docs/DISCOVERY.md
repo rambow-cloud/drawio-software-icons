@@ -55,11 +55,13 @@ bundled with that deployment and a shared runtime-safe HTML renderer. It does
 not fetch a catalog from an upstream service or generate per-icon HTML/JSON files.
 Adding a catalog entry automatically adds its routes, sitemap entries and links.
 
-The existing editorial guidance for Kubernetes, Karpenter, Keycloak and Grafana
-is preserved. Other pages describe actual catalog names, aliases, collection,
-category, format, source, revision and license with general import instructions;
-they do not invent product capabilities. All pages provide single-image downloads,
-category XML, online draw.io loading and a link to the JSON/MCP usage guide.
+Concise product summaries for Kubernetes, Karpenter, Keycloak and Grafana
+are preserved. Other pages describe actual catalog names, aliases, collection,
+category, format, source, revision and license; they do not invent product
+capabilities. Artwork information sits below the download controls beside the
+preview. Repetitive architecture advice and import walkthroughs are omitted.
+All pages provide single-image downloads, category XML and online draw.io loading;
+the header links to the shared usage guide.
 Artwork rights are distinct from the software license.
 
 Homepage cards are real links. Ordinary clicks keep the quick dialog; opening
