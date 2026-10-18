@@ -3,6 +3,14 @@ import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import { parse } from 'yaml';
 
+test('both homepage templates keep catalog fallbacks without retired archive links', async () => {
+  for (const path of ['index.html', 'en/index.html']) {
+    const html = await readFile(path, 'utf8');
+    assert(!html.includes('.zip'), path);
+    assert.match(html, /<noscript>.*<a href="[^\"]*discover\//);
+  }
+});
+
 test('Actions retains only a temporary Pages transfer and always cleans up after deployment', async () => {
   for (const name of await readdir('.github/workflows')) {
     const workflow = parse(await readFile(`.github/workflows/${name}`, 'utf8'));
