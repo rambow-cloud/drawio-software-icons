@@ -1,12 +1,12 @@
 /* Icon details share the homepage brand without changing homepage styles. */
 :root {
   font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-  color: #252a29;
-  background: #f8f7f4;
+  color: var(--brand-ink);
+  background: var(--brand-paper);
   font-synthesis: none;
-  --accent: #d9532c;
-  --muted: #5d655f;
-  --border: #e4e5df;
+  --accent: var(--brand-blue);
+  --muted: var(--brand-muted);
+  --border: var(--brand-line);
 }
 * { box-sizing: border-box; }
 body { margin: 0; }
@@ -22,14 +22,14 @@ img { object-fit: contain; max-width: 100%; }
 .topbar { max-width: 1440px; margin: auto; padding: 25px 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--border); }
 .brand { display: flex; align-items: center; gap: 11px; font-size: 21px; font-weight: 750; letter-spacing: -.8px; }
 .brand img { flex-shrink: 0; }
-.brand-light { font-weight: 400; color: #676d69; }
-.brand small { display: block; margin-top: 1px; font-size: 10px; letter-spacing: 1.2px; color: #747976; font-weight: 500; }
-.topbar nav { display: flex; gap: 28px; font-size: 13px; color: #646b66; }
+.brand-light { font-weight: 400; color: var(--brand-muted); }
+.brand small { display: block; margin-top: 1px; font-size: 10px; letter-spacing: 1.2px; color: var(--brand-muted); font-weight: 500; }
+.topbar nav { display: flex; gap: 28px; font-size: 13px; color: var(--brand-muted); }
 .language { padding: 9px 12px; font-size: 12px; border-radius: 6px; }
-.language:hover { background: #e9ede2; }
+.language:hover { background: var(--brand-wash); }
 .detail-main { max-width: 1280px; padding: 0 64px 56px; margin: auto; }
 .breadcrumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 28px 0 32px; font-size: 12px; color: var(--muted); }
-.breadcrumbs [aria-current] { color: #252a29; }
+.breadcrumbs [aria-current] { color: var(--brand-ink); }
 .icon-hero { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 44px; align-items: start; padding: 0 0 36px; }
 .icon-intro { min-width: 0; }
 .detail-category { margin-bottom: 16px; font-size: 12px; line-height: 1.6; color: var(--muted); }
@@ -38,13 +38,13 @@ img { object-fit: contain; max-width: 100%; }
 .detail-type { font-size: 12px; color: var(--muted); }
 .intro { margin: 20px 0 22px; font-size: 14px; color: var(--muted); }
 .actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.action { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 42px; padding: 10px 16px; border: 1px solid #dedfd9; border-radius: 6px; font-size: 13px; font-weight: 550; background: #fff; }
+.action { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 42px; padding: 10px 16px; border: 1px solid var(--brand-line); border-radius: 6px; font-size: 13px; font-weight: 550; background: #fff; }
 .action svg { flex-shrink: 0; }
-.action:hover { background: #f0f1ec; color: #252a29; }
+.action:hover { background: var(--brand-wash); color: var(--brand-ink); }
 .action-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-.action-primary:hover { background: #bc4320; border-color: #bc4320; color: #fff; }
+.action-primary:hover { background: var(--brand-blue-hover); border-color: var(--brand-blue-hover); color: #fff; }
 .secondary-action { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-top: 16px; font-size: 12px; color: var(--muted); }
-.secondary-action .action { min-height: 32px; padding: 4px 0; border: 0; background: transparent; font-size: 12px; color: #252a29; }
+.secondary-action .action { min-height: 32px; padding: 4px 0; border: 0; background: transparent; font-size: 12px; color: var(--brand-ink); }
 .secondary-action .action:hover { color: var(--accent); }
 .provenance { margin-top: 20px; border-top: 1px solid var(--border); min-width: 0; }
 dl { margin: 0; font-size: 13px; }
@@ -65,7 +65,7 @@ h2 { font-size: 23px; font-weight: 600; letter-spacing: -.6px; line-height: 1.5;
 .section-heading > a { font-size: 12px; color: var(--muted); }
 .related-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 20px; }
 .related-card { display: flex; flex-direction: column; align-items: center; gap: 14px; min-width: 0; padding: 16px 8px; text-align: center; border-radius: 6px; }
-.related-card:hover { background: #f0f1ec; }
+.related-card:hover { background: var(--brand-wash); }
 .related-art { display: grid; place-items: center; width: 80px; height: 80px; }
 .related-art img { width: 64px; height: 64px; }
 .related-card strong { font-size: 13px; line-height: 1.6; font-weight: 500; overflow-wrap: anywhere; }

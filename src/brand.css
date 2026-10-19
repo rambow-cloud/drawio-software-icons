@@ -1,0 +1,22 @@
+/* Shared palette from https://rambow.cloud/zh/ and https://blog.rambow.cloud/zh/. */
+:root {
+  --brand-paper: #edf5fc;
+  --brand-surface: #ffffff;
+  --brand-surface-soft: #f8fbff;
+  --brand-ink: #142f55;
+  --brand-muted: #526d8c;
+  --brand-blue: #0078bb;
+  --brand-blue-hover: #00669f;
+  --brand-cyan: #00a6ed;
+  --brand-wash: #e8f2fb;
+  --brand-selected: #dfedf9;
+  --brand-line: #5d89bd38;
+  --brand-line-strong: #b5cce2;
+  --brand-scrollbar: #91adc9;
+  --brand-shadow-soft: #142f5508;
+  --brand-shadow: #142f5512;
+  --brand-shadow-raised: #142f5526;
+  --brand-shadow-dialog: #142f5530;
+  --brand-backdrop: #142f555c;
+  --brand-focus-halo: #0078bb18;
+}
