@@ -64,7 +64,7 @@
     "manifest": "data/official-icons.json",
     "license": "Proprietary brand artwork; permission not verified",
     "licenseFile": "licenses/official-apps-LICENSE.txt",
-    "revision": "124c970535b43b29ac09a01c24c5f8a022982501ca924ec870e93bc4e56a1cda"
+    "revision": "ccaecef77f52d1af123c48376fa19e116ecc72f3237d9e2c2cbfe9894698edf6"
   },
   "vendor": {
     "kind": "github",

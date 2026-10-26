@@ -1,4 +1,14 @@
 {
+  "aider": {
+    "url": "https://raw.githubusercontent.com/Aider-AI/aider/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/website/assets/icons/android-chrome-384x384.png",
+    "format": "png",
+    "publisher": "Aider project contributors",
+    "listing": "https://github.com/Aider-AI/aider",
+    "retrievedOn": "2026-10-27",
+    "sha256": "1bdc5eaa7b2cc20519b252288607caff2d0d1dfadc89bdc5a25f89e6e7f4d89c",
+    "width": 384,
+    "height": 384
+  },
   "alloy": {
     "format": "svg",
     "name": "Grafana Alloy",

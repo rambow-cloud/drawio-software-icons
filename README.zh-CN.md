@@ -19,15 +19,15 @@
 优先使用内置形状，结果不足时补充本站图标。可试着说：
 「请用 Draw.io MCP 搜索 ScyllaDB 图标，并绘制一个数据库节点。」
 
-554 个软件与服务图标，8 个用途分类，支持中英文浏览、搜索与分类库下载。以开源项目为主，兼收常用商业工具，优先使用上游原色 SVG。
+563 个软件与服务图标，8 个用途分类，支持中英文浏览、搜索与分类库下载。以开源项目为主，兼收常用商业工具，优先使用上游原色 SVG。
 
 **商业图标使用范围：** 本项目中的商业软件与服务图标仅适用于 draw.io / diagrams.net 架构图绘制，不适用于其他发行用途。本项目不额外授予品牌使用权，也不覆盖上游许可证。原创代码和文档继续采用 MIT 许可。使用商业品牌图标前请阅读中英双语 [图标使用声明](ICON_USAGE.md)。
 
 
 ## 图标集合并，两个旧网址保留
 
-现在包含 **554 个软件与服务图标**（8 类）和 **888 个阿里云图标条目**（9 个来源分类），
-共 **1,442 个条目、两个图标集**。阿里云条目包含颜色变体和 UI 补充图形，不代表 888 种独立云服务。
+现在包含 **563 个软件与服务图标**（8 类）和 **888 个阿里云图标条目**（9 个来源分类），
+共 **1,451 个条目、两个图标集**。阿里云条目包含颜色变体和 UI 补充图形，不代表 888 种独立云服务。
 分类、界面和使用流程支持中英文；上游没有英文产品名称的条目保留原名。
 
 - [软件入口](https://icons.rambow.cloud/)默认选中「通用软件」。
@@ -99,6 +99,15 @@ Dashboard Icons。保留原色及比例，VictoriaMetrics 使用上游单色标�
 图标权利与软件许可证分别适用，详见[第三方说明](THIRD_PARTY_NOTICES.md)。
 
 ## AI 工具与品牌
+
+**AI 编程智能体：**「数据分析与 AI」现已收录 OpenCode、Pi、Claude Code、
+Codex、Gemini CLI、Cline、Roo Code、Goose 和 Aider。搜索 `AI agent`、
+`coding agent`、`编程智能体`，或 `Pi Coding Agent`、`Claude Dev`、`Roo Cline`
+等别名即可查找；已有 Cursor、GitHub Copilot 也补充相同智能体搜索词。
+8 个 SVG 沿用固定版本的 Lobe Icons；Aider 使用官方 384 × 384 PNG，固定
+仓库提交和 SHA-256，在单图下载与 draw.io 图标库中保留原始像素。Claude Code
+归为商业工具，其余 8 项按链接所指的开源 CLI 或编辑器项目分类，与托管服务和
+模型 API 的许可分别记录。
 
 「数据分析与 AI」新增 vLLM、DeepSeek、Qwen、Google Gemini、ChatGPT、Claude、Hugging Face、LangChain、LlamaIndex、Dify、Open WebUI、LM Studio、Perplexity、ComfyUI、Cursor 和 GitHub Copilot，与已有 Ollama、PyTorch、TensorFlow 放在一起。支持产品名、深度求索 / 通义千问 / 千问等中文别名，以及 AI / LLM / RAG / 推理 / 智能体等搜索词。
 
