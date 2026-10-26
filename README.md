@@ -21,15 +21,15 @@ MCP Server URL. The official `search_shapes` tool uses built-in shapes first and
 supplements sparse results with icons from this service. Try: “Use Draw.io MCP
 to search for the ScyllaDB icon and draw a database node.”
 
-554 software and service icons across 8 categories. Bilingual browsing, search and library downloads, focused on open-source projects with selected commercial tools. Original-color upstream SVGs are preferred.
+563 software and service icons across 8 categories. Bilingual browsing, search and library downloads, focused on open-source projects with selected commercial tools. Original-color upstream SVGs are preferred.
 
 **Commercial icon usage:** commercial software and service icons are provided solely for drawing draw.io / diagrams.net architecture diagrams, not for other distribution purposes. The project does not grant additional brand rights or override upstream licenses. Original code and documentation remain MIT licensed. Read the bilingual [icon usage policy](ICON_USAGE.md) before using commercial brand assets.
 
 
 ## Unified collections, unchanged URLs
 
-The site now combines **554 software and service icons** in 8 categories with
-**888 Alibaba Cloud icon entries** in 9 source categories: **1,442 entries across
+The site now combines **563 software and service icons** in 8 categories with
+**888 Alibaba Cloud icon entries** in 9 source categories: **1,451 entries across
 two collections**. Alibaba counts include color variants and supplemental UI
 symbols, not 888 distinct cloud services. Original names remain where no upstream
 English product name exists; categories, browsing and setup are bilingual.
@@ -117,6 +117,16 @@ proportions are retained; VictoriaMetrics uses the upstream monochrome mark.
 Artwork rights are separate from software licenses. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ## AI tools and brands
+
+**AI coding agents:** OpenCode, Pi, Claude Code, Codex, Gemini CLI, Cline,
+Roo Code, Goose and Aider are available under **Analytics & AI**. Search
+`AI agent`, `coding agent`, `编程智能体` or product aliases such as `Pi Coding Agent`,
+`Claude Dev` and `Roo Cline`. Cursor and GitHub Copilot also share these agent
+search tags. The eight agent SVGs reuse the pinned Lobe Icons collection;
+Aider uses its official 384 × 384 PNG, pinned to a repository commit and SHA-256,
+with original pixels retained in downloads and draw.io libraries. Claude Code
+is classified as commercial; the other eight entries describe their open-source
+CLI or editor projects, separately from hosted services and model APIs.
 
 **Analytics & AI** includes vLLM, DeepSeek, Qwen, Google Gemini, ChatGPT, Claude, Hugging Face, LangChain, LlamaIndex, Dify, Open WebUI, LM Studio, Perplexity, ComfyUI, Cursor and GitHub Copilot, alongside Ollama, PyTorch and TensorFlow. Search by product name, Chinese aliases such as 深度求索 / 通义千问 / 千问, or AI / LLM / RAG / 推理 / 智能体.
 

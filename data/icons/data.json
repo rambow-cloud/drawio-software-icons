@@ -2,6 +2,53 @@
   "$schema": "../schemas/icons.schema.json",
   "icons": [
     {
+      "id": "aider",
+      "name": "Aider",
+      "category": "data",
+      "source": "official-apps",
+      "homepage": "https://aider.chat",
+      "repository": "https://github.com/Aider-AI/aider",
+      "softwareType": "open-source",
+      "softwareLicense": "Apache-2.0",
+      "classificationNote": "Classification and license describe the linked open-source terminal coding tool; software licensing is separate from brand artwork rights.",
+      "aliases": [
+        "aider chat",
+        "AI pair programming",
+        "Aider 编程助手",
+        "Aider 结对编程"
+      ],
+      "tags": [
+        "AI",
+        "LLM",
+        "AI agent",
+        "AI agents",
+        "coding agent",
+        "coding assistant",
+        "agentic coding",
+        "人工智能",
+        "智能体",
+        "AI 智能体",
+        "编程智能体",
+        "代码助手",
+        "编程助手",
+        "CLI",
+        "terminal",
+        "pair programming",
+        "终端",
+        "结对编程"
+      ],
+      "artwork": {
+        "url": "https://raw.githubusercontent.com/Aider-AI/aider/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/website/assets/icons/android-chrome-384x384.png",
+        "format": "png",
+        "publisher": "Aider project contributors",
+        "listing": "https://github.com/Aider-AI/aider",
+        "retrievedOn": "2026-10-27",
+        "sha256": "1bdc5eaa7b2cc20519b252288607caff2d0d1dfadc89bdc5a25f89e6e7f4d89c",
+        "width": 384,
+        "height": 384
+      }
+    },
+    {
       "id": "apacheairflow",
       "name": "Apache Airflow",
       "category": "data",
@@ -191,6 +238,123 @@
       }
     },
     {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "category": "data",
+      "source": "lobe",
+      "homepage": "https://code.claude.com/docs/en/overview",
+      "repository": "https://github.com/anthropics/claude-code",
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Claude Code is a proprietary coding agent; its public issue and plugin repository does not make the application open source. Artwork licensing is separate.",
+      "aliases": [
+        "claudecode",
+        "Claude CLI",
+        "Claude 编程助手"
+      ],
+      "tags": [
+        "AI",
+        "LLM",
+        "AI agent",
+        "AI agents",
+        "coding agent",
+        "coding assistant",
+        "agentic coding",
+        "人工智能",
+        "智能体",
+        "AI 智能体",
+        "编程智能体",
+        "代码助手",
+        "编程助手",
+        "Anthropic",
+        "CLI",
+        "terminal",
+        "终端"
+      ],
+      "artwork": {
+        "path": "packages/static-svg/icons/claudecode-color.svg",
+        "variant": "color"
+      }
+    },
+    {
+      "id": "cline",
+      "name": "Cline",
+      "category": "data",
+      "source": "lobe",
+      "homepage": "https://cline.bot",
+      "repository": "https://github.com/cline/cline",
+      "softwareType": "open-source",
+      "softwareLicense": "Apache-2.0",
+      "classificationNote": "Classification and license describe the linked open-source coding agent, not paid model APIs, hosted services or brand artwork.",
+      "aliases": [
+        "Claude Dev",
+        "Cline AI",
+        "Cline 编程助手"
+      ],
+      "tags": [
+        "AI",
+        "LLM",
+        "AI agent",
+        "AI agents",
+        "coding agent",
+        "coding assistant",
+        "agentic coding",
+        "人工智能",
+        "智能体",
+        "AI 智能体",
+        "编程智能体",
+        "代码助手",
+        "编程助手",
+        "VS Code",
+        "vscode",
+        "IDE",
+        "编辑器"
+      ],
+      "artwork": {
+        "path": "packages/static-svg/icons/cline.svg",
+        "variant": "monochrome"
+      }
+    },
+    {
+      "id": "codex",
+      "name": "Codex",
+      "category": "data",
+      "source": "lobe",
+      "homepage": "https://github.com/openai/codex",
+      "repository": "https://github.com/openai/codex",
+      "softwareType": "open-source",
+      "softwareLicense": "Apache-2.0",
+      "classificationNote": "Classification and license describe the linked open-source coding agent, not paid model APIs, hosted services or brand artwork.",
+      "aliases": [
+        "OpenAI Codex",
+        "Codex CLI",
+        "Codex 编程智能体"
+      ],
+      "tags": [
+        "AI",
+        "LLM",
+        "AI agent",
+        "AI agents",
+        "coding agent",
+        "coding assistant",
+        "agentic coding",
+        "人工智能",
+        "智能体",
+        "AI 智能体",
+        "编程智能体",
+        "代码助手",
+        "编程助手",
+        "OpenAI",
+        "CLI",
+        "terminal",
+        "终端"
+      ],
+      "artwork": {
+        "path": "packages/static-svg/icons/codex-color.svg",
+        "variant": "color"
+      }
+    },
+    {
       "id": "comfyui",
       "name": "ComfyUI",
       "source": "lobe",
@@ -264,7 +428,16 @@
         "AI & Machine Learning",
         "ai",
         "ml",
-        "llm"
+        "llm",
+        "AI agent",
+        "AI agents",
+        "coding agent",
+        "coding assistant",
+        "agentic coding",
+        "智能体",
+        "AI 智能体",
+        "编程智能体",
+        "编程助手"
       ],
       "artwork": {
         "path": "packages/static-svg/icons/cursor.svg",
@@ -425,6 +598,45 @@
       }
     },
     {
+      "id": "gemini-cli",
+      "name": "Gemini CLI",
+      "category": "data",
+      "source": "lobe",
+      "homepage": "https://geminicli.com",
+      "repository": "https://github.com/google-gemini/gemini-cli",
+      "softwareType": "open-source",
+      "softwareLicense": "Apache-2.0",
+      "classificationNote": "Classification and license describe the linked open-source coding agent, not paid model APIs, hosted services or brand artwork.",
+      "aliases": [
+        "geminicli",
+        "Google Gemini CLI",
+        "谷歌 Gemini 命令行"
+      ],
+      "tags": [
+        "AI",
+        "LLM",
+        "AI agent",
+        "AI agents",
+        "coding agent",
+        "coding assistant",
+        "agentic coding",
+        "人工智能",
+        "智能体",
+        "AI 智能体",
+        "编程智能体",
+        "代码助手",
+        "编程助手",
+        "Google",
+        "CLI",
+        "terminal",
+        "终端"
+      ],
+      "artwork": {
+        "path": "packages/static-svg/icons/geminicli-color.svg",
+        "variant": "color"
+      }
+    },
+    {
       "id": "github-copilot",
       "name": "GitHub Copilot",
       "source": "lobe",
@@ -456,10 +668,59 @@
         "AI & Machine Learning",
         "ai",
         "ml",
-        "llm"
+        "llm",
+        "AI agent",
+        "AI agents",
+        "coding agent",
+        "coding assistant",
+        "agentic coding",
+        "智能体",
+        "AI 智能体",
+        "编程智能体",
+        "编程助手"
       ],
       "artwork": {
         "path": "packages/static-svg/icons/githubcopilot.svg",
+        "variant": "monochrome"
+      }
+    },
+    {
+      "id": "goose",
+      "name": "Goose",
+      "category": "data",
+      "source": "lobe",
+      "homepage": "https://goose-docs.ai",
+      "repository": "https://github.com/aaif-goose/goose",
+      "softwareType": "open-source",
+      "softwareLicense": "Apache-2.0",
+      "classificationNote": "Classification and license describe the linked open-source coding agent, not paid model APIs, hosted services or brand artwork.",
+      "aliases": [
+        "Block Goose",
+        "Goose AI",
+        "Goose 编程智能体"
+      ],
+      "tags": [
+        "AI",
+        "LLM",
+        "AI agent",
+        "AI agents",
+        "coding agent",
+        "coding assistant",
+        "agentic coding",
+        "人工智能",
+        "智能体",
+        "AI 智能体",
+        "编程智能体",
+        "代码助手",
+        "编程助手",
+        "CLI",
+        "desktop",
+        "MCP",
+        "终端",
+        "桌面"
+      ],
+      "artwork": {
+        "path": "packages/static-svg/icons/goose.svg",
         "variant": "monochrome"
       }
     },
@@ -1009,6 +1270,45 @@
       }
     },
     {
+      "id": "opencode",
+      "name": "OpenCode",
+      "category": "data",
+      "source": "lobe",
+      "homepage": "https://opencode.ai",
+      "repository": "https://github.com/anomalyco/opencode",
+      "softwareType": "open-source",
+      "softwareLicense": "MIT",
+      "classificationNote": "Classification and license describe the linked open-source coding agent, not paid model APIs, hosted services or brand artwork.",
+      "aliases": [
+        "open code",
+        "OpenCode AI",
+        "OpenCode 编程智能体"
+      ],
+      "tags": [
+        "AI",
+        "LLM",
+        "AI agent",
+        "AI agents",
+        "coding agent",
+        "coding assistant",
+        "agentic coding",
+        "人工智能",
+        "智能体",
+        "AI 智能体",
+        "编程智能体",
+        "代码助手",
+        "编程助手",
+        "CLI",
+        "terminal",
+        "IDE",
+        "终端"
+      ],
+      "artwork": {
+        "path": "packages/static-svg/icons/opencode.svg",
+        "variant": "monochrome"
+      }
+    },
+    {
       "id": "opencv",
       "name": "OpenCV",
       "category": "data",
@@ -1113,6 +1413,47 @@
       "artwork": {
         "path": "packages/static-svg/icons/perplexity-color.svg",
         "variant": "color"
+      }
+    },
+    {
+      "id": "pi",
+      "name": "Pi",
+      "category": "data",
+      "source": "lobe",
+      "homepage": "https://pi.dev",
+      "repository": "https://github.com/earendil-works/pi",
+      "softwareType": "open-source",
+      "softwareLicense": "MIT",
+      "classificationNote": "Classification and license describe the linked open-source coding agent, not paid model APIs, hosted services or brand artwork.",
+      "aliases": [
+        "Pi Agent",
+        "Pi Coding Agent",
+        "pi-coding-agent",
+        "Pi 编程智能体"
+      ],
+      "tags": [
+        "AI",
+        "LLM",
+        "AI agent",
+        "AI agents",
+        "coding agent",
+        "coding assistant",
+        "agentic coding",
+        "人工智能",
+        "智能体",
+        "AI 智能体",
+        "编程智能体",
+        "代码助手",
+        "编程助手",
+        "CLI",
+        "terminal",
+        "agent harness",
+        "终端",
+        "智能体框架"
+      ],
+      "artwork": {
+        "path": "packages/static-svg/icons/pi.svg",
+        "variant": "monochrome"
       }
     },
     {
@@ -1224,6 +1565,45 @@
       "artwork": {
         "path": "packages/static-svg/icons/qwen-color.svg",
         "variant": "color"
+      }
+    },
+    {
+      "id": "roo-code",
+      "name": "Roo Code",
+      "category": "data",
+      "source": "lobe",
+      "homepage": "https://roocode.com",
+      "repository": "https://github.com/RooCodeInc/Roo-Code",
+      "softwareType": "open-source",
+      "softwareLicense": "Apache-2.0",
+      "classificationNote": "Classification and license describe the linked open-source coding agent, not paid model APIs, hosted services or brand artwork.",
+      "aliases": [
+        "roocode",
+        "Roo Cline",
+        "Roo Code 编程助手"
+      ],
+      "tags": [
+        "AI",
+        "LLM",
+        "AI agent",
+        "AI agents",
+        "coding agent",
+        "coding assistant",
+        "agentic coding",
+        "人工智能",
+        "智能体",
+        "AI 智能体",
+        "编程智能体",
+        "代码助手",
+        "编程助手",
+        "VS Code",
+        "vscode",
+        "IDE",
+        "编辑器"
+      ],
+      "artwork": {
+        "path": "packages/static-svg/icons/roocode.svg",
+        "variant": "monochrome"
       }
     },
     {

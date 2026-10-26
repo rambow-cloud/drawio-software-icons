@@ -83,9 +83,25 @@ Exception: the ServiceNow SVG from Vendor Icons SVG is preserved verbatim, inclu
 
 ## Attribution and trademarks / 署名与商标
 
-AI additions use SVGs collected by LobeHub's Lobe Icons contributors. Color variants are selected where provided; upstream monochrome marks are retained otherwise. ChatGPT uses the collection's OpenAI mark. Their exact paths, revisions and hashes are recorded per icon; no brand-owner approval or official-download status is claimed. The collection license is separate from model-weight, software and hosted-service terms.
+AI coding agent additions include OpenCode, Pi, Claude Code, Codex, Gemini CLI,
+Cline, Roo Code and Goose SVGs from the existing pinned Lobe Icons revision.
+Pi identifies the pi.dev coding agent. Claude Code, Codex and Gemini CLI use
+their distinct agent marks, separately from the existing chatbot entries.
+Aider retains its official 384 × 384 PNG from a commit-pinned project repository
+URL, with dimensions and SHA-256 in the configuration and generated manifest.
+The PNG is preserved unchanged and embedded directly in draw.io libraries. Software
+licenses and the Lobe Icons MIT license do not confer brand-owner permission.
 
-AI 新增素材来自 LobeHub 的 Lobe Icons 社区图标集，有彩色版本时优先使用，否则保留上游单色图形；ChatGPT 使用该集的 OpenAI 标志。逐项记录路径、版本与校验值，不声称获得品牌方批准或来自官方下载。图标集许可与模型权重、软件及在线服务条款分别适用。
+AI 编程智能体新增图标中，OpenCode、Pi、Claude Code、Codex、Gemini CLI、
+Cline、Roo Code、Goose 的 SVG 来自已有固定版本的 Lobe Icons。Pi 指向
+pi.dev 编程智能体；Claude Code、Codex、Gemini CLI 使用各自的智能体标志，
+与已有聊天产品条目区分。Aider 使用官方项目仓库中的 384 × 384 PNG，固定
+提交、尺寸与 SHA-256。PNG 保留原始像素并直接内嵌到 draw.io 图标库。
+软件许可与图标集 MIT 许可不代表品牌方授权。
+
+AI SVGs use artwork collected by LobeHub's Lobe Icons contributors. Color variants are selected where provided; upstream monochrome marks are retained otherwise. ChatGPT uses the collection's OpenAI mark. Their exact paths, revisions and hashes are recorded per icon; no brand-owner approval or official-download status is claimed. The collection license is separate from model-weight, software and hosted-service terms.
+
+AI SVG 素材来自 LobeHub 的 Lobe Icons 社区图标集，有彩色版本时优先使用，否则保留上游单色图形；ChatGPT 使用该集的 OpenAI 标志。逐项记录路径、版本与校验值，不声称获得品牌方批准或来自官方下载。图标集许可与模型权重、软件及在线服务条款分别适用。
 
 Devicon artwork is collected by the Devicon contributors; Dashboard Icons artwork is collected by Homarr Labs and its contributors. All product names, logos, trademarks and brands belong to their respective owners. This independent collection uses them for identification and does not imply endorsement or affiliation with draw.io, Devicon, Homarr Labs, or the featured projects. Collection licenses do not grant trademark rights or replace project-specific brand guidelines.
 
@@ -117,6 +133,6 @@ is preserved in the imported `NOTICE.md`.
 `ICON_USAGE.md` 的架构图绘制用途声明，不覆盖上游权利。颜色变体和 UI 补充图形分别保留，
 原项目的历史归属说明不删除。
 
-Software classifications are editorial metadata about the linked project or community edition. Commercial editions may have different terms. `source-available` is separate from `open-source`; unclear or mixed-edition cases are marked `unverified`. SPDX software-license identifiers are currently null because they have not been individually verified. Check the linked project's license for the specific version you use. An icon collection's MIT or Apache-2.0 license is not the software's license.
+Software classifications are editorial metadata about the linked project or community edition. Commercial editions may have different terms. `source-available` is separate from `open-source`; unclear or mixed-edition cases are marked `unverified`. SPDX software-license identifiers are recorded where individually verified and otherwise remain null. Check the linked project's license for the specific version you use. An icon collection's MIT or Apache-2.0 license is not the software's license.
 
-软件类型由人工整理，按链接所指的项目或社区版本分类；商业版本可能采用不同许可。源码可用不等于开源，不明确或许可混合的项目标为待核实。尚未逐项核实软件 SPDX 许可证，因此对应字段为 null。软件类型不是法律结论，具体版本请查阅项目本身的许可。
+软件类型由人工整理，按链接所指的项目或社区版本分类；商业版本可能采用不同许可。源码可用不等于开源，不明确或许可混合的项目标为待核实。已逐项核实的软件 SPDX 许可证记录于对应字段，其余保持 null。软件类型不是法律结论，具体版本请查阅项目本身的许可。
