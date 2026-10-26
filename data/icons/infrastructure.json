@@ -2099,6 +2099,42 @@
       }
     },
     {
+      "id": "redhat",
+      "name": "Red Hat Enterprise Linux",
+      "category": "infrastructure",
+      "source": "dashboard",
+      "homepage": "https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "classificationNote": "Classification describes the commercially supported Red Hat Enterprise Linux subscription product. Individual open-source components have their own licenses; software terms and Red Hat brand artwork rights are separate.",
+      "aliases": [
+        "Red Hat",
+        "redhat",
+        "red hat linux",
+        "RHEL",
+        "红帽",
+        "红帽企业 Linux",
+        "红帽企业版 Linux"
+      ],
+      "tags": [
+        "linux",
+        "os",
+        "operating system",
+        "enterprise linux",
+        "distribution",
+        "server",
+        "操作系统",
+        "企业 Linux",
+        "Linux 发行版",
+        "服务器"
+      ],
+      "artwork": {
+        "path": "svg/redhat-linux.svg",
+        "variant": "original"
+      }
+    },
+    {
       "id": "rockylinux",
       "name": "Rocky Linux",
       "category": "infrastructure",

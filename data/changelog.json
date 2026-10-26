@@ -1,5 +1,29 @@
 [
   {
+    "id": "sync-2026-10-27-d6926eeb08eb-16",
+    "date": "2026-10-27",
+    "title": {
+      "en": "Red Hat Enterprise Linux",
+      "zh-CN": "红帽企业 Linux 图标"
+    },
+    "summary": {
+      "en": "Added Red Hat Enterprise Linux under Cloud & Infrastructure, with Red Hat, redhat, RHEL and Chinese search aliases. The original red-and-black hat SVG reuses the pinned Dashboard Icons revision.",
+      "zh-CN": "在云与基础设施分类新增 Red Hat Enterprise Linux，支持 Red Hat、redhat、RHEL、红帽等搜索词；红黑帽子 SVG 原图沿用固定版本的 Dashboard Icons。"
+    },
+    "changes": [
+      {
+        "kind": "added",
+        "collection": "software",
+        "icons": [
+          {
+            "id": "redhat",
+            "name": "Red Hat Enterprise Linux"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "sync-2026-10-27-e32591702fdd-15",
     "date": "2026-10-27",
     "title": {
