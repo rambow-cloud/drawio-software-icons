@@ -21,15 +21,15 @@ MCP Server URL. The official `search_shapes` tool uses built-in shapes first and
 supplements sparse results with icons from this service. Try: “Use Draw.io MCP
 to search for the ScyllaDB icon and draw a database node.”
 
-563 software and service icons across 8 categories. Bilingual browsing, search and library downloads, focused on open-source projects with selected commercial tools. Original-color upstream SVGs are preferred.
+564 software and service icons across 8 categories. Bilingual browsing, search and library downloads, focused on open-source projects with selected commercial tools. Original-color upstream SVGs are preferred.
 
 **Commercial icon usage:** commercial software and service icons are provided solely for drawing draw.io / diagrams.net architecture diagrams, not for other distribution purposes. The project does not grant additional brand rights or override upstream licenses. Original code and documentation remain MIT licensed. Read the bilingual [icon usage policy](ICON_USAGE.md) before using commercial brand assets.
 
 
 ## Unified collections, unchanged URLs
 
-The site now combines **563 software and service icons** in 8 categories with
-**888 Alibaba Cloud icon entries** in 9 source categories: **1,451 entries across
+The site now combines **564 software and service icons** in 8 categories with
+**888 Alibaba Cloud icon entries** in 9 source categories: **1,452 entries across
 two collections**. Alibaba counts include color variants and supplemental UI
 symbols, not 888 distinct cloud services. Original names remain where no upstream
 English product name exists; categories, browsing and setup are bilingual.
@@ -67,6 +67,13 @@ Bulk ZIP archives are no longer published. Download individual SVG/PNG artwork f
 Code, data and tests are maintained in this repository. The old Alibaba repository
 publishes a compatibility site from the latest successful source build, checking
 hourly or on manual dispatch. See [deployment details](docs/DEPLOYMENT.md).
+
+## Linux distributions
+
+Red Hat Enterprise Linux is available under **Cloud & Infrastructure**. Search
+`redhat`, `Red Hat`, `RHEL` or `红帽`. Its red-and-black hat SVG comes from the
+existing pinned Dashboard Icons collection; software subscription terms and
+brand artwork rights are recorded separately.
 
 ## Identity providers and authentication
 
