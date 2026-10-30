@@ -39,6 +39,11 @@ PostgreSQL and Redis architecture diagram, keeping product icons in their
 original colors.” The companion supplies artwork; your chosen skill or tool
 controls layout. It preserves the existing Draw.io MCP setup.
 
+An npm/npx installer is prepared in `skills/rambow-icons`; see its
+[package README](skills/rambow-icons/README.md) for publication status,
+multi-agent destinations and release instructions. The GitHub command above
+works before npm publication.
+
 The bundled Node.js 22+ helper searches bilingual catalogs, downloads original
 SVG/PNG bytes with SHA-256 verification, and generates an embedded SVG image
 plus provenance metadata. It supports the main site, GitHub Pages mirror and
