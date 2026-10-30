@@ -124,7 +124,7 @@ export async function syncIcons({ update = false, refresh = false, fetchImpl = f
         const category = categoryMap.get(item.category);
         icons[index] = { ...prior, ...projectMetadata(item), aliases: [...new Set(item.aliases)],
           tags: [...new Set([...item.tags, category.name, ...category.keywords])],
-          ...(item.softwareType === 'commercial' ? { usagePolicy: 'drawio-architecture-only', usagePolicyUrl: 'ICON_USAGE.md', brandPermissionStatus: 'not-verified' } : {}),
+          ...(item.softwareType === 'commercial' ? { usagePolicy: 'technical-diagrams-and-docs', usagePolicyUrl: 'ICON_USAGE.md', brandPermissionStatus: 'not-verified' } : {}),
           asset, ...dimensions, sha256: hash(raw),
           source: { id: item.source,
             ...(official ? { kind: 'publisher-artwork', publisher: art.publisher, listing: art.listing, appId: art.appId, retrievedOn: art.retrievedOn }

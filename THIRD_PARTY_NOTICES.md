@@ -107,9 +107,9 @@ Devicon artwork is collected by the Devicon contributors; Dashboard Icons artwor
 
 Additional artwork is collected by bwks / Vendor Icons SVG contributors. Collection licensing is reported from each pinned repository; it is not a representation that the collection's authors own every depicted brand or can authorize all brand uses.
 
-**Commercial icon scope:** this project's commercial software icons are provided solely for draw.io architecture diagrams, not other distribution purposes. This does not override upstream licenses or brand-owner rights. See the bilingual [icon usage policy](ICON_USAGE.md). Brand-owner permissions are not individually verified.
+**Commercial icon scope:** this project's commercial software icons are provided for technical diagrams, documentation and presentations across tools and formats, including HTML/SVG/PNG/PDF. This does not override upstream licenses or brand-owner rights. See the bilingual [icon usage policy](ICON_USAGE.md). Brand-owner permissions are not individually verified.
 
-**商业图标用途：** 本项目仅提供用于 draw.io 架构图绘制的商业软件图标，不适用于其他发行用途；此声明不覆盖上游许可和品牌方权利。详见中英双语 [图标使用声明](ICON_USAGE.md)。品牌授权尚未逐项核实。
+**商业图标用途：** 本项目提供用于技术图示、文档与演示的商业软件图标，适用于不同工具和格式，包括 HTML/SVG/PNG/PDF；此声明不覆盖上游许可和品牌方权利。详见中英双语 [图标使用声明](ICON_USAGE.md)。品牌授权尚未逐项核实。
 
 感谢 Devicon、Homarr Labs 与各项目贡献者。品牌名称、图标与商标属于各自所有者。本项目仅用于标识，不代表官方背书或隶属关系。图标集许可证不授予商标权，也不替代具体项目的品牌规范。
 

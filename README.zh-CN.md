@@ -21,8 +21,25 @@
 
 564 个软件与服务图标，8 个用途分类，支持中英文浏览、搜索与分类库下载。以开源项目为主，兼收常用商业工具，优先使用上游原色 SVG。
 
-**商业图标使用范围：** 本项目中的商业软件与服务图标仅适用于 draw.io / diagrams.net 架构图绘制，不适用于其他发行用途。本项目不额外授予品牌使用权，也不覆盖上游许可证。原创代码和文档继续采用 MIT 许可。使用商业品牌图标前请阅读中英双语 [图标使用声明](ICON_USAGE.md)。
+**商业图标使用范围：** 本项目图标（包括商业软件与服务图标）适用于不同工具和格式的技术图示、文档与演示，包括 diagram-design、HTML/SVG/PNG/PDF，不再限定于 draw.io。本项目不额外授予品牌使用权，也不覆盖上游许可证。原创代码和文档继续采用 MIT 许可。使用商业品牌图标前请阅读中英双语 [图标使用声明](ICON_USAGE.md)。
 
+
+## 配合 diagram-design 及其他智能体使用
+
+安装配套的 [rambow-icons skill](skills/rambow-icons/SKILL.md)：
+
+```sh
+npx skills add rambow-cloud/drawio-software-icons --skill rambow-icons
+```
+
+安装后可以说：「使用 diagram-design 和 rambow-icons 绘制 Kubernetes、
+PostgreSQL、Redis 架构图，产品图标保留原色。」配套 skill 提供图标，布局由你选择的
+绘图 skill 或工具负责，原有 Draw.io MCP 接入继续使用。
+
+内置脚本需要 Node.js 22+，支持中英文搜索、下载 SVG/PNG 原图、核对 SHA-256，
+并生成可内嵌的 SVG 图像与来源说明。支持主站、GitHub Pages 镜像和本地清单，
+无需 API Key 或额外 npm 依赖。命令及离线使用方法见 skill。新安装的 skill
+在下一轮对话可用；会缓存 skill 的客户端可能需要重新加载。
 
 ## 图标集合并，两个旧网址保留
 
@@ -117,7 +134,7 @@ Codex、Gemini CLI、Cline、Roo Code、Goose 和 Aider。搜索 `AI agent`、
 
 「数据分析与 AI」新增 vLLM、DeepSeek、Qwen、Google Gemini、ChatGPT、Claude、Hugging Face、LangChain、LlamaIndex、Dify、Open WebUI、LM Studio、Perplexity、ComfyUI、Cursor 和 GitHub Copilot，与已有 Ollama、PyTorch、TensorFlow 放在一起。支持产品名、深度求索 / 通义千问 / 千问等中文别名，以及 AI / LLM / RAG / 推理 / 智能体等搜索词。
 
-这 16 张 SVG 来自固定版本的 [Lobe Icons](https://github.com/lobehub/lobe-icons)，附带其 MIT 许可。优先采用彩色版本；ChatGPT 使用图标集的单色 OpenAI 标志，Open WebUI、LM Studio、Cursor 和 GitHub Copilot 保留上游单色素材。这些是社区整理的品牌图形，不声称是逐项授权的官方下载。商业条目沿用仅供架构图绘制的用途声明。软件类型指所链接工具或在线服务，不代表模型权重的许可证；Dify 和 Open WebUI 标记为源码可用。新增清单、别名与素材变体维护在 `data/icons/data.json`。
+这 16 张 SVG 来自固定版本的 [Lobe Icons](https://github.com/lobehub/lobe-icons)，附带其 MIT 许可。优先采用彩色版本；ChatGPT 使用图标集的单色 OpenAI 标志，Open WebUI、LM Studio、Cursor 和 GitHub Copilot 保留上游单色素材。这些是社区整理的品牌图形，不声称是逐项授权的官方下载。商业条目沿用技术图示、文档与演示的用途声明。软件类型指所链接工具或在线服务，不代表模型权重的许可证；Dify 和 Open WebUI 标记为源码可用。新增清单、别名与素材变体维护在 `data/icons/data.json`。
 
 ## 即时通讯与企业应用
 

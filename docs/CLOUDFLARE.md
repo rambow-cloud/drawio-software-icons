@@ -75,6 +75,17 @@ uses production HTTPS image URLs because upstream MCP rejects HTTP image URLs.
 `GET /api/health` exposes the icon count and content-derived index version.
 The existing [icon usage policy](../ICON_USAGE.md) applies to API results too.
 
+## Companion skill
+
+The [rambow-icons skill](../skills/rambow-icons/SKILL.md) uses the existing
+unified static catalog and original artwork, including the GitHub Pages mirror.
+It supports diagram-design and other technical diagram/document tools without
+an MCP server or changes to this HTTP API. Install with
+`npx skills add rambow-cloud/drawio-software-icons --skill rambow-icons`.
+The project's scope covers technical diagrams, documentation and presentations
+across tools and formats; upstream artwork licenses and brand rights still
+apply. See [ICON_USAGE.md](../ICON_USAGE.md).
+
 ## Build and deployment
 
 ```sh

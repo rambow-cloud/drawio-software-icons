@@ -73,7 +73,7 @@ test('IM and enterprise additions have searchable names, correct categories and 
     for(const query of [project.name,...project.aliases]) assert.ok(filterIcons(catalog.icons,categories,query).some(i=>i.id===project.id),query);
   }
   for(const icon of catalog.icons.filter(i=>i.softwareType==='commercial')) {
-    assert.equal(icon.usagePolicy,'drawio-architecture-only',icon.id);
+    assert.equal(icon.usagePolicy,'technical-diagrams-and-docs',icon.id);
     assert.equal(icon.usagePolicyUrl,'ICON_USAGE.md',icon.id);
     assert.equal(icon.brandPermissionStatus,'not-verified',icon.id);
   }
@@ -165,7 +165,7 @@ test('AI tools and hosted brands share a category with bilingual search and inta
   for(const id of ['deepseek','qwen','gemini','chatgpt','claude']) {
     const icon=catalog.icons.find(i=>i.id===id);
     assert.equal(icon.softwareType,'commercial');
-    assert.equal(icon.usagePolicy,'drawio-architecture-only');
+    assert.equal(icon.usagePolicy,'technical-diagrams-and-docs');
   }
   assert.equal(catalog.icons.find(i=>i.id==='vllm').softwareType,'open-source');
   for(const id of ['dify','open-webui']) assert.equal(catalog.icons.find(i=>i.id===id).softwareType,'source-available');
@@ -229,7 +229,7 @@ test('library XML survives Unicode, quotes, ampersands and embedded SVG unchange
 test('draw.io library titles are explicit Unicode text independent of encoded URL filenames',()=>{
   const entries=[libraryEntry({id:'git',name:'Git',aliases:[],tags:[]},square)];
   for(const title of [...categories.flatMap(c=>[c.name,c.nameEn]),'中文 & "quoted" <tools>']) {
-    const xml=libraryXml(entries,'tags',title,'Commercial icons: draw.io architecture diagrams only. 商业图标使用声明：ICON_USAGE.md');
+    const xml=libraryXml(entries,'tags',title,'Icons for technical diagrams and documentation across tools. 图标使用声明：ICON_USAGE.md');
     // EditorUi.importFiles/openFileHandle use this literal prefix for dropped libraries.
     assert.equal(xml.substring(0,10),'<mxlibrary');
     assert.match(xml,/<!-- .*ICON_USAGE\.md.* -->/);

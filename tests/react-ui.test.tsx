@@ -168,7 +168,7 @@ test('compact details preserve publisher sources, usage restrictions and file ve
     const html=render(<DetailDialog icon={item}/>,locale);
     for(const value of ['https://example.com/listing','https://example.com/logo.svg','full-pinned-revision','pinned-sha','ICON_USAGE.md',iconDetailUrl(locale,icon.id)])assert(html.includes(value),value);
     assert(html.includes(locale==='en'?'Download PNG':'下载 PNG'));
-    assert(html.includes(locale==='en'?'Commercial icons are provided solely':'商业软件图标仅供'));
+    assert(html.includes(locale==='en'?'Commercial icons are provided for technical':'商业软件图标适用于'));
     assert(html.includes(locale==='en'?'Official 512':'官方发布的 512'));
     assert(html.includes('<details>'));
   }
