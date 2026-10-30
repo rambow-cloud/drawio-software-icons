@@ -498,7 +498,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/amazon-cognito.svg",
@@ -558,7 +558,7 @@
         "saas",
         "云"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/amazonwebservices.svg",
@@ -1763,7 +1763,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/auth0.svg",
@@ -1925,7 +1925,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/authing.svg",
@@ -2063,7 +2063,7 @@
         "saas",
         "云"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/azure.svg",
@@ -3628,7 +3628,7 @@
         "ml",
         "llm"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/chatgpt.svg",
@@ -3748,7 +3748,7 @@
         "ml",
         "llm"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/claude.svg",
@@ -3813,7 +3813,7 @@
         "ml",
         "llm"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/claude-code.svg",
@@ -3873,7 +3873,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/clerk.png",
@@ -4126,7 +4126,7 @@
         "saas",
         "云"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/cloudflare.svg",
@@ -5123,7 +5123,7 @@
         "编程智能体",
         "编程助手"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/cursor.svg",
@@ -5346,7 +5346,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/datadog.svg",
@@ -5502,7 +5502,7 @@
         "ml",
         "llm"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/deepseek.svg",
@@ -5599,7 +5599,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/descope.svg",
@@ -5820,7 +5820,7 @@
         "saas",
         "云"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/digitalocean.svg",
@@ -5870,7 +5870,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/dingtalk.svg",
@@ -5922,7 +5922,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/discord.svg",
@@ -6476,7 +6476,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/duo.svg",
@@ -6577,7 +6577,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/dynatrace.svg",
@@ -7722,7 +7722,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/feishu.png",
@@ -7918,7 +7918,7 @@
         "SSO",
         "单点登录"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/firebase.svg",
@@ -8595,7 +8595,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/frontegg.svg",
@@ -8692,7 +8692,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/fusionauth.svg",
@@ -8925,7 +8925,7 @@
         "ml",
         "llm"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/gemini.svg",
@@ -9264,7 +9264,7 @@
         "build",
         "自动化"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/github.svg",
@@ -9326,7 +9326,7 @@
         "编程智能体",
         "编程助手"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/github-copilot.svg",
@@ -9377,7 +9377,7 @@
         "build",
         "自动化"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/githubactions.svg",
@@ -9595,7 +9595,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/google-identity.svg",
@@ -9653,7 +9653,7 @@
         "saas",
         "云"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/googlecloud.svg",
@@ -10590,7 +10590,7 @@
         "saas",
         "云"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/heroku.svg",
@@ -10862,7 +10862,7 @@
         "ml",
         "llm"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/huggingface.svg",
@@ -11780,7 +11780,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/jumpcloud.svg",
@@ -12953,7 +12953,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/kinde.svg",
@@ -13447,7 +13447,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/kubecost.svg",
@@ -14153,7 +14153,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/lark.svg",
@@ -14688,7 +14688,7 @@
         "ml",
         "llm"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/lmstudio.svg",
@@ -15572,7 +15572,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/microsoft-entra-id.svg",
@@ -15623,7 +15623,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/microsoft-teams.svg",
@@ -16698,7 +16698,7 @@
         "saas",
         "云"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/netlify.svg",
@@ -16791,7 +16791,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/newrelic.svg",
@@ -17684,7 +17684,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/okta.svg",
@@ -17786,7 +17786,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/onelogin.svg",
@@ -18707,7 +18707,7 @@
         "ml",
         "llm"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/perplexity.svg",
@@ -19062,7 +19062,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/ping-identity.png",
@@ -19121,7 +19121,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/pingid.png",
@@ -19608,7 +19608,7 @@
         "build",
         "自动化"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/postman.svg",
@@ -20386,7 +20386,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/qq.png",
@@ -20556,7 +20556,7 @@
         "ml",
         "llm"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/qwen.svg",
@@ -21043,7 +21043,7 @@
         "saas",
         "云"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/redhat.svg",
@@ -22276,7 +22276,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/servicenow.svg",
@@ -22473,7 +22473,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/slack.svg",
@@ -22941,7 +22941,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/splunk.svg",
@@ -24214,7 +24214,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/telegram.svg",
@@ -25715,7 +25715,7 @@
         "saas",
         "云"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/vercel.svg",
@@ -26424,7 +26424,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/webex.svg",
@@ -26565,7 +26565,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/wechat.png",
@@ -26619,7 +26619,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/wecom.png",
@@ -26670,7 +26670,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/whatsapp.svg",
@@ -26913,7 +26913,7 @@
         "auth",
         "安全"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/workos.svg",
@@ -27356,7 +27356,7 @@
         "design",
         "媒体"
       ],
-      "usagePolicy": "drawio-architecture-only",
+      "usagePolicy": "technical-diagrams-and-docs",
       "usagePolicyUrl": "ICON_USAGE.md",
       "brandPermissionStatus": "not-verified",
       "asset": "icons/zoom.svg",

@@ -16,7 +16,7 @@ const en=await json('data/categories.en.json');
 const categories=(await json('data/categories.json')).map(c=>({...c,nameEn:en[c.id][0],descriptionEn:en[c.id][1],
   libraries:{'zh-CN':`libraries/zh-CN/${c.name.replaceAll('/','-')}.xml`,en:`libraries/en/${en[c.id][0]}.xml`}}));
 const entries=new Map(), categoryXml=new Map();
-const usageNotice='Commercial icons: provided solely for draw.io architecture diagrams, not other distribution purposes. 商业图标仅供 draw.io 架构图绘制，不适用于其他发行用途。 Upstream licenses and brand rights remain applicable; this statement grants no additional rights. See ICON_USAGE.md and THIRD_PARTY_NOTICES.md.';
+const usageNotice='Icons for technical diagrams, documentation and presentations across tools and formats, including HTML/SVG/PNG/PDF. 图标适用于不同工具和格式的技术图示、文档与演示，包括 HTML/SVG/PNG/PDF。 Upstream licenses and brand rights remain applicable; this statement grants no additional rights. See ICON_USAGE.md and THIRD_PARTY_NOTICES.md.';
 for(const icon of catalog.icons) {
   const svg=await readFile(`assets/${icon.asset}`,icon.asset.endsWith('.png')?undefined:'utf8');
   entries.set(icon.id,libraryEntry(icon,svg));

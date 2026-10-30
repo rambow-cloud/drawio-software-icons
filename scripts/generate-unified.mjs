@@ -54,7 +54,7 @@ export async function generateUnified(software, softwareEntries) {
       homepage: entry.product_url || 'https://www.aliyun.com/', repository: null,
       source: { id: 'alibaba-iconfont', url: entry.source_url, revision: origin.revision,
         collectionLicense: 'Third-party artwork / 第三方图形权利', licenseUrl: 'compat/alibaba-cloud/NOTICE.md' },
-      usagePolicy: 'drawio-architecture-only', usagePolicyUrl: 'ICON_USAGE.md', brandPermissionStatus: 'not-verified' });
+      usagePolicy: 'technical-diagrams-and-docs', usagePolicyUrl: 'ICON_USAGE.md', brandPermissionStatus: 'not-verified' });
   }
   const combined = { ...software, collections, categories, icons, changelog:await json('data/changelog.json'),
     categoryAliases: { ...software.categoryAliases, ...Object.fromEntries(alibaba.categories.map(c => [c.id, `alibaba-${c.id}`])) } };

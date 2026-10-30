@@ -23,8 +23,28 @@ to search for the ScyllaDB icon and draw a database node.”
 
 564 software and service icons across 8 categories. Bilingual browsing, search and library downloads, focused on open-source projects with selected commercial tools. Original-color upstream SVGs are preferred.
 
-**Commercial icon usage:** commercial software and service icons are provided solely for drawing draw.io / diagrams.net architecture diagrams, not for other distribution purposes. The project does not grant additional brand rights or override upstream licenses. Original code and documentation remain MIT licensed. Read the bilingual [icon usage policy](ICON_USAGE.md) before using commercial brand assets.
+**Commercial icon usage:** icons, including commercial software and service icons, are provided for technical diagrams, documentation and presentations across tools and formats, including diagram-design and HTML/SVG/PNG/PDF. The project does not grant additional brand rights or override upstream licenses. Original code and documentation remain MIT licensed. Read the bilingual [icon usage policy](ICON_USAGE.md) before using commercial brand assets.
 
+
+## Use the icon library with diagram-design and other agents
+
+Install the companion [rambow-icons skill](skills/rambow-icons/SKILL.md):
+
+```sh
+npx skills add rambow-cloud/drawio-software-icons --skill rambow-icons
+```
+
+Then ask: “Use diagram-design and rambow-icons to draw a Kubernetes,
+PostgreSQL and Redis architecture diagram, keeping product icons in their
+original colors.” The companion supplies artwork; your chosen skill or tool
+controls layout. It preserves the existing Draw.io MCP setup.
+
+The bundled Node.js 22+ helper searches bilingual catalogs, downloads original
+SVG/PNG bytes with SHA-256 verification, and generates an embedded SVG image
+plus provenance metadata. It supports the main site, GitHub Pages mirror and
+local catalogs without an API key or extra npm dependencies. See the skill for
+commands and offline use. The installed skill becomes available on the next
+agent turn; clients that cache skills may need to reload.
 
 ## Unified collections, unchanged URLs
 
@@ -137,7 +157,7 @@ CLI or editor projects, separately from hosted services and model APIs.
 
 **Analytics & AI** includes vLLM, DeepSeek, Qwen, Google Gemini, ChatGPT, Claude, Hugging Face, LangChain, LlamaIndex, Dify, Open WebUI, LM Studio, Perplexity, ComfyUI, Cursor and GitHub Copilot, alongside Ollama, PyTorch and TensorFlow. Search by product name, Chinese aliases such as 深度求索 / 通义千问 / 千问, or AI / LLM / RAG / 推理 / 智能体.
 
-The 16 new SVGs come from a pinned revision of [Lobe Icons](https://github.com/lobehub/lobe-icons), with its MIT license included. Color variants are preferred; ChatGPT uses the collection's monochrome OpenAI mark, and Open WebUI, LM Studio, Cursor and GitHub Copilot retain upstream monochrome artwork. These are community-collected brand assets, not individually authorized official downloads. Commercial entries retain the architecture-diagram-only usage notice. Classification refers to the linked tool or hosted service, not model-weight licenses; Dify and Open WebUI are marked source-available.
+The 16 new SVGs come from a pinned revision of [Lobe Icons](https://github.com/lobehub/lobe-icons), with its MIT license included. Color variants are preferred; ChatGPT uses the collection's monochrome OpenAI mark, and Open WebUI, LM Studio, Cursor and GitHub Copilot retain upstream monochrome artwork. These are community-collected brand assets, not individually authorized official downloads. Commercial entries retain the technical-diagram, documentation and presentation usage notice. Classification refers to the linked tool or hosted service, not model-weight licenses; Dify and Open WebUI are marked source-available.
 
 ## Messaging and enterprise applications
 

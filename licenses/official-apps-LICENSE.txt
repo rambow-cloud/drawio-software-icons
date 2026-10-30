@@ -42,8 +42,9 @@ recorded in data/official-icons.json and the distributed catalog.json.
 Copyright and trademark rights remain with their respective owners. No
 open-source license or individual brand-owner permission is claimed.
 
-This project provides commercial artwork solely to identify the corresponding
-products in draw.io architecture diagrams, not for other distribution purposes.
+This project provides commercial artwork to identify the corresponding
+products in technical diagrams, documentation and presentations across tools
+and formats, including HTML/SVG/PNG/PDF.
 This statement does not confer permission or replace applicable owner terms.
 See ICON_USAGE.md and THIRD_PARTY_NOTICES.md for the project's usage policy.
 
@@ -58,7 +59,7 @@ SuperTokens 的品牌 PNG 来自各自官方 GitHub 组织资料。上述素材�
 条目，原样保留彩色应用图标。来源网址、发布者、采集日期与校验值均
 随清单提供。公开可下载不代表获得品牌授权或再分发许可。版权及商标
 权仍归原权利人；本项目不声称这些图标采用 MIT、Apache 或其他开源
-许可。商业图标仅供 draw.io 架构图标识使用，不适用于其他发行用途；
+许可。商业图标用于技术图示、文档与演示，适用于不同工具和格式；
 此用途声明不能替代品牌方授权。详见 ICON_USAGE.md。
 
 钉钉的 SVG 包装为原始 PNG 添加圆角显示裁切，PNG 字节不变，并单独保留

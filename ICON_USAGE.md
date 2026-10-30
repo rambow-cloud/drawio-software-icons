@@ -2,9 +2,11 @@
 
 [中文说明](#中文说明) · [English README](README.md) · [中文 README](README.zh-CN.md)
 
-## Project scope: draw.io architecture diagrams only
+## Project scope: technical diagrams, documentation and presentations
 
-Commercial software and service icons in this project are provided solely to identify the corresponding products in architecture diagrams created with draw.io / diagrams.net, including those diagrams embedded in technical documentation. They are not offered for other distribution purposes, including standalone icon republication, icon resale, stock-asset packs, advertising, merchandise, or use as another product's logo or app icon. This is a purpose limitation for this project's offering, not a new license over third-party artwork.
+Icons in this project, including commercial software and service icons, are provided to identify the corresponding products in architecture and other technical diagrams, documentation and presentations. This scope applies across authoring tools and formats, including draw.io / diagrams.net, diagram-design, HTML, SVG, PNG, PDF and slides. It is not limited to draw.io. Catalog entries use `usagePolicy: technical-diagrams-and-docs` for this project scope.
+
+They are not offered for standalone icon republication, icon resale, stock-asset packs, advertising, merchandise, or use as another product's logo or app icon. This statement defines the project's offering; it is not a new license over third-party artwork or a claim of individual owner authorization. Older catalogs marked `drawio-architecture-only` describe the previous scope; use the policy accompanying the version you obtained.
 
 ## Code, artwork and trademarks have separate terms
 
@@ -16,7 +18,7 @@ Commercial software and service icons in this project are provided solely to ide
 
 ## AI brands
 
-AI brand additions (including DeepSeek, Qwen, Gemini, ChatGPT and Claude) are collected from Lobe Icons, not represented as individually authorized official brand downloads. Hosted-service classification does not determine the license of any model weights. These commercial entries follow the same draw.io architecture-diagram scope and retain upstream artwork licenses and brand rights.
+AI brand additions (including DeepSeek, Qwen, Gemini, ChatGPT and Claude) are collected from Lobe Icons, not represented as individually authorized official brand downloads. Hosted-service classification does not determine the license of any model weights. These commercial entries follow the same technical-diagram, documentation and presentation scope and retain upstream artwork licenses and brand rights.
 
 ## Microsoft and ServiceNow
 
@@ -28,13 +30,15 @@ The ServiceNow SVG is collected from `bwks/vendor-icons-svg`, whose repository d
 
 ## 中文说明
 
-### 本项目提供范围：仅供 draw.io 架构图绘制
+### 本项目提供范围：技术图示、文档与演示
 
-本项目中的商业软件与服务图标仅用于在 draw.io / diagrams.net 绘制的架构图中标识相应产品，包括将这些架构图用于技术文档。不适用于其他发行用途，包括独立转载图标、转售图标、素材包发行、广告宣传、商品制作，或作为其他产品的 Logo、应用图标。本声明界定本项目提供素材的用途，不是对第三方图形重新授予许可证。
+本项目中的图标（包括商业软件与服务图标）用于在架构图及其他技术图示、文档与演示中标识相应产品，适用于不同绘图工具及输出格式，包括 draw.io / diagrams.net、diagram-design、HTML、SVG、PNG、PDF 和幻灯片，不再限定于 draw.io。清单以 `usagePolicy: technical-diagrams-and-docs` 标识本项目提供范围。
+
+不适用于独立转载图标、转售图标、素材包发行、广告宣传、商品制作，或作为其他产品的 Logo、应用图标。本声明界定项目提供范围，不是对第三方图形重新授权，也不声称已取得逐项品牌许可。旧版清单的 `drawio-architecture-only` 字段代表之前的范围，应阅读所用版本附带的声明。
 
 ### 代码、图形与商标分别适用各自条款
 
-DeepSeek、Qwen、Gemini、ChatGPT、Claude 等 AI 品牌素材来自 Lobe Icons，不声称是逐项授权的官方品牌下载。在线服务的分类不能用于推断模型权重的许可；这些商业条目沿用仅供 draw.io 架构图绘制的范围，并保留上游图形许可与品牌权利。
+DeepSeek、Qwen、Gemini、ChatGPT、Claude 等 AI 品牌素材来自 Lobe Icons，不声称是逐项授权的官方品牌下载。在线服务的分类不能用于推断模型权重的许可；这些商业条目沿用技术图示、文档与演示的范围，并保留上游图形许可与品牌权利。
 
 微信、企业微信、钉钉、QQ 和飞书使用官方发布者提供的彩色 PNG 原图，不再使用单色 Ant Design 替代图。它们是专有品牌素材，不适用 Ant Design 的 MIT 许可；核对发布者及来源不等于取得品牌使用授权。详见 `licenses/official-apps-LICENSE.txt`。飞书与 Lark 分开收录。
 

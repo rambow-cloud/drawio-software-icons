@@ -57,7 +57,7 @@ AI additions belong in `data/icons/data.json` under the existing `data` (Analyti
 
 UI strings are paired in `src/i18n.ts`. Categories use `data/categories.json` and `data/categories.en.json`. Both locales must contain corresponding entries. Product names remain in their original language. Search uses both category languages regardless of the selected UI language. Keep the default English `README.md` and Chinese `README.zh-CN.md` in sync; `README.en.md` is a compatibility link.
 
-Messaging and enterprise additions are maintained in `data/icons/applications.json`, with Chinese / English aliases and a reviewed software type. Configure upstream revisions and licenses in `data/icon-sources.json`; configure paths in the icon entry. Commercial entries retain generated `drawio-architecture-only` project-use metadata. Follow `ICON_USAGE.md`; never infer brand-owner permission from an icon collection license. Preserve upstream rights, attribution and source requirements, including verbatim GPL SVG source where applicable.
+Messaging and enterprise additions are maintained in `data/icons/applications.json`, with Chinese / English aliases and a reviewed software type. Configure upstream revisions and licenses in `data/icon-sources.json`; configure paths in the icon entry. Commercial entries retain generated `technical-diagrams-and-docs` project-use metadata. Follow `ICON_USAGE.md`; never infer brand-owner permission from an icon collection license. Preserve upstream rights, attribution and source requirements, including verbatim GPL SVG source where applicable.
 
 ## Stable interfaces / 稳定接口
 
