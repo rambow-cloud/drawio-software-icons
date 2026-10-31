@@ -25,23 +25,17 @@ footer > div {
 
 .skill-install {
   grid-area: skill;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 24px 32px;
-  padding: 24px;
-  border: 1px solid var(--brand-line-strong);
-  border-top: 4px solid var(--brand-blue);
-  border-radius: 14px;
-  background: linear-gradient(120deg, var(--brand-wash), var(--brand-surface));
-  box-shadow: 0 8px 24px var(--brand-shadow-soft);
 }
-.skill-install > * { min-width: 0; }
-.skill-install .eyebrow { color: var(--brand-blue); margin-bottom: 8px; }
-.skill-install h2 { font-size: clamp(20px, 2vw, 26px); line-height: 1.35; margin-bottom: 8px; }
-.skill-install-intro > p:not(.eyebrow) { color: var(--brand-muted); font-size: 12px; line-height: 1.7; margin-bottom: 8px; }
-.skill-install-intro .skill-install-agents { font-size: 11px; margin-bottom: 0; }
-.skill-install-hint { color: var(--brand-muted); font-size: 11px; line-height: 1.6; margin: 10px 0 6px; }
-.skill-install-command > a { color: var(--brand-blue); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+.skill-install-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 9px; }
+.skill-install h2 { font-size: 12px; font-weight: 600; line-height: 1.6; letter-spacing: 0; margin: 0; }
+.skill-install-heading a { display: inline-flex; align-items: center; gap: 3px; color: var(--brand-muted); font-size: 11px; line-height: 1.6; }
+.skill-install-heading a:hover { color: var(--brand-blue); text-decoration: underline; text-underline-offset: 3px; }
+.skill-install-command { display: flex; align-items: center; gap: 10px; padding: 5px 6px 5px 13px; border: 1px solid var(--brand-line); border-radius: 8px; background: var(--brand-surface-soft); color: var(--brand-muted); }
+.skill-install-command:focus-within { border-color: var(--brand-blue); }
+.skill-install-command > svg { flex-shrink: 0; }
+.skill-install-command textarea { flex: 1; width: 0; min-width: 0; height: 24px; padding: 0; border: 0; outline: none; border-radius: 0; background: transparent; color: var(--brand-ink); font: 12px/24px ui-monospace,Consolas,monospace; resize: none; overflow: auto; scrollbar-width: none; }
+.skill-install-command textarea:focus-visible { outline: 2px solid var(--brand-blue); outline-offset: 3px; }
+.skill-install-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 3px 12px; color: var(--brand-muted); font-size: 10px; line-height: 1.6; margin: 7px 0 0; }
 .skill-install-status { display: block; color: var(--brand-blue); font-size: 11px; line-height: 1.6; }
 
 /* Every modal shares the same viewport and scrolling rules. */
@@ -71,7 +65,6 @@ html:has(.site-dialog[open]), body:has(.site-dialog[open]) { overflow: hidden; }
 }
 
 @media (max-width: 760px) {
-  .skill-install { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 18px; }
   .workspace { grid-template-columns: minmax(0, 1fr); }
   .collection-list, .category-list { max-width: 100%; overscroll-behavior-x: contain; }
   .steps { grid-template-columns: 1fr; gap: 24px; }
