@@ -4,11 +4,20 @@ import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve, join, relative, isAbsolute } from 'node:path';
 import { parse } from 'yaml';
-import { PACKAGE_NAME, planRelease, packageDigest, readRegistry } from '../scripts/prepare-skill-release.mjs';
+import { PACKAGE_NAME, planRelease, packageDigest, readRegistry, parsePackManifest } from '../scripts/prepare-skill-release.mjs';
 
 const source={commit:'a'.repeat(40),digest:'b'.repeat(64)};
 const manifest={name:PACKAGE_NAME,version:'0.1.0'};
 const registry=(versions)=>({name:PACKAGE_NAME,versions});
+
+test('npm legacy arrays and npm 12 keyed reports select the same single package',()=>{
+  const pack={name:PACKAGE_NAME,files:[{path:'SKILL.md',mode:420}]};
+  assert.equal(parsePackManifest([pack]),pack);
+  assert.equal(parsePackManifest({[PACKAGE_NAME]:pack}),pack);
+  for(const report of [null,'invalid',[],{},[pack,pack],{[PACKAGE_NAME]:pack,other:{name:'other'}},
+    {wrong:pack},[{...pack,name:'other'}],{other:{...pack,name:'other'}},[null],
+    [{...pack,files:[]}],[{...pack,files:null}]])assert.throws(()=>parsePackManifest(report),/npm pack|one npm package/);
+});
 
 test('only skill package changes on main automatically trigger npm publication',async()=>{
   const workflow=parse(await readFile('.github/workflows/publish-npm.yml','utf8'));
@@ -55,6 +64,8 @@ test('content digests follow packed files only and reject paths outside the pack
   await writeFile(join(directory,'unrelated.txt'),'not in the package');
   const pack={name:PACKAGE_NAME,files:[{path:'SKILL.md'}]};
   const first=await packageDigest(pack,directory);
+  assert.equal(await packageDigest(parsePackManifest([pack]),directory),first);
+  assert.equal(await packageDigest(parsePackManifest({[PACKAGE_NAME]:pack}),directory),first);
   assert.notEqual(await packageDigest({...pack,files:[{path:'SKILL.md',mode:493}]},directory),first);
   await writeFile(join(directory,'unrelated.txt'),'changed');
   assert.equal(await packageDigest(pack,directory),first);
