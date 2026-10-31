@@ -11,9 +11,10 @@ type CopyButtonProps = {
   fallbackLabel: string;
   onStatus: (status: string) => void;
   disabled?: boolean;
+  iconOnly?: boolean;
 };
 
-export function CopyButton({ id, value, fieldRef, label, copiedLabel, fallbackLabel, onStatus, disabled }: CopyButtonProps) {
+export function CopyButton({ id, value, fieldRef, label, copiedLabel, fallbackLabel, onStatus, disabled, iconOnly = false }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
   const [busy, setBusy] = useState(false);
   const revision = useRef(0);
@@ -46,9 +47,10 @@ export function CopyButton({ id, value, fieldRef, label, copiedLabel, fallbackLa
     }
   }
 
-  return <Button id={id} variant="outline" size="sm" disabled={disabled} loading={busy}
+  return <Button id={id} variant={iconOnly ? 'ghost' : 'outline'} size={iconOnly ? 'icon' : 'sm'} disabled={disabled} loading={busy}
+    title={iconOnly ? (copied ? copiedLabel : label) : undefined}
     className="max-w-full whitespace-normal text-xs" onClick={() => void copy()}>
     {!busy && (copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />)}
-    {copied ? copiedLabel : label}
+    <span className={iconOnly ? 'sr-only' : undefined}>{copied ? copiedLabel : label}</span>
   </Button>;
 }
