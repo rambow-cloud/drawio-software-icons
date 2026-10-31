@@ -79,36 +79,7 @@ helper writes the asset, an SVG with an embedded image, and a provenance sidecar
 Read [SKILL.md](SKILL.md) for offline catalogs, Tabler and artwork terms.
 The package contains no artwork collection and has no runtime npm dependencies.
 
-## Maintainers
-
-The repository root remains a private website package. The public npm package
-is **@rambowcloud/icons-skill**; the installed agent skill keeps the name
-`rambow-icons`.
-
-Ongoing npm releases run through `publish-npm.yml` on `main` only when files
-under `skills/rambow-icons/**` change. Website files, artwork/catalog updates,
-root documentation, tests and workflow-only changes do not automatically
-trigger an npm release. Manual runs still skip unchanged package content and
-previously published source commits.
-
-Actions derives the next patch version from npm, or uses a higher explicit
-stable version from package.json. It changes version metadata only in the
-runner and never pushes to main. The workflow uses npm trusted publishing
-(OIDC) and needs no long-lived NPM_TOKEN.
-
-One-time bootstrap requires the organization owner's npm login and 2FA. The
-npm 12 bootstrap CLI needs Node.js 22.22.2+ on the 22 line, 24.15.0+ on the
-24 line, or Node.js 26+; the skill installer itself needs Node.js 22.12+.
-
-```sh
-npm publish ./skills/rambow-icons --registry=https://registry.npmjs.org/ --access public
-npm exec --registry=https://registry.npmjs.org/ --yes --package=npm@12.2.1 -- npm trust github @rambowcloud/icons-skill --repo rambow-cloud/drawio-software-icons --file publish-npm.yml --allow-publish --yes --registry=https://registry.npmjs.org/
-gh workflow run publish-npm.yml --ref main
-```
-
-The package must exist before its trusted publisher can be configured. This
-initial publish is the one-time bootstrap; subsequent versions come from
-Actions. See [release setup and behavior](https://github.com/rambow-cloud/drawio-software-icons/blob/main/docs/NPM_RELEASE.md).
+## License
 
 The MIT license covers code and instructions; downloaded artwork retains its
 upstream licenses and trademark rights.
