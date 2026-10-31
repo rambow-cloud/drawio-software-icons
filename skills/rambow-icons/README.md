@@ -53,13 +53,31 @@ npx skills add rambow-cloud/drawio-software-icons --skill rambow-icons
 
 ## Use
 
-Ask your agent:
+After installation, reload your agent or start a new session so it can discover
+the skill. With automatic skill selection enabled in a compatible agent, ask
+naturally; you do not need to mention `rambow-icons`:
 
-> 使用 rambow-icons 给后台导航和操作按钮添加 Tabler 图标，沿用项目现有组件、主题和无障碍标签。
+> 画一个 Kubernetes、PostgreSQL 和 Redis 的架构图。
 
-> 使用 rambow-icons 为技术栈文档加入 Kubernetes、PostgreSQL 和 Redis 原色产品图标，保留来源与许可说明。
+> 画一张阿里云 ECS、SLB 和 RDS 的部署图。
 
-> 使用 diagram-design 和 rambow-icons 绘制 Kubernetes、PostgreSQL、Redis 架构图，产品图标保留原色，通用图标直接使用 Tabler。
+> 给后台导航和操作按钮添加图标，沿用项目现有组件、主题和无障碍标签。
+
+For matching technical diagrams, the skill instructs the agent to identify the
+products in the nodes, fetch their original-color artwork and use generic Tabler
+icons where helpful. It works alongside the selected diagram tool, including
+diagram-design. Explicit no-icon requests and output-format limits take priority.
+
+Automatic selection is controlled by your agent; installing the skill cannot
+force every client or session to invoke it. If it is not selected, explicitly
+request `rambow-icons` for that task. To update an older installation, run:
+
+```sh
+npx @rambowcloud/icons-skill@latest install --agent codex --global --force
+```
+
+Replace `codex` and `--global` with your agent and the scope of the existing
+installation. Reload the agent after updating.
 
 The skill distinguishes original product identities from generic UI/concept
 icons, and explains how to embed local assets in frontend code, Markdown,
