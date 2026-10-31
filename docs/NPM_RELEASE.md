@@ -29,13 +29,17 @@ The same package content in a manual rerun → no publication.
 
 ## One-time setup
 
+The npm 12 bootstrap CLI requires Node.js 22.22.2+ on the 22 line,
+24.15.0+ on the 24 line, or Node.js 26+. This maintainer requirement is
+separate from the skill installer's Node.js 22.12+ minimum.
+
 The logged-in npm account must have publication rights in `rambowcloud` and
 account 2FA enabled for trusted publisher setup. The package must exist before
 its trusted publisher can be created. From a reviewed, merged main checkout:
 
 ```sh
 npm publish ./skills/rambow-icons --registry=https://registry.npmjs.org/ --access public
-npm exec --registry=https://registry.npmjs.org/ --yes --package=npm@11.15.0 -- npm trust github @rambowcloud/icons-skill --repo rambow-cloud/drawio-software-icons --file publish-npm.yml --allow-publish --yes --registry=https://registry.npmjs.org/
+npm exec --registry=https://registry.npmjs.org/ --yes --package=npm@12.2.1 -- npm trust github @rambowcloud/icons-skill --repo rambow-cloud/drawio-software-icons --file publish-npm.yml --allow-publish --yes --registry=https://registry.npmjs.org/
 gh workflow run publish-npm.yml --ref main
 ```
 
@@ -54,7 +58,7 @@ Alternatively configure trusted publishing on the npm package settings page:
 - Allow direct `npm publish`.
 
 Only GitHub-hosted runners are used. The workflow grants `id-token: write` to
-the publish job and uses npm 11.15.0 on Node 24. No npm write token is copied
+the publish job and uses npm 12.2.1 on Node 24. No npm write token is copied
 into GitHub secrets. Do not add a token fallback to bypass a missing trusted
 publisher configuration.
 

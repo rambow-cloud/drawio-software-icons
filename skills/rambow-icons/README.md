@@ -96,11 +96,13 @@ stable version from package.json. It changes version metadata only in the
 runner and never pushes to main. The workflow uses npm trusted publishing
 (OIDC) and needs no long-lived NPM_TOKEN.
 
-One-time bootstrap, with the organization owner's npm login and required 2FA:
+One-time bootstrap requires the organization owner's npm login and 2FA. The
+npm 12 bootstrap CLI needs Node.js 22.22.2+ on the 22 line, 24.15.0+ on the
+24 line, or Node.js 26+; the skill installer itself needs Node.js 22.12+.
 
 ```sh
 npm publish ./skills/rambow-icons --registry=https://registry.npmjs.org/ --access public
-npm exec --registry=https://registry.npmjs.org/ --yes --package=npm@11.15.0 -- npm trust github @rambowcloud/icons-skill --repo rambow-cloud/drawio-software-icons --file publish-npm.yml --allow-publish --yes --registry=https://registry.npmjs.org/
+npm exec --registry=https://registry.npmjs.org/ --yes --package=npm@12.2.1 -- npm trust github @rambowcloud/icons-skill --repo rambow-cloud/drawio-software-icons --file publish-npm.yml --allow-publish --yes --registry=https://registry.npmjs.org/
 gh workflow run publish-npm.yml --ref main
 ```
 
