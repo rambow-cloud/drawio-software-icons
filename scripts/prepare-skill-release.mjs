@@ -64,9 +64,22 @@ export async function packageDigest(pack, directory=resolve(PACKAGE_DIRECTORY)) 
   return hash.digest('hex');
 }
 
+export function parsePackManifest(report) {
+  let packages;
+  if(Array.isArray(report))packages=report;
+  else if(report&&typeof report==='object') {
+    const entries=Object.entries(report);
+    if(entries.some(([name,pack])=>name!==pack?.name))throw Error('Unexpected npm pack package key');
+    packages=entries.map(([,pack])=>pack);
+  } else throw Error('Unexpected npm pack report');
+  if(packages.length!==1)throw Error('Expected exactly one npm package');
+  const [pack]=packages;
+  if(pack?.name!==PACKAGE_NAME||!Array.isArray(pack.files)||!pack.files.length)throw Error('Unexpected npm pack manifest');
+  return pack;
+}
+
 export async function main(packFile) {
-  const [pack,...extra]=JSON.parse(await readFile(packFile,'utf8'));
-  if(extra.length)throw Error('Expected exactly one npm package');
+  const pack=parsePackManifest(JSON.parse(await readFile(packFile,'utf8')));
   const file=resolve(PACKAGE_DIRECTORY,'package.json'),manifest=JSON.parse(await readFile(file,'utf8'));
   const digest=await packageDigest(pack),commit=process.env.GITHUB_SHA;
   const plan=planRelease(manifest,await readRegistry(),{commit,digest});
