@@ -24,17 +24,18 @@
 **商业图标使用范围：** 本项目图标（包括商业软件与服务图标）适用于不同工具和格式的技术图示、文档与演示，包括 diagram-design、HTML/SVG/PNG/PDF，不再限定于 draw.io。本项目不额外授予品牌使用权，也不覆盖上游许可证。原创代码和文档继续采用 MIT 许可。使用商业品牌图标前请阅读中英双语 [图标使用声明](ICON_USAGE.md)。
 
 
-## 配合 diagram-design 及其他智能体使用
+## 在 AI 智能体中使用图标库
 
 安装配套的 [rambow-icons skill](skills/rambow-icons/SKILL.md)：
 
 ```sh
-npx skills add rambow-cloud/drawio-software-icons --skill rambow-icons
+npx @rambowcloud/icons-skill
 ```
 
-安装后可以说：「使用 diagram-design 和 rambow-icons 绘制 Kubernetes、
-PostgreSQL、Redis 架构图，产品图标保留原色。」配套 skill 提供图标，布局由你选择的
-绘图 skill 或工具负责，原有 Draw.io MCP 接入继续使用。
+适用于网页、应用界面、文档、演示和架构图。例如：「使用 rambow-icons 给后台导航
+添加 Tabler 图标，沿用现有组件和主题。」也可以说：「使用 diagram-design 和
+rambow-icons 绘制 Kubernetes、PostgreSQL、Redis 架构图，产品图标保留原色。」
+Skill 提供素材与嵌入指引，布局由所选工具负责；产品素材继续遵守清单的用途声明和上游条款。
 
 npm 包名为 `@rambowcloud/icons-skill`，运行 `npx @rambowcloud/icons-skill`
 即可选择 agent。支持 Codex、Claude Code、Cursor、Gemini CLI、GitHub Copilot、

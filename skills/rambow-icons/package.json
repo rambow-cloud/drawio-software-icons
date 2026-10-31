@@ -1,7 +1,7 @@
 {
   "name": "@rambowcloud/icons-skill",
   "version": "0.1.0",
-  "description": "Install Rambow Icons for coding agents: original product artwork and direct Tabler downloads for diagrams.",
+  "description": "An icon sourcing skill for coding agents: original product artwork and direct Tabler downloads for websites, interfaces, docs, slides and diagrams.",
   "type": "module",
   "license": "MIT",
   "engines": {

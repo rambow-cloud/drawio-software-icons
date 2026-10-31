@@ -26,18 +26,21 @@ to search for the ScyllaDB icon and draw a database node.”
 **Commercial icon usage:** icons, including commercial software and service icons, are provided for technical diagrams, documentation and presentations across tools and formats, including diagram-design and HTML/SVG/PNG/PDF. The project does not grant additional brand rights or override upstream licenses. Original code and documentation remain MIT licensed. Read the bilingual [icon usage policy](ICON_USAGE.md) before using commercial brand assets.
 
 
-## Use the icon library with diagram-design and other agents
+## Use the icon library with AI agents
 
 Install the companion [rambow-icons skill](skills/rambow-icons/SKILL.md):
 
 ```sh
-npx skills add rambow-cloud/drawio-software-icons --skill rambow-icons
+npx @rambowcloud/icons-skill
 ```
 
-Then ask: “Use diagram-design and rambow-icons to draw a Kubernetes,
-PostgreSQL and Redis architecture diagram, keeping product icons in their
-original colors.” The companion supplies artwork; your chosen skill or tool
-controls layout. It preserves the existing Draw.io MCP setup.
+Use the skill for websites, app interfaces, documentation, slides and diagrams.
+For example: “Use rambow-icons to add Tabler navigation icons to this dashboard,
+following the existing components and theme.” For product artwork, try:
+“Use diagram-design and rambow-icons to draw a Kubernetes, PostgreSQL and Redis
+architecture diagram, keeping product icons in their original colors.”
+The skill supplies assets and integration guidance; your chosen tool controls
+layout. Product artwork retains its catalog usage policy and upstream terms.
 
 The npm package is `@rambowcloud/icons-skill`: run
 `npx @rambowcloud/icons-skill` to select agents, or add
