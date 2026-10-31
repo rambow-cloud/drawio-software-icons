@@ -1,19 +1,44 @@
 {
-  "name": "rambow-icons",
+  "name": "@rambowcloud/icons-skill",
   "version": "0.1.0",
   "description": "Install Rambow Icons for coding agents: original product artwork and direct Tabler downloads for diagrams.",
   "type": "module",
   "license": "MIT",
-  "engines": { "node": ">=22.12.0" },
-  "bin": { "rambow-icons": "bin/rambow-icons.mjs" },
-  "files": ["SKILL.md", "scripts/icons.mjs", "bin/rambow-icons.mjs", "LICENSE"],
-  "publishConfig": { "access": "public", "registry": "https://registry.npmjs.org/" },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "bin": {
+    "icons-skill": "bin/icons-skill.mjs"
+  },
+  "files": [
+    "SKILL.md",
+    "scripts/icons.mjs",
+    "bin/icons-skill.mjs",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rambow-cloud/drawio-software-icons.git",
     "directory": "skills/rambow-icons"
   },
   "homepage": "https://icons.rambow.cloud/",
-  "bugs": { "url": "https://github.com/rambow-cloud/drawio-software-icons/issues" },
-  "keywords": ["agent-skills", "icons", "diagram-design", "tabler", "codex", "claude-code", "cursor", "gemini-cli", "github-copilot", "opencode"]
+  "bugs": {
+    "url": "https://github.com/rambow-cloud/drawio-software-icons/issues"
+  },
+  "keywords": [
+    "agent-skills",
+    "icons",
+    "diagram-design",
+    "tabler",
+    "codex",
+    "claude-code",
+    "cursor",
+    "gemini-cli",
+    "github-copilot",
+    "opencode"
+  ]
 }

@@ -36,9 +36,10 @@ npx skills add rambow-cloud/drawio-software-icons --skill rambow-icons
 PostgreSQL、Redis 架构图，产品图标保留原色。」配套 skill 提供图标，布局由你选择的
 绘图 skill 或工具负责，原有 Draw.io MCP 接入继续使用。
 
-npm/npx 安装器维护在 `skills/rambow-icons`，支持 Codex、Claude Code、Cursor、
-Gemini CLI、GitHub Copilot、OpenCode 的项目级与全局安装。发布状态及使用方法见
-[包说明](skills/rambow-icons/README.md)。npm 发布前可继续使用上面的 GitHub 安装命令。
+npm 包名为 `@rambowcloud/icons-skill`，运行 `npx @rambowcloud/icons-skill`
+即可选择 agent。支持 Codex、Claude Code、Cursor、Gemini CLI、GitHub Copilot、
+OpenCode 的项目级与全局安装。使用方法见[包说明](skills/rambow-icons/README.md)。
+只有 skill 包目录变化才触发 Actions 发布，规则及首次配置见[npm 发布说明](docs/NPM_RELEASE.md)。
 
 内置脚本需要 Node.js 22+，支持中英文搜索、下载 SVG/PNG 原图、核对 SHA-256，
 并生成可内嵌的 SVG 图像与来源说明。支持主站、GitHub Pages 镜像和本地清单，

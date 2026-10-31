@@ -99,16 +99,16 @@ export function parseInstallArgs(args) {
   return options;
 }
 
-const help=`rambow-icons — install the skill and fetch artwork (Node.js 22+)
+const help=`@rambowcloud/icons-skill — install the skill and fetch artwork (Node.js 22+)
 
-  npx rambow-icons                         Interactive project installation
-  npx rambow-icons install -a codex,cursor  Install into the current project
-  npx rambow-icons install -a claude-code -g
-  npx rambow-icons install --all -g --dry-run
-  npx rambow-icons install -a codex -g --force
-  npx rambow-icons list-agents
-  npx rambow-icons search Kubernetes
-  npx rambow-icons fetch kubernetes --out ./kubernetes.svg
+  npx @rambowcloud/icons-skill                         Interactive project installation
+  npx @rambowcloud/icons-skill install -a codex,cursor  Install into the current project
+  npx @rambowcloud/icons-skill install -a claude-code -g
+  npx @rambowcloud/icons-skill install --all -g --dry-run
+  npx @rambowcloud/icons-skill install -a codex -g --force
+  npx @rambowcloud/icons-skill list-agents
+  npx @rambowcloud/icons-skill search Kubernetes
+  npx @rambowcloud/icons-skill fetch kubernetes --out ./kubernetes.svg
 
 Options: --agent/-a (repeatable or comma-separated), --all, --global/-g,
          --project (default), --dry-run, --force, --help, --version
