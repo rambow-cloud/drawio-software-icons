@@ -57,10 +57,16 @@ After installation, reload your agent or start a new session so it can discover
 the skill. With automatic skill selection enabled in a compatible agent, ask
 naturally; you do not need to mention `rambow-icons`:
 
+> Draw an architecture diagram with Kubernetes, PostgreSQL, and Redis.
+>
 > 画一个 Kubernetes、PostgreSQL 和 Redis 的架构图。
 
+> Draw an Alibaba Cloud deployment diagram using ECS, SLB, and RDS.
+>
 > 画一张阿里云 ECS、SLB 和 RDS 的部署图。
 
+> Add icons to the admin navigation and action buttons, following the project's existing components, theme, and accessibility labels.
+>
 > 给后台导航和操作按钮添加图标，沿用项目现有组件、主题和无障碍标签。
 
 For matching technical diagrams, the skill instructs the agent to identify the

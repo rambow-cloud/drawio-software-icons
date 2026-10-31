@@ -101,13 +101,18 @@ text label. Give informative standalone images an appropriate text alternative.
 Do not insert catalog text into markup without escaping it. Do not copy scripts
 or event handlers from downloaded SVGs into an application.
 
-Example requests this skill supports:
+Example requests this skill supports in English or Chinese:
 
-- “画一个 Kubernetes、PostgreSQL 和 Redis 的架构图。”
-- “画一张阿里云 ECS、SLB 和 RDS 的部署图。”
-- “给管理后台的导航和操作按钮使用图标，沿用现有组件和主题。”
-- “为技术栈文档添加 Kubernetes、PostgreSQL 和 Redis 原色图标。”
-- “为演示文稿下载产品图标，并保留来源与许可说明。”
+- “Draw an architecture diagram with Kubernetes, PostgreSQL, and Redis.”
+  / “画一个 Kubernetes、PostgreSQL 和 Redis 的架构图。”
+- “Draw an Alibaba Cloud deployment diagram using ECS, SLB, and RDS.”
+  / “画一张阿里云 ECS、SLB 和 RDS 的部署图。”
+- “Add icons to the admin navigation and action buttons, using the existing components and theme.”
+  / “给管理后台的导航和操作按钮使用图标，沿用现有组件和主题。”
+- “Add original-color Kubernetes, PostgreSQL, and Redis icons to the technology-stack documentation.”
+  / “为技术栈文档添加 Kubernetes、PostgreSQL 和 Redis 原色图标。”
+- “Download product icons for the presentation and retain source and license notices.”
+  / “为演示文稿下载产品图标，并保留来源与许可说明。”
 
 ## With diagram-design
 
@@ -122,7 +127,8 @@ diagram-design's default monochrome treatment and import substitution rule;
 follow its layout, connector,
 accessibility and export guidance. Do not edit its installed files.
 
-Example: “使用 diagram-design 绘制 Kubernetes、PostgreSQL、Redis 架构图。”
+Example: “Use diagram-design to draw a Kubernetes, PostgreSQL, and Redis architecture diagram.”
+/ “使用 diagram-design 绘制 Kubernetes、PostgreSQL、Redis 架构图。”
 
 ## Generic icons: direct Tabler downloads
 
