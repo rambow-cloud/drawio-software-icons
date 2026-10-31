@@ -1,6 +1,6 @@
 ---
 name: rambow-icons
-description: Find, download and embed icons for websites, app interfaces, documentation, presentations and diagrams. Use Rambow for original-color software and Alibaba Cloud product artwork, and direct Tabler downloads for generic icons. Use when sourcing icon assets or when 本站图标库 or rambow-icons is requested.
+description: Add original-color product artwork from Rambow and generic Tabler icons to diagrams. Use when creating or editing architecture, deployment or technology-stack diagrams with software/cloud services (架构图、部署图、技术栈图), even when the user does not mention icons or this skill. Also source icons for websites, interfaces, docs and slides. Respect explicit text-only or no-icon requests.
 license: MIT
 ---
 
@@ -11,6 +11,26 @@ documents, slides, diagrams or other visual content. Keep their framework,
 authoring tool, layout and theme. No diagram skill is required.
 No account, API key or MCP setup is required. The helper uses Node.js 22.12+ and
 only built-in modules; resolve its path relative to this installed skill.
+
+## Default behavior for technical diagrams
+
+When creating or editing an architecture, deployment or technology-stack diagram,
+use this skill for its icon assets alongside the chosen layout tool. The user
+does not need to say `rambow-icons`, name an icon library or request each logo.
+
+Derive the icon list from the actual diagram components. For named software or
+cloud services, search and fetch matching product artwork and keep its original
+colors. For generic nodes such as users, API and storage, choose suitable Tabler
+icons when they help readers distinguish roles. Keep readable text labels and
+reuse each downloaded asset across repeated nodes. Do not add products or
+change the topology just to include artwork.
+
+Respect a request for no icons, text-only output or an existing visual style.
+For abstract diagrams, use icons only when they clarify the concepts. If the
+requested renderer cannot embed images, preserve the requested format and its
+labels, explain that limit, and offer an image-capable export when useful.
+Missing artwork follows the generic-icon/text fallback below; it does not block
+the rest of the diagram. Do not silently switch tools or output formats.
 
 ## Choose the source
 
@@ -83,23 +103,26 @@ or event handlers from downloaded SVGs into an application.
 
 Example requests this skill supports:
 
-- “给管理后台的导航和操作按钮使用 Tabler 图标，沿用现有组件和主题。”
+- “画一个 Kubernetes、PostgreSQL 和 Redis 的架构图。”
+- “画一张阿里云 ECS、SLB 和 RDS 的部署图。”
+- “给管理后台的导航和操作按钮使用图标，沿用现有组件和主题。”
 - “为技术栈文档添加 Kubernetes、PostgreSQL 和 Redis 原色图标。”
 - “为演示文稿下载产品图标，并保留来源与许可说明。”
-- “使用 diagram-design 和 rambow-icons 绘制架构图，产品图标保留原色。”
 
 ## With diagram-design
 
-When both skills are requested, use Rambow artwork for named products and
-download generic icons directly from Tabler as described below. If a product
+When diagram-design is the chosen layout skill for a matching technical diagram,
+compose it with this skill without requiring the user to name both. Use Rambow
+artwork for named products and download generic icons directly from Tabler as
+described below. If a product
 is missing, use an appropriate generic Tabler icon with the product's text label.
 Product artwork keeps its original colors instead of inheriting `currentColor`.
-This is the requested product-icon extension to diagram-design's default
-monochrome treatment and import substitution rule; follow its layout, connector,
+For a matching technical diagram, this supplies the product-icon extension to
+diagram-design's default monochrome treatment and import substitution rule;
+follow its layout, connector,
 accessibility and export guidance. Do not edit its installed files.
 
-Example: “使用 diagram-design 和 rambow-icons 绘制 Kubernetes、PostgreSQL、Redis
-架构图，产品图标保留原色。”
+Example: “使用 diagram-design 绘制 Kubernetes、PostgreSQL、Redis 架构图。”
 
 ## Generic icons: direct Tabler downloads
 
