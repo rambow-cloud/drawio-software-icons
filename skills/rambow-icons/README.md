@@ -2,8 +2,9 @@
 
 Install the Rambow Icons agent skill with npm/npx. It supplies original-color
 software and Alibaba Cloud artwork from https://icons.rambow.cloud/ and generic
-architecture icons directly from Tabler. Pair it with diagram-design or your
-preferred diagram/document workflow. Node.js 22.12+ is required.
+icons directly from Tabler for websites, application interfaces, documentation,
+presentations and diagrams. Use it independently with your existing framework
+or authoring tool, or pair it with diagram-design. Node.js 22.12+ is required.
 
 ## Install
 
@@ -54,7 +55,17 @@ npx skills add rambow-cloud/drawio-software-icons --skill rambow-icons
 
 Ask your agent:
 
+> 使用 rambow-icons 给后台导航和操作按钮添加 Tabler 图标，沿用项目现有组件、主题和无障碍标签。
+
+> 使用 rambow-icons 为技术栈文档加入 Kubernetes、PostgreSQL 和 Redis 原色产品图标，保留来源与许可说明。
+
 > 使用 diagram-design 和 rambow-icons 绘制 Kubernetes、PostgreSQL、Redis 架构图，产品图标保留原色，通用图标直接使用 Tabler。
+
+The skill distinguishes original product identities from generic UI/concept
+icons, and explains how to embed local assets in frontend code, Markdown,
+documents, slides and self-contained HTML/SVG. Product artwork retains its
+catalog usage policy; generic Tabler icons use MIT. A broader skill workflow
+does not grant additional brand-artwork permissions.
 
 The npm command also exposes the artwork helper:
 
