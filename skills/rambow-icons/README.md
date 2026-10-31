@@ -1,4 +1,4 @@
-# rambow-icons
+# @rambowcloud/icons-skill
 
 Install the Rambow Icons agent skill with npm/npx. It supplies original-color
 software and Alibaba Cloud artwork from https://icons.rambow.cloud/ and generic
@@ -7,13 +7,13 @@ preferred diagram/document workflow. Node.js 22.12+ is required.
 
 ## Install
 
-After the package is published to npm:
+Install the public organization-scoped package:
 
 ```sh
-npx rambow-icons
-npx rambow-icons install --agent codex,cursor --global
-npx rambow-icons install --agent claude-code --project
-npx rambow-icons install --all --global --dry-run
+npx @rambowcloud/icons-skill
+npx @rambowcloud/icons-skill install --agent codex,cursor --global
+npx @rambowcloud/icons-skill install --agent claude-code --project
+npx @rambowcloud/icons-skill install --all --global --dry-run
 ```
 
 The first command opens agent selection in an interactive terminal. Project
@@ -21,7 +21,7 @@ installation is the default; `--global` installs for the current user. Agent
 names can be repeated with `--agent` or separated with commas. Use `--force` to
 update an existing differing copy; it replaces only the three bundled skill
 files and preserves custom files. `--dry-run` reports destinations without writes.
-Plain `npm install rambow-icons` installs the npm package, not agent skills:
+Plain `npm install @rambowcloud/icons-skill` installs the npm package, not agent skills:
 agent folders are changed only when you explicitly run the installer.
 
 | Agent | `--agent` | Project directory | User directory |
@@ -44,7 +44,7 @@ Directory references: [Codex](https://learn.chatgpt.com/docs/build-skills),
 [Cursor](https://cursor.com/docs/skills),
 [multi-agent directory map](https://github.com/vercel-labs/skills/blob/main/docs/agents.md).
 
-Before npm publication, install directly from GitHub with the existing skills CLI:
+You can also install directly from GitHub with the existing skills CLI:
 
 ```sh
 npx skills add rambow-cloud/drawio-software-icons --skill rambow-icons
@@ -59,8 +59,8 @@ Ask your agent:
 The npm command also exposes the artwork helper:
 
 ```sh
-npx rambow-icons search Kubernetes
-npx rambow-icons fetch kubernetes --out ./diagram-assets/kubernetes.svg
+npx @rambowcloud/icons-skill search Kubernetes
+npx @rambowcloud/icons-skill fetch kubernetes --out ./diagram-assets/kubernetes.svg
 ```
 
 Downloads keep original bytes and verify SHA-256 against the catalog. The
@@ -70,16 +70,32 @@ The package contains no artwork collection and has no runtime npm dependencies.
 
 ## Maintainers
 
-The repository root remains a private website package; publish this directory
-only. With npm authentication and any required 2FA completed:
+The repository root remains a private website package. The public npm package
+is **@rambowcloud/icons-skill**; the installed agent skill keeps the name
+`rambow-icons`.
+
+Ongoing npm releases run through `publish-npm.yml` on `main` only when files
+under `skills/rambow-icons/**` change. Website files, artwork/catalog updates,
+root documentation, tests and workflow-only changes do not automatically
+trigger an npm release. Manual runs still skip unchanged package content and
+previously published source commits.
+
+Actions derives the next patch version from npm, or uses a higher explicit
+stable version from package.json. It changes version metadata only in the
+runner and never pushes to main. The workflow uses npm trusted publishing
+(OIDC) and needs no long-lived NPM_TOKEN.
+
+One-time bootstrap, with the organization owner's npm login and required 2FA:
 
 ```sh
-cd skills/rambow-icons
-npm pack --dry-run
-npm publish --registry=https://registry.npmjs.org/ --access public
+npm publish ./skills/rambow-icons --registry=https://registry.npmjs.org/ --access public
+npm exec --registry=https://registry.npmjs.org/ --yes --package=npm@11.15.0 -- npm trust github @rambowcloud/icons-skill --repo rambow-cloud/drawio-software-icons --file publish-npm.yml --allow-publish --yes --registry=https://registry.npmjs.org/
+gh workflow run publish-npm.yml --ref main
 ```
 
-The package's `publishConfig` selects the official registry without changing
-global npm settings. Package names/versions become public when published;
-publish each version only once. The MIT license covers code and instructions;
-downloaded artwork retains upstream licenses and trademark rights.
+The package must exist before its trusted publisher can be configured. This
+initial publish is the one-time bootstrap; subsequent versions come from
+Actions. See [release setup and behavior](https://github.com/rambow-cloud/drawio-software-icons/blob/main/docs/NPM_RELEASE.md).
+
+The MIT license covers code and instructions; downloaded artwork retains its
+upstream licenses and trademark rights.

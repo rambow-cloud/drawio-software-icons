@@ -4,7 +4,7 @@ import { mkdtemp, readFile, writeFile, mkdir, readdir, rm, symlink, lstat } from
 import { tmpdir } from 'node:os';
 import { join, resolve, relative, isAbsolute } from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { AGENTS, installationTargets, installSkill, parseInstallArgs } from '../skills/rambow-icons/bin/rambow-icons.mjs';
+import { AGENTS, installationTargets, installSkill, parseInstallArgs } from '../skills/rambow-icons/bin/icons-skill.mjs';
 
 async function temp(t) {
   const root=resolve(tmpdir()),directory=await mkdtemp(join(root,'rambow-installer-'));
@@ -74,12 +74,13 @@ test('CLI supports multi-agent flags, rejects ambiguous options and is inert wit
   assert.deepEqual(parseInstallArgs(['-a','codex,cursor','-a','claude-code','-g','--dry-run']).agents,['codex','cursor','claude-code']);
   assert.equal(parseInstallArgs(['--all']).agents.length,6);
   for(const args of [['--all','-a','codex'],['--global','--project'],['--agent'],['--unknown']])assert.throws(()=>parseInstallArgs(args));
-  const root=await temp(t),bin=resolve('skills/rambow-icons/bin/rambow-icons.mjs');
+  const root=await temp(t),bin=resolve('skills/rambow-icons/bin/icons-skill.mjs');
   const noSelection=spawnSync(process.execPath,[bin],{cwd:root,encoding:'utf8'});
   assert.equal(noSelection.status,1);
   assert.match(noSelection.stderr,/Specify --agent/);
   assert.deepEqual(await readdir(root),[]);
-  assert.equal(execFileSync(process.execPath,[bin,'--version'],{encoding:'utf8'}).trim(),'0.1.0');
+  const version=JSON.parse(await readFile('skills/rambow-icons/package.json','utf8')).version;
+  assert.equal(execFileSync(process.execPath,[bin,'--version'],{encoding:'utf8'}).trim(),version);
   const manifest=JSON.parse(await readFile('skills/rambow-icons/package.json','utf8'));
   assert.equal(manifest.private,undefined);
   assert.equal(manifest.scripts?.postinstall,undefined);
