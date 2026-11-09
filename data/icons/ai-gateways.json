@@ -1,0 +1,255 @@
+{
+  "$schema": "../schemas/icons.schema.json",
+  "icons": [
+    {
+      "id": "litellm",
+      "name": "LiteLLM",
+      "homepage": "https://www.litellm.ai",
+      "repository": "https://github.com/BerriAI/litellm",
+      "softwareType": "open-source",
+      "softwareLicense": "MIT",
+      "aliases": [
+        "Lite LLM",
+        "LiteLLM Proxy",
+        "LiteLLM Gateway"
+      ],
+      "classificationNote": "MIT applies to the community code outside enterprise/. Enterprise features have separate terms; software licensing does not grant trademark permission.",
+      "category": "data",
+      "source": "official-apps",
+      "tags": [
+        "AI",
+        "LLM",
+        "AI gateway",
+        "LLM gateway",
+        "gateway",
+        "API gateway",
+        "proxy",
+        "model routing",
+        "AI 网关",
+        "LLM 网关",
+        "大模型网关",
+        "模型网关",
+        "模型路由",
+        "API 代理",
+        "人工智能"
+      ],
+      "artwork": {
+        "url": "https://raw.githubusercontent.com/BerriAI/litellm/5d6f32a6f66b4d2c332f42d2607959be7f93681e/litellm/proxy/logo_monogram.png",
+        "format": "png",
+        "variant": "official-png",
+        "sha256": "5903e2fcc009a17c7f518db364fafccdca23192206419966585039ffbb635df0",
+        "width": 256,
+        "height": 256,
+        "publisher": "BerriAI",
+        "listing": "https://github.com/BerriAI/litellm/blob/5d6f32a6f66b4d2c332f42d2607959be7f93681e/litellm/proxy/logo_monogram.png",
+        "retrievedOn": "2026-11-10"
+      }
+    },
+    {
+      "id": "portkey",
+      "name": "Portkey",
+      "homepage": "https://portkey.ai",
+      "repository": "https://github.com/Portkey-AI/gateway",
+      "softwareType": "open-source",
+      "softwareLicense": "MIT",
+      "aliases": [
+        "Portkey AI",
+        "Portkey Gateway",
+        "Portkey AI Gateway"
+      ],
+      "classificationNote": "Classification refers to the MIT-licensed open-source gateway, not every hosted or enterprise product. Brand artwork rights remain separate.",
+      "category": "data",
+      "source": "official-apps",
+      "tags": [
+        "AI",
+        "LLM",
+        "AI gateway",
+        "LLM gateway",
+        "gateway",
+        "API gateway",
+        "proxy",
+        "model routing",
+        "AI 网关",
+        "LLM 网关",
+        "大模型网关",
+        "模型网关",
+        "模型路由",
+        "API 代理",
+        "人工智能"
+      ],
+      "artwork": {
+        "url": "https://raw.githubusercontent.com/Portkey-AI/docs-core/2f6c3e7bf55ffd2d408529c9c1bb8238248a57c0/logo.png",
+        "format": "png",
+        "variant": "official-png",
+        "sha256": "b792a8f5e862e939525bbc4e23a3074520f78615647db4cdc741a4d52651523f",
+        "width": 360,
+        "height": 360,
+        "publisher": "Portkey AI",
+        "listing": "https://github.com/Portkey-AI/docs-core/blob/2f6c3e7bf55ffd2d408529c9c1bb8238248a57c0/logo.png",
+        "retrievedOn": "2026-11-10"
+      }
+    },
+    {
+      "id": "bifrost",
+      "name": "Bifrost",
+      "homepage": "https://www.getmaxim.ai/bifrost",
+      "repository": "https://github.com/maximhq/bifrost",
+      "softwareType": "open-source",
+      "softwareLicense": "Apache-2.0",
+      "aliases": [
+        "Maxim Bifrost",
+        "Bifrost AI Gateway",
+        "Bifrost Gateway"
+      ],
+      "classificationNote": "Classification refers to the Apache-2.0 community gateway. Hosted and enterprise offerings and brand artwork may have separate terms.",
+      "category": "data",
+      "source": "official-apps",
+      "tags": [
+        "AI",
+        "LLM",
+        "AI gateway",
+        "LLM gateway",
+        "gateway",
+        "API gateway",
+        "proxy",
+        "model routing",
+        "AI 网关",
+        "LLM 网关",
+        "大模型网关",
+        "模型网关",
+        "模型路由",
+        "API 代理",
+        "人工智能"
+      ],
+      "artwork": {
+        "url": "https://raw.githubusercontent.com/maximhq/bifrost/6e3620a91ec25919690c1eb211d68755a5ccdac7/docs/favicon.png",
+        "format": "png",
+        "variant": "official-png",
+        "sha256": "1aaed31d1613fbfbcecdd9136811ad3f91a4fb69f9457f969a000e050ac72a07",
+        "width": 1408,
+        "height": 1420,
+        "publisher": "Maxim AI",
+        "listing": "https://github.com/maximhq/bifrost/blob/6e3620a91ec25919690c1eb211d68755a5ccdac7/docs/favicon.png",
+        "retrievedOn": "2026-11-10"
+      }
+    },
+    {
+      "id": "helicone",
+      "name": "Helicone",
+      "homepage": "https://www.helicone.ai",
+      "repository": "https://github.com/Helicone/ai-gateway",
+      "softwareType": "open-source",
+      "softwareLicense": "GPL-3.0-only",
+      "aliases": [
+        "Helicone AI Gateway",
+        "Helicone Gateway"
+      ],
+      "classificationNote": "Classification refers to the GPL-3.0 AI gateway repository, not the separate observability repository or all hosted services. Brand artwork rights remain separate.",
+      "category": "data",
+      "source": "official-apps",
+      "tags": [
+        "AI",
+        "LLM",
+        "AI gateway",
+        "LLM gateway",
+        "gateway",
+        "API gateway",
+        "proxy",
+        "model routing",
+        "AI 网关",
+        "LLM 网关",
+        "大模型网关",
+        "模型网关",
+        "模型路由",
+        "API 代理",
+        "人工智能",
+        "LLM observability",
+        "可观测性"
+      ],
+      "artwork": {
+        "url": "https://raw.githubusercontent.com/Helicone/helicone/7720d286110391c3e3776bb46a18fb2a13f7567c/docs/favicon.svg",
+        "format": "svg",
+        "variant": "official-svg",
+        "sha256": "2c19b8e814857fb04650833477121b03d1fdd1a63dc1c08899a342f8bce51647",
+        "width": 312,
+        "height": 314,
+        "publisher": "Helicone",
+        "listing": "https://github.com/Helicone/helicone/blob/7720d286110391c3e3776bb46a18fb2a13f7567c/docs/favicon.svg",
+        "retrievedOn": "2026-11-10"
+      }
+    },
+    {
+      "id": "openrouter",
+      "name": "OpenRouter",
+      "homepage": "https://openrouter.ai",
+      "repository": null,
+      "softwareType": "commercial",
+      "softwareLicense": null,
+      "aliases": [
+        "Open Router",
+        "OpenRouter Gateway"
+      ],
+      "classificationNote": "Hosted model routing service; this classification does not describe third-party SDKs or model weights.",
+      "category": "data",
+      "source": "lobe",
+      "tags": [
+        "AI",
+        "LLM",
+        "AI gateway",
+        "LLM gateway",
+        "gateway",
+        "API gateway",
+        "proxy",
+        "model routing",
+        "AI 网关",
+        "LLM 网关",
+        "大模型网关",
+        "模型网关",
+        "模型路由",
+        "API 代理",
+        "人工智能"
+      ],
+      "artwork": {
+        "path": "packages/static-svg/icons/openrouter-color.svg",
+        "variant": "color"
+      }
+    },
+    {
+      "id": "new-api",
+      "name": "New API",
+      "homepage": "https://www.newapi.ai",
+      "repository": "https://github.com/QuantumNous/new-api",
+      "softwareType": "open-source",
+      "softwareLicense": "AGPL-3.0-only",
+      "aliases": [
+        "NewAPI",
+        "new-api",
+        "New API 网关"
+      ],
+      "classificationNote": "Classification refers to the AGPL-3.0 community repository. Review upstream license and branding requirements for the deployed edition.",
+      "category": "data",
+      "source": "lobe",
+      "tags": [
+        "AI",
+        "LLM",
+        "AI gateway",
+        "LLM gateway",
+        "gateway",
+        "API gateway",
+        "proxy",
+        "model routing",
+        "AI 网关",
+        "LLM 网关",
+        "大模型网关",
+        "模型网关",
+        "模型路由",
+        "API 代理",
+        "人工智能"
+      ],
+      "artwork": {
+        "path": "packages/static-svg/icons/newapi-color.svg",
+        "variant": "color"
+      }
+    }
+  ]
+}
