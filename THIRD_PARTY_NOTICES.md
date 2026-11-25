@@ -103,6 +103,17 @@ AI SVGs use artwork collected by LobeHub's Lobe Icons contributors. Color varian
 
 AI SVG 素材来自 LobeHub 的 Lobe Icons 社区图标集，有彩色版本时优先使用，否则保留上游单色图形；ChatGPT 使用该集的 OpenAI 标志。逐项记录路径、版本与校验值，不声称获得品牌方批准或来自官方下载。图标集许可与模型权重、软件及在线服务条款分别适用。
 
+The Volcengine and Tencent Cloud color SVGs come from the pinned Lobe Icons
+collection. Huawei Cloud uses the unchanged `HUAWEI CLOUD` wordmark PNG
+from the [Huawei Cloud Trademark Guidelines](https://www.huaweicloud.com/eu/declaration/hcpn_tg.html),
+not the Huawei corporate logo. These entries identify providers, not individual
+services. Neither the collection license nor publication of the wordmark grants
+brand-use permission.
+
+火山引擎、腾讯云的彩色 SVG 来自固定版本的 Lobe Icons；华为云采用《华为云商标
+指南》中的 `HUAWEI CLOUD` 字标 PNG 原图，并非华为集团标志。这三项仅用于标识
+云厂商，不包含具体服务图标。图标集许可和字标公开发布均不代表品牌方授权。
+
 Devicon artwork is collected by the Devicon contributors; Dashboard Icons artwork is collected by Homarr Labs and its contributors. All product names, logos, trademarks and brands belong to their respective owners. This independent collection uses them for identification and does not imply endorsement or affiliation with draw.io, Devicon, Homarr Labs, or the featured projects. Collection licenses do not grant trademark rights or replace project-specific brand guidelines.
 
 Additional artwork is collected by bwks / Vendor Icons SVG contributors. Collection licensing is reported from each pinned repository; it is not a representation that the collection's authors own every depicted brand or can authorize all brand uses.
