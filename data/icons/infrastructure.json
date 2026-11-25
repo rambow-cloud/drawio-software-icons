@@ -1238,6 +1238,29 @@
       }
     },
     {
+      "id": "huaweicloud",
+      "name": "Huawei Cloud",
+      "category": "infrastructure",
+      "source": "official-apps",
+      "homepage": "https://www.huaweicloud.com/",
+      "softwareType": "commercial",
+      "classificationNote": "Commercial cloud platform. The artwork is the Huawei Cloud wordmark, not the Huawei corporate mark.",
+      "aliases": ["HuaweiCloud", "华为云", "华为云计算"],
+      "tags": ["cloud", "cloud provider", "cloud computing", "云厂商", "云计算"],
+      "artwork": {
+        "url": "https://res-static.hc-cdn.cn/cloudbu-site/china/zh-cn/news/images/16644179945442973image.png",
+        "format": "png",
+        "variant": "official-png",
+        "sha256": "e7dd5250507f63f5d8a07d20ad81fb11c1f8044d91c48feec14bb18bcc028883",
+        "width": 330,
+        "height": 63,
+        "publisher": "Huawei Cloud",
+        "listing": "https://www.huaweicloud.com/eu/declaration/hcpn_tg.html",
+        "licenseUrl": "https://www.huaweicloud.com/eu/declaration/hcpn_tg.html",
+        "retrievedOn": "2026-11-25"
+      }
+    },
+    {
       "id": "k3s",
       "name": "K3s",
       "category": "infrastructure",
@@ -2284,6 +2307,21 @@
       }
     },
     {
+      "id": "tencentcloud",
+      "name": "Tencent Cloud",
+      "category": "infrastructure",
+      "source": "lobe",
+      "homepage": "https://cloud.tencent.com/",
+      "softwareType": "commercial",
+      "classificationNote": "Commercial cloud platform. Classification does not describe the logo's license or trademark permissions.",
+      "aliases": ["TencentCloud", "Qcloud", "腾讯云", "腾讯云计算"],
+      "tags": ["cloud", "cloud provider", "cloud computing", "云厂商", "云计算"],
+      "artwork": {
+        "path": "packages/static-svg/icons/tencentcloud-color.svg",
+        "variant": "color"
+      }
+    },
+    {
       "id": "tomcat",
       "name": "Apache Tomcat",
       "category": "infrastructure",
@@ -2514,6 +2552,21 @@
       "artwork": {
         "path": "icons/vercel/vercel-original.svg",
         "variant": "original"
+      }
+    },
+    {
+      "id": "volcengine",
+      "name": "Volcengine",
+      "category": "infrastructure",
+      "source": "lobe",
+      "homepage": "https://www.volcengine.com/",
+      "softwareType": "commercial",
+      "classificationNote": "Commercial cloud platform. Classification does not describe the logo's license or trademark permissions.",
+      "aliases": ["Volc Engine", "Volcengine Cloud", "Volcano Engine", "火山引擎", "火山云", "火山引擎云"],
+      "tags": ["cloud", "cloud provider", "cloud computing", "云厂商", "云计算"],
+      "artwork": {
+        "path": "packages/static-svg/icons/volcengine-color.svg",
+        "variant": "color"
       }
     },
     {
